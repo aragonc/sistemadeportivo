@@ -1,7 +1,12 @@
 package dao;
-/* import interfaces.BoletaDAO;
-import interfaces.ClienteDAO;
-import interfaces.ProductoDAO; */
+
+import interfaces.CategoriaDAO;
+import interfaces.DelegadoDAO;
+import interfaces.DisciplinaDAO;
+import interfaces.EntrenadorDAO;
+import interfaces.EquipoDAO;
+import interfaces.JugadorDAO;
+import interfaces.PersonaDAO;
 
 
 public abstract class DAOFactory {
@@ -12,9 +17,14 @@ public abstract class DAOFactory {
     public static final int SQLSERVER = 4;
     public static final int XML = 5;
     
-    /*public abstract ProductoDAO getProductoDAO();
-    public abstract ClienteDAO getClienteDAO();
-    public abstract BoletaDAO getBoletaDAO(); */
+    public abstract CategoriaDAO getCategoriaDAO();
+    public abstract DelegadoDAO getDelegadoDAO();
+    public abstract DisciplinaDAO getDisciplinaDAO();
+    public abstract EntrenadorDAO getEntrenadorDAO();
+    public abstract EquipoDAO getEquipoDAO();
+    public abstract JugadorDAO getJugadorDAO();
+    public abstract PersonaDAO getPersonaDAO();
+
     public static DAOFactory getDAOFactory(int whichFactory){
         switch(whichFactory){
        	case MYSQL:

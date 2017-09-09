@@ -1,24 +1,49 @@
 package dao;
-/* import interfaces.BoletaDAO;
-import interfaces.ClienteDAO;
-import interfaces.ProductoDAO; */
+import interfaces.CategoriaDAO;
+import interfaces.DelegadoDAO;
+import interfaces.DisciplinaDAO;
+import interfaces.EntrenadorDAO;
+import interfaces.EquipoDAO;
+import interfaces.JugadorDAO;
+import interfaces.PersonaDAO;
 
 public class MySqlDAOFactory extends DAOFactory {
 	
-	/* @Override
-	public ProductoDAO getProductoDAO() {
+	@Override
+	public CategoriaDAO getCategoriaDAO() {
 		// TODO Auto-generated method stub
-		return new MySqlProductoDAO();
+		return new MySqlCategoriaDAO();
 	}
 	@Override
-	public ClienteDAO getClienteDAO() {
+	public DelegadoDAO getDelegadoDAO() {
 		// TODO Auto-generated method stub
-		return new MySqlClienteDAO();
+		return new MySqlDelegadoDAO();
 	}
 	@Override
-	public BoletaDAO getBoletaDAO() {
+	public DisciplinaDAO getDisciplinaDAO() {
 		// TODO Auto-generated method stub
-		return new MySqlBoletaDAO();
-	}*/
+		return new MySqlDisciplinaDAO();
+	}
+	@Override
+	public EntrenadorDAO getEntrenadorDAO() {
+		// TODO Auto-generated method stub
+		return new MySqlEntrenadorDAO();
+	}
+	@Override
+	public EquipoDAO getEquipoDAO() {
+		// TODO Auto-generated method stub
+		return new MySqlEquipoDAO();
+	}
+	@Override
+	public JugadorDAO getJugadorDAO() {
+		// TODO Auto-generated method stub
+		return new MySqlJugadorDAO();
+	}
+	@Override
+	public PersonaDAO getPersonaDAO() {
+		// TODO Auto-generated method stub
+		return new MySqlPersonaDAO();
+	}
+	
 }
 
