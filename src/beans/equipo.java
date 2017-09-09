@@ -1,7 +1,5 @@
 package beans;
 
-import java.util.Date;
-
 public class Equipo {
 	
 	private int codigo;
