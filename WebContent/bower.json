@@ -1,0 +1,17 @@
+{
+  "name": "SistemaCampeonato",
+  "description": "Sistema de control para campenonato deportivo",
+  "version": "1.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies" : {
+  	"bootstrap" : "~3.3.6",
+  	"font-awesome" : "4.7.0"
+  }
+}
