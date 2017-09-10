@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
  <jsp:include page="_header.jsp" flush="true" />
   <jsp:include page="_sidebar.jsp" flush="true" />
@@ -67,7 +68,7 @@
 			                    <option value="5">Partida de Nacimiento</option>
 			                    <option value="6">Otros</option>
 		                  	</select>
-					      	<input type="text" class="form-control" id="txtnumdocumento" name="txtnumdocumento" placeholder="Escribir el número de documento">
+					      	<input type="text" class="form-control" id="txtnumdocumento" name="txtnumdocumento" placeholder="Escribir el nÃºmero de documento">
 					    </div>
 					</div>
 					<div class="form-group">
@@ -91,15 +92,15 @@
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="txtfono" class="col-sm-2 control-label">Teléfono:</label>
+					    <label for="txtfono" class="col-sm-2 control-label">TelÃ©fono:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtfono" name="txtfono" placeholder="Escribir el número de teléfono">
+					      <input type="text" class="form-control" id="txtfono" name="txtfono" placeholder="Escribir el nÃºmero de telÃ©fono">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="txtmovil" class="col-sm-2 control-label">Movil:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtmovil" name="txtmovil" placeholder="Escribir el número de celular">
+					      <input type="text" class="form-control" id="txtmovil" name="txtmovil" placeholder="Escribir el nÃºmero de celular">
 					    </div>
 					</div>
 					<div class="form-group">

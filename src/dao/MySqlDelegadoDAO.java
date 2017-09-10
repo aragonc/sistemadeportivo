@@ -32,7 +32,7 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 				del.setAmaterno(rs.getString(4));
 				del.setSexo(rs.getInt(5));
 				del.setNumdocumento(rs.getString(6));
-				del.setEstado(rs.getBoolean(7));				
+				del.setEstado(rs.getInt(7));				
 				data.add(del);
 			}
 		} catch (Exception e) {
@@ -68,13 +68,9 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 				del = new Delegado();
 				del.setCodigo(rs.getInt(1));
 				del.setNombre(rs.getString(2));
-				del.setGenero(rs.getInt(3));
-				del.setEdadmin(rs.getInt(4));
-				del.setEdadmax(rs.getInt(5));
-				del.setFregistro(rs.getString(6));
-				del.setEstado(rs.getBoolean(7));
+				
 			}
-		} delch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -84,7 +80,7 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 					pstm.close();
 				if (cn != null)
 					cn.close();
-			} delch (Exception e2) {
+			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
 		}
@@ -101,14 +97,10 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 			String sql = "insert into delegoria values(null,?,?,?,?,?,?)";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
-			pstm.setInt(2, obj.getGenero());
-			pstm.setInt(3, obj.getEdadmin());
-			pstm.setInt(4, obj.getEdadmax());
-			pstm.setString(5, obj.getFregistro());
-			pstm.setBoolean(6, obj.getEstado());
+			
 			
 			estado = pstm.executeUpdate();
-		} delch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -116,7 +108,7 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 					pstm.close();
 				if (cn != null)
 					cn.close();
-			} delch (Exception e2) {
+			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
 		}
@@ -134,14 +126,10 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 					+ " edad_min=?,edad_max=?, fecha_registro=? estado=? where iddelegoria=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
-			pstm.setInt(2, obj.getGenero());
-			pstm.setInt(3, obj.getEdadmin());
-			pstm.setInt(4, obj.getEdadmax());
-			pstm.setString(5, obj.getFregistro());
-			pstm.setBoolean(6, obj.getEstado());;	
+			
 			pstm.setInt(7, obj.getCodigo());
 			estado = pstm.executeUpdate();
-		} delch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -149,7 +137,7 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 					pstm.close();
 				if (cn != null)
 					cn.close();
-			} delch (Exception e2) {
+			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
 		}

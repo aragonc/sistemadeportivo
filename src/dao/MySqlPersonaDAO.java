@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import beans.Jugador;
 import beans.PersonaDTO;
 import interfaces.PersonaDAO;
 import utils.MysqlDBConexion;

@@ -16,10 +16,14 @@ public class Delegado extends PersonaDTO{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Delegado(int codigo, String nombre, String apaterno, String amaterno, int sexo, String dni,
-			String fnacimiento, String email, String fono, String movil, Boolean estado) {
-		super(codigo, nombre, apaterno, amaterno, sexo, dni, fnacimiento, email, fono, movil, estado);
-		// TODO Auto-generated constructor stub
+	public Delegado(int codigo, String nombre, String apaterno, String amaterno, int sexo, int tipodocumento,
+			String numdocumento, String fnacimiento, String email, String fono, String movil, int estado,
+			int codequipo) {
+		super(codigo, nombre, apaterno, amaterno, sexo, tipodocumento, numdocumento, fnacimiento, email, fono, movil,
+				estado);
+		this.codequipo = codequipo;
 	}
+
+	
 	
 }

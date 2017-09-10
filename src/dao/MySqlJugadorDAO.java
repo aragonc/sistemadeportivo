@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import beans.Delegado;
-import beans.Equipo;
 import beans.Jugador;
 import interfaces.JugadorDAO;
 import utils.MysqlDBConexion;
@@ -34,7 +32,7 @@ public class MySqlJugadorDAO implements JugadorDAO{
 				a.setAmaterno(rs.getString(4));
 				a.setSexo(rs.getInt(5));
 				a.setNumdocumento(rs.getString(6));
-				a.setEstado(rs.getBoolean(7));				
+				a.setEstado(rs.getInt(7));				
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -74,7 +72,7 @@ public class MySqlJugadorDAO implements JugadorDAO{
 				a.setAmaterno(rs.getString(4));
 				a.setSexo(rs.getInt(5));
 				a.setNumdocumento(rs.getString(6));
-				a.setEstado(rs.getBoolean(7));		
+				a.setEstado(rs.getInt(7));		
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

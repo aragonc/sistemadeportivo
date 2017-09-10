@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
   <!-- INICIO SIDEBAR IZQUIERDO -->
   <aside class="main-sidebar">
     <section class="sidebar">
@@ -12,7 +14,7 @@
         </div>
       </div>
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MENÚ OPCIONES</li>
+        <li class="header">MENÃš OPCIONES</li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>

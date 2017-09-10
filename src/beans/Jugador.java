@@ -48,11 +48,19 @@ public class Jugador extends PersonaDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Jugador(int codigo, String nombre, String apaterno, String amaterno, int sexo, String dni,
-			String fnacimiento, String email, String fono, String movil, Boolean estado) {
-		super(codigo, nombre, apaterno, amaterno, sexo, dni, fnacimiento, email, fono, movil, estado);
-		// TODO Auto-generated constructor stub
+	public Jugador(int codigo, String nombre, String apaterno, String amaterno, int sexo, int tipodocumento,
+			String numdocumento, String fnacimiento, String email, String fono, String movil, int estado,
+			int numjugador, Double estatura, Double peso, String tiposangre, int codequipo, int tipo) {
+		super(codigo, nombre, apaterno, amaterno, sexo, tipodocumento, numdocumento, fnacimiento, email, fono, movil,
+				estado);
+		this.numjugador = numjugador;
+		this.estatura = estatura;
+		this.peso = peso;
+		this.tiposangre = tiposangre;
+		this.codequipo = codequipo;
+		this.tipo = tipo;
 	}
+	
 	
 	
 }
