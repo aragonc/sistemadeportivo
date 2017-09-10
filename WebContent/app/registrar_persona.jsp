@@ -26,7 +26,7 @@
     		<div class="box-header with-border">
   				<h3 class="box-title">Registrar persona</h3>
   			</div>
-	  		<form class="form-horizontal" action="ServletPersona?accion=registrar" method="post">
+	  		<form class="form-horizontal" action="../ServletPersona?tipo=registrar" method="post">
 	  			<div class="box-body">
 		  			<div class="form-group">
 					    <label for="txtnombre" class="col-sm-2 control-label">Nombres:</label>

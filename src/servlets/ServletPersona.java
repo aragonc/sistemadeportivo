@@ -24,19 +24,19 @@ public class ServletPersona extends HttpServlet {
 	
 	 protected void service(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 			
-	    	String accion = request.getParameter("action");
-	    	String tipopersona = request.getParameter("tipo");
-			if (accion.equals("registrar"))
+	    	String tipo = request.getParameter("tipo");
+	    	//String tipopersona = request.getParameter("tipo");
+			if (tipo.equals("registrar"))
 				registrar(request, response);
-			else if (accion.equals("buscarpersona"))
+			else if (tipo.equals("buscarpersona"))
 				buscarPersona(request, response);
-			else if (accion.equals("actualizar"))
+			else if (tipo.equals("actualizar"))
 				actualizar(request, response);
-			else if (accion.equals("buscar"))
+			else if (tipo.equals("buscar"))
 				buscarPersona(request, response);
-			else if (accion.equals("listar"))
+			else if (tipo.equals("listar"))
 				listar(request, response);
-			else if (accion.equals("eliminar"))
+			else if (tipo.equals("eliminar"))
 				eliminar(request, response);
 		}
 	//metodos para registar una persona pero según su tipo;
@@ -66,7 +66,7 @@ public class ServletPersona extends HttpServlet {
 		
 		PersonaDTO obj = new PersonaDTO();
 		
-		request.getRequestDispatcher("registar_persona.jsp").forward(request, response);
+		request.getRequestDispatcher("app/registar_persona.jsp").forward(request, response);
 
 		String nombre = request.getParameter("txtnombre");
 		String apaterno = request.getParameter("txtapaterno");
