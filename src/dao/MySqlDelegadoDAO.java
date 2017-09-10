@@ -28,14 +28,14 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 				del = new Delegado();
 				del.setCodigo(rs.getInt(1));
 				del.setNombre(rs.getString(2));
-				del.setGenero(rs.getInt(3));
-				del.setEdadmin(rs.getInt(4));
-				del.setEdadmax(rs.getInt(5));
-				del.setFregistro(rs.getString(6));
+				del.setApaterno(rs.getString(3));
+				del.setAmaterno(rs.getString(4));
+				del.setSexo(rs.getInt(5));
+				del.setDni(rs.getString(6));
 				del.setEstado(rs.getBoolean(7));				
 				data.add(del);
 			}
-		} delch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -45,7 +45,7 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 					pstm.close();
 				if (cn != null)
 					cn.close();
-			} delch (Exception e2) {
+			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
 		}

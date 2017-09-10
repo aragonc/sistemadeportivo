@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,7 +96,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Registrar Equipo
+        Registrar Persona
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
