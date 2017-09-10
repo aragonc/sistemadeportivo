@@ -10,8 +10,11 @@
     "test",
     "tests"
   ],
-  "dependencies" : {
-  	"bootstrap" : "~3.3.6",
-  	"font-awesome" : "4.7.0"
+  "dependencies": {
+  	"bootstrap": "^3.3.7",
+  	"bootstrap-datepicker": "^1.7.0",
+  	"bootstrap-daterangepicker": "^2.1.25",
+  	"moment": "^2.18.1",
+  	"font-awesome": "^4.7.0"
   }
 }

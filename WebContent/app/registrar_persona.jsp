@@ -1,97 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sistema Deportivo</title>
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="../static/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="../static/css/skins/_all-skins.min.css">
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="#" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>S</b>D</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Sistema</b>Deportivo</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">         
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i> Salir</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MENÚ OPCIONES</li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-          </ul>
-        </li>
-        <li class="treeview active">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Modulo Registro</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Registrar Equipo</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Registrar Modalidad</a></li>
-          </ul>
-        </li>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
 
-  <!-- Content Wrapper. Contains page content -->
+ <jsp:include page="_header.jsp" flush="true" />
+  <jsp:include page="_sidebar.jsp" flush="true" />
+  <!-- INICIO DE CABECERA INFO PAGE  -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -100,36 +11,114 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Registrar Equipo</li>
+        <li class="active">Registrar persona</li>
       </ol>
     </section>
-
-    <!-- Main content -->
+	<!-- /.FIN DE CABECERA INFO PAGE -->
+	
+    <!-- SECCION DE CONTENIDO -->
     <section class="content">
-      <div class="row">
-        <!-- left column -->
-        <div class="col-md-12">
-         
-        </div>
-        
-      </div>
-      <!-- /.row -->
+    
+    <div class="box box-primary">
+    	<div class="row">
+    	<div class="col-md-9">
+    		<div class="box-header with-border">
+  				<h3 class="box-title">Registrar persona</h3>
+  			</div>
+	  		<form class="form-horizontal" action="">
+	  			<div class="box-body">
+		  			<div class="form-group">
+					    <label for="txtnombre" class="col-sm-2 control-label">Nombres:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="txtnombre" placeholder="Escribir el nombre">
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label for="txtapaterno" class="col-sm-2 control-label">Apellido Paterno:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="txtapaterno" placeholder="Escribir el apellido paterno">
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label for="txtamaterno" class="col-sm-2 control-label">Apellido Materno:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="txtamaterno" placeholder="Escribir el apellido materno">
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label for="cmbsexo" class="col-sm-2 control-label">Sexo:</label>
+					    <div class="col-sm-10">
+					      <select class="form-control" name="cmbsexo">
+		                    <option>option 1</option>
+		                    <option>option 2</option>
+		                    <option>option 3</option>
+		                    <option>option 4</option>
+		                    <option>option 5</option>
+		                  </select>
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label for="txtdni" class="col-sm-2 control-label">N° de documento:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="txtdni" placeholder="Escribir el número de documento">
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label for="txtfechanacimiento" class="col-sm-2 control-label">Fecha Nacimiento:</label>
+					    <div class="col-sm-10">
+					      <div class="input-group date">
+			                  <div class="input-group-addon">
+			                    <i class="fa fa-calendar"></i>
+			                  </div>
+			                  <input type="text" class="form-control pull-right" id="datepicker">
+			                </div>
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label for="txtemail" class="col-sm-2 control-label">Email:</label>
+					    <div class="col-sm-10">
+					      <div class="input-group">
+				                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+				                <input type="email" class="form-control" placeholder="Escribir el correo electronico">
+				          </div>
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label for="txtfono" class="col-sm-2 control-label">Teléfono:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="txtfono" placeholder="Escribir el número de teléfono">
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label for="txtmovil" class="col-sm-2 control-label">Movil:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="txtmovil" placeholder="Escribir el número de celular">
+					    </div>
+					</div>
+					<div class="form-group">
+					    <label for="cmbsexo" class="col-sm-2 control-label">Estado:</label>
+					    <div class="col-sm-10">
+					      <select class="form-control" name="cmbsexo">
+		                    <option>Inactivo</option>
+		                    <option>Activo</option>
+		                  </select>
+					    </div>
+					</div>
+				</div>
+				<div class="box-footer">
+					<a href="#" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volvar a lista </a>
+                	<button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar persona</button>
+              	</div>
+	  		</form>
+    	</div>
+    	<div class="col-md-3">
+    	
+    	</div>
+  		</div>
+	</div>
+      
     </section>
-    <!-- /.content -->
+    <!-- /.FIN DE CABECERA INFO PAGE-->
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0.0
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="#">Equipo 7</a>.</strong> Todos los derechos reservados.
-  </footer>
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<script src="../bower_components/jquery/dist/jquery.min.js"></script>
-<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../static/js/adminlte.min.js"></script>
-</body>
-</html>
+  <!-- /.FIN DE SECCION DE CONTENIDO -->
+  <jsp:include page="_footer.jsp" flush="true" />
