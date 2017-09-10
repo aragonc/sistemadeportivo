@@ -2,17 +2,17 @@ package interfaces;
 
 import java.util.List;
 
-import beans.Persona;
+import beans.PersonaDTO;
 
 public interface PersonaDAO {
 	
-	public List<Persona> listarPersona();
+	public List<PersonaDTO> listarPersona();
 	
-	public Persona buscarPersona(int cod);
+	public PersonaDTO buscarPersona(int cod);
 	
-	public int registrarPersona(Persona obj);
+	public int registrarPersona(PersonaDTO obj);
 	
-	public int actualizarPersona(Persona obj);
+	public int actualizarPersona(PersonaDTO obj);
 	
 	public int eliminarPersona(int cod);
 

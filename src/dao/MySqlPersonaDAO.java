@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Jugador;
-import beans.Persona;
+import beans.PersonaDTO;
 import interfaces.PersonaDAO;
 import utils.MysqlDBConexion;
 
 public class MySqlPersonaDAO implements PersonaDAO{
 
 	@Override
-	public List<Persona> listarPersona() {
-		Persona a = null;
-		List<Persona> data = new ArrayList<Persona>();
+	public List<PersonaDTO> listarPersona() {
+		PersonaDTO a = null;
+		List<PersonaDTO> data = new ArrayList<PersonaDTO>();
 		Connection cn = null;
 		ResultSet rs = null;
 		PreparedStatement pstm = null;
@@ -26,14 +26,14 @@ public class MySqlPersonaDAO implements PersonaDAO{
 			pstm = cn.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				a = new Persona();
+				a = new PersonaDTO();
 				a.setCodigo(rs.getInt(1));
 				a.setNombre(rs.getString(2));
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
 				a.setSexo(rs.getInt(5));
-				a.setDni(rs.getString(6));
-				a.setEstado(rs.getBoolean(7));				
+				a.setNumdocumento(rs.getString(6));
+				a.setEstado(rs.getInt(7));				
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -54,8 +54,8 @@ public class MySqlPersonaDAO implements PersonaDAO{
 	}
 
 	@Override
-	public Persona buscarPersona(int cod) {
-		Persona a = null;
+	public PersonaDTO buscarPersona(int cod) {
+		PersonaDTO a = null;
 		Connection cn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -66,14 +66,14 @@ public class MySqlPersonaDAO implements PersonaDAO{
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
 			if (rs.next()) {
-				a = new Persona();
+				a = new PersonaDTO();
 				a.setCodigo(rs.getInt(1));
 				a.setNombre(rs.getString(2));
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
 				a.setSexo(rs.getInt(5));
-				a.setDni(rs.getString(6));
-				a.setEstado(rs.getBoolean(7));		
+				a.setNumdocumento(rs.getString(6));
+				a.setEstado(rs.getInt(7));		
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,24 +93,25 @@ public class MySqlPersonaDAO implements PersonaDAO{
 	}
 
 	@Override
-	public int registrarPersona(Persona obj) {
+	public int registrarPersona(PersonaDTO obj) {
 		int estado = -1;
 		Connection cn = null;
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "insert into delegoria values(null,?,?,?,?,?,?)";
+			String sql = "INSERT INTO `campeonato`.`persona` VALUES (null,? ,? ,? ,? ,? ,? ,? , ? ,? ,? ,?, NOW())";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getApaterno());
 			pstm.setString(3, obj.getAmaterno());
 			pstm.setInt(4, obj.getSexo());
-			pstm.setString(5, obj.getDni());
-			pstm.setString(6, obj.getFnacimiento());
-			pstm.setString(7, obj.getEmail());
-			pstm.setString(8, obj.getFono());
-			pstm.setString(9, obj.getMovil());
-			pstm.setBoolean(10, obj.getEstado());
+			pstm.setInt(5, obj.getTipodocumento());
+			pstm.setString(6, obj.getNumdocumento());
+			pstm.setString(7, obj.getFnacimiento());
+			pstm.setString(8, obj.getEmail());
+			pstm.setString(9, obj.getFono());
+			pstm.setString(10, obj.getMovil());
+			pstm.setInt(11, obj.getEstado());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -128,7 +129,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 	}
 
 	@Override
-	public int actualizarPersona(Persona obj) {
+	public int actualizarPersona(PersonaDTO obj) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

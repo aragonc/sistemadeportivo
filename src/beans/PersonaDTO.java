@@ -1,17 +1,18 @@
 package beans;
 
-public class Persona {
+public class PersonaDTO {
 	private int codigo;
 	private String nombre;
 	private String apaterno;
 	private String amaterno;
 	private int sexo;
-	private String dni;
+	private int tipodocumento;
+	private String numdocumento;
 	private String fnacimiento;
 	private String email;
 	private String fono;
 	private String movil;
-	private Boolean estado;
+	private int estado;
 	
 	public int getCodigo() {
 		return codigo;
@@ -43,11 +44,11 @@ public class Persona {
 	public void setSexo(int sexo) {
 		this.sexo = sexo;
 	}
-	public String getDni() {
-		return dni;
+	public String getNumdocumento() {
+		return numdocumento;
 	}
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setNumdocumento(String dni) {
+		this.numdocumento = dni;
 	}
 	public String getFnacimiento() {
 		return fnacimiento;
@@ -73,28 +74,36 @@ public class Persona {
 	public void setMovil(String movil) {
 		this.movil = movil;
 	}
-	public Boolean getEstado() {
+	public int getEstado() {
 		return estado;
 	}
-	public void setEstado(Boolean estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-	public Persona(int codigo, String nombre, String apaterno, String amaterno, int sexo, String dni,
-			String fnacimiento, String email, String fono, String movil, Boolean estado) {
+	public int getTipodocumento() {
+		return tipodocumento;
+	}
+	public void setTipodocumento(int tipodocumento) {
+		this.tipodocumento = tipodocumento;
+	}
+
+	public PersonaDTO(int codigo, String nombre, String apaterno, String amaterno, int sexo, int tipodocumento,
+			String numdocumento, String fnacimiento, String email, String fono, String movil, int estado) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.apaterno = apaterno;
 		this.amaterno = amaterno;
 		this.sexo = sexo;
-		this.dni = dni;
+		this.tipodocumento = tipodocumento;
+		this.numdocumento = numdocumento;
 		this.fnacimiento = fnacimiento;
 		this.email = email;
 		this.fono = fono;
 		this.movil = movil;
 		this.estado = estado;
 	}
-	public Persona() {
+	public PersonaDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

@@ -25,42 +25,49 @@
     		<div class="box-header with-border">
   				<h3 class="box-title">Registrar persona</h3>
   			</div>
-	  		<form class="form-horizontal" action="">
+	  		<form class="form-horizontal" action="ServletPersona?accion=registrar" method="post">
 	  			<div class="box-body">
 		  			<div class="form-group">
 					    <label for="txtnombre" class="col-sm-2 control-label">Nombres:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtnombre" placeholder="Escribir el nombre">
+					      <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Escribir el nombre">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="txtapaterno" class="col-sm-2 control-label">Apellido Paterno:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtapaterno" placeholder="Escribir el apellido paterno">
+					      <input type="text" class="form-control" id="txtapaterno" name="txtapaterno" placeholder="Escribir el apellido paterno">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="txtamaterno" class="col-sm-2 control-label">Apellido Materno:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtamaterno" placeholder="Escribir el apellido materno">
+					      <input type="text" class="form-control" id="txtamaterno" name="txtamaterno" placeholder="Escribir el apellido materno">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="cmbsexo" class="col-sm-2 control-label">Sexo:</label>
 					    <div class="col-sm-10">
-					      <select class="form-control" name="cmbsexo">
-		                    <option>option 1</option>
-		                    <option>option 2</option>
-		                    <option>option 3</option>
-		                    <option>option 4</option>
-		                    <option>option 5</option>
+					      <select class="form-control" id="cmbsexo" name="cmbsexo">
+		                    <option value="0">-- Seleccione --</option>
+		                    <option value="1">Masculino</option>
+		                    <option value="2">Femenino</option>
 		                  </select>
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="txtdni" class="col-sm-2 control-label">N° de documento:</label>
+					    <label for="cbotipodocumento" class="col-sm-2 control-label">Documento de identidad:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtdni" placeholder="Escribir el número de documento">
+					    	 <select class="form-control" id="cbotipodocumento" name="cbotipodocumento">
+			                    <option value="0">-- Seleccione --</option>
+			                    <option value="1">Documento Nacional de Identidad</option>
+			                    <option value="2">Carnet de Extranjeria</option>
+			                    <option value="3">Registro Unico de Contribuyentes</option>
+			                    <option value="4">Pasaporte</option>
+			                    <option value="5">Partida de Nacimiento</option>
+			                    <option value="6">Otros</option>
+		                  	</select>
+					      	<input type="text" class="form-control" id="txtnumdocumento" name="txtnumdocumento" placeholder="Escribir el número de documento">
 					    </div>
 					</div>
 					<div class="form-group">
@@ -70,7 +77,7 @@
 			                  <div class="input-group-addon">
 			                    <i class="fa fa-calendar"></i>
 			                  </div>
-			                  <input type="text" class="form-control pull-right" id="datepicker">
+			                  <input type="text" class="form-control midatepicker pull-right" id="txtfechanacimiento" name="txtfechanacimiento">
 			                </div>
 					    </div>
 					</div>
@@ -79,28 +86,28 @@
 					    <div class="col-sm-10">
 					      <div class="input-group">
 				                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-				                <input type="email" class="form-control" placeholder="Escribir el correo electronico">
+				                <input type="email" class="form-control" name="txtemail" id="txtemail" placeholder="Escribir el correo electronico">
 				          </div>
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="txtfono" class="col-sm-2 control-label">Teléfono:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtfono" placeholder="Escribir el número de teléfono">
+					      <input type="text" class="form-control" id="txtfono" name="txtfono" placeholder="Escribir el número de teléfono">
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="txtmovil" class="col-sm-2 control-label">Movil:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtmovil" placeholder="Escribir el número de celular">
+					      <input type="text" class="form-control" id="txtmovil" name="txtmovil" placeholder="Escribir el número de celular">
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="cmbsexo" class="col-sm-2 control-label">Estado:</label>
+					    <label for="cmbestado" class="col-sm-2 control-label">Estado:</label>
 					    <div class="col-sm-10">
-					      <select class="form-control" name="cmbsexo">
-		                    <option>Inactivo</option>
-		                    <option>Activo</option>
+					      <select class="form-control" name="cmbestado">
+		                    <option value="1">Activo</option>
+		                    <option value="2">Inactivo</option>
 		                  </select>
 					    </div>
 					</div>

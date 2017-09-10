@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 
-import beans.Persona;
+import beans.PersonaDTO;
 import interfaces.PersonaDAO;
 import dao.DAOFactory;
 
@@ -12,19 +12,19 @@ public class PersonaService {
 	
 	PersonaDAO personaDAO = factory.getPersonaDAO();
 	
-	public List<Persona> listarPersona() {
+	public List<PersonaDTO> listarPersona() {
 		return personaDAO.listarPersona();		
 	}	
 	
-	public Persona buscarPersona(int cod){
+	public PersonaDTO buscarPersona(int cod){
 		return personaDAO.buscarPersona(cod);
 	}
 	
-	public int registrarPersona(Persona obj){
+	public int registrarPersona(PersonaDTO obj){
 		return personaDAO.registrarPersona(obj);
 	}
 	
-	public int actualizarPersona(Persona obj){
+	public int actualizarPersona(PersonaDTO obj){
 		return personaDAO.actualizarPersona(obj);
 	}
 	

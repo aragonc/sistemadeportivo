@@ -1,6 +1,6 @@
 package beans;
 
-public class Delegado extends Persona{
+public class Delegado extends PersonaDTO{
 	private int codequipo;
 
 	public int getCodequipo() {

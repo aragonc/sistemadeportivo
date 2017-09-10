@@ -1,6 +1,6 @@
 package beans;
 
-public class Entrenador extends Persona{
+public class Entrenador extends PersonaDTO{
 	private String numlicencia;
 	private int categoria;
 	private String fvencimiento;

@@ -33,7 +33,7 @@ public class MySqlJugadorDAO implements JugadorDAO{
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
 				a.setSexo(rs.getInt(5));
-				a.setDni(rs.getString(6));
+				a.setNumdocumento(rs.getString(6));
 				a.setEstado(rs.getBoolean(7));				
 				data.add(a);
 			}
@@ -73,7 +73,7 @@ public class MySqlJugadorDAO implements JugadorDAO{
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
 				a.setSexo(rs.getInt(5));
-				a.setDni(rs.getString(6));
+				a.setNumdocumento(rs.getString(6));
 				a.setEstado(rs.getBoolean(7));		
 			}
 		} catch (Exception e) {

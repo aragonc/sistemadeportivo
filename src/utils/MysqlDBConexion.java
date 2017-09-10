@@ -11,7 +11,7 @@ public class MysqlDBConexion {
 		Connection cn=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			cn=DriverManager.getConnection("jdbc:mysql://localhost/campeonato","root","");
+			cn=DriverManager.getConnection("jdbc:mysql://localhost/campeonato","root","mysql");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
