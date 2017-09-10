@@ -6,7 +6,7 @@ public class Jugador extends Persona {
 	private Double peso;
 	private String tiposangre;
 	private int codequipo;
-	private int iscapital;
+	private int tipo;
 	public int getNumjugador() {
 		return numjugador;
 	}
@@ -37,11 +37,12 @@ public class Jugador extends Persona {
 	public void setCodequipo(int codequipo) {
 		this.codequipo = codequipo;
 	}
-	public int getIscapital() {
-		return iscapital;
+	
+	public int getTipo() {
+		return tipo;
 	}
-	public void setIscapital(int iscapital) {
-		this.iscapital = iscapital;
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 	public Jugador() {
 		super();
