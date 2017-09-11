@@ -30,9 +30,10 @@ public class MySqlEquipoDAO implements EquipoDAO{
 				a.setNombre(rs.getString(2));
 				a.setLogo(rs.getString(3));
 				a.setDireccion(rs.getString(4));
-				a.setEmail(rs.getString(5));
-				a.setFono(rs.getString(6));
-				a.setEstado(rs.getBoolean(7));
+				a.setFregistro(rs.getString(5));
+				a.setEmail(rs.getString(6));
+				a.setFono(rs.getString(7));
+				a.setEstado(rs.getBoolean(8));				
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -60,7 +61,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		ResultSet rs = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select * from delegoria where iddelegoria=?";
+			String sql = "select * from equipo where idequipo=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
@@ -70,9 +71,10 @@ public class MySqlEquipoDAO implements EquipoDAO{
 				a.setNombre(rs.getString(2));
 				a.setLogo(rs.getString(3));
 				a.setDireccion(rs.getString(4));
-				a.setEmail(rs.getString(5));
-				a.setFono(rs.getString(6));
-				a.setEstado(rs.getBoolean(7));
+				a.setFregistro(rs.getString(5));
+				a.setEmail(rs.getString(6));
+				a.setFono(rs.getString(7));
+				a.setEstado(rs.getBoolean(8));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,12 +100,12 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "insert into delegoria values(null,?,?,?,?,?,?)";
+			String sql = "insert into equipo values(null,?,?,?,?,?,?)";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
-			pstm.setString(2, obj.getNombre());
-			pstm.setString(3, obj.getLogo());
-			pstm.setString(4, obj.getDireccion());
+			pstm.setString(2, obj.getLogo());
+			pstm.setString(3, obj.getDireccion());
+			pstm.setString(4, obj.getFregistro());
 			pstm.setString(5, obj.getEmail());
 			pstm.setString(6, obj.getFono());
 			pstm.setBoolean(7, obj.getEstado());
@@ -130,13 +132,13 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "update delegoria set nombres=?,genero=?, "
-					+ " edad_min=?,edad_max=?, fecha_registro=? estado=? where iddelegoria=?";
+			String sql = "update equipo set nombre=?,logo=?, "
+					+ " direccion=?,email_contacto=?, telefono_contacto=?, estado=? fecha_contacto=? where idequipo=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
-			pstm.setString(2, obj.getNombre());
-			pstm.setString(3, obj.getLogo());
-			pstm.setString(4, obj.getDireccion());
+			pstm.setString(2, obj.getLogo());
+			pstm.setString(3, obj.getDireccion());
+			pstm.setString(4, obj.getFregistro());
 			pstm.setString(5, obj.getEmail());
 			pstm.setString(6, obj.getFono());
 			pstm.setBoolean(7, obj.getEstado());
@@ -165,7 +167,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "delete from delegado where iddelegado=?";
+			String sql = "delete from equipo where idequipo=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
 			estado = pstm.executeUpdate();

@@ -3,7 +3,6 @@ package beans;
 public class Disciplina {
 	private int codigo;
 	private String nombre;
-	private String descripcion;
 	private String fregistro;
 	private Boolean estado;
 	public int getCodigo() {
@@ -18,12 +17,7 @@ public class Disciplina {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+	
 	public String getFregistro() {
 		return fregistro;
 	}
@@ -40,7 +34,6 @@ public class Disciplina {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
-		this.descripcion = descripcion;
 		this.fregistro = fregistro;
 		this.estado = estado;
 	}
