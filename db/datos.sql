@@ -40,25 +40,8 @@ CREATE TABLE IF NOT EXISTS `campeonato`.`persona` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `campeonato`.`entrenador`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `campeonato`.`entrenador` ;
 
-CREATE TABLE IF NOT EXISTS `campeonato`.`entrenador` (
-  `identrenador` INT NOT NULL AUTO_INCREMENT,
-  `num_licencia` VARCHAR(50) NULL,
-  `categoria` INT NULL,
-  `fvencimiento` DATE NULL,
-  `persona_idpersona` INT NOT NULL,
-  PRIMARY KEY (`identrenador`),
-  INDEX `fk_entrenador_persona1_idx` (`persona_idpersona` ASC),
-  CONSTRAINT `fk_entrenador_persona1`
-    FOREIGN KEY (`persona_idpersona`)
-    REFERENCES `campeonato`.`persona` (`idpersona`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
