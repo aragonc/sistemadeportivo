@@ -94,7 +94,7 @@ public class MySqlDisciplinaDAO implements DisciplinaDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "insert into disciplina values(null,?,?,now())";
+			String sql = "insert into disciplina values(null,?,now(),?)";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setInt(2, obj.getEstado());			

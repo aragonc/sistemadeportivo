@@ -21,7 +21,7 @@
                   <div class="box-body">
                           <div class="col-md-9">
 
-                                <form action="/ServletDisciplina?tipo=registrar" class="form-horizontal" id="frmdisciplina">
+                                <form action="../ServletDisciplina?tipo=registrar" class="form-horizontal" id="frmdisciplina" method="post">
                                   <div class="form-group">
                                     <label for="txtdisciplina" class="col-sm-3 control-label">Nombre de Disciplina</label>
                                     <div class="col-sm-9">
