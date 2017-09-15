@@ -2,18 +2,18 @@ package interfaces;
 
 import java.util.List;
 
-import beans.Delegado;
+import beans.DelegadoDTO;
 
 public interface DelegadoDAO {
 	
 	
-	public List<Delegado> listarDelegado();
+	public List<DelegadoDTO> listarDelegado();
 	
-	public Delegado buscarDelegado(int cod);
+	public DelegadoDTO buscarDelegado(int cod);
 	
-	public int registrarDelegado(Delegado obj);
+	public int registrarDelegado(DelegadoDTO obj);
 	
-	public int actualizarDelegado(Delegado obj);
+	public int actualizarDelegado(DelegadoDTO obj);
 	
 	public int eliminarDelegado(int cod);
 

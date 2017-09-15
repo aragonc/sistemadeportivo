@@ -8,15 +8,15 @@ import java.util.List;
 
 import utils.MysqlDBConexion;
 
-import beans.Categoria;
+import beans.CategoriaDTO;
 import interfaces.CategoriaDAO;
 
 public class MySqlCategoriaDAO implements CategoriaDAO {
 
 	@Override
-	public List<Categoria> listarCategoria() {
-		Categoria cat = null;
-		List<Categoria> data = new ArrayList<Categoria>();
+	public List<CategoriaDTO> listarCategoria() {
+		CategoriaDTO cat = null;
+		List<CategoriaDTO> data = new ArrayList<CategoriaDTO>();
 		Connection cn = null;
 		ResultSet rs = null;
 		PreparedStatement pstm = null;
@@ -26,7 +26,7 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 			pstm = cn.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				cat = new Categoria();
+				cat = new CategoriaDTO();
 				cat.setCodigo(rs.getInt(1));
 				cat.setNombre(rs.getString(2));
 				cat.setGenero(rs.getInt(3));
@@ -54,8 +54,8 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 	}
 
 	@Override
-	public Categoria buscarCategoria(int cod) {
-		Categoria cat = null;
+	public CategoriaDTO buscarCategoria(int cod) {
+		CategoriaDTO cat = null;
 		Connection cn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -66,7 +66,7 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
 			if (rs.next()) {
-				cat = new Categoria();
+				cat = new CategoriaDTO();
 				cat.setCodigo(rs.getInt(1));
 				cat.setNombre(rs.getString(2));
 				cat.setGenero(rs.getInt(3));
@@ -93,7 +93,7 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 	}
 
 	@Override
-	public int registrarCategoria(Categoria obj) {
+	public int registrarCategoria(CategoriaDTO obj) {
 		int estado = -1;
 		Connection cn = null;
 		PreparedStatement pstm = null;
@@ -125,7 +125,7 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 	}
 
 	@Override
-	public int actualizarCategoria(Categoria obj) {
+	public int actualizarCategoria(CategoriaDTO obj) {
 		int estado = -1;
 		Connection cn = null;
 		PreparedStatement pstm = null;

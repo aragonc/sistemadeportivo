@@ -3,17 +3,17 @@ package interfaces;
 import java.util.List;
 
 
-import beans.Equipo;
+import beans.EquipoDTO;
 
 public interface EquipoDAO {
 	
-	public List<Equipo> listarEquipo();
+	public List<EquipoDTO> listarEquipo();
 	
-	public Equipo buscarEquipo(int cod);
+	public EquipoDTO buscarEquipo(int cod);
 	
-	public int registrarEquipo(Equipo obj);
+	public int registrarEquipo(EquipoDTO obj);
 	
-	public int actualizarEquipo(Equipo obj);
+	public int actualizarEquipo(EquipoDTO obj);
 	
 	public int eliminarEquipo(int cod);
 

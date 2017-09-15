@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 
-import beans.Disciplina;
+import beans.DisciplinaDTO;
 import interfaces.DisciplinaDAO;
 import dao.DAOFactory;
 
@@ -12,19 +12,19 @@ public class DisciplinaService {
 	
 	DisciplinaDAO disciplinaDAO = factory.getDisciplinaDAO();
 	
-	public List<Disciplina> listarDisciplina() {
+	public List<DisciplinaDTO> listarDisciplina() {
 		return disciplinaDAO.listarDisciplina();		
 	}	
 	
-	public Disciplina buscarDisciplina(int cod){
+	public DisciplinaDTO buscarDisciplina(int cod){
 		return disciplinaDAO.buscarDisciplina(cod);
 	}
 	
-	public int registrarDisciplina(Disciplina obj){
+	public int registrarDisciplina(DisciplinaDTO obj){
 		return disciplinaDAO.registrarDisciplina(obj);
 	}
 	
-	public int actualizarDisciplina(Disciplina obj){
+	public int actualizarDisciplina(DisciplinaDTO obj){
 		return disciplinaDAO.actualizarDisciplina(obj);
 	}
 	

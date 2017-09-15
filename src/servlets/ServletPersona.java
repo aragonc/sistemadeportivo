@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -46,9 +47,10 @@ public class ServletPersona extends HttpServlet {
 		
 	}
 
-	private void listar(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<PersonaDTO> info = personaService.listarPersona();
+		request.setAttribute("data", info);
+		request.getRequestDispatcher("listar_persona.jsp").forward(request, response);
 	}
 
 	private void actualizar(HttpServletRequest request, HttpServletResponse response) {

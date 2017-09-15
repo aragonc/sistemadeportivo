@@ -1,10 +1,10 @@
 package beans;
 
-public class Disciplina {
+public class DisciplinaDTO {
 	private int codigo;
 	private String nombre;
 	private String fregistro;
-	private Boolean estado;
+	private int estado;
 	public int getCodigo() {
 		return codigo;
 	}
@@ -24,21 +24,22 @@ public class Disciplina {
 	public void setFregistro(String fregistro) {
 		this.fregistro = fregistro;
 	}
-	public Boolean getEstado() {
+	public int getEstado() {
 		return estado;
 	}
-	public void setEstado(Boolean estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-	public Disciplina(int codigo, String nombre, String descripcion, String fregistro, Boolean estado) {
+	public DisciplinaDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public DisciplinaDTO(int codigo, String nombre, String fregistro, int estado) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.fregistro = fregistro;
 		this.estado = estado;
 	}
-	public Disciplina() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 }

@@ -3,18 +3,18 @@ package interfaces;
 import java.util.List;
 
 
-import beans.Jugador;
+import beans.JugadorDTO;
 
 public interface JugadorDAO {
 
 
-	public List<Jugador> listarJugador();
+	public List<JugadorDTO> listarJugador();
 	
-	public Jugador buscarJugador(int cod);
+	public JugadorDTO buscarJugador(int cod);
 	
-	public int registrarJugador(Jugador obj);
+	public int registrarJugador(JugadorDTO obj);
 	
-	public int actualizarJugador(Jugador obj);
+	public int actualizarJugador(JugadorDTO obj);
 	
 	public int eliminarJugador(int cod);
 }

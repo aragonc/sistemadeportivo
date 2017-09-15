@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 
-import beans.Jugador;
+import beans.JugadorDTO;
 import interfaces.JugadorDAO;
 import dao.DAOFactory;
 
@@ -12,19 +12,19 @@ public class JugadorService {
 	
 	JugadorDAO jugadorDAO = factory.getJugadorDAO();
 	
-	public List<Jugador> listarJugador() {
+	public List<JugadorDTO> listarJugador() {
 		return jugadorDAO.listarJugador();		
 	}	
 	
-	public Jugador buscarJugador(int cod){
+	public JugadorDTO buscarJugador(int cod){
 		return jugadorDAO.buscarJugador(cod);
 	}
 	
-	public int registrarJugador(Jugador obj){
+	public int registrarJugador(JugadorDTO obj){
 		return jugadorDAO.registrarJugador(obj);
 	}
 	
-	public int actualizarJugador(Jugador obj){
+	public int actualizarJugador(JugadorDTO obj){
 		return jugadorDAO.actualizarJugador(obj);
 	}
 	

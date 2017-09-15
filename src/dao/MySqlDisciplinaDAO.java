@@ -8,15 +8,15 @@ import java.util.List;
 
 import utils.MysqlDBConexion;
 
-import beans.Disciplina;
+import beans.DisciplinaDTO;
 import interfaces.DisciplinaDAO;
 
 public class MySqlDisciplinaDAO implements DisciplinaDAO{
 
 	@Override
-	public List<Disciplina> listarDisciplina() {
-		Disciplina dis = null;
-		List<Disciplina> data = new ArrayList<Disciplina>();
+	public List<DisciplinaDTO> listarDisciplina() {
+		DisciplinaDTO dis = null;
+		List<DisciplinaDTO> data = new ArrayList<DisciplinaDTO>();
 		Connection cn = null;
 		ResultSet rs = null;
 		PreparedStatement pstm = null;
@@ -26,11 +26,11 @@ public class MySqlDisciplinaDAO implements DisciplinaDAO{
 			pstm = cn.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				dis = new Disciplina();
+				dis = new DisciplinaDTO();
 				dis.setCodigo(rs.getInt(1));
 				dis.setNombre(rs.getString(2));
 				dis.setFregistro(rs.getString(3));
-				dis.setEstado(rs.getBoolean(4));
+				dis.setEstado(rs.getInt(4));
 								
 				data.add(dis);
 			}
@@ -52,8 +52,8 @@ public class MySqlDisciplinaDAO implements DisciplinaDAO{
 	}
 
 	@Override
-	public Disciplina buscarDisciplina(int cod) {
-		Disciplina dis = null;
+	public DisciplinaDTO buscarDisciplina(int cod) {
+		DisciplinaDTO dis = null;
 		Connection cn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -64,11 +64,11 @@ public class MySqlDisciplinaDAO implements DisciplinaDAO{
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
 			if (rs.next()) {
-				dis = new Disciplina();
+				dis = new DisciplinaDTO();
 				dis.setCodigo(rs.getInt(1));
 				dis.setNombre(rs.getString(2));
 				dis.setFregistro(rs.getString(3));
-				dis.setEstado(rs.getBoolean(4));
+				dis.setEstado(rs.getInt(4));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,7 +88,7 @@ public class MySqlDisciplinaDAO implements DisciplinaDAO{
 	}
 
 	@Override
-	public int registrarDisciplina(Disciplina obj) {
+	public int registrarDisciplina(DisciplinaDTO obj) {
 		int estado = -1;
 		Connection cn = null;
 		PreparedStatement pstm = null;
@@ -98,7 +98,7 @@ public class MySqlDisciplinaDAO implements DisciplinaDAO{
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getFregistro());
-			pstm.setBoolean(3, obj.getEstado());
+			pstm.setInt(3, obj.getEstado());
 			
 			
 			estado = pstm.executeUpdate();
@@ -118,7 +118,7 @@ public class MySqlDisciplinaDAO implements DisciplinaDAO{
 	}
 
 	@Override
-	public int actualizarDisciplina(Disciplina obj) {
+	public int actualizarDisciplina(DisciplinaDTO obj) {
 		int estado = -1;
 		Connection cn = null;
 		PreparedStatement pstm = null;
@@ -129,7 +129,7 @@ public class MySqlDisciplinaDAO implements DisciplinaDAO{
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getFregistro());
-			pstm.setBoolean(3, obj.getEstado());
+			pstm.setInt(3, obj.getEstado());
 			pstm.setInt(5, obj.getCodigo());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {

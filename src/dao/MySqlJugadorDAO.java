@@ -6,16 +6,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import beans.Jugador;
+import beans.JugadorDTO;
 import interfaces.JugadorDAO;
 import utils.MysqlDBConexion;
 
 public class MySqlJugadorDAO implements JugadorDAO{
 
 	@Override
-	public List<Jugador> listarJugador() {
-		Jugador a = null;
-		List<Jugador> data = new ArrayList<Jugador>();
+	public List<JugadorDTO> listarJugador() {
+		JugadorDTO a = null;
+		List<JugadorDTO> data = new ArrayList<JugadorDTO>();
 		Connection cn = null;
 		ResultSet rs = null;
 		PreparedStatement pstm = null;
@@ -25,7 +25,7 @@ public class MySqlJugadorDAO implements JugadorDAO{
 			pstm = cn.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				a = new Jugador();
+				a = new JugadorDTO();
 				a.setCodigo(rs.getInt(1));
 				a.setNombre(rs.getString(2));
 				a.setApaterno(rs.getString(3));
@@ -53,8 +53,8 @@ public class MySqlJugadorDAO implements JugadorDAO{
 	}
 
 	@Override
-	public Jugador buscarJugador(int cod) {
-		Jugador a = null;
+	public JugadorDTO buscarJugador(int cod) {
+		JugadorDTO a = null;
 		Connection cn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -65,7 +65,7 @@ public class MySqlJugadorDAO implements JugadorDAO{
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
 			if (rs.next()) {
-				a = new Jugador();
+				a = new JugadorDTO();
 				a.setCodigo(rs.getInt(1));
 				a.setNombre(rs.getString(2));
 				a.setApaterno(rs.getString(3));
@@ -92,7 +92,7 @@ public class MySqlJugadorDAO implements JugadorDAO{
 	}
 
 	@Override
-	public int registrarJugador(Jugador obj) {
+	public int registrarJugador(JugadorDTO obj) {
 		int estado = -1;
 		Connection cn = null;
 		PreparedStatement pstm = null;
@@ -123,7 +123,7 @@ public class MySqlJugadorDAO implements JugadorDAO{
 	}
 
 	@Override
-	public int actualizarJugador(Jugador obj) {
+	public int actualizarJugador(JugadorDTO obj) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -21,7 +21,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select * from delegado";
+			String sql = "SELECT * FROM persona;";
 			pstm = cn.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
@@ -31,7 +31,12 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
 				a.setSexo(rs.getInt(5));
-				a.setNumdocumento(rs.getString(6));
+				a.setTipodocumento(rs.getInt(6));
+				a.setNumdocumento(rs.getString(7));
+				a.setFnacimiento(rs.getString(8));
+				a.setEmail(rs.getString(9));
+				a.setFono(rs.getString(10));
+				a.setMovil(rs.getString(11));
 				a.setEstado(rs.getInt(7));				
 				data.add(a);
 			}

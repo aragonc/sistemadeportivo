@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 
-import beans.Categoria;
+import beans.CategoriaDTO;
 import interfaces.CategoriaDAO;
 import dao.DAOFactory;
 
@@ -12,19 +12,19 @@ public class CategoriaService {
 	
 	CategoriaDAO categoriaDAO = factory.getCategoriaDAO();
 	
-	public List<Categoria> listarCategoria() {
+	public List<CategoriaDTO> listarCategoria() {
 		return categoriaDAO.listarCategoria();		
 	}	
 	
-	public Categoria buscarCategoria(int cod){
+	public CategoriaDTO buscarCategoria(int cod){
 		return categoriaDAO.buscarCategoria(cod);
 	}
 	
-	public int registrarCategoria(Categoria obj){
+	public int registrarCategoria(CategoriaDTO obj){
 		return categoriaDAO.registrarCategoria(obj);
 	}
 	
-	public int actualizarCategoria(Categoria obj){
+	public int actualizarCategoria(CategoriaDTO obj){
 		return categoriaDAO.actualizarCategoria(obj);
 	}
 	

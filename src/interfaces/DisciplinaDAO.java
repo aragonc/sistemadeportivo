@@ -3,17 +3,17 @@ package interfaces;
 import java.util.List;
 
 
-import beans.Disciplina;
+import beans.DisciplinaDTO;
 
 public interface DisciplinaDAO {
 	
-	public List<Disciplina> listarDisciplina();
+	public List<DisciplinaDTO> listarDisciplina();
 	
-	public Disciplina buscarDisciplina(int cod);
+	public DisciplinaDTO buscarDisciplina(int cod);
 	
-	public int registrarDisciplina(Disciplina obj);
+	public int registrarDisciplina(DisciplinaDTO obj);
 	
-	public int actualizarDisciplina(Disciplina obj);
+	public int actualizarDisciplina(DisciplinaDTO obj);
 	
 	public int eliminarDisciplina(int cod);
 

@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 
-import beans.Delegado;
+import beans.DelegadoDTO;
 import interfaces.DelegadoDAO;
 import dao.DAOFactory;
 
@@ -12,19 +12,19 @@ public class DelegadoService {
 	
 	DelegadoDAO delegadoDAO = factory.getDelegadoDAO();
 	
-	public List<Delegado> listarDelegado() {
+	public List<DelegadoDTO> listarDelegado() {
 		return delegadoDAO.listarDelegado();		
 	}	
 	
-	public Delegado buscarDelegado(int cod){
+	public DelegadoDTO buscarDelegado(int cod){
 		return delegadoDAO.buscarDelegado(cod);
 	}
 	
-	public int registrarDelegado(Delegado obj){
+	public int registrarDelegado(DelegadoDTO obj){
 		return delegadoDAO.registrarDelegado(obj);
 	}
 	
-	public int actualizarDelegado(Delegado obj){
+	public int actualizarDelegado(DelegadoDTO obj){
 		return delegadoDAO.actualizarDelegado(obj);
 	}
 	

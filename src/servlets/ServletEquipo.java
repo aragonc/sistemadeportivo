@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-import beans.Equipo;
+import beans.EquipoDTO;
 
 import service.EquipoService;
 
@@ -45,7 +45,7 @@ public class ServletEquipo extends HttpServlet{
 	
 	private void listar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Equipo> info = equipoService.listarEquipo();
+		List<EquipoDTO> info = equipoService.listarEquipo();
 		request.setAttribute("data", info);
 		request.getRequestDispatcher("listarEquipo.jsp").forward(request,
 				response);
@@ -55,7 +55,7 @@ public class ServletEquipo extends HttpServlet{
 
 	private void registrar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Equipo obj = new Equipo();
+		EquipoDTO obj = new EquipoDTO();
 		String nombre = request.getParameter("txt_nombre");
 		String logo = request.getParameter("logo");
 		String direccion = request.getParameter("txt_direccion");
@@ -84,7 +84,7 @@ public class ServletEquipo extends HttpServlet{
 			throws ServletException, IOException {
 		String dato = request.getParameter("cod");
 		int codigo = Integer.parseInt(dato);
-		Equipo x = equipoService.buscarEquipo(codigo);
+		EquipoDTO x = equipoService.buscarEquipo(codigo);
 		request.setAttribute("registro", x);
 		request.getRequestDispatcher("actualizarEquipo.jsp").forward(request,
 				response);
@@ -92,7 +92,7 @@ public class ServletEquipo extends HttpServlet{
 	
 	private void actualizar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Equipo obj = new Equipo();
+		EquipoDTO obj = new EquipoDTO();
 		String codigo = request.getParameter("txt_codigo");
 		String nombre = request.getParameter("txt_nombre");
 		String logo = request.getParameter("logo");

@@ -5,16 +5,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
-import beans.Equipo;
+import beans.EquipoDTO;
 import interfaces.EquipoDAO;
 import utils.MysqlDBConexion;
 
 public class MySqlEquipoDAO implements EquipoDAO{
 
 	@Override
-	public List<Equipo> listarEquipo() {
-		Equipo a = null;
-		List<Equipo> data = new ArrayList<Equipo>();
+	public List<EquipoDTO> listarEquipo() {
+		EquipoDTO a = null;
+		List<EquipoDTO> data = new ArrayList<EquipoDTO>();
 		Connection cn = null;
 		ResultSet rs = null;
 		PreparedStatement pstm = null;
@@ -25,7 +25,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 			pstm = cn.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				a = new Equipo();
+				a = new EquipoDTO();
 				a.setCodigo(rs.getInt(1));
 				a.setNombre(rs.getString(2));
 				a.setLogo(rs.getString(3));
@@ -54,8 +54,8 @@ public class MySqlEquipoDAO implements EquipoDAO{
 	}
 
 	@Override
-	public Equipo buscarEquipo(int cod) {
-		Equipo a = null;
+	public EquipoDTO buscarEquipo(int cod) {
+		EquipoDTO a = null;
 		Connection cn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -66,7 +66,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
 			if (rs.next()) {
-				a = new Equipo();
+				a = new EquipoDTO();
 				a.setCodigo(rs.getInt(1));
 				a.setNombre(rs.getString(2));
 				a.setLogo(rs.getString(3));
@@ -94,7 +94,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 	}
 
 	@Override
-	public int registrarEquipo(Equipo obj) {
+	public int registrarEquipo(EquipoDTO obj) {
 		int estado = -1;
 		Connection cn = null;
 		PreparedStatement pstm = null;
@@ -126,7 +126,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 	}
 
 	@Override
-	public int actualizarEquipo(Equipo obj) {
+	public int actualizarEquipo(EquipoDTO obj) {
 		int estado = -1;
 		Connection cn = null;
 		PreparedStatement pstm = null;

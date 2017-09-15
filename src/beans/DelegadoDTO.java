@@ -1,6 +1,6 @@
 package beans;
 
-public class Delegado extends PersonaDTO{
+public class DelegadoDTO extends PersonaDTO{
 	private int codequipo;
 
 	public int getCodequipo() {
@@ -11,12 +11,12 @@ public class Delegado extends PersonaDTO{
 		this.codequipo = codequipo;
 	}
 
-	public Delegado() {
+	public DelegadoDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Delegado(int codigo, String nombre, String apaterno, String amaterno, int sexo, int tipodocumento,
+	public DelegadoDTO(int codigo, String nombre, String apaterno, String amaterno, int sexo, int tipodocumento,
 			String numdocumento, String fnacimiento, String email, String fono, String movil, int estado,
 			int codequipo) {
 		super(codigo, nombre, apaterno, amaterno, sexo, tipodocumento, numdocumento, fnacimiento, email, fono, movil,

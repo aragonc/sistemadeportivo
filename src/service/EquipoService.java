@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 
-import beans.Equipo;
+import beans.EquipoDTO;
 import interfaces.EquipoDAO;
 import dao.DAOFactory;
 
@@ -12,19 +12,19 @@ public class EquipoService {
 	
 	EquipoDAO equipoDAO = factory.getEquipoDAO();
 	
-	public List<Equipo> listarEquipo() {
+	public List<EquipoDTO> listarEquipo() {
 		return equipoDAO.listarEquipo();		
 	}	
 	
-	public Equipo buscarEquipo(int cod){
+	public EquipoDTO buscarEquipo(int cod){
 		return equipoDAO.buscarEquipo(cod);
 	}
 	
-	public int registrarEquipo(Equipo obj){
+	public int registrarEquipo(EquipoDTO obj){
 		return equipoDAO.registrarEquipo(obj);
 	}
 	
-	public int actualizarEquipo(Equipo obj){
+	public int actualizarEquipo(EquipoDTO obj){
 		return equipoDAO.actualizarEquipo(obj);
 	}
 	

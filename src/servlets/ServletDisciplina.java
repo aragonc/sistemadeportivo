@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-import beans.Disciplina;
+import beans.DisciplinaDTO;
 
 import service.DisciplinaService;
 
@@ -45,7 +45,7 @@ public class ServletDisciplina extends HttpServlet{
 	
 	private void listar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Disciplina> info = disciplinaService.listarDisciplina();
+		List<DisciplinaDTO> info = disciplinaService.listarDisciplina();
 		request.setAttribute("data", info);
 		request.getRequestDispatcher("listarDisciplina.jsp").forward(request,
 				response);
@@ -55,7 +55,7 @@ public class ServletDisciplina extends HttpServlet{
 
 	private void registrar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Disciplina obj = new Disciplina();
+		DisciplinaDTO obj = new DisciplinaDTO();
 		String nombre = request.getParameter("txt_nombre");
 		String fregistro = request.getParameter("txt_fregistro");
 		String est = request.getParameter("txt_estado");
@@ -63,7 +63,7 @@ public class ServletDisciplina extends HttpServlet{
 				
 		obj.setNombre(nombre);
 		obj.setFregistro(fregistro);
-		obj.setEstado(Boolean.parseBoolean(est));
+		obj.setEstado(Integer.parseInt(est));
 		
 		
 		int estado = disciplinaService.registrarDisciplina(obj);
@@ -77,7 +77,7 @@ public class ServletDisciplina extends HttpServlet{
 			throws ServletException, IOException {
 		String dato = request.getParameter("cod");
 		int codigo = Integer.parseInt(dato);
-		Disciplina x = disciplinaService.buscarDisciplina(codigo);
+		DisciplinaDTO x = disciplinaService.buscarDisciplina(codigo);
 		request.setAttribute("registro", x);
 		request.getRequestDispatcher("actualizarDisciplina.jsp").forward(request,
 				response);
@@ -85,7 +85,7 @@ public class ServletDisciplina extends HttpServlet{
 	
 	private void actualizar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Disciplina obj = new Disciplina();
+		DisciplinaDTO obj = new DisciplinaDTO();
 		String cod = request.getParameter("txt_codigo");
 		String nombre = request.getParameter("txt_nombre");
 		String fregistro = request.getParameter("txt_fregistro");
@@ -94,7 +94,7 @@ public class ServletDisciplina extends HttpServlet{
 		obj.setCodigo(Integer.parseInt(cod));		
 		obj.setNombre(nombre);
 		obj.setFregistro(fregistro);
-		obj.setEstado(Boolean.parseBoolean(est));
+		obj.setEstado(Integer.parseInt(est));
 		
 		int estado = disciplinaService.actualizarDisciplina(obj);
 		if (estado != -1)

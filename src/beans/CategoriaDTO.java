@@ -1,6 +1,6 @@
 package beans;
 
-public class Categoria {
+public class CategoriaDTO {
 	private int codigo;
 	private String nombre;
 	private int genero;
@@ -50,7 +50,7 @@ public class Categoria {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
-	public Categoria(int codigo, String nombre, int genero, int edadmin, int edadmax, String fregistro,
+	public CategoriaDTO(int codigo, String nombre, int genero, int edadmin, int edadmax, String fregistro,
 			Boolean estado) {
 		super();
 		this.codigo = codigo;
@@ -61,7 +61,7 @@ public class Categoria {
 		this.fregistro = fregistro;
 		this.estado = estado;
 	}
-	public Categoria() {
+	public CategoriaDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

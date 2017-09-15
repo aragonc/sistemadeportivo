@@ -8,14 +8,14 @@ import java.util.List;
 
 import utils.MysqlDBConexion;
 
-import beans.Delegado;
+import beans.DelegadoDTO;
 import interfaces.DelegadoDAO;
 public class MySqlDelegadoDAO implements DelegadoDAO{
 
 	@Override
-	public List<Delegado> listarDelegado() {
-		Delegado del = null;
-		List<Delegado> data = new ArrayList<Delegado>();
+	public List<DelegadoDTO> listarDelegado() {
+		DelegadoDTO del = null;
+		List<DelegadoDTO> data = new ArrayList<DelegadoDTO>();
 		Connection cn = null;
 		ResultSet rs = null;
 		PreparedStatement pstm = null;
@@ -25,7 +25,7 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 			pstm = cn.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				del = new Delegado();
+				del = new DelegadoDTO();
 				del.setCodigo(rs.getInt(1));
 				del.setNombre(rs.getString(2));
 				del.setApaterno(rs.getString(3));
@@ -53,8 +53,8 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 	}
 
 	@Override
-	public Delegado buscarDelegado(int cod) {
-		Delegado del = null;
+	public DelegadoDTO buscarDelegado(int cod) {
+		DelegadoDTO del = null;
 		Connection cn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -65,7 +65,7 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
 			if (rs.next()) {
-				del = new Delegado();
+				del = new DelegadoDTO();
 				del.setCodigo(rs.getInt(1));
 				del.setNombre(rs.getString(2));
 				
@@ -88,7 +88,7 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 	}
 
 	@Override
-	public int registrarDelegado(Delegado obj) {
+	public int registrarDelegado(DelegadoDTO obj) {
 		int estado = -1;
 		Connection cn = null;
 		PreparedStatement pstm = null;
@@ -116,7 +116,7 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 	}
 
 	@Override
-	public int actualizarDelegado(Delegado obj) {
+	public int actualizarDelegado(DelegadoDTO obj) {
 		int estado = -1;
 		Connection cn = null;
 		PreparedStatement pstm = null;

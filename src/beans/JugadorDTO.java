@@ -1,6 +1,6 @@
 package beans;
 
-public class Jugador extends PersonaDTO {
+public class JugadorDTO extends PersonaDTO {
 	private int numjugador;
 	private Double estatura;
 	private Double peso;
@@ -44,11 +44,11 @@ public class Jugador extends PersonaDTO {
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
-	public Jugador() {
+	public JugadorDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Jugador(int codigo, String nombre, String apaterno, String amaterno, int sexo, int tipodocumento,
+	public JugadorDTO(int codigo, String nombre, String apaterno, String amaterno, int sexo, int tipodocumento,
 			String numdocumento, String fnacimiento, String email, String fono, String movil, int estado,
 			int numjugador, Double estatura, Double peso, String tiposangre, int codequipo, int tipo) {
 		super(codigo, nombre, apaterno, amaterno, sexo, tipodocumento, numdocumento, fnacimiento, email, fono, movil,

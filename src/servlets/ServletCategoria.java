@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-import beans.Categoria;
+import beans.CategoriaDTO;
 
 import service.CategoriaService;
 
@@ -45,7 +45,7 @@ public class ServletCategoria extends HttpServlet{
 	
 	private void listar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Categoria> info = categoriaService.listarCategoria();
+		List<CategoriaDTO> info = categoriaService.listarCategoria();
 		request.setAttribute("data", info);
 		request.getRequestDispatcher("listarCategoria.jsp").forward(request,
 				response);
@@ -55,7 +55,7 @@ public class ServletCategoria extends HttpServlet{
 
 	private void registrar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Categoria obj = new Categoria();
+		CategoriaDTO obj = new CategoriaDTO();
 		String nombre = request.getParameter("txt_nombre");
 		String genero = request.getParameter("cbo_genero");
 		String edadmin = request.getParameter("txt_edadmin");
@@ -83,7 +83,7 @@ public class ServletCategoria extends HttpServlet{
 			throws ServletException, IOException {
 		String dato = request.getParameter("cod");
 		int codigo = Integer.parseInt(dato);
-		Categoria x = categoriaService.buscarCategoria(codigo);
+		CategoriaDTO x = categoriaService.buscarCategoria(codigo);
 		request.setAttribute("registro", x);
 		request.getRequestDispatcher("actualizarCategoria.jsp").forward(request,
 				response);
@@ -91,7 +91,7 @@ public class ServletCategoria extends HttpServlet{
 	
 	private void actualizar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Categoria obj = new Categoria();
+		CategoriaDTO obj = new CategoriaDTO();
 		String cod = request.getParameter("txt_codigo");
 		String nombre = request.getParameter("txt_nombre");
 		String genero = request.getParameter("cbo_genero");

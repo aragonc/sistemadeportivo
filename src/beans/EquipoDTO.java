@@ -1,6 +1,6 @@
 package beans;
 
-public class Equipo {
+public class EquipoDTO {
 	
 	private int codigo;
 	private String nombre;
@@ -10,10 +10,9 @@ public class Equipo {
 	private String email;
 	private String fono;
 	private Boolean estado;
-	private Entrenador entrenador;
-	private Delegado delegado;
+	private DelegadoDTO delegadoDTO;
 	
-	public Equipo() {
+	public EquipoDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -81,19 +80,26 @@ public class Equipo {
 		this.estado = estado;
 	}
 	
-	public Entrenador getEntrenador() {
-		return entrenador;
+	public DelegadoDTO getDelegado() {
+		return delegadoDTO;
 	}
 	
-	public void setEntrenador(Entrenador entrenador) {
-		this.entrenador = entrenador;
+	public void setDelegado(DelegadoDTO delegadoDTO) {
+		this.delegadoDTO = delegadoDTO;
 	}
 	
-	public Delegado getDelegado() {
-		return delegado;
+	public EquipoDTO(int codigo, String nombre, String logo, String direccion, String fregistro, String email,
+			String fono, Boolean estado, DelegadoDTO delegadoDTO) {
+		super();
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.logo = logo;
+		this.direccion = direccion;
+		this.fregistro = fregistro;
+		this.email = email;
+		this.fono = fono;
+		this.estado = estado;
+		this.delegadoDTO = delegadoDTO;
 	}
 	
-	public void setDelegado(Delegado delegado) {
-		this.delegado = delegado;
-	}
 }
