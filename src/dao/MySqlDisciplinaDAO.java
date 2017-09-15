@@ -94,12 +94,10 @@ public class MySqlDisciplinaDAO implements DisciplinaDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "insert into disciplina values(null,?,?,?,?)";
+			String sql = "insert into disciplina values(null,?,?,now())";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
-			pstm.setString(2, obj.getFregistro());
-			pstm.setInt(3, obj.getEstado());
-			
+			pstm.setInt(2, obj.getEstado());			
 			
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
@@ -124,13 +122,12 @@ public class MySqlDisciplinaDAO implements DisciplinaDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "update disciplina set nombre=?,fecha_registro=?, "
+			String sql = "update disciplina set nombre=?, "
 					+ " estado=? iddisciplina=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
-			pstm.setString(2, obj.getFregistro());
 			pstm.setInt(3, obj.getEstado());
-			pstm.setInt(5, obj.getCodigo());
+			pstm.setInt(4, obj.getCodigo());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

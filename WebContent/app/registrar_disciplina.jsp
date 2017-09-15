@@ -21,18 +21,18 @@
                   <div class="box-body">
                           <div class="col-md-9">
 
-                                <form action="" class="form-horizontal" id="frmdisciplina">
+                                <form action="/ServletDisciplina?tipo=registrar" class="form-horizontal" id="frmdisciplina">
                                   <div class="form-group">
                                     <label for="txtdisciplina" class="col-sm-3 control-label">Nombre de Disciplina</label>
                                     <div class="col-sm-9">
-                                      <input type="text" class="form-control" name="txtdisciplina" id="txtdisciplina" placeholder="Escribe nombre de disciplina">
+                                      <input type="text" class="form-control" name="txt_nombre" id="txtdisciplina" placeholder="Escribe nombre de disciplina">
                                     </div>
                                   </div>
 
                                   <div class="form-group">
                                     <label class="col-sm-3 control-label">Estado</label>
                                     <div class="col-sm-9">
-                                      <select id="cboestado" name="cboestado" class="form-control">
+                                      <select id="cboestado" name="cbo_estado" class="form-control">
                                             <option value="1">Activo</option>
                                             <option value="2">Inactivo</option>
                                           </select>
@@ -43,7 +43,7 @@
                                       <a href="#" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i>
                                         Atras
                                       </a>
-                                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                      <button type="submit" class="btn btn-primary">
                                       <i class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i> Registrar Disciplina</button>
                                     </div>
                                   </div>

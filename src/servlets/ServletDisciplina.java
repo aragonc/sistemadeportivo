@@ -56,13 +56,13 @@ public class ServletDisciplina extends HttpServlet{
 	private void registrar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		DisciplinaDTO obj = new DisciplinaDTO();
+		request.getRequestDispatcher("app/registrar_disciplina.jsp").forward(request,
+				response);
 		String nombre = request.getParameter("txt_nombre");
-		String fregistro = request.getParameter("txt_fregistro");
-		String est = request.getParameter("txt_estado");
+		String est = request.getParameter("cbo_estado");
 		
 				
-		obj.setNombre(nombre);
-		obj.setFregistro(fregistro);
+		obj.setNombre(nombre);		
 		obj.setEstado(Integer.parseInt(est));
 		
 		
@@ -87,13 +87,11 @@ public class ServletDisciplina extends HttpServlet{
 			HttpServletResponse response) throws ServletException, IOException {
 		DisciplinaDTO obj = new DisciplinaDTO();
 		String cod = request.getParameter("txt_codigo");
-		String nombre = request.getParameter("txt_nombre");
-		String fregistro = request.getParameter("txt_fregistro");
-		String est = request.getParameter("txt_estado");
+		String nombre = request.getParameter("txt_nombre");		
+		String est = request.getParameter("cbo_estado");
 		
 		obj.setCodigo(Integer.parseInt(cod));		
 		obj.setNombre(nombre);
-		obj.setFregistro(fregistro);
 		obj.setEstado(Integer.parseInt(est));
 		
 		int estado = disciplinaService.actualizarDisciplina(obj);
