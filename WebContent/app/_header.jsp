@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <link rel="stylesheet" href="../static/css/AdminLTE.min.css">
   <link rel="stylesheet" href="../static/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="../static/css/style.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>

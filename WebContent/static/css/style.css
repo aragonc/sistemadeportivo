@@ -1,0 +1,17 @@
+.toolbar-actions{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-bottom: 10px;
+}
+.table tr td,.table tr th {
+    border: 1px solid #c2c2c2;
+}
+.table tbody tr th{
+    border-top: 1px solid #c2c2c2;
+}
+.table-header{
+	background-color: #f5f5f5;
+}
+.table td .checkbox{
+	text-align: center;
+}
