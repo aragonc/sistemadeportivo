@@ -56,8 +56,6 @@ public class ServletDisciplina extends HttpServlet{
 	private void registrar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		DisciplinaDTO obj = new DisciplinaDTO();
-		request.getRequestDispatcher("app/registrar_disciplina.jsp").forward(request,
-				response);
 		String nombre = request.getParameter("txt_nombre");
 		String est = request.getParameter("cbo_estado");
 		
