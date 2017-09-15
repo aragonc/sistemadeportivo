@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import beans.CategoriaDTO;
 
 import service.CategoriaService;
+import sun.invoke.empty.Empty;
 
 @WebServlet("/ServletCategoria")
 
@@ -56,20 +57,19 @@ public class ServletCategoria extends HttpServlet{
 	private void registrar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		CategoriaDTO obj = new CategoriaDTO();
-		String nombre = request.getParameter("txt_nombre");
-		String genero = request.getParameter("cbo_genero");
-		String edadmin = request.getParameter("txt_edadmin");
-		String edadmax = request.getParameter("txt_edadmax");
-		String fregistro = request.getParameter("txt_fregistro");
-		String est = request.getParameter("cbo_estado");
+		String nombre = request.getParameter("txtnombre");
+		String genero = request.getParameter("rbgenero");
+		if(request.getParameterMap().containsKey("txtcantidad")){
+			String cantidad = request.getParameter("txtcantidad");
+			obj.setCantidad(Integer.parseInt(cantidad));
+			System.out.println(cantidad);
+		}
 		
-				
+		String est = request.getParameter("cboestado");
+		
 		obj.setNombre(nombre);
-		obj.setGenero(Integer.parseInt(genero));
-		obj.setEdadmin(Integer.parseInt(edadmin));
-		obj.setEdadmax(Integer.parseInt(edadmax));
-		obj.setFregistro(fregistro);
-		obj.setEstado(Boolean.parseBoolean(est));
+		obj.setGenero(genero);
+		obj.setEstado(Integer.parseInt(est));
 		
 		
 		int estado = categoriaService.registrarCategoria(obj);
@@ -95,8 +95,7 @@ public class ServletCategoria extends HttpServlet{
 		String cod = request.getParameter("txt_codigo");
 		String nombre = request.getParameter("txt_nombre");
 		String genero = request.getParameter("cbo_genero");
-		String edadmin = request.getParameter("txt_edadmin");
-		String edadmax = request.getParameter("txt_edadmax");
+		String cantidad = request.getParameter("txt_cantidad");
 		String fregistro = request.getParameter("txt_fregistro");
 		String est = request.getParameter("cbo_estado");
 		
@@ -104,11 +103,11 @@ public class ServletCategoria extends HttpServlet{
 		
 		obj.setCodigo(Integer.parseInt(cod));
 		obj.setNombre(nombre);
-		obj.setGenero(Integer.parseInt(genero));
-		obj.setEdadmin(Integer.parseInt(edadmin));
-		obj.setEdadmax(Integer.parseInt(edadmax));
+		obj.setGenero(genero);
+		obj.setCantidad(Integer.parseInt(cantidad));
 		obj.setFregistro(fregistro);
-		obj.setEstado(Boolean.parseBoolean(est));
+		obj.setEstado(Integer.parseInt(est));
+		
 		int estado = categoriaService.actualizarCategoria(obj);
 		if (estado != -1)
 			listar(request, response);

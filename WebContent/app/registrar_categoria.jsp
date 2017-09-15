@@ -14,24 +14,24 @@
             </div>
         	<div class="box-body">
             	<div class="col-md-9">
-					<form action="" class="form-horizontal" id="frmregistrar" method="post">
+					<form action="../ServletCategoria?tipo=registrar" class="form-horizontal" id="frmregistrar" method="post">
                          <div class="form-group">
                            <label class="col-sm-3 control-label">Nombre Categoria</label>
                            <div class="col-sm-9">
-                             <input type="text"  id="nombre" class="form-control" placeholder="Escribe nombre de Categoria">
+                             <input type="text"  id="txtnombre" name="txtnombre" class="form-control" placeholder="Escribe nombre de Categoria">
                            </div>
                          </div>
                          <div class="form-group">
                           <label class="col-sm-3 control-label">Genero</label>
                            <div class="col-sm-9">
                              	<label class="radio-inline">
-								  <input type="radio" name="genero" id="rb_genero1" value="M"> Masculino
+								  <input type="radio" name="rbgenero" id="rb_genero1" value="M"> Masculino
 								</label>
 								<label class="radio-inline">
-								  <input type="radio" name="genero" id="rb_genero2" value="F"> Femenino
+								  <input type="radio" name="rbgenero" id="rb_genero2" value="F"> Femenino
 								</label>
 								<label class="radio-inline">
-								  <input type="radio" name="genero" id="rb_genero3" value="A"> Mixto
+								  <input type="radio" name="rbgenero" id="rb_genero3" value="A"> Mixto
 								</label>
                            </div>
                          </div>
@@ -49,7 +49,7 @@
                          <div class="form-group">
                            <label class="col-sm-3 control-label"> </label>
                            <div class="col-sm-9">
-                             <input type="text" id="maxpersonas" name="maxpersonas" class="form-control" disabled >
+                             <input type="text" id="maxpersonas" name="txtcantidad" class="form-control" value="0" disabled >
                            </div>
                          </div>                                 
                          <div class="form-group">

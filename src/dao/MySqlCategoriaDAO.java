@@ -29,11 +29,10 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 				cat = new CategoriaDTO();
 				cat.setCodigo(rs.getInt(1));
 				cat.setNombre(rs.getString(2));
-				cat.setGenero(rs.getInt(3));
-				cat.setEdadmin(rs.getInt(4));
-				cat.setEdadmax(rs.getInt(5));
-				cat.setFregistro(rs.getString(6));
-				cat.setEstado(rs.getBoolean(7));				
+				cat.setGenero(rs.getString(3));
+				cat.setCantidad(rs.getInt(4));;
+				cat.setFregistro(rs.getString(5));
+				cat.setEstado(rs.getInt(6));				
 				data.add(cat);
 			}
 		} catch (Exception e) {
@@ -69,11 +68,10 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 				cat = new CategoriaDTO();
 				cat.setCodigo(rs.getInt(1));
 				cat.setNombre(rs.getString(2));
-				cat.setGenero(rs.getInt(3));
-				cat.setEdadmin(rs.getInt(4));
-				cat.setEdadmax(rs.getInt(5));
-				cat.setFregistro(rs.getString(6));
-				cat.setEstado(rs.getBoolean(7));
+				cat.setGenero(rs.getString(3));
+				cat.setCantidad(rs.getInt(4));;
+				cat.setFregistro(rs.getString(5));
+				cat.setEstado(rs.getInt(6));	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -99,14 +97,12 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "insert into categoria values(null,?,?,?,?,?,?)";
+			String sql = "insert into categoria values(null ,? ,? ,? , now(),? )";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
-			pstm.setInt(2, obj.getGenero());
-			pstm.setInt(3, obj.getEdadmin());
-			pstm.setInt(4, obj.getEdadmax());
-			pstm.setString(5, obj.getFregistro());
-			pstm.setBoolean(6, obj.getEstado());
+			pstm.setString(2, obj.getGenero());
+			pstm.setInt(3, obj.getCantidad());
+			pstm.setInt(4, obj.getEstado());
 			
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
@@ -135,11 +131,10 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 					+ " edad_min=?,edad_max=?, fecha_registro=? estado=? where idcategoria=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
-			pstm.setInt(2, obj.getGenero());
-			pstm.setInt(3, obj.getEdadmin());
-			pstm.setInt(4, obj.getEdadmax());
-			pstm.setString(5, obj.getFregistro());
-			pstm.setBoolean(6, obj.getEstado());;	
+			pstm.setString(2, obj.getGenero());
+			pstm.setInt(3, obj.getCantidad());
+			pstm.setString(4, obj.getFregistro());
+			pstm.setInt(5, obj.getEstado());	
 			pstm.setInt(7, obj.getCodigo());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
