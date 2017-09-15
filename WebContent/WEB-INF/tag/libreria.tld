@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE taglib
+  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+   "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+	<tlibversion>1.0</tlibversion>
+	<jspversion>1.2</jspversion>
+	<shortname>custag</shortname>
+	<uri>http://libreria.registro</uri>
+	<tag>
+		<name>cboDinamico</name>
+		<tagclass>tags.TagComboDinamico</tagclass>
+		<attribute>
+			<name>nombre</name>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>sql</name>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>valor</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+	</tag>
+    <!-- Taglib config here -->
+</taglib>
