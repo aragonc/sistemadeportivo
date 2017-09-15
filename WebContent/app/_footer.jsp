@@ -17,6 +17,7 @@
 <script src="../static/js/adminlte.min.js"></script>
 <script src="../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="../static/js/main.js"></script>
 <script type="text/javascript">
 
 $('.midatepicker').datepicker({

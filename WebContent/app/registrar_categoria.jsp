@@ -49,7 +49,7 @@
                          <div class="form-group">
                            <label class="col-sm-3 control-label"> </label>
                            <div class="col-sm-9">
-                             <input type="text" id="maxpersonas" name="maxpersonas" class="form-control" >
+                             <input type="text" id="maxpersonas" name="maxpersonas" class="form-control" disabled >
                            </div>
                          </div>                                 
                          <div class="form-group">
@@ -77,7 +77,47 @@
 	             </div>
 			</div>
 		</div>
-
+		<div class="box box-primary">
+            <div class="box-body">
+            	<div class="box-header with-border">
+	              <h3 class="box-title">Listado de categorias</h3>
+	            </div>
+	            <div class="box-body">
+	            	<div class="col-md-9">
+	            		<form class="form-horizontal">
+			              <div class="box-body table-responsive no-padding">
+			              <table class="table table-hover">
+			                <tbody><tr>
+			                  <th>Codigo</th>
+			                  <th>Nombre</th>
+			                  <th>Género</th>
+			                  <th>Cant. Participantes</th>
+			                  <th>Estado</th>
+			                  <th>Acciones</th>
+			                </tr>
+			                <tr>
+			                  <td>0001</td>
+			                  <td>Sub 20 Varones</td>
+			                  <td>Masculino</td>
+			                  <td>20</td>
+			                  <td><span class="label label-success">Activo</span></td>
+			                  <td class="text-center">
+			                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+			                      <a href="#" class="btn btn-default" title="Editar Deuda"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+			                      <a href="#" class="btn btn-default" title="Eliminar deuda"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+			                    </div>
+			                  </td>
+			                	</tr>
+			               	</table>
+			              </div>
+			            </form>
+	            	</div>
+	            	<div class="col-md-3">
+	            	
+	            	</div>
+	            </div>
+        	</div>
+        </div>
     </section>
   </div>
  
