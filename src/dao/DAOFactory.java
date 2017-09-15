@@ -3,7 +3,6 @@ package dao;
 import interfaces.CategoriaDAO;
 import interfaces.DelegadoDAO;
 import interfaces.DisciplinaDAO;
-import interfaces.EntrenadorDAO;
 import interfaces.EquipoDAO;
 import interfaces.JugadorDAO;
 import interfaces.PersonaDAO;
@@ -20,7 +19,6 @@ public abstract class DAOFactory {
     public abstract CategoriaDAO getCategoriaDAO();
     public abstract DelegadoDAO getDelegadoDAO();
     public abstract DisciplinaDAO getDisciplinaDAO();
-    public abstract EntrenadorDAO getEntrenadorDAO();
     public abstract EquipoDAO getEquipoDAO();
     public abstract JugadorDAO getJugadorDAO();
     public abstract PersonaDAO getPersonaDAO();

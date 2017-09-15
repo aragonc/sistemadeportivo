@@ -2,7 +2,6 @@ package dao;
 import interfaces.CategoriaDAO;
 import interfaces.DelegadoDAO;
 import interfaces.DisciplinaDAO;
-import interfaces.EntrenadorDAO;
 import interfaces.EquipoDAO;
 import interfaces.JugadorDAO;
 import interfaces.PersonaDAO;
@@ -23,11 +22,6 @@ public class MySqlDAOFactory extends DAOFactory {
 	public DisciplinaDAO getDisciplinaDAO() {
 		// TODO Auto-generated method stub
 		return new MySqlDisciplinaDAO();
-	}
-	@Override
-	public EntrenadorDAO getEntrenadorDAO() {
-		// TODO Auto-generated method stub
-		return new MySqlEntrenadorDAO();
 	}
 	@Override
 	public EquipoDAO getEquipoDAO() {
