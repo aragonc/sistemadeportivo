@@ -42,11 +42,12 @@
 		                </display:column>
 		                <display:column  title="Acciones" sortable="false">
 		              
-		              
+		              <div class="text-center">
 		                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
 		                    <a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=buscar&cod=${lista.codigo}" class="btn btn-default" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 		                    <a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" href=".${pageContext.request.contextPath}/ServletDisciplina?tipo=eliminar&cod=${lista.codigo}" class="btn btn-default" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 		                  </div>
+		              </div>
 		                  
 		                  </display:column>
 		                 </display:table>
