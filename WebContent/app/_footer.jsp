@@ -12,12 +12,12 @@
 </div>
 <!-- ./FIN DEL CONTENEDOR WRAPPER -->
 
-<script src="../bower_components/jquery/dist/jquery.min.js"></script>
-<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../static/js/adminlte.min.js"></script>
-<script src="../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<script src="../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="../static/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/adminlte.min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/main.js"></script>
 <script type="text/javascript">
 
 $('.midatepicker').datepicker({

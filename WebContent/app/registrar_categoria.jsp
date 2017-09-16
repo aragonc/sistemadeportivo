@@ -14,7 +14,7 @@
             </div>
         	<div class="box-body">
             	<div class="col-md-9">
-					<form action="../ServletCategoria?tipo=registrar" class="form-horizontal" id="frmregistrar" method="post">
+					<form action="${pageContext.request.contextPath}/ServletCategoria?tipo=registrar" class="form-horizontal" id="frmregistrar" method="post">
                          <div class="form-group">
                            <label class="col-sm-3 control-label">Nombre Categoria</label>
                            <div class="col-sm-9">
@@ -63,7 +63,7 @@
                          </div>
                          <div class="form-group">
                            <div class="col-sm-offset-3 col-sm-9">
-                             <a href="lista_categoria.jsp" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+                             <a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i>
                                Atras
                              </a>
                              <button type="submit" class="btn btn-primary" >
