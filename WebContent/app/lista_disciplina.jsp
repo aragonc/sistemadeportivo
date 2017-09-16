@@ -15,16 +15,19 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h3>Lista de disciplinas</h3> 
+      <h3>Disciplinas deportivas</h3> 
     </section>
 
     <!-- Main content -->
     <section class="content">
        <div class="box box-primary">
+       		<div class="box-header with-border">
+	              <h3 class="box-title">Listado de disciplinas</h3>
+	        </div>
            <div class="box-body">
 	        <div class="col-md-9">
 	        <div class="toolbar-actions">
-		        <a href="registrar_disciplina.jsp" class="btn btn-primary">
+		        <a href="${pageContext.request.contextPath}/app/registrar_disciplina.jsp" class="btn btn-primary">
 		        	<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar disciplina</a>
 		       
 	       	</div>
