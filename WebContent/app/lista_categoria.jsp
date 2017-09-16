@@ -33,7 +33,10 @@
 			                <display:column property="nombre" title="Nombre" />
 			                <display:column property="genero" title="Genero" />
 			                <display:column property="cantidad" title="Cantidad" />
-			                <display:column property="estado" title="Estado" />
+			                <display:column  title="Estado" sortable="false" >
+			                	${lista.estado == 1 ? '<span class="label label-success"> Activo </span>' : '<span class="label label-danger"> Inactivo </span>'}
+			                </display:column>
+			                
 			                <display:column  title="Acciones" sortable="false">
 			                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
 			                    <a href="ServletCategoria?tipo=buscar&cod=${lista.codigo}" class="btn btn-default" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>

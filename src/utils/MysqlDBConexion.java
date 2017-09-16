@@ -10,7 +10,7 @@ public class MysqlDBConexion {
 		Connection cn=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			cn=DriverManager.getConnection("jdbc:mysql://localhost/campeonato","root","mysql");
+			cn=DriverManager.getConnection("jdbc:mysql://localhost/campeonato?autoReconnect=true&useSSL=false","root","mysql");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

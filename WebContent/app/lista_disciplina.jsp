@@ -30,17 +30,19 @@
 	       	</div>
 	        <div class="box-body table-responsive no-padding">
 	        
-		        <display:table class="table table-bordered"  name="data" requestURI="../ServletDisciplina?tipo=listar"	excludedParams="tipo" id="f">
+		        <display:table class="table table-bordered"  name="data" requestURI="../ServletDisciplina?tipo=listar"	excludedParams="tipo" id="lista">
 		              
-		                <display:column property="codigo" title="Codigo" sortable="true"/>
-		                <display:column property="nombre" title="Nombre" sortable="true"/>
-		                <display:column property="estado" title="Estado" sortable="true"/>
+		                <display:column property="codigo" title="Codigo" sortable="false"/>
+		                <display:column property="nombre" title="Nombre" sortable="false"/>
+		                <display:column title="Estado" sortable="false">
+		                	${lista.estado == 1 ? '<span class="label label-success"> Activo </span>' : '<span class="label label-danger"> Inactivo </span>'}
+		                </display:column>
 		                <display:column  title="Acciones" sortable="false">
 		              
 		              
 		                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
-		                    <a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=buscar&cod=${f.codigo}" class="btn btn-default" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-		                    <a href=".${pageContext.request.contextPath}/ServletDisciplina?tipo=eliminar&cod=${f.codigo}" class="btn btn-default" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+		                    <a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=buscar&cod=${lista.codigo}" class="btn btn-default" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+		                    <a href=".${pageContext.request.contextPath}/ServletDisciplina?tipo=eliminar&cod=${lista.codigo}" class="btn btn-default" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 		                  </div>
 		                  
 		                  </display:column>
