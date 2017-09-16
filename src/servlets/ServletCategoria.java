@@ -48,7 +48,7 @@ public class ServletCategoria extends HttpServlet{
 			throws ServletException, IOException {
 		List<CategoriaDTO> info = categoriaService.listarCategoria();
 		request.setAttribute("data", info);
-		request.getRequestDispatcher("listarCategoria.jsp").forward(request,
+		request.getRequestDispatcher("app/lista_categoria.jsp").forward(request,
 				response);
 	}
 

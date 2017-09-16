@@ -22,7 +22,7 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select * from categoria ";
+			String sql = "SELECT * FROM categoria ";
 			pstm = cn.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
