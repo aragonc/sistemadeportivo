@@ -22,15 +22,14 @@ public class MySqlDisciplinaDAO implements DisciplinaDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select * from disciplina ";
+			String sql = "select iddisciplina,nombre,estado from disciplina";
 			pstm = cn.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
 				dis = new DisciplinaDTO();
 				dis.setCodigo(rs.getInt(1));
 				dis.setNombre(rs.getString(2));
-				dis.setFregistro(rs.getString(3));
-				dis.setEstado(rs.getInt(4));
+				dis.setEstado(rs.getInt(3));
 								
 				data.add(dis);
 			}

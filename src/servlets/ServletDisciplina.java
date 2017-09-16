@@ -47,7 +47,7 @@ public class ServletDisciplina extends HttpServlet{
 			throws ServletException, IOException {
 		List<DisciplinaDTO> info = disciplinaService.listarDisciplina();
 		request.setAttribute("data", info);
-		request.getRequestDispatcher("listarDisciplina.jsp").forward(request,
+		request.getRequestDispatcher("app/lista_disciplina.jsp").forward(request,
 				response);
 	}
 
