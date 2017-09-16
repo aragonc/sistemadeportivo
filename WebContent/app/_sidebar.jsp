@@ -34,8 +34,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Registrar Equipo</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Registrar Modalidad</a></li>
+          	<li><a href="lista_categoria.jsp"><i class="fa fa-circle-o"></i> Lista de Categorias</a></li>
+          	<li><a href="lista_disciplina.jsp"><i class="fa fa-circle-o"></i> Lista de Disciplinas</a></li>
+            <li><a href="registrar_categoria.jsp"><i class="fa fa-circle-o"></i> Registrar Categoria</a></li>
+            <li><a href="registrar_disciplina.jsp"><i class="fa fa-circle-o"></i> Registrar Disciplina</a></li>
           </ul>
         </li>
       </ul>

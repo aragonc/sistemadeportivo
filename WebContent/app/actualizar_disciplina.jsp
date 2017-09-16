@@ -44,7 +44,7 @@
                                         Atras
                                       </a>
                                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                      <i class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i> Registrar Disciplina</button>
+                                      <i class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i> Actualizar Disciplina</button>
                                     </div>
                                   </div>
                                 </form>
