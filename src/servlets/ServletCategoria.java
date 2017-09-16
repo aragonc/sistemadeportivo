@@ -85,27 +85,25 @@ public class ServletCategoria extends HttpServlet{
 		int codigo = Integer.parseInt(dato);
 		CategoriaDTO x = categoriaService.buscarCategoria(codigo);
 		request.setAttribute("registro", x);
-		request.getRequestDispatcher("actualizarCategoria.jsp").forward(request,
+		request.getRequestDispatcher("app/actualizar_categoria.jsp").forward(request,
 				response);
+		//System.out.println(baseURL);
 	}
 	
 	private void actualizar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		CategoriaDTO obj = new CategoriaDTO();
-		String cod = request.getParameter("txt_codigo");
-		String nombre = request.getParameter("txt_nombre");
-		String genero = request.getParameter("cbo_genero");
-		String cantidad = request.getParameter("txt_cantidad");
-		String fregistro = request.getParameter("txt_fregistro");
-		String est = request.getParameter("cbo_estado");
+		String nombre = request.getParameter("txtnombre");
+		String genero = request.getParameter("rbgenero");
+		if(request.getParameterMap().containsKey("txtcantidad")){
+			String cantidad = request.getParameter("txtcantidad");
+			obj.setCantidad(Integer.parseInt(cantidad));
+			System.out.println(cantidad);
+		}
+		String est = request.getParameter("cboestado");
 		
-		
-		
-		obj.setCodigo(Integer.parseInt(cod));
 		obj.setNombre(nombre);
 		obj.setGenero(genero);
-		obj.setCantidad(Integer.parseInt(cantidad));
-		obj.setFregistro(fregistro);
 		obj.setEstado(Integer.parseInt(est));
 		
 		int estado = categoriaService.actualizarCategoria(obj);
