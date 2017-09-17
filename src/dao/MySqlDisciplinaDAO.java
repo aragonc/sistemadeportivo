@@ -122,11 +122,11 @@ public class MySqlDisciplinaDAO implements DisciplinaDAO{
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "update disciplina set nombre=?, "
-					+ " estado=? iddisciplina=?";
+					+ " estado=? where iddisciplina=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
-			pstm.setInt(3, obj.getEstado());
-			pstm.setInt(4, obj.getCodigo());
+			pstm.setInt(2, obj.getEstado());
+			pstm.setInt(3, obj.getCodigo());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

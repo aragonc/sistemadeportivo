@@ -77,7 +77,7 @@ public class ServletDisciplina extends HttpServlet{
 		int codigo = Integer.parseInt(dato);
 		DisciplinaDTO x = disciplinaService.buscarDisciplina(codigo);
 		request.setAttribute("registro", x);
-		request.getRequestDispatcher("actualizarDisciplina.jsp").forward(request,
+		request.getRequestDispatcher("app/actualizar_disciplina.jsp").forward(request,
 				response);
 	}
 	
