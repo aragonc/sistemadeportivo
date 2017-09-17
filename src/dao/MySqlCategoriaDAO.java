@@ -127,15 +127,13 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "update categoria set nombres=?,genero=?, "
-					+ " edad_min=?,edad_max=?, fecha_registro=? estado=? where idcategoria=?";
+			String sql = "UPDATE categoria SET nombres = ?, genero = ?, cantidad=?, estado = ? WHERE idcategoria = ?;";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getGenero());
 			pstm.setInt(3, obj.getCantidad());
-			pstm.setString(4, obj.getFregistro());
-			pstm.setInt(5, obj.getEstado());	
-			pstm.setInt(7, obj.getCodigo());
+			pstm.setInt(4, obj.getEstado());	
+			pstm.setInt(5, obj.getCodigo());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
