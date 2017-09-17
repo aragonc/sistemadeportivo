@@ -1,6 +1,16 @@
+<%@page import="service.ComboService"%>
+<%@page import="dao.MySqlComboDAO"%>
+<%@page import="interfaces.ComboDAO"%>
+<%@page import="beans.ComboDTO"%>
+<%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%  
+	ComboService listaDocumento = new ComboService();  
+	List<ComboDTO> listaDoc = listaDocumento.listarCombo("documento");
+	List<ComboDTO> listaSexo = listaDocumento.listarCombo("sexo");
+%>
  <jsp:include page="_header.jsp" flush="true" />
   <jsp:include page="_sidebar.jsp" flush="true" />
   <!-- INICIO DE CABECERA INFO PAGE  -->
@@ -51,8 +61,13 @@
 					    <div class="col-sm-10">
 					      <select class="form-control" id="cmbsexo" name="cmbsexo">
 		                    <option value="0">-- Seleccione --</option>
-		                    <option value="1">Masculino</option>
-		                    <option value="2">Femenino</option>
+		                    	<%
+			                    	for (ComboDTO item : listaSexo ){
+			                    %>
+			                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
+			                   	<%
+			                   		}  
+			                   	%>
 		                  </select>
 					    </div>
 					</div>
@@ -61,12 +76,13 @@
 					    <div class="col-sm-10">
 					    	 <select class="form-control" id="cbotipodocumento" name="cbotipodocumento">
 			                    <option value="0">-- Seleccione --</option>
-			                    <option value="1">Documento Nacional de Identidad</option>
-			                    <option value="2">Carnet de Extranjeria</option>
-			                    <option value="3">Registro Unico de Contribuyentes</option>
-			                    <option value="4">Pasaporte</option>
-			                    <option value="5">Partida de Nacimiento</option>
-			                    <option value="6">Otros</option>
+			                    <%
+			                    	for (ComboDTO item : listaDoc ){
+			                    %>
+			                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
+			                   	<%
+			                   		}  
+			                   	%>
 		                  	</select>
 					      	<input type="text" class="form-control" id="txtnumdocumento" name="txtnumdocumento" placeholder="Escribir el número de documento">
 					    </div>

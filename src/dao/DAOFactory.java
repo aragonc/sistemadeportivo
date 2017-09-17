@@ -1,6 +1,7 @@
 package dao;
 
 import interfaces.CategoriaDAO;
+import interfaces.ComboDAO;
 import interfaces.DelegadoDAO;
 import interfaces.DisciplinaDAO;
 import interfaces.EquipoDAO;
@@ -22,6 +23,7 @@ public abstract class DAOFactory {
     public abstract EquipoDAO getEquipoDAO();
     public abstract JugadorDAO getJugadorDAO();
     public abstract PersonaDAO getPersonaDAO();
+    public abstract ComboDAO getComboDAO();
 
     public static DAOFactory getDAOFactory(int whichFactory){
         switch(whichFactory){
