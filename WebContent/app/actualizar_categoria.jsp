@@ -7,6 +7,7 @@
  <% CategoriaDTO ca = (CategoriaDTO) request.getAttribute("registro"); %>
  <c:set var="genero" value="<%= ca.getGenero() %>"/>
  <c:set var="cantidad" value="<%= ca.getCantidad() %>"/>
+ <c:set var="estado" value="<%= ca.getEstado() %>"/>
  <div class="content-wrapper">
     <section class="content-header">
       <h3>Actualizar categoria de disciplina</h3> 
@@ -18,7 +19,7 @@
             </div>
         	<div class="box-body">
             	<div class="col-md-9">
-					<form action="${pageContext.request.contextPath}/ServletCategoria?tipo=registrar" class="form-horizontal" id="frmregistrar" method="post">
+					<form action="${pageContext.request.contextPath}/ServletCategoria?tipo=actualizar" class="form-horizontal" id="frmregistrar" method="post">
                          <input type="hidden" name="codigo" value="<%= ca.getCodigo() %>">
                          <div class="form-group">
                            <label class="col-sm-3 control-label">Nombre Categoria</label>
@@ -62,8 +63,8 @@
                            <label class="col-sm-3 control-label">Estado</label>
                            <div class="col-sm-9">
                              <select id="cboestado" name="cboestado" class="form-control">
-                                   <option value="1">Activo</option>
-                                   <option value="2">Inactivo</option>
+                                   <option value="1" ${estado == 1 ? 'selected' : ''}>Activo</option>
+                                   <option value="2" ${estado == 2 ? 'selected' : ''}>Inactivo</option>
                              </select>
                            </div>
                          </div>
