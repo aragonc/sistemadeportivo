@@ -36,8 +36,9 @@
           <ul class="treeview-menu">
           	<li><a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar"><i class="fa fa-circle-o"></i> Lista de Categorias</a></li>
           	<li><a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=listar"><i class="fa fa-circle-o"></i> Lista de Disciplinas</a></li>
-            <li><a href="registrar_categoria.jsp"><i class="fa fa-circle-o"></i> Registrar Categoria</a></li>
-            <li><a href="registrar_disciplina.jsp"><i class="fa fa-circle-o"></i> Registrar Disciplina</a></li>
+            <li><a href="${pageContext.request.contextPath}/app/registrar_categoria.jsp"><i class="fa fa-circle-o"></i> Registrar Categoria</a></li>
+            <li><a href="${pageContext.request.contextPath}/app/registrar_disciplina.jsp"><i class="fa fa-circle-o"></i> Registrar Disciplina</a></li>
+            <li><a href="${pageContext.request.contextPath}/app/registrar_persona.jsp"><i class="fa fa-circle-o"></i> Registrar Persona</a></li>
           </ul>
         </li>
       </ul>

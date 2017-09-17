@@ -98,12 +98,6 @@
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="txtmovil" class="col-sm-2 control-label">Movil:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtmovil" name="txtmovil" placeholder="Escribir el número de celular">
-					    </div>
-					</div>
-					<div class="form-group">
 					    <label for="cmbestado" class="col-sm-2 control-label">Estado:</label>
 					    <div class="col-sm-10">
 					      <select class="form-control" name="cmbestado">
