@@ -12,4 +12,7 @@ public class ComboService {
 	public List<ComboDTO> listarCombo(String field){
 		return comboDAO.listarCombo(field);
 	}
+	public List<ComboDTO> listarComboSql(String misql){
+		return comboDAO.listarComboSql(misql);
+	}
 }

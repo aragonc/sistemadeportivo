@@ -5,11 +5,13 @@ public class EquipoDTO {
 	private int codigo;
 	private String nombre;
 	private String logo;
-	private String direccion;
+	private String color;
 	private String fregistro;
 	private String email;
 	private String fono;
-	private Boolean estado;
+	private int estado;
+	private int iddisciplina;
+	private int idcategoria;
 	private DelegadoDTO delegadoDTO;
 	
 	public EquipoDTO() {
@@ -40,14 +42,6 @@ public class EquipoDTO {
 		this.logo = logo;
 	}
 	
-	public String getDireccion() {
-		return direccion;
-	}
-	
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-	
 	public String getFregistro() {
 		return fregistro;
 	}
@@ -72,14 +66,26 @@ public class EquipoDTO {
 		this.fono = fono;
 	}
 	
-	public Boolean getEstado() {
+	public int getEstado() {
 		return estado;
 	}
 	
-	public void setEstado(Boolean estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 	
+	public int getIddisciplina() {
+		return iddisciplina;
+	}
+	public void setIddisciplina(int iddisciplina) {
+		this.iddisciplina = iddisciplina;
+	}
+	public int getIdcategoria() {
+		return idcategoria;
+	}
+	public void setIdcategoria(int idcategoria) {
+		this.idcategoria = idcategoria;
+	}
 	public DelegadoDTO getDelegado() {
 		return delegadoDTO;
 	}
@@ -87,19 +93,31 @@ public class EquipoDTO {
 	public void setDelegado(DelegadoDTO delegadoDTO) {
 		this.delegadoDTO = delegadoDTO;
 	}
-	
-	public EquipoDTO(int codigo, String nombre, String logo, String direccion, String fregistro, String email,
-			String fono, Boolean estado, DelegadoDTO delegadoDTO) {
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public DelegadoDTO getDelegadoDTO() {
+		return delegadoDTO;
+	}
+	public void setDelegadoDTO(DelegadoDTO delegadoDTO) {
+		this.delegadoDTO = delegadoDTO;
+	}
+	public EquipoDTO(int codigo, String nombre, String logo, String color, String fregistro, String email, String fono,
+			int estado, int iddisciplina, int idcategoria, DelegadoDTO delegadoDTO) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.logo = logo;
-		this.direccion = direccion;
+		this.color = color;
 		this.fregistro = fregistro;
 		this.email = email;
 		this.fono = fono;
 		this.estado = estado;
+		this.iddisciplina = iddisciplina;
+		this.idcategoria = idcategoria;
 		this.delegadoDTO = delegadoDTO;
 	}
-	
 }

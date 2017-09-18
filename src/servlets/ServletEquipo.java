@@ -40,38 +40,35 @@ public class ServletEquipo extends HttpServlet{
 			eliminar(request, response);
 		
 	}
-
-	
-	
 	private void listar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<EquipoDTO> info = equipoService.listarEquipo();
 		request.setAttribute("data", info);
-		request.getRequestDispatcher("listarEquipo.jsp").forward(request,
+		request.getRequestDispatcher("app/listar_equipo.jsp").forward(request,
 				response);
 	}
-
-	
 
 	private void registrar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		EquipoDTO obj = new EquipoDTO();
-		String nombre = request.getParameter("txt_nombre");
-		String logo = request.getParameter("logo");
-		String direccion = request.getParameter("txt_direccion");
-		String fregistro = request.getParameter("txt_fregistro");
-		String email = request.getParameter("txt_email");
-		String fono = request.getParameter("txt_fono");
-		String est = request.getParameter("cboEstado");
+		String nombre = request.getParameter("nombre");
+		String logo = request.getParameter("logotipo");
+		String email = request.getParameter("email");
+		String fono = request.getParameter("fono");
+		String disciplina = request.getParameter("disciplina");
+		String categoria = request.getParameter("categoria");
+		String color = request.getParameter("color");
+		String est = request.getParameter("estado");
 		
 				
 		obj.setNombre(nombre);
 		obj.setLogo(logo);
-		obj.setDireccion(direccion);
-		obj.setFregistro(fregistro);
 		obj.setEmail(email);
 		obj.setFono(fono);
-		obj.setEstado(Boolean.parseBoolean(est));
+		obj.setColor(color);
+		obj.setIddisciplina(Integer.parseInt(disciplina));
+		obj.setIdcategoria(Integer.parseInt(categoria));
+		obj.setEstado(Integer.parseInt(est));
 				
 		int estado = equipoService.registrarEquipo(obj);
 		if (estado != -1)
@@ -94,24 +91,24 @@ public class ServletEquipo extends HttpServlet{
 			HttpServletResponse response) throws ServletException, IOException {
 		EquipoDTO obj = new EquipoDTO();
 		String codigo = request.getParameter("txt_codigo");
-		String nombre = request.getParameter("txt_nombre");
-		String logo = request.getParameter("logo");
-		String direccion = request.getParameter("txt_direccion");
-		String fregistro = request.getParameter("txt_fregistro");
-		String email = request.getParameter("txt_email");
-		String fono = request.getParameter("txt_fono");
-		String est = request.getParameter("cboEstado");
-		
-		
+		String nombre = request.getParameter("nombre");
+		String logo = request.getParameter("logotipo");
+		String email = request.getParameter("email");
+		String fono = request.getParameter("fono");
+		String disciplina = request.getParameter("disciplina");
+		String categoria = request.getParameter("categoria");
+		String color = request.getParameter("color");
+		String est = request.getParameter("estado");
 		
 		obj.setCodigo(Integer.parseInt(codigo));
 		obj.setNombre(nombre);
 		obj.setLogo(logo);
-		obj.setDireccion(direccion);
-		obj.setFregistro(fregistro);
+		obj.setColor(color);
+		obj.setIddisciplina(Integer.parseInt(disciplina));
+		obj.setIdcategoria(Integer.parseInt(categoria));
 		obj.setEmail(email);
 		obj.setFono(fono);
-		obj.setEstado(Boolean.parseBoolean(est));
+		obj.setEstado(Integer.parseInt(est));
 		int estado = equipoService.actualizarEquipo(obj);
 		if (estado != -1)
 			listar(request, response);

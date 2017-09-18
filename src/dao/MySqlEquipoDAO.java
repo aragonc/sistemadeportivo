@@ -29,11 +29,13 @@ public class MySqlEquipoDAO implements EquipoDAO{
 				a.setCodigo(rs.getInt(1));
 				a.setNombre(rs.getString(2));
 				a.setLogo(rs.getString(3));
-				a.setDireccion(rs.getString(4));
-				a.setFregistro(rs.getString(5));
-				a.setEmail(rs.getString(6));
-				a.setFono(rs.getString(7));
-				a.setEstado(rs.getBoolean(8));				
+				a.setEmail(rs.getString(4));
+				a.setFono(rs.getString(5));
+				a.setColor(rs.getString(6));
+				a.setFregistro(rs.getString(7));
+				a.setEstado(rs.getInt(8));	
+				a.setIddisciplina(rs.getInt(9));
+				a.setIdcategoria(rs.getInt(10));
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -70,11 +72,13 @@ public class MySqlEquipoDAO implements EquipoDAO{
 				a.setCodigo(rs.getInt(1));
 				a.setNombre(rs.getString(2));
 				a.setLogo(rs.getString(3));
-				a.setDireccion(rs.getString(4));
-				a.setFregistro(rs.getString(5));
-				a.setEmail(rs.getString(6));
-				a.setFono(rs.getString(7));
-				a.setEstado(rs.getBoolean(8));
+				a.setEmail(rs.getString(4));
+				a.setFono(rs.getString(5));
+				a.setColor(rs.getString(6));
+				a.setFregistro(rs.getString(7));
+				a.setEstado(rs.getInt(8));	
+				a.setIddisciplina(rs.getInt(9));
+				a.setIdcategoria(rs.getInt(10));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,15 +104,16 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "insert into equipo values(null,?,?,?,?,?,?)";
+			String sql = "insert into equipo values(null,? ,? ,? ,? ,? ,now() , ?, ?, ?)";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getLogo());
-			pstm.setString(3, obj.getDireccion());
-			pstm.setString(4, obj.getFregistro());
-			pstm.setString(5, obj.getEmail());
-			pstm.setString(6, obj.getFono());
-			pstm.setBoolean(7, obj.getEstado());
+			pstm.setString(3, obj.getEmail());
+			pstm.setString(4, obj.getFono());
+			pstm.setString(5, obj.getColor());
+			pstm.setInt(6, obj.getEstado());
+			pstm.setInt(7, obj.getIddisciplina());
+			pstm.setInt(8, obj.getIdcategoria());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -137,12 +142,14 @@ public class MySqlEquipoDAO implements EquipoDAO{
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getLogo());
-			pstm.setString(3, obj.getDireccion());
-			pstm.setString(4, obj.getFregistro());
-			pstm.setString(5, obj.getEmail());
-			pstm.setString(6, obj.getFono());
-			pstm.setBoolean(7, obj.getEstado());
-			pstm.setInt(8, obj.getCodigo());
+			pstm.setString(3, obj.getEmail());
+			pstm.setString(4, obj.getFono());
+			pstm.setString(5, obj.getColor());
+			pstm.setString(6, obj.getFregistro());
+			pstm.setInt(7, obj.getEstado());
+			pstm.setInt(8, obj.getIddisciplina());
+			pstm.setInt(9, obj.getIdcategoria());
+			pstm.setInt(10, obj.getCodigo());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

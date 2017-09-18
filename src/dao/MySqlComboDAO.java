@@ -50,4 +50,40 @@ public class MySqlComboDAO implements ComboDAO{
 		return data;
 	}
 
+	@Override
+	public List<ComboDTO> listarComboSql(String misql) {
+		// TODO Auto-generated method stub
+		ComboDTO a = null;
+		List<ComboDTO> data = new ArrayList<ComboDTO>();
+		Connection cn = null;
+		ResultSet rs = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = misql;
+			pstm = cn.prepareStatement(sql);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				a = new ComboDTO();
+				a.setField(rs.getString(1));
+				a.setValor(rs.getString(2));
+				data.add(a);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return data;
+	}
+
 }
