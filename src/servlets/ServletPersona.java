@@ -67,7 +67,6 @@ public class ServletPersona extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		PersonaDTO obj = new PersonaDTO();
-		
 		request.getRequestDispatcher("app/registar_persona.jsp").forward(request, response);
 
 		String nombre = request.getParameter("txtnombre");
@@ -79,11 +78,10 @@ public class ServletPersona extends HttpServlet {
 		String fnacimiento = request.getParameter("txtfechanacimiento");
 		String email = request.getParameter("txtemail");
 		String fono = request.getParameter("txtfono");
-		String movil = request.getParameter("txtmovil");
 		String estado = request.getParameter("cmbestado");
 		
 		if(fnacimiento!=null && !fnacimiento.trim().equals("")){
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 			Date date = null;
 			try {
 				date = sdf.parse(fnacimiento);
@@ -91,7 +89,7 @@ public class ServletPersona extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			obj.setFnacimiento(date.toString());
+			obj.setFnacimiento(date);
 		}
 		obj.setNombre(nombre);
 		obj.setApaterno(apaterno);
@@ -101,7 +99,6 @@ public class ServletPersona extends HttpServlet {
 		obj.setNumdocumento(numdocumento);
 		obj.setEmail(email);
 		obj.setFono(fono);
-		obj.setMovil(movil);
 		obj.setEstado(Integer.parseInt(estado));
 		
 		int proceso = personaService.registrarPersona(obj);
