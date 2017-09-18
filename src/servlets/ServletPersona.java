@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.CategoriaDTO;
 import beans.PersonaDTO;
 import service.PersonaService;
 
@@ -50,7 +51,7 @@ public class ServletPersona extends HttpServlet {
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<PersonaDTO> info = personaService.listarPersona();
 		request.setAttribute("data", info);
-		request.getRequestDispatcher("listar_persona.jsp").forward(request, response);
+		request.getRequestDispatcher("app/listar_persona.jsp").forward(request, response);
 	}
 
 	private void actualizar(HttpServletRequest request, HttpServletResponse response) {
@@ -58,16 +59,20 @@ public class ServletPersona extends HttpServlet {
 		
 	}
 
-	private void buscarPersona(HttpServletRequest request, HttpServletResponse response) {
+	private void buscarPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		String dato = request.getParameter("cod");
+		int codigo = Integer.parseInt(dato);
+		PersonaDTO x = personaService.buscarPersona(codigo);
+		request.setAttribute("registro", x);
+		request.getRequestDispatcher("app/actualizar_persona.jsp").forward(request,
+				response);
 	}
 
 	private void registrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		PersonaDTO obj = new PersonaDTO();
-		
 		request.getRequestDispatcher("app/registar_persona.jsp").forward(request, response);
 
 		String nombre = request.getParameter("txtnombre");
@@ -79,11 +84,10 @@ public class ServletPersona extends HttpServlet {
 		String fnacimiento = request.getParameter("txtfechanacimiento");
 		String email = request.getParameter("txtemail");
 		String fono = request.getParameter("txtfono");
-		String movil = request.getParameter("txtmovil");
 		String estado = request.getParameter("cmbestado");
 		
 		if(fnacimiento!=null && !fnacimiento.trim().equals("")){
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 			Date date = null;
 			try {
 				date = sdf.parse(fnacimiento);
@@ -91,7 +95,7 @@ public class ServletPersona extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			obj.setFnacimiento(date.toString());
+			obj.setFnacimiento(date);
 		}
 		obj.setNombre(nombre);
 		obj.setApaterno(apaterno);
@@ -101,17 +105,14 @@ public class ServletPersona extends HttpServlet {
 		obj.setNumdocumento(numdocumento);
 		obj.setEmail(email);
 		obj.setFono(fono);
-		obj.setMovil(movil);
 		obj.setEstado(Integer.parseInt(estado));
 		
 		int proceso = personaService.registrarPersona(obj);
 		
 		if(proceso != -1){
-			System.out.println("Registro exitoso...");
+			listar(request, response);
 		} else {
-			System.out.println("Error...");
+			response.sendRedirect("error.html");
 		}
-		
-		
 	}
 }

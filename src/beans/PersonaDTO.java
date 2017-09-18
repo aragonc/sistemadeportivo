@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.Date;
+
 public class PersonaDTO {
 	private int codigo;
 	private String nombre;
@@ -8,7 +10,7 @@ public class PersonaDTO {
 	private int sexo;
 	private int tipodocumento;
 	private String numdocumento;
-	private String fnacimiento;
+	private Date fnacimiento;
 	private String email;
 	private String fono;
 	private String movil;
@@ -50,10 +52,10 @@ public class PersonaDTO {
 	public void setNumdocumento(String dni) {
 		this.numdocumento = dni;
 	}
-	public String getFnacimiento() {
+	public Date getFnacimiento() {
 		return fnacimiento;
 	}
-	public void setFnacimiento(String fnacimiento) {
+	public void setFnacimiento(Date fnacimiento) {
 		this.fnacimiento = fnacimiento;
 	}
 	public String getEmail() {
@@ -88,7 +90,7 @@ public class PersonaDTO {
 	}
 
 	public PersonaDTO(int codigo, String nombre, String apaterno, String amaterno, int sexo, int tipodocumento,
-			String numdocumento, String fnacimiento, String email, String fono, String movil, int estado) {
+			String numdocumento, Date fnacimiento, String email, String fono, String movil, int estado) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;

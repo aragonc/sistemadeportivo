@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.Date;
+
 public class JugadorDTO extends PersonaDTO {
 	private int numjugador;
 	private Double estatura;
@@ -49,7 +51,7 @@ public class JugadorDTO extends PersonaDTO {
 		// TODO Auto-generated constructor stub
 	}
 	public JugadorDTO(int codigo, String nombre, String apaterno, String amaterno, int sexo, int tipodocumento,
-			String numdocumento, String fnacimiento, String email, String fono, String movil, int estado,
+			String numdocumento, Date fnacimiento, String email, String fono, String movil, int estado,
 			int numjugador, Double estatura, Double peso, String tiposangre, int codequipo, int tipo) {
 		super(codigo, nombre, apaterno, amaterno, sexo, tipodocumento, numdocumento, fnacimiento, email, fono, movil,
 				estado);

@@ -33,11 +33,10 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setSexo(rs.getInt(5));
 				a.setTipodocumento(rs.getInt(6));
 				a.setNumdocumento(rs.getString(7));
-				a.setFnacimiento(rs.getString(8));
+				a.setFnacimiento(rs.getDate(8));
 				a.setEmail(rs.getString(9));
 				a.setFono(rs.getString(10));
-				a.setMovil(rs.getString(11));
-				a.setEstado(rs.getInt(7));				
+				a.setEstado(rs.getInt(11));				
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -65,7 +64,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		ResultSet rs = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select * from delegoria where iddelegoria=?";
+			String sql = "SELECT * FROM persona WHERE idpersona=?;";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
@@ -103,7 +102,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "INSERT INTO `campeonato`.`persona` VALUES (null,? ,? ,? ,? ,? ,? ,? , ? ,? ,? ,?, NOW())";
+			String sql = "INSERT INTO persona VALUES (null,? ,? ,? ,? ,? ,? ,? , ? ,? ,? , NOW())";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getApaterno());
@@ -111,11 +110,10 @@ public class MySqlPersonaDAO implements PersonaDAO{
 			pstm.setInt(4, obj.getSexo());
 			pstm.setInt(5, obj.getTipodocumento());
 			pstm.setString(6, obj.getNumdocumento());
-			pstm.setString(7, obj.getFnacimiento());
+			pstm.setDate(7, new java.sql.Date(obj.getFnacimiento().getTime()));
 			pstm.setString(8, obj.getEmail());
 			pstm.setString(9, obj.getFono());
-			pstm.setString(10, obj.getMovil());
-			pstm.setInt(11, obj.getEstado());
+			pstm.setInt(10, obj.getEstado());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
