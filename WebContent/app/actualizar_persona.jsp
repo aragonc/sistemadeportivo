@@ -1,3 +1,4 @@
+<%@page import="beans.PersonaDTO"%>
 <%@page import="service.ComboService"%>
 <%@page import="dao.MySqlComboDAO"%>
 <%@page import="interfaces.ComboDAO"%>
@@ -7,6 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%  
+	PersonaDTO ca = (PersonaDTO) request.getAttribute("registro");
 	ComboService listaDocumento = new ComboService();  
 	List<ComboDTO> listaDoc = listaDocumento.listarCombo("documento");
 	List<ComboDTO> listaSexo = listaDocumento.listarCombo("sexo");
@@ -36,7 +38,8 @@
     		<div class="box-header with-border">
   				<h3 class="box-title">Registrar persona</h3>
   			</div>
-	  		<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletPersona?tipo=registrar" method="post">
+	  		<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletPersona?tipo=actualizar" method="post">
+	  			<input type="hidden" name="codigo" value="<%= ca.getCodigo() %>">
 	  			<div class="box-body">
 		  			<div class="form-group">
 					    <label for="txtnombre" class="col-sm-2 control-label">Nombres:</label>

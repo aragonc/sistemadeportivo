@@ -1,5 +1,6 @@
 package dao;
 import interfaces.CategoriaDAO;
+import interfaces.ComboDAO;
 import interfaces.DelegadoDAO;
 import interfaces.DisciplinaDAO;
 import interfaces.EquipoDAO;
@@ -37,6 +38,11 @@ public class MySqlDAOFactory extends DAOFactory {
 	public PersonaDAO getPersonaDAO() {
 		// TODO Auto-generated method stub
 		return new MySqlPersonaDAO();
+	}
+	@Override
+	public ComboDAO getComboDAO() {
+		// TODO Auto-generated method stub
+		return new MySqlComboDAO();
 	}
 	
 }

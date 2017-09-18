@@ -21,7 +21,8 @@
 <script type="text/javascript">
 
 $('.midatepicker').datepicker({
-  autoclose: true
+  autoclose: true,
+  dateFormat: 'yyyy-mm-dd'
 });
 </script>
 </body>

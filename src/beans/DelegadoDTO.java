@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.Date;
+
 public class DelegadoDTO extends PersonaDTO{
 	private int codequipo;
 
@@ -17,7 +19,7 @@ public class DelegadoDTO extends PersonaDTO{
 	}
 
 	public DelegadoDTO(int codigo, String nombre, String apaterno, String amaterno, int sexo, int tipodocumento,
-			String numdocumento, String fnacimiento, String email, String fono, String movil, int estado,
+			String numdocumento, Date fnacimiento, String email, String fono, String movil, int estado,
 			int codequipo) {
 		super(codigo, nombre, apaterno, amaterno, sexo, tipodocumento, numdocumento, fnacimiento, email, fono, movil,
 				estado);
