@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.CategoriaDTO;
 import beans.PersonaDTO;
 import service.PersonaService;
 
@@ -50,7 +51,7 @@ public class ServletPersona extends HttpServlet {
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<PersonaDTO> info = personaService.listarPersona();
 		request.setAttribute("data", info);
-		request.getRequestDispatcher("listar_persona.jsp").forward(request, response);
+		request.getRequestDispatcher("app/listar_persona.jsp").forward(request, response);
 	}
 
 	private void actualizar(HttpServletRequest request, HttpServletResponse response) {
@@ -58,9 +59,14 @@ public class ServletPersona extends HttpServlet {
 		
 	}
 
-	private void buscarPersona(HttpServletRequest request, HttpServletResponse response) {
+	private void buscarPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		String dato = request.getParameter("cod");
+		int codigo = Integer.parseInt(dato);
+		PersonaDTO x = personaService.buscarPersona(codigo);
+		request.setAttribute("registro", x);
+		request.getRequestDispatcher("app/actualizar_persona.jsp").forward(request,
+				response);
 	}
 
 	private void registrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -104,11 +110,9 @@ public class ServletPersona extends HttpServlet {
 		int proceso = personaService.registrarPersona(obj);
 		
 		if(proceso != -1){
-			System.out.println("Registro exitoso...");
+			listar(request, response);
 		} else {
-			System.out.println("Error...");
+			response.sendRedirect("error.html");
 		}
-		
-		
 	}
 }

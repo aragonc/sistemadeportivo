@@ -1,11 +1,17 @@
+<%@page import="beans.ComboDTO"%>
+<%@page import="service.ComboService"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="beans.PersonaDTO"%>
 <%@page import="java.util.List"%>
-
+<%  
+	ComboService listaDocumento = new ComboService();
+	List<ComboDTO> listaSexo = listaDocumento.listarCombo("sexo");
+%>
  <jsp:include page="_header.jsp" flush="true" />
  <jsp:include page="_sidebar.jsp" flush="true" />
  
@@ -23,25 +29,29 @@
     	<div class="box box-primary">
         	<div class="box-body">
             	<div class="col-md-9">
-					<a href="" class="btn btn-primary"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar persona</a>
+					<a href="${pageContext.request.contextPath}/app/registrar_persona.jsp" class="btn btn-primary"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar persona</a>
 		              <div class="box-body">
 		              	<form class="form-horizontal">
 		               		<div class="table-responsive">
-		               			<display:table name="data" class="table table-hover" pagesize="10" requestURI="ServletPersona?tipo=listar" export="true" excludedParams="tipo" id="userTable">
-		               		 		<display:column property="codigo" title="Codigo" sortable="true"/>
-										<display:column property="nombre" title="Nombres" sortable="true"/>
-										<display:column property="apaterno" title="A. Paterno" sortable="true"/>
-										<display:column property="amaterno" title="A. Materno" sortable="true"/>
-										<display:column property="email" title="Email" sortable="true"/>	
-										<display:column property="sexo" title="Sexo" sortable="true"/>
-										<display:column property="estado" title="Estado" sortable="true"/>
+		               			<display:table name="data" class="table table-bordered" pagesize="10" requestURI="ServletPersona?tipo=listar" excludedParams="tipo" id="lista">
+		               		 		<display:column property="codigo" title="Codigo" sortable="false"/>
+										<display:column property="nombre" title="Nombres" sortable="false"/>
+										<display:column property="apaterno" title="Apellido Paterno" sortable="false"/>
+										<display:column property="amaterno" title="Apellido Materno" sortable="false"/>
+										<display:column property="email" title="Email" sortable="false"/>	
+										<display:column title="Sexo" sortable="false">
+											${lista.sexo == 1 ? '<span> Masculino </span>' : '<span> Femenino </span>'}
+										</display:column>
+										<display:column  title="Estado" sortable="false">
+											${lista.estado == 1 ? '<span class="label label-success"> Activo </span>' : '<span class="label label-danger"> Inactivo </span>'}
+										</display:column>
 										<display:column title="Acciones" sortable="false" media="html" >
 										
 											<div class="btn-group btn-group-sm" role="group">
-												<a class="btn btn-default" title="Actualizar" href="ServletPersona?tipo=buscar&cod=${userTable.codUser}">
+												<a class="btn btn-default" title="Actualizar" href="ServletPersona?tipo=buscar&cod=${lista.codigo}">
 													<i class="fa fa-pencil" aria-hidden="true"></i>
 												</a>
-												<a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" class="btn btn-default" title="Eliminar" href="ServletPersona?tipo=eliminar&cod=${userTable.codUser}">
+												<a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" class="btn btn-default" title="Eliminar" href="ServletPersona?tipo=eliminar&cod=${lista.codigo}">
 													<i class="fa fa-trash" aria-hidden="true"></i>
 												</a>
 											</div>

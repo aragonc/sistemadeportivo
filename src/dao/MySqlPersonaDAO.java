@@ -33,11 +33,10 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setSexo(rs.getInt(5));
 				a.setTipodocumento(rs.getInt(6));
 				a.setNumdocumento(rs.getString(7));
-				a.setFnacimiento(new java.sql.Date(a.getFnacimiento().getTime()));
+				a.setFnacimiento(rs.getDate(8));
 				a.setEmail(rs.getString(9));
 				a.setFono(rs.getString(10));
-				a.setMovil(rs.getString(11));
-				a.setEstado(rs.getInt(7));				
+				a.setEstado(rs.getInt(11));				
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -65,7 +64,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		ResultSet rs = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select * from delegoria where iddelegoria=?";
+			String sql = "SELECT * FROM persona WHERE idpersona=?;";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
