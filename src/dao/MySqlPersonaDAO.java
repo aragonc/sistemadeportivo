@@ -56,6 +56,50 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		return data;
 	}
 
+	public List<PersonaDTO> listarPersonaBuscar(String criterio) {
+		PersonaDTO a = null;
+		List<PersonaDTO> data = new ArrayList<PersonaDTO>();
+		Connection cn = null;
+		ResultSet rs = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "SELECT * FROM persona where ;";
+			pstm = cn.prepareStatement(sql);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				a = new PersonaDTO();
+				a.setCodigo(rs.getInt(1));
+				a.setNombre(rs.getString(2));
+				a.setApaterno(rs.getString(3));
+				a.setAmaterno(rs.getString(4));
+				a.setSexo(rs.getInt(5));
+				a.setTipodocumento(rs.getInt(6));
+				a.setNumdocumento(rs.getString(7));
+				a.setFnacimiento(rs.getDate(8));
+				a.setEmail(rs.getString(9));
+				a.setFono(rs.getString(10));
+				a.setEstado(rs.getInt(11));				
+				data.add(a);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return data;
+	}
+
+	
 	@Override
 	public PersonaDTO buscarPersona(int cod) {
 		PersonaDTO a = null;
@@ -132,14 +176,65 @@ public class MySqlPersonaDAO implements PersonaDAO{
 
 	@Override
 	public int actualizarPersona(PersonaDTO obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "update persona set nombres=?, "
+					+ " apaterno=?, amaterno=?, sexo=?, dni=?, fecha_nacimiento=?"
+					+ ", email=?, telefono_contacto=?,estado=? where idpersona=?";
+			pstm = cn.prepareStatement(sql);
+			pstm.setString(1, obj.getNombre());
+			pstm.setString(2, obj.getApaterno());
+			pstm.setString(3, obj.getAmaterno());
+			pstm.setInt(4, obj.getSexo());
+			pstm.setInt(5, obj.getTipodocumento());
+			pstm.setString(6, obj.getNumdocumento());
+			pstm.setDate(7, new java.sql.Date(obj.getFnacimiento().getTime()));
+			pstm.setString(8, obj.getEmail());
+			pstm.setString(9, obj.getFono());
+			pstm.setInt(10, obj.getEstado());
+			pstm.setInt(11, obj.getCodigo());
+			estado = pstm.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return estado;
 	}
 
-	@Override
 	public int eliminarPersona(int cod) {
-		// TODO Auto-generated method stub
-		return 0;
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "delete from persona where idpersona=?";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, cod);
+			estado = pstm.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return estado;
 	}
 
 }

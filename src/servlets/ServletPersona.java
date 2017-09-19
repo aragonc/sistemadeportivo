@@ -43,10 +43,14 @@ public class ServletPersona extends HttpServlet {
 		}
 	//metodos para registar una persona pero según su tipo;
 	 
-	private void eliminar(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
+	 private void eliminar(HttpServletRequest request,
+				HttpServletResponse response) throws ServletException, IOException {
+			String dato = request.getParameter("cod");
+			int codigo = Integer.parseInt(dato);
+			personaService.eliminarPersona(codigo);
+			request.getRequestDispatcher("ServletPersona?tipo=listar").forward(request,
+					response);
+		}
 
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<PersonaDTO> info = personaService.listarPersona();
@@ -54,9 +58,49 @@ public class ServletPersona extends HttpServlet {
 		request.getRequestDispatcher("app/listar_persona.jsp").forward(request, response);
 	}
 
-	private void actualizar(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void actualizar(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		PersonaDTO obj = new PersonaDTO();
 		
+		String nombre = request.getParameter("txtnombre");		
+		String paterno = request.getParameter("txtapaterno");
+		String materno = request.getParameter("txtamaterno");
+		String sexo = request.getParameter("cmbsexo");
+		String dni = request.getParameter("cbotipodocumento");
+		String fechanac = request.getParameter("txtfechanacimiento");
+		String email = request.getParameter("txtemail");
+		String telefono = request.getParameter("txtfono");
+		String est = request.getParameter("cmbestado");
+		String cod = request.getParameter("codigo");
+		
+		if(fechanac!=null && !fechanac.trim().equals("")){
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+			Date date = null;
+			try {
+				date = sdf.parse(fechanac);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			obj.setFnacimiento(date);
+		}
+		
+			
+		obj.setNombre(nombre);
+		obj.setApaterno(paterno);
+		obj.setAmaterno(materno);
+		obj.setSexo(Integer.parseInt(sexo));
+		obj.setTipodocumento(Integer.parseInt(dni));;
+		obj.setEmail(email);
+		obj.setFono(telefono);
+		obj.setEstado(Integer.parseInt(est));
+		obj.setCodigo(Integer.parseInt(cod));	
+		
+		int estado = personaService.actualizarPersona(obj);
+		if (estado != -1)
+			listar(request, response);
+		else
+			response.sendRedirect("error.html");
 	}
 
 	private void buscarPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
