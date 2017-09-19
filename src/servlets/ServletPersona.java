@@ -117,7 +117,7 @@ public class ServletPersona extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		PersonaDTO obj = new PersonaDTO();
-		request.getRequestDispatcher("app/registar_persona.jsp").forward(request, response);
+		//request.getRequestDispatcher("app/registar_persona.jsp").forward(request, response);
 
 		String nombre = request.getParameter("txtnombre");
 		String apaterno = request.getParameter("txtapaterno");
