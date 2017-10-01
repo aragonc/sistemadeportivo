@@ -47,7 +47,7 @@
                               	 		Atras
                              			</a>	
                                       <button type="submit" class="btn btn-primary">
-                                      <i class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i> Actualizar Disciplina</button>
+                                      <i class="fa fa-pencil" aria-hidden="true"></i> Actualizar Disciplina</button>
                                     </div>
                                   </div>
                                 </form>

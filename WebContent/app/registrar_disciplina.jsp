@@ -40,11 +40,11 @@
                                   </div>
                                   <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                      <a href="#" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                      <a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=listar" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i>
                                         Atras
                                       </a>
                                       <button type="submit" class="btn btn-primary">
-                                      <i class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i> Registrar Disciplina</button>
+                                      <i class="fa fa-plus" aria-hidden="true"></i> Registrar Disciplina</button>
                                     </div>
                                   </div>
                                 </form>

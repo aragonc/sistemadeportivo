@@ -29,10 +29,8 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 				cat = new CategoriaDTO();
 				cat.setCodigo(rs.getInt(1));
 				cat.setNombre(rs.getString(2));
-				cat.setGenero(rs.getString(3));
-				cat.setCantidad(rs.getInt(4));;
-				cat.setFregistro(rs.getString(5));
-				cat.setEstado(rs.getInt(6));				
+				cat.setFregistro(rs.getString(3));
+				cat.setEstado(rs.getInt(4));				
 				data.add(cat);
 			}
 		} catch (Exception e) {
@@ -68,10 +66,8 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 				cat = new CategoriaDTO();
 				cat.setCodigo(rs.getInt(1));
 				cat.setNombre(rs.getString(2));
-				cat.setGenero(rs.getString(3));
-				cat.setCantidad(rs.getInt(4));;
-				cat.setFregistro(rs.getString(5));
-				cat.setEstado(rs.getInt(6));	
+				cat.setFregistro(rs.getString(3));
+				cat.setEstado(rs.getInt(4));	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -97,12 +93,10 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "insert into categoria values(null ,? ,? ,? , now(),? )";
+			String sql = "insert into categoria values(null , ?, now(), ?)";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
-			pstm.setString(2, obj.getGenero());
-			pstm.setInt(3, obj.getCantidad());
-			pstm.setInt(4, obj.getEstado());
+			pstm.setInt(2, obj.getEstado());
 			
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
@@ -127,13 +121,11 @@ public class MySqlCategoriaDAO implements CategoriaDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "UPDATE categoria SET nombres = ?, genero = ?, cantidad=?, estado = ? WHERE idcategoria = ?;";
+			String sql = "UPDATE categoria SET nombres = ?, estado = ? WHERE idcategoria = ?;";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
-			pstm.setString(2, obj.getGenero());
-			pstm.setInt(3, obj.getCantidad());
-			pstm.setInt(4, obj.getEstado());	
-			pstm.setInt(5, obj.getCodigo());
+			pstm.setInt(2, obj.getEstado());	
+			pstm.setInt(3, obj.getCodigo());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

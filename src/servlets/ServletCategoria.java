@@ -8,12 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
 import beans.CategoriaDTO;
-
 import service.CategoriaService;
-import sun.invoke.empty.Empty;
+
 
 @WebServlet("/ServletCategoria")
 
@@ -58,17 +55,9 @@ public class ServletCategoria extends HttpServlet{
 			HttpServletResponse response) throws ServletException, IOException {
 		CategoriaDTO obj = new CategoriaDTO();
 		String nombre = request.getParameter("txtnombre");
-		String genero = request.getParameter("rbgenero");
-		if(request.getParameterMap().containsKey("txtcantidad")){
-			String cantidad = request.getParameter("txtcantidad");
-			obj.setCantidad(Integer.parseInt(cantidad));
-			System.out.println(cantidad);
-		}
-		
 		String est = request.getParameter("cboestado");
 		
 		obj.setNombre(nombre);
-		obj.setGenero(genero);
 		obj.setEstado(Integer.parseInt(est));
 		
 		
@@ -95,16 +84,9 @@ public class ServletCategoria extends HttpServlet{
 		CategoriaDTO obj = new CategoriaDTO();
 		String codigo = request.getParameter("codigo");
 		String nombre = request.getParameter("txtnombre");
-		String genero = request.getParameter("rbgenero");
-		if(request.getParameterMap().containsKey("txtcantidad")){
-			String cantidad = request.getParameter("txtcantidad");
-			obj.setCantidad(Integer.parseInt(cantidad));
-			//System.out.println(cantidad);
-		}
 		String est = request.getParameter("cboestado");
 		
 		obj.setNombre(nombre);
-		obj.setGenero(genero);
 		obj.setCodigo(Integer.parseInt(codigo));
 		obj.setEstado(Integer.parseInt(est));
 		

@@ -20,38 +20,7 @@
                            <div class="col-sm-9">
                              <input type="text"  id="txtnombre" name="txtnombre" class="form-control" placeholder="Escribe nombre de Categoria">
                            </div>
-                         </div>
-                         <div class="form-group">
-                          <label class="col-sm-3 control-label">Genero</label>
-                           <div class="col-sm-9">
-                             	<label class="radio-inline">
-								  <input type="radio" name="rbgenero" id="rb_genero1" value="M"> Masculino
-								</label>
-								<label class="radio-inline">
-								  <input type="radio" name="rbgenero" id="rb_genero2" value="F"> Femenino
-								</label>
-								<label class="radio-inline">
-								  <input type="radio" name="rbgenero" id="rb_genero3" value="A"> Mixto
-								</label>
-                           </div>
-                         </div>
-                         
-                         <div class="form-group">
-                           <label class="col-sm-3 control-label">Maximo Participante:</label>
-                           <div class="col-sm-9">
-                               <div class="checkbox">
-                           <label>
-                             <input type="checkbox" id="maxactive" value="1" >Habilitar Maximo de Participantes
-                           </label>
-                         </div>
-                           </div>
-                         </div>                                  
-                         <div class="form-group">
-                           <label class="col-sm-3 control-label"> </label>
-                           <div class="col-sm-9">
-                             <input type="text" id="maxpersonas" name="txtcantidad" class="form-control" value="0" disabled >
-                           </div>
-                         </div>                                 
+                         </div>                                                                
                          <div class="form-group">
                            <label class="col-sm-3 control-label">Estado</label>
                            <div class="col-sm-9">
@@ -67,7 +36,7 @@
                                Atras
                              </a>
                              <button type="submit" class="btn btn-primary" >
-                             <i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar Categoria</button>
+                             <i class="fa fa-plus" aria-hidden="true"></i> Registrar Categoria</button>
                            </div>
                          </div>
                        </form>

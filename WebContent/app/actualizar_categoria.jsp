@@ -5,8 +5,6 @@
  <jsp:include page="_header.jsp" flush="true" />
  <jsp:include page="_sidebar.jsp" flush="true" />
  <% CategoriaDTO ca = (CategoriaDTO) request.getAttribute("registro"); %>
- <c:set var="genero" value="<%= ca.getGenero() %>"/>
- <c:set var="cantidad" value="<%= ca.getCantidad() %>"/>
  <c:set var="estado" value="<%= ca.getEstado() %>"/>
  <div class="content-wrapper">
     <section class="content-header">
@@ -26,39 +24,8 @@
                            <div class="col-sm-9">
                              <input type="text"  id="txtnombre" name="txtnombre" class="form-control" value="<%= ca.getNombre() %>">
                            </div>
-                         </div>
-                         <div class="form-group">
-                          <label class="col-sm-3 control-label">Genero</label>
-                           <div class="col-sm-9">
-                           	                          
-                             	<label class="radio-inline">
-								  <input type="radio" name="rbgenero" id="rb_genero1" value="M" ${genero == 'M' ? 'checked' : ''}> Masculino
-								</label>
-								<label class="radio-inline">
-								  <input type="radio" name="rbgenero" id="rb_genero2" value="F" ${genero == 'F' ? 'checked' : ''}> Femenino
-								</label>
-								<label class="radio-inline">
-								  <input type="radio" name="rbgenero" id="rb_genero3" value="A" ${genero == 'A' ? 'checked' : ''}> Mixto
-								</label>
-                           </div>
-                         </div>
-                         
-                         <div class="form-group">
-                           <label class="col-sm-3 control-label">Maximo Participante:</label>
-                           <div class="col-sm-9">
-                               <div class="checkbox">
-                           <label>
-                             <input type="checkbox" id="maxactive" value="1" ${cantidad > 0 ? 'checked' : ''}>Habilitar Maximo de Participantes
-                           </label>
-                         </div>
-                           </div>
-                         </div>                                  
-                         <div class="form-group">
-                           <label class="col-sm-3 control-label"> </label>
-                           <div class="col-sm-9">
-                             <input type="text" id="maxpersonas" name="txtcantidad" class="form-control" value="${cantidad}" ${cantidad > 0 ? '' : 'disabled'} >
-                           </div>
-                         </div>                                 
+                         </div>                            
+                                                  
                          <div class="form-group">
                            <label class="col-sm-3 control-label">Estado</label>
                            <div class="col-sm-9">
@@ -74,7 +41,7 @@
                                Atras
                              </a>
                              <button type="submit" class="btn btn-primary" >
-                             <i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Actualizar Categoria</button>
+                             <i class="fa fa-pencil" aria-hidden="true"></i> Actualizar Categoria</button>
                            </div>
                          </div>
                        </form>

@@ -5,6 +5,7 @@ public class DisciplinaDTO {
 	private String nombre;
 	private String fregistro;
 	private int estado;
+	
 	public int getCodigo() {
 		return codigo;
 	}

@@ -31,8 +31,6 @@
 				        <display:table class="table table-bordered"  name="data" requestURI="../ServletCategoria?tipo=listar"	id="lista">
 			                <display:column property="codigo" title="Codigo" />
 			                <display:column property="nombre" title="Nombre" />
-			                <display:column property="genero" title="Genero" />
-			                <display:column property="cantidad" title="Cantidad" />
 			                <display:column  title="Estado" sortable="false" >
 			                	${lista.estado == 1 ? '<span class="label label-success"> Activo </span>' : '<span class="label label-danger"> Inactivo </span>'}
 			                </display:column>
