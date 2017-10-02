@@ -20,13 +20,12 @@
       <h1>
         Listar Personas
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Listar personas</li>
-      </ol>
     </section>
     <section class="content">
     	<div class="box box-primary">
+    		<div class="box-header with-border">
+	              <h3 class="box-title">Listado de personas</h3>
+	        </div>
         	<div class="box-body">
             	<div class="col-md-9">
 					<a href="${pageContext.request.contextPath}/app/registrar_persona.jsp" class="btn btn-primary"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar persona</a>
@@ -40,7 +39,7 @@
 										<display:column property="amaterno" title="Apellido Materno" sortable="false"/>
 										<display:column property="email" title="Email" sortable="false"/>	
 										<display:column title="Sexo" sortable="false">
-											${lista.sexo == 1 ? '<span> Masculino </span>' : '<span> Femenino </span>'}
+											${lista.sexo == 'M' ? '<span> Masculino </span>' : '<span> Femenino </span>'}
 										</display:column>
 										<display:column  title="Estado" sortable="false">
 											${lista.estado == 1 ? '<span class="label label-success"> Activo </span>' : '<span class="label label-danger"> Inactivo </span>'}

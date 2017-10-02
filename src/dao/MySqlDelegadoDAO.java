@@ -30,7 +30,7 @@ public class MySqlDelegadoDAO implements DelegadoDAO{
 				del.setNombre(rs.getString(2));
 				del.setApaterno(rs.getString(3));
 				del.setAmaterno(rs.getString(4));
-				del.setSexo(rs.getInt(5));
+				del.setSexo(rs.getString(5));
 				del.setNumdocumento(rs.getString(6));
 				del.setEstado(rs.getInt(7));				
 				data.add(del);

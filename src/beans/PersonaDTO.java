@@ -7,7 +7,7 @@ public class PersonaDTO {
 	private String nombre;
 	private String apaterno;
 	private String amaterno;
-	private int sexo;
+	private String sexo;
 	private int tipodocumento;
 	private String numdocumento;
 	private Date fnacimiento;
@@ -40,10 +40,10 @@ public class PersonaDTO {
 	public void setAmaterno(String amaterno) {
 		this.amaterno = amaterno;
 	}
-	public int getSexo() {
+	public String getSexo() {
 		return sexo;
 	}
-	public void setSexo(int sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 	public String getNumdocumento() {
@@ -89,7 +89,7 @@ public class PersonaDTO {
 		this.tipodocumento = tipodocumento;
 	}
 
-	public PersonaDTO(int codigo, String nombre, String apaterno, String amaterno, int sexo, int tipodocumento,
+	public PersonaDTO(int codigo, String nombre, String apaterno, String amaterno, String sexo, int tipodocumento,
 			String numdocumento, Date fnacimiento, String email, String fono, String movil, int estado) {
 		super();
 		this.codigo = codigo;

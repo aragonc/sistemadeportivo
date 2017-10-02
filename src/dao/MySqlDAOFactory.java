@@ -4,6 +4,7 @@ import interfaces.ComboDAO;
 import interfaces.DelegadoDAO;
 import interfaces.DisciplinaDAO;
 import interfaces.EquipoDAO;
+import interfaces.EventoDAO;
 import interfaces.JugadorDAO;
 import interfaces.PersonaDAO;
 
@@ -44,6 +45,8 @@ public class MySqlDAOFactory extends DAOFactory {
 		// TODO Auto-generated method stub
 		return new MySqlComboDAO();
 	}
-	
+	public EventoDAO getEventoDAO(){
+		return new MySqlEventoDAO();
+	}
 }
 

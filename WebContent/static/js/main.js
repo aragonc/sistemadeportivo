@@ -3,5 +3,7 @@ $( document ).ready(function() {
 	$("#maxactive").click(function(){
 		   $("#maxpersonas").attr('disabled',!this.checked)
 	});
-	
+});
+$(function () {
+    $('.datefechahora').datetimepicker();
 });

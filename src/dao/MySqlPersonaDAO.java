@@ -30,7 +30,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setNombre(rs.getString(2));
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
-				a.setSexo(rs.getInt(5));
+				a.setSexo(rs.getString(5));
 				a.setTipodocumento(rs.getInt(6));
 				a.setNumdocumento(rs.getString(7));
 				a.setFnacimiento(rs.getDate(8));
@@ -73,7 +73,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setNombre(rs.getString(2));
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
-				a.setSexo(rs.getInt(5));
+				a.setSexo(rs.getString(5));
 				a.setTipodocumento(rs.getInt(6));
 				a.setNumdocumento(rs.getString(7));
 				a.setFnacimiento(rs.getDate(8));
@@ -118,9 +118,13 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setNombre(rs.getString(2));
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
-				a.setSexo(rs.getInt(5));
-				a.setNumdocumento(rs.getString(6));
-				a.setEstado(rs.getInt(7));		
+				a.setSexo(rs.getString(5));
+				a.setTipodocumento(rs.getInt(6));
+				a.setNumdocumento(rs.getString(7));
+				a.setFnacimiento(rs.getDate(8));
+				a.setEmail(rs.getString(9));
+				a.setFono(rs.getString(10));
+				a.setEstado(rs.getInt(11));	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -151,7 +155,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getApaterno());
 			pstm.setString(3, obj.getAmaterno());
-			pstm.setInt(4, obj.getSexo());
+			pstm.setString(4, obj.getSexo());
 			pstm.setInt(5, obj.getTipodocumento());
 			pstm.setString(6, obj.getNumdocumento());
 			pstm.setDate(7, new java.sql.Date(obj.getFnacimiento().getTime()));
@@ -182,13 +186,13 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "update persona set nombres=?, "
-					+ " apaterno=?, amaterno=?, sexo=?, dni=?, fecha_nacimiento=?"
+					+ " apaterno=?, amaterno=?, sexo=?, tipo_documento=?, dni=?, fecha_nacimiento=?"
 					+ ", email=?, telefono_contacto=?,estado=? where idpersona=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getApaterno());
 			pstm.setString(3, obj.getAmaterno());
-			pstm.setInt(4, obj.getSexo());
+			pstm.setString(4, obj.getSexo());
 			pstm.setInt(5, obj.getTipodocumento());
 			pstm.setString(6, obj.getNumdocumento());
 			pstm.setDate(7, new java.sql.Date(obj.getFnacimiento().getTime()));

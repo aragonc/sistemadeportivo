@@ -6,6 +6,7 @@
  <jsp:include page="_sidebar.jsp" flush="true" />
  <% CategoriaDTO ca = (CategoriaDTO) request.getAttribute("registro"); %>
  <c:set var="estado" value="<%= ca.getEstado() %>"/>
+
  <div class="content-wrapper">
     <section class="content-header">
       <h3>Actualizar categoria de disciplina</h3> 

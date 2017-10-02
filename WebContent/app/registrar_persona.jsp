@@ -60,7 +60,7 @@
 					    <label for="cmbsexo" class="col-sm-2 control-label">Sexo:</label>
 					    <div class="col-sm-10">
 					      <select class="form-control" id="cmbsexo" name="cmbsexo">
-		                    <option value="0">-- Seleccione --</option>
+		                    <option value="">-- Seleccione --</option>
 		                    	<%
 			                    	for (ComboDTO item : listaSexo ){
 			                    %>
