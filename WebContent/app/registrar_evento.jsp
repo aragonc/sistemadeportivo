@@ -12,25 +12,28 @@
  %>
   <div class="content-wrapper">
     <section class="content-header">
-      <h3>Registrar evento</h3> 
+      <h1>Registrar evento</h1> 
     </section>
     <section class="content">
     	<div class="box box-primary">
     		<div class="box-header with-border">
-              <h3 class="box-title">Nuevo evento</h3>
+              <h3 class="box-title">Añadir un nuevo evento a la agenda</h3>
             </div>
         	<div class="box-body">
             	<div class="col-md-9">
 					<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletEvento?tipo=registrar" method="post" id="frmevento">
 						<div class="form-group">
-	                         <label for="nombre" class="col-sm-2 control-label">Nombre del Evento</label>
+	                         <label for="nombre" class="col-sm-2 control-label">Titulo del Evento</label>
 	                         <div class="col-sm-10">
-	                           <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Escribe nombre del evento">
+	                           <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Escribe titulo del evento">
 	                         </div>
 	                    </div>
-	                    
-	                    
-
+	                    <div class="form-group">
+	                         <label for="nombre" class="col-sm-2 control-label">Descripción</label>
+	                         <div class="col-sm-10">
+	                         	<textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+	                         </div>
+	                    </div>
 	                    <div class="row">
 	                    	<div class="col-md-6">
 	                    		<div class="form-group">
@@ -40,7 +43,7 @@
 						                  <div class="input-group-addon">
 						                    <i class="fa fa-calendar"></i>
 						                  </div>
-						                  <input type="text" class="form-control datefechahora pull-right" id="fechainicio" name="txtfechainicio">
+						                  <input type="text" class="form-control datefechahora pull-right" id="fechainicio" name="fechainicio">
 						                </div>
 	                    			</div>
 	                    		</div>
@@ -53,7 +56,7 @@
 						                  <div class="input-group-addon">
 						                    <i class="fa fa-calendar"></i>
 						                  </div>
-						                  <input type="text" class="form-control datefechahora pull-right" id="fechafin"  name="txtfechafin">
+						                  <input type="text" class="form-control datefechahora pull-right" id="fechafin"  name="fechafin">
 						                </div>
 	                    			</div>
 	                    		</div>
@@ -62,9 +65,16 @@
 	                    <div class="row">
 	                    	<div class="col-md-6">
 	                    		<div class="form-group">
-	                    			<label for="costo" class="col-sm-4 control-label">Costo Inscripción S/.</label>
+	                    			<label for="costo" class="col-sm-4 control-label">Costo S/.</label>
 	                    			<div class="col-sm-8">
-	                    				<input type="text" id="costo" name="txtcosto" class="form-control" placeholder="Dejar vacio si es evento libre">
+	                    				<input type="text" id="txtcosto" name="costo" class="form-control" placeholder="Ingrese costo S/.">
+	                    				<div class="checkbox">
+										  <label>
+										    <input id="gratuito" name="gratuito" type="checkbox" value="1" checked="checked">
+										    Desmarcar si es un evento gratuito
+										  </label>
+										</div>
+	                    				
 	                    			</div>
 	                    		</div>
 	                    	</div>
@@ -80,36 +90,11 @@
 								</div>
 	                    	</div>
 	                    </div>
-	                    <div class="form-group">
-	                         <div class="col-sm-offset-2 col-sm-10">
-	                           <button type="button" class="btn btn-success"><i class="fa fa-plus-square" aria-hidden="true"></i> Asignar Modalidades</button>
-	                         </div>
-	                    </div>
-                        <div class="row">
-                        	<div class="col-md-12">
-                        		<table id="modalidadtable" class="display">
-								    <thead>
-								        <tr>
-								            <th>Column 1</th>
-								            <th>Column 2</th>
-								        </tr>
-								    </thead>
-								    <tbody>
-								        <tr>
-								            <td>Row 1 Data 1</td>
-								            <td>Row 1 Data 2</td>
-								        </tr>
-								        <tr>
-								            <td>Row 2 Data 1</td>
-								            <td>Row 2 Data 2</td>
-								        </tr>
-								    </tbody>
-								</table>
-                        	</div>
-                        </div>
+	                    
+                        
                         <div class="box-footer">
 							<a href="${pageContext.request.contextPath}/ServletEquipo?tipo=listar" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver a lista </a>
-		                	<button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar evento</button>
+		                	<button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar evento</button>
 		              	</div>
 					</form>
                   </div>

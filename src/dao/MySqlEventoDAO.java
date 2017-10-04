@@ -1,9 +1,12 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import beans.EventoDTO;
 import interfaces.EventoDAO;
+import utils.MysqlDBConexion;
 
 public class MySqlEventoDAO implements EventoDAO {
 
@@ -21,8 +24,34 @@ public class MySqlEventoDAO implements EventoDAO {
 
 	@Override
 	public int registrarEvento(EventoDTO obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "INSERT INTO evento VALUES (null,? ,? ,? ,? ,? ,? ,? , NOW())";
+			pstm = cn.prepareStatement(sql);
+			pstm.setString(1, obj.getNombre());
+			pstm.setString(2, obj.getDescripcion());
+			pstm.setDate(3, new java.sql.Date(obj.getFechaInicio().getTime()));
+			pstm.setDate(4, new java.sql.Date(obj.getFechaInicio().getTime()));
+			pstm.setBoolean(5, obj.getGratuito());
+			pstm.setDouble(6, obj.getPrecio());
+			pstm.setInt(7, obj.getEstado());
+			estado = pstm.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return estado;
 	}
 
 	@Override

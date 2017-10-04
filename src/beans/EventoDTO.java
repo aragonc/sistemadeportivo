@@ -6,10 +6,12 @@ import java.util.List;
 public class EventoDTO {
 	private int codigo;
 	private String nombre;
+	private String descripcion;
 	private Date fechaInicio;
 	private Date fechaFin;
 	private int estado;
 	private double precio;
+	private boolean gratuito;
 	private List<ModalidadDTO> listaModalidad;
 	
 	public int getCodigo() {
@@ -56,17 +58,33 @@ public class EventoDTO {
 	public void setListaModalidad(List<ModalidadDTO> listaModalidad) {
 		this.listaModalidad = listaModalidad;
 	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 	
-	public EventoDTO(int codigo, String nombre, Date fechaInicio, Date fechaFin, int estado, double precio) {
+	public boolean getGratuito() {
+		return gratuito;
+	}
+	public void setGratuito(boolean gratuito) {
+		this.gratuito = gratuito;
+	}
+	public EventoDTO(int codigo, String nombre, String descripcion, Date fechaInicio, Date fechaFin, int estado,
+			double precio, boolean gratuito, List<ModalidadDTO> listaModalidad) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
+		this.descripcion = descripcion;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.estado = estado;
 		this.precio = precio;
+		this.gratuito = gratuito;
+		this.listaModalidad = listaModalidad;
 	}
-	
 	public EventoDTO() {
 		super();
 		// TODO Auto-generated constructor stub

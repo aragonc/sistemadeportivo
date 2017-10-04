@@ -1,11 +1,14 @@
 // Iniciando el codigo del main js
 $( document ).ready(function() {
-	$("#maxactive").click(function(){
-		   $("#maxpersonas").attr('disabled',!this.checked)
+	$("#gratuito").click(function(){
+		   $("#txtcosto").attr('disabled',!this.checked)
 	});
 	 $('#modalidadtable').DataTable();
 });
 $(function () {
-    $('.datefechahora').datetimepicker();
+    $('.datefechahora').datetimepicker({
+    	locale: 'es',
+    	format: 'YYYY-MM-DD HH:mm'
+    });
 });
 

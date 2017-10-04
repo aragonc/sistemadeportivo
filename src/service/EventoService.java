@@ -15,19 +15,19 @@ public class EventoService {
 		return eventoDAO.listarEventos();		
 	}	
 	
-	public EventoDTO buscarEquipo(int cod){
+	public EventoDTO buscarEvento(int cod){
 		return eventoDAO.buscarEvento(cod);
 	}
 	
-	public int registrarEquipo(EventoDTO obj){
+	public int registrarEvento(EventoDTO obj){
 		return eventoDAO.registrarEvento(obj);
 	}
 	
-	public int actualizarEquipo(EventoDTO obj){
+	public int actualizarEvento(EventoDTO obj){
 		return eventoDAO.actualizarEvento(obj);
 	}
 	
-	public int eliminarEquipo(int cod){
+	public int eliminarEvento(int cod){
 		return eventoDAO.eliminarEvento(cod);
 	}
 
