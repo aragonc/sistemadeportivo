@@ -1,15 +1,10 @@
-<%@page import="beans.ComboDTO"%>
+
 <%@page import="java.util.List"%>
-<%@page import="service.ComboService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <jsp:include page="_header.jsp" flush="true" />
  <jsp:include page="_sidebar.jsp" flush="true" />
- <%
- 	ComboService listaDocumento = new ComboService();  
-	List<ComboDTO> listaDisciplina = listaDocumento.listarComboSql("SELECT iddisciplina, nombre FROM disciplina where estado = 1;");
-	List<ComboDTO> listaCategoria = listaDocumento.listarComboSql("SELECT idcategoria, nombres FROM categoria where estado = 1;");
- %>
+
   <div class="content-wrapper">
     <section class="content-header">
       <h1>Registrar evento</h1> 

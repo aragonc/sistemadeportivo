@@ -73,7 +73,7 @@ public class ServletEvento extends HttpServlet {
 		String estado = request.getParameter("estado");
 		
 		if(fechainicio!=null && !fechainicio.trim().equals("")){
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			
 			Date dateinicio = null;
 			try {
@@ -87,7 +87,7 @@ public class ServletEvento extends HttpServlet {
 		}
 		
 		if(fechafin!=null && !fechafin.trim().equals("")){
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			Date datefin = null;
 			try {
 				datefin = sdf.parse(fechafin);
