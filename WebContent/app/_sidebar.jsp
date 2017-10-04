@@ -23,7 +23,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            <li><a href="${pageContext.request.contextPath}/app/"><i class="fa fa-circle-o"></i> Escritorio</a></li>
           </ul>
         </li>
         <li class="treeview active">
@@ -34,14 +34,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-          	<li><a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar"><i class="fa fa-circle-o"></i> Lista de Categorias</a></li>
-          	<li><a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=listar"><i class="fa fa-circle-o"></i> Lista de Disciplinas</a></li>
-          	<li><a href="${pageContext.request.contextPath}/ServletPersona?tipo=listar"><i class="fa fa-circle-o"></i> Lista de Personas</a></li>
-          	<li><a href="${pageContext.request.contextPath}/ServletEquipo?tipo=listar"><i class="fa fa-circle-o"></i> Lista de Equipos</a></li>
             <li><a href="${pageContext.request.contextPath}/app/registrar_categoria.jsp"><i class="fa fa-circle-o"></i> Registrar Categoria</a></li>
             <li><a href="${pageContext.request.contextPath}/app/registrar_disciplina.jsp"><i class="fa fa-circle-o"></i> Registrar Disciplina</a></li>
             <li><a href="${pageContext.request.contextPath}/app/registrar_persona.jsp"><i class="fa fa-circle-o"></i> Registrar Persona</a></li>
             <li><a href="${pageContext.request.contextPath}/app/registrar_equipo.jsp"><i class="fa fa-circle-o"></i> Registrar Equipo</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i> Registrar Evento</a></li>
           </ul>
         </li>
       </ul>

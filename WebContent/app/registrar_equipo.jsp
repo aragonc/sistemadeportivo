@@ -28,6 +28,18 @@
 	                           <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Escribe nombre del equipo">
 	                         </div>
 	                    </div>
+	                    
+	                    <div class="form-group">
+	                         <label for="evento" class="col-sm-2 control-label">Evento</label>
+	                         <div class="col-sm-10">
+	                           	<select id="evento" name="evento" class="form-control">
+	                           		<option value="0">--- Seleccione ---</option>
+	                           		<option value="1">Juegos Academicos Lima 2017</option>
+	                           		<option value="2">Copa Perú 2017</option>
+	                           	</select>
+	                         </div>
+	                    </div>
+	                    
 	                    <div class="row">
 	                    	<div class="col-md-6">
 	                    		<div class="form-group">

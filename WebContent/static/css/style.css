@@ -1,7 +1,40 @@
 .toolbar-actions{
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding: 10px;
 	margin-bottom: 10px;
+	border: 1px solid #dddddd;
+	border-radius: 5px;
+	margin-top: 10px;
+	background: #FFF;
+}
+.toolbar-actions img{
+	padding: 3px;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+}
+.toolbar-actions img:hover{
+    background: #ededed; /* Old browsers */
+    background: -moz-linear-gradient(top, #ededed 2%, #f6f6f6 49%, #ffffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(2%,#ededed), color-stop(49%,#f6f6f6), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ededed 2%,#f6f6f6 49%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ededed 2%,#f6f6f6 49%,#ffffff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ededed 2%,#f6f6f6 49%,#ffffff 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #ededed 2%,#f6f6f6 49%,#ffffff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+.table-hover{
+	border: 1px solid #DDDDDD;
+}
+.table-hover thead tr th{
+	background: #EEEEEE;
+	border-bottom: 1px solid #DDDDDD;
 }
 .table tr td,.table tr th {
     border: 1px solid #c2c2c2;
@@ -15,4 +48,42 @@
 }
 .table td .checkbox{
 	text-align: center;
+}
+.content-wrapper {
+	min-height: 100%;
+	background-color: #FFF;
+	z-index: 800;
+}
+.box{
+	box-shadow: none;
+}
+.app-tools{
+	padding: 10px;
+	text-align: center;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.app-tools .icon .touch{
+	padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px #C8C8C8;
+    border: 1px solid #e6e6e6;
+}
+.app-tools .icon .touch:hover{
+	padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 18px #C8C8C8;
+}
+.app-tools .name{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.app-tools .name a{
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #333;
+}
+.app-tools .name a:hover{
+	color:#666;
 }

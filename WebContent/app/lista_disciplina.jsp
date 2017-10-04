@@ -15,7 +15,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h3>Disciplinas deportivas</h3> 
+      <h2>Disciplinas deportivas</h2> 
     </section>
 
     <!-- Main content -->
@@ -27,13 +27,17 @@
            <div class="box-body">
 	        <div class="col-md-9">
 	        <div class="toolbar-actions">
-		        <a href="${pageContext.request.contextPath}/app/registrar_disciplina.jsp" class="btn btn-primary">
-		        	<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar disciplina</a>
+	        	<a href="${pageContext.request.contextPath}/app/">
+			    	<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
+			    </a>
+		        <a href="${pageContext.request.contextPath}/app/registrar_disciplina.jsp" >
+		        	<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/nueva_disciplina.png">
+		       	</a>
 		       
 	       	</div>
 	        <div class="box-body table-responsive no-padding">
 	        
-		        <display:table class="table table-bordered"  name="data" requestURI="../ServletDisciplina?tipo=listar"	excludedParams="tipo" id="lista">
+		        <display:table class="table table-hover"  name="data" requestURI="../ServletDisciplina?tipo=listar"	excludedParams="tipo" id="lista">
 		              
 		                <display:column property="codigo" title="Codigo" sortable="false"/>
 		                <display:column property="nombre" title="Nombre" sortable="false"/>

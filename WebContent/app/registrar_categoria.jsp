@@ -5,7 +5,7 @@
  
  <div class="content-wrapper">
     <section class="content-header">
-      <h3>Registrar categoria de disciplina</h3> 
+      <h1>Registrar categoria de disciplina</h1> 
     </section>
     <section class="content">
         <div class="box box-primary">

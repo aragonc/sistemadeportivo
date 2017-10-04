@@ -79,10 +79,34 @@
 								    </div>
 								</div>
 	                    	</div>
-	                    	
 	                    </div>
-	                    
-                        
+	                    <div class="form-group">
+	                         <div class="col-sm-offset-2 col-sm-10">
+	                           <button type="button" class="btn btn-success"><i class="fa fa-plus-square" aria-hidden="true"></i> Asignar Modalidades</button>
+	                         </div>
+	                    </div>
+                        <div class="row">
+                        	<div class="col-md-12">
+                        		<table id="modalidadtable" class="display">
+								    <thead>
+								        <tr>
+								            <th>Column 1</th>
+								            <th>Column 2</th>
+								        </tr>
+								    </thead>
+								    <tbody>
+								        <tr>
+								            <td>Row 1 Data 1</td>
+								            <td>Row 1 Data 2</td>
+								        </tr>
+								        <tr>
+								            <td>Row 2 Data 1</td>
+								            <td>Row 2 Data 2</td>
+								        </tr>
+								    </tbody>
+								</table>
+                        	</div>
+                        </div>
                         <div class="box-footer">
 							<a href="${pageContext.request.contextPath}/ServletEquipo?tipo=listar" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver a lista </a>
 		                	<button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar evento</button>

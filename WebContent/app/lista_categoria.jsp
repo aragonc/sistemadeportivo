@@ -12,7 +12,7 @@
  
   <div class="content-wrapper">
     <section class="content-header">
-      <h3>Categorias de disciplina</h3> 
+      <h1>Categorias de disciplina</h1> 
     </section>
     <section class="content">
        <div class="box box-primary">
@@ -23,12 +23,15 @@
 	        <div class="body">
 	        	<div class="col-md-9">
 			        <div class="toolbar-actions">
-				        <a href="${pageContext.request.contextPath}/app/registrar_categoria.jsp" class="btn btn-primary">
-				        	<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Crear nueva categoria
+			        	<a href="${pageContext.request.contextPath}/app/">
+			        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
+			        	</a>
+				        <a href="${pageContext.request.contextPath}/app/registrar_categoria.jsp">
+				        	<img alt="Crear nueva categoria" title="Crear nueva categoria" src="${pageContext.request.contextPath}/images/icons/32/new_folder.png">
 				        </a>
 			       	</div>
 			        <div class="box-body table-responsive no-padding">
-				        <display:table class="table table-bordered"  name="data" requestURI="../ServletCategoria?tipo=listar"	id="lista">
+				        <display:table class="table table-hover"  name="data" requestURI="../ServletCategoria?tipo=listar"	id="lista">
 			                <display:column property="codigo" title="Codigo" />
 			                <display:column property="nombre" title="Nombre" />
 			                <display:column  title="Estado" sortable="false" >
