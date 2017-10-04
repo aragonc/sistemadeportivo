@@ -27,7 +27,7 @@
            <div class="box-body">
 	        <div class="col-md-9">
 	        <div class="toolbar-actions">
-	        	<a href="${pageContext.request.contextPath}/app/">
+	        	<a href="${pageContext.request.contextPath}">
 			    	<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
 			    </a>
 		        <a href="${pageContext.request.contextPath}/app/registrar_disciplina.jsp" >

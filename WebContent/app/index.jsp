@@ -64,6 +64,19 @@
             	<div class="col-md-2 col-xs-6">
 					<div class="app-tools">
 						<div class="icon">
+							<a href="${pageContext.request.contextPath}/ServletEquipo?tipo=listar">
+								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/007-game-2.png">
+							</a>
+						</div>
+						<div class="name">
+							<a href="${pageContext.request.contextPath}/ServletEquipo?tipo=listar">Mis Equipos</a>
+						</div>
+					</div>
+            	</div>
+            	
+            	<div class="col-md-2 col-xs-6">
+					<div class="app-tools">
+						<div class="icon">
 							<a href="#">
 								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/001-games.png">
 							</a>
@@ -74,18 +87,7 @@
 					</div>
             	</div>
             	
-            	<div class="col-md-2 col-xs-6">
-					<div class="app-tools">
-						<div class="icon">
-							<a href="${pageContext.request.contextPath}/ServletEquipo?tipo=listar">
-								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/007-game-2.png">
-							</a>
-						</div>
-						<div class="name">
-							<a href="${pageContext.request.contextPath}/ServletEquipo?tipo=listar">Mis Equipos</a>
-						</div>
-					</div>
-            	</div>
+            	
                   
            	</div>
        	</div>

@@ -23,7 +23,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="${pageContext.request.contextPath}/app/"><i class="fa fa-circle-o"></i> Escritorio</a></li>
+            <li><a href="${pageContext.request.contextPath}"><i class="fa fa-circle-o"></i> Escritorio</a></li>
           </ul>
         </li>
         <li class="treeview active">

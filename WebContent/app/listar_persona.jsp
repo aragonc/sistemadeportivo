@@ -28,7 +28,16 @@
 	        </div>
         	<div class="box-body">
             	<div class="col-md-9">
-					<a href="${pageContext.request.contextPath}/app/registrar_persona.jsp" class="btn btn-primary"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar persona</a>
+            		<div class="toolbar-actions">
+			        	<a href="${pageContext.request.contextPath}">
+			        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
+			        	</a>
+				        <a href="${pageContext.request.contextPath}/app/registrar_persona.jsp">
+				        	<img alt="Registrar persona" title="Crear nueva categoria" src="${pageContext.request.contextPath}/images/icons/32/nuevo_usuario.png">
+				        </a>
+			       	</div>
+            	
+					
 		              <div class="box-body">
 		              	<form class="form-horizontal">
 		               		<div class="table-responsive">
