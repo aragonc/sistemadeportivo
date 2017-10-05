@@ -72,30 +72,33 @@ public class ServletEvento extends HttpServlet {
 		String gratuito = request.getParameter("gratuito");
 		String estado = request.getParameter("estado");
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		
 		if(fechainicio!=null && !fechainicio.trim().equals("")){
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			
 			Date dateinicio = null;
+			
 			try {
 				dateinicio = sdf.parse(fechainicio);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(dateinicio);
+
 			obj.setFechaInicio(dateinicio);
 		}
 		
 		if(fechafin!=null && !fechafin.trim().equals("")){
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			
 			Date datefin = null;
+			
 			try {
 				datefin = sdf.parse(fechafin);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(datefin);
+		
 			obj.setFechaFin(datefin);
 		}
 		

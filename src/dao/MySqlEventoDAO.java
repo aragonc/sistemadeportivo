@@ -33,8 +33,10 @@ public class MySqlEventoDAO implements EventoDAO {
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDescripcion());
-			pstm.setDate(3, new java.sql.Date(obj.getFechaInicio().getTime()));
-			pstm.setDate(4, new java.sql.Date(obj.getFechaInicio().getTime()));
+			System.out.println(obj.getFechaInicio());
+			System.out.println(obj.getFechaInicio().getTime());
+			pstm.setTimestamp(3, new java.sql.Timestamp(obj.getFechaInicio().getTime()));
+			pstm.setTimestamp(4, new java.sql.Timestamp(obj.getFechaFin().getTime()));
 			pstm.setBoolean(5, obj.getGratuito());
 			pstm.setDouble(6, obj.getPrecio());
 			pstm.setInt(7, obj.getEstado());
