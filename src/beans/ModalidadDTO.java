@@ -1,17 +1,18 @@
 package beans;
 
 public class ModalidadDTO {
-	private int codEvento;
+	private int codigo;
 	private int codDisciplina;
 	private int codCategoria;
+	private String descripcion;
 	private CategoriaDTO categoria;
 	private DisciplinaDTO disciplina;
-	
-	public int getCodEvento() {
-		return codEvento;
+
+	public int getCodigo() {
+		return codigo;
 	}
-	public void setCodEvento(int codEvento) {
-		this.codEvento = codEvento;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	public int getCodDisciplina() {
 		return codDisciplina;
@@ -42,14 +43,23 @@ public class ModalidadDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ModalidadDTO(int codEvento, int codDisciplina, int codCategoria, CategoriaDTO categoria,
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public ModalidadDTO(int codigo, int codDisciplina, int codCategoria, String descripcion, CategoriaDTO categoria,
 			DisciplinaDTO disciplina) {
 		super();
-		this.codEvento = codEvento;
+		this.codigo = codigo;
 		this.codDisciplina = codDisciplina;
 		this.codCategoria = codCategoria;
+		this.descripcion = descripcion;
 		this.categoria = categoria;
 		this.disciplina = disciplina;
 	}
+	
 	
 }

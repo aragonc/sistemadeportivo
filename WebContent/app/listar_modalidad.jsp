@@ -26,28 +26,23 @@
 			        	<a href="${pageContext.request.contextPath}">
 			        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
 			        	</a>
-				        <a href="${pageContext.request.contextPath}/app/registrar_categoria.jsp">
+				        <a href="${pageContext.request.contextPath}/app/registrar_modalidad.jsp">
 				        	<img alt="Crear nueva categoria" title="Crear nueva modalidad" src="${pageContext.request.contextPath}/images/icons/32/new_folder.png">
 				        </a>
 			       	</div>
 			        <div class="box-body table-responsive no-padding">
 				        <display:table class="table table-bordered table-hover"  name="data" requestURI="../ServletModalidad?tipo=listar"	id="lista">
-			                
 			                <display:column title="Item" sortable="false" media="html" >
-             		 			<div class="checkbox">
-							    	<input type="checkbox" name="evento[]" value="${lista.codigo}">
-								</div>
+							    	<input type="checkbox" name="modalidad[]" value="${lista.codigo}">
              		 		</display:column>
-			                <display:column property="nombre" title="Nombre" />
-			                <display:column  title="Estado" sortable="false" >
-			                	${lista.estado == 1 ? '<span class="label label-success"> Activo </span>' : '<span class="label label-danger"> Inactivo </span>'}
-			                </display:column>
-			                
+             		 		<display:column property="disciplina.nombre" title="Disciplina" />
+			                <display:column property="categoria.nombre" title="Categoria" />
+			                <display:column property="descripcion" title="Descripcion" />
 			                <display:column  title="Acciones" sortable="false">
 			               	<div class="text-center">
 			               		<div class="btn-group btn-group-sm" role="group" aria-label="...">
-			                    <a href="ServletCategoria?tipo=buscar&cod=${lista.codigo}" class="btn btn-default" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-			                    <a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" href="ServletCategoria?tipo=eliminar&cod=${lista.codigo}" class="btn btn-default" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+			                    <a href="ServletModalidad?tipo=buscar&cod=${lista.codigo}" class="btn btn-default" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+			                    <a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" href="ServletModalidad?tipo=eliminar&cod=${lista.codigo}" class="btn btn-default" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 			                  </div>
 			               	</div>
 			                  
