@@ -31,20 +31,26 @@ public class ServletModalidad extends HttpServlet {
 	protected void service(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 			
 	    	String tipo = request.getParameter("tipo");
-	    	//String tipopersona = request.getParameter("tipo");
+	    	
 			if (tipo.equals("registrar"))
 				registrar(request, response);
-			else if (tipo.equals("buscarpersona"))
-				buscarPersona(request, response);
+			else if (tipo.equals("buscarlista"))
+				buscarLista(request, response);
 			else if (tipo.equals("actualizar"))
 				actualizar(request, response);
 			else if (tipo.equals("buscar"))
-				buscarPersona(request, response);
+				buscarModalidad(request, response);
 			else if (tipo.equals("listar"))
 				listar(request, response);
 			else if (tipo.equals("eliminar"))
 				eliminar(request, response);
 		}
+	
+	private void buscarLista(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void eliminar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String dato = request.getParameter("cod");
@@ -62,14 +68,35 @@ public class ServletModalidad extends HttpServlet {
 				response);
 	}
 
-	private void actualizar(HttpServletRequest request, HttpServletResponse response) {
+	private void actualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ModalidadDTO obj = new ModalidadDTO();
+		String descripcion = request.getParameter("descripcion");
+		String idcategoria = request.getParameter("cbocategoria");
+		String iddisciplina = request.getParameter("cbodisciplina");
+		String cod = request.getParameter("codigo");
 		
+		obj.setCodigo(Integer.parseInt(cod));
+		obj.setCodCategoria(Integer.parseInt(idcategoria));
+		obj.setCodDisciplina(Integer.parseInt(iddisciplina));
+		obj.setDescripcion(descripcion);
+		
+		int resultado = modalidadService.actualizarModalidad(obj);
+		if (resultado != -1){
+			listar(request, response);
+		}else{
+			response.sendRedirect("error.html");
+		}
 	}
 
-	private void buscarPersona(HttpServletRequest request, HttpServletResponse response) {
+	private void buscarModalidad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		String dato = request.getParameter("cod");
+		int codigo = Integer.parseInt(dato);
+		ModalidadDTO obj = modalidadService.buscarModalidad(codigo);
+		request.setAttribute("registro", obj);
+		request.getRequestDispatcher("app/actualizar_modalidad.jsp").forward(request,
+				response);
 	}
 
 	private void registrar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

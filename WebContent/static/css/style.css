@@ -92,3 +92,8 @@
 	font-weight: bold;
 	text-transform: uppercase;
 }
+.btn-toolbar{
+	margin-top: 20px;
+	display: inline-block;
+	margin-bottom: 20px;
+}

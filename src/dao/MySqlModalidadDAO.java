@@ -9,6 +9,7 @@ import java.util.List;
 import beans.CategoriaDTO;
 import beans.DisciplinaDTO;
 import beans.ModalidadDTO;
+import beans.PersonaDTO;
 import interfaces.ModalidadDAO;
 import utils.MysqlDBConexion;
 
@@ -61,8 +62,46 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 
 	@Override
 	public ModalidadDTO buscarModalidad(int cod) {
-		// TODO Auto-generated method stub
-		return null;
+		ModalidadDTO cat = null;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "SELECT m.idmodalidad, m.descripcion, d.iddisciplina, d.nombre, c.idcategoria, c.nombres  FROM modalidad m "
+					+ "inner join categoria c on m.categoria_idcategoria = c.idcategoria inner join "
+					+ "disciplina d on  m.disciplina_iddisciplina = d.iddisciplina WHERE m.idmodalidad=?;";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, cod);
+			rs = pstm.executeQuery();
+			if (rs.next()) {
+				cat = new ModalidadDTO();
+				cat.setCodigo(rs.getInt(1));
+				cat.setDescripcion(rs.getString(2));
+				DisciplinaDTO a = new DisciplinaDTO();
+					a.setCodigo(rs.getInt(3));
+					a.setNombre(rs.getString(4));
+				cat.setDisciplina(a);
+				CategoriaDTO b = new CategoriaDTO();
+				b.setCodigo(rs.getInt(5));
+				b.setNombre(rs.getString(6));
+				cat.setCategoria(b);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return cat;
 	}
 
 	@Override
