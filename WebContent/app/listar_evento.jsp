@@ -62,7 +62,7 @@
 		              <% } %>
 		              	<form class="form-horizontal">
 		               		<div class="table-responsive">
-		               			<display:table name="data" class="table table-bordered" pagesize="15" requestURI="ServletEvento?tipo=listar" excludedParams="tipo" id="lista">
+		               			<display:table name="data" class="table table-bordered table-hover" pagesize="15" requestURI="ServletEvento?tipo=listar" excludedParams="tipo" id="lista">
 		               		 			<display:column title="Item" sortable="false" media="html" >
 		               		 				<div class="checkbox">
 											    <input type="checkbox" name="evento[]" value="${lista.codigo}">

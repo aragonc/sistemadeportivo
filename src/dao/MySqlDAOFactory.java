@@ -6,6 +6,7 @@ import interfaces.DisciplinaDAO;
 import interfaces.EquipoDAO;
 import interfaces.EventoDAO;
 import interfaces.JugadorDAO;
+import interfaces.ModalidadDAO;
 import interfaces.PersonaDAO;
 
 public class MySqlDAOFactory extends DAOFactory {
@@ -47,6 +48,9 @@ public class MySqlDAOFactory extends DAOFactory {
 	}
 	public EventoDAO getEventoDAO(){
 		return new MySqlEventoDAO();
+	}
+	public ModalidadDAO getModalidadDAO(){
+		return new MySqlModalidadDAO();
 	}
 }
 

@@ -37,7 +37,7 @@
 	       	</div>
 	        <div class="box-body table-responsive no-padding">
 	        
-		        <display:table class="table table-hover"  name="data" requestURI="../ServletDisciplina?tipo=listar"	excludedParams="tipo" id="lista">
+		        <display:table class="table table-bordered table-hover"  name="data" requestURI="../ServletDisciplina?tipo=listar"	excludedParams="tipo" id="lista">
 		              
 		                <display:column property="codigo" title="Codigo" sortable="false"/>
 		                <display:column property="nombre" title="Nombre" sortable="false"/>

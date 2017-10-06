@@ -7,6 +7,7 @@ import interfaces.DisciplinaDAO;
 import interfaces.EquipoDAO;
 import interfaces.EventoDAO;
 import interfaces.JugadorDAO;
+import interfaces.ModalidadDAO;
 import interfaces.PersonaDAO;
 
 
@@ -26,6 +27,7 @@ public abstract class DAOFactory {
     public abstract PersonaDAO getPersonaDAO();
     public abstract ComboDAO getComboDAO();
     public abstract EventoDAO getEventoDAO();
+    public abstract ModalidadDAO getModalidadDAO();
 
     public static DAOFactory getDAOFactory(int whichFactory){
         switch(whichFactory){

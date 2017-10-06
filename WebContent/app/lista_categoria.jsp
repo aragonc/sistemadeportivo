@@ -31,7 +31,7 @@
 				        </a>
 			       	</div>
 			        <div class="box-body table-responsive no-padding">
-				        <display:table class="table table-hover"  name="data" requestURI="../ServletCategoria?tipo=listar"	id="lista">
+				        <display:table class="table table-bordered table-hover"  name="data" requestURI="../ServletCategoria?tipo=listar"	id="lista">
 			                <display:column property="codigo" title="Codigo" />
 			                <display:column property="nombre" title="Nombre" />
 			                <display:column  title="Estado" sortable="false" >

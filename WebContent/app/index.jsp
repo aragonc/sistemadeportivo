@@ -19,18 +19,6 @@
 	              <h3 class="box-title">Gestión de la plataforma</h3>
 	        </div>
         	<div class="box-body">
-            	<div class="col-md-2 col-xs-6">
-					<div class="app-tools">
-						<div class="icon">
-							<a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar"">
-								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/014-ball.png">
-							</a>
-						</div>
-						<div class="name">
-							<a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar"">Categorias</a>
-						</div>
-					</div>
-            	</div>
             	
             	<div class="col-md-2 col-xs-6">
 					<div class="app-tools">
@@ -41,6 +29,32 @@
 						</div>
 						<div class="name">
 							<a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=listar">Disciplinas</a>
+						</div>
+					</div>
+            	</div>
+            	
+            	<div class="col-md-2 col-xs-6">
+					<div class="app-tools">
+						<div class="icon">
+							<a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar">
+								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/014-ball.png">
+							</a>
+						</div>
+						<div class="name">
+							<a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar">Categorias</a>
+						</div>
+					</div>
+            	</div>
+            	
+            	<div class="col-md-2 col-xs-6">
+					<div class="app-tools">
+						<div class="icon">
+							<a href="${pageContext.request.contextPath}/ServletModalidad?tipo=listar">
+								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/035-strategy.png">
+							</a>
+						</div>
+						<div class="name">
+							<a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar">Modalidades</a>
 						</div>
 					</div>
             	</div>

@@ -29,26 +29,7 @@
     background: linear-gradient(to bottom, #ededed 2%,#f6f6f6 49%,#ffffff 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 }
-.table-hover{
-	border: 1px solid #DDDDDD;
-}
-.table-hover thead tr th{
-	background: #EEEEEE;
-	border-bottom: 1px solid #DDDDDD;
-}
-.table tr td,.table tr th {
-    border: 1px solid #c2c2c2;
-}
-.table tbody tr th{
-    border-top: 1px solid #c2c2c2;
-    background-color: #e0e0e0;
-}
-.table-header{
-	background-color: #f5f5f5;
-}
-.table td .checkbox{
-	text-align: center;
-}
+
 .content-wrapper {
 	min-height: 100%;
 	background-color: #FFF;
