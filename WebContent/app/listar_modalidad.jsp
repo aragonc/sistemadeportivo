@@ -49,6 +49,21 @@
 				            </display:column>
 				        </display:table>
 			         </div>
+			         <div class="btn-toolbar">
+			         	<div class="btn-group">
+			         		<a href="#" class="btn btn-default">Seleccionar todos</a>
+			         		<a href="#" class="btn btn-default">Anular selección</a>
+			         	</div>
+			         	<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Acciones <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Eliminar de la plataforma</a></li>
+    
+  </ul>
+</div>
+			         </div>
 	     	 	</div>
            		<div class="col-md-3">
                  
