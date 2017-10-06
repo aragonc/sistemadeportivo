@@ -6,6 +6,8 @@
     pageEncoding="ISO-8859-1"%>
 <%@page import="beans.PersonaDTO"%>
 <%@page import="java.util.List"%>
+<% String xnombre = (String)request.getAttribute("nomevento"); %>
+<% String xcodigo = (String)request.getAttribute("codevento"); %>
 
  <jsp:include page="_header.jsp" flush="true" />
  <jsp:include page="_sidebar.jsp" flush="true" />
@@ -23,17 +25,50 @@
 	        </div>
         	<div class="box-body">
             	<div class="col-md-9">
-					<a href="${pageContext.request.contextPath}/app/registrar_evento.jsp" class="btn btn-primary"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Nuevo evento</a>
+            	
+            		<div class="toolbar-actions">
+            			<div class="row">
+            				<div class="col-md-6">
+            					<a href="${pageContext.request.contextPath}">
+					        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
+					        	</a>
+						        <a href="${pageContext.request.contextPath}/app/registrar_evento.jsp">
+						        	<img alt="Registrar persona" title="Crear nuevo evento" src="${pageContext.request.contextPath}/images/icons/32/nuevo_evento.png">
+						        </a>
+            				</div>
+            				<div class="col-md-6">
+	            				<div class="pull-right">
+	            					<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									      <input type="text" name="txtdni" class="form-control" id="txtdni" size="40" placeholder="Buscar por nombre de evento">
+									    </div>
+									  </div>
+									  <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i>
+									   Buscar</button>
+									</form>
+	            				</div>
+            				</div>
+            			</div>
+			        	
+			       	</div>
+					
 		              <div class="box-body">
+		              <% if(xnombre!=null) { %>
+		              	<div class="alert alert-success" role="alert">
+		              		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		              		Acabas de crear el evento <span class="valor"><%= xnombre %></span> sin modalidades de juego <a href="#cod?<%= xcodigo %>" class="btn btn-success">¿Deseas agregar modalidades?</a>
+		              	</div>
+		              <% } %>
 		              	<form class="form-horizontal">
 		               		<div class="table-responsive">
-		               			<display:table name="data" class="table table-bordered" pagesize="10" requestURI="ServletEvento?tipo=listar" excludedParams="tipo" id="lista">
+		               			<display:table name="data" class="table table-bordered" pagesize="15" requestURI="ServletEvento?tipo=listar" excludedParams="tipo" id="lista">
 		               		 			<display:column title="Item" sortable="false" media="html" >
 		               		 				<div class="checkbox">
 											    <input type="checkbox" name="evento[]" value="${lista.codigo}">
 											</div>
 		               		 			</display:column>
-		               		 			<display:column property="codigo" title="Codigo" sortable="false"/>
+		               		 			
 										<display:column property="nombre" title="Titulo Evento" sortable="false"/>
 										<display:column property="descripcion" title="Descripción" sortable="false"/>
 										<display:column property="fechaInicio" title="Fecha Inicio" sortable="false">

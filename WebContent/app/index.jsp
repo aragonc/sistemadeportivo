@@ -5,15 +5,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.List"%>
-
  <jsp:include page="_header.jsp" flush="true" />
  <jsp:include page="_sidebar.jsp" flush="true" />
- 
    <div class="content-wrapper">
     <section class="content-header">
-      <h1>
+      <h3>
         Escritorio
-      </h1>
+      </h3>
     </section>
     <section class="content">
     	<div class="box box-primary">
@@ -21,7 +19,6 @@
 	              <h3 class="box-title">Gestión de la plataforma</h3>
 	        </div>
         	<div class="box-body">
-            	
             	<div class="col-md-2 col-xs-6">
 					<div class="app-tools">
 						<div class="icon">
@@ -86,9 +83,6 @@
 						</div>
 					</div>
             	</div>
-            	
-            	
-                  
            	</div>
        	</div>
     </section>

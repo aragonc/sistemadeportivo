@@ -32,8 +32,8 @@ public class MySqlEventoDAO implements EventoDAO {
 				a.setCodigo(rs.getInt(1));
 				a.setNombre(rs.getString(2));
 				a.setDescripcion(rs.getString(3));
-				a.setFechaInicio(rs.getDate(4));
-				a.setFechaFin(rs.getDate(5));
+				a.setFechaInicio(rs.getTimestamp(4));
+				a.setFechaFin(rs.getTimestamp(5));
 				a.setGratuito(rs.getBoolean(6));
 				a.setPrecio(rs.getDouble(7));
 				a.setEstado(rs.getInt(8));			
@@ -109,8 +109,28 @@ public class MySqlEventoDAO implements EventoDAO {
 
 	@Override
 	public int eliminarEvento(int cod) {
-		// TODO Auto-generated method stub
-		return 0;
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "delete from evento where idevento=?";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, cod);
+			estado = pstm.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return estado;
 	}
 
 }

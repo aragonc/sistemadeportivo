@@ -42,10 +42,14 @@ public class ServletEvento extends HttpServlet {
 			eliminar(request, response);
 	}
 	
-    private void eliminar(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
+	 private void eliminar(HttpServletRequest request,
+				HttpServletResponse response) throws ServletException, IOException {
+			String dato = request.getParameter("cod");
+			int codigo = Integer.parseInt(dato);
+			eventoService.eliminarEvento(codigo);
+			request.getRequestDispatcher("ServletEvento?tipo=listar").forward(request,
+					response);
+		}
 
     private void listar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -114,9 +118,9 @@ public class ServletEvento extends HttpServlet {
 		obj.setEstado(Integer.parseInt(estado));
 		
 		int resultado = eventoService.registrarEvento(obj);
-		System.out.println(resultado);
 		if (resultado != -1){
-			request.setAttribute("codevento", resultado);
+			request.setAttribute("nomevento", obj.getNombre());
+			request.setAttribute("codevento", resultado+"");
 			listar(request, response);
 		}else{
 			response.sendRedirect("error.html");
