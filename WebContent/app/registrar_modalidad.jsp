@@ -73,7 +73,7 @@
                              <a href="${pageContext.request.contextPath}/ServletModalidad?tipo=listar" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i>
                                Atras
                              </a>
-                             <button type="submit" class="btn btn-primary" >
+                             <button type="submit" class="btn btn-success" >
                              <i class="fa fa-plus" aria-hidden="true"></i> Registrar Modalidad</button>
                            </div>
                          </div>

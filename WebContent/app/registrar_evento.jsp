@@ -6,9 +6,7 @@
  <jsp:include page="_sidebar.jsp" flush="true" />
 
   <div class="content-wrapper">
-    <section class="content-header">
-      <h1>Registrar evento</h1> 
-    </section>
+    
     <section class="content">
     	<div class="box box-primary">
     		<div class="box-header with-border">

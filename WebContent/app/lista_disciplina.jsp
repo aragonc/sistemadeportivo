@@ -13,11 +13,6 @@
  <jsp:include page="_sidebar.jsp" flush="true" />
  
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h2>Disciplinas deportivas</h2> 
-    </section>
-
     <!-- Main content -->
     <section class="content">
        <div class="box box-primary">
@@ -31,7 +26,7 @@
 			    	<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
 			    </a>
 		        <a href="${pageContext.request.contextPath}/app/registrar_disciplina.jsp" >
-		        	<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/nueva_disciplina.png">
+		        	<img alt="Regresar al escritorio" title ="Registrar nueva disciplina" src="${pageContext.request.contextPath}/images/icons/32/nueva_disciplina.png">
 		       	</a>
 		       
 	       	</div>

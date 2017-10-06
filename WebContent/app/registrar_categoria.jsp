@@ -4,13 +4,11 @@
  <jsp:include page="_sidebar.jsp" flush="true" />
  
  <div class="content-wrapper">
-    <section class="content-header">
-      <h1>Registrar categoria de disciplina</h1> 
-    </section>
+    
     <section class="content">
         <div class="box box-primary">
         	<div class="box-header with-border">
-              <h3 class="box-title">Categoria de disciplina</h3>
+              <h3 class="box-title">Agregar categoria de juego</h3>
             </div>
         	<div class="box-body">
             	<div class="col-md-9">
@@ -35,7 +33,7 @@
                              <a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i>
                                Atras
                              </a>
-                             <button type="submit" class="btn btn-primary" >
+                             <button type="submit" class="btn btn-success" >
                              <i class="fa fa-plus" aria-hidden="true"></i> Registrar Categoria</button>
                            </div>
                          </div>

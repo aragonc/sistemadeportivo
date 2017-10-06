@@ -6,20 +6,12 @@
  <jsp:include page="_sidebar.jsp" flush="true" />
  <% DisciplinaDTO di = (DisciplinaDTO) request.getAttribute("registro"); %>
   <c:set var="estado" value="<%= di.getEstado() %>"/>
- <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h3> 
-           Actualizar disciplina
-      </h3> 
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Campeonato</li>
-        <li class="active">Registrar Equipo</li>
-      </ol>
-    </section>
+ <div class="content-wrapper">   
     <section class="content">
               <div class="box box-primary">
+              <div class="box-header with-border">
+	              <h3 class="box-title">Actualizar disciplina de juego</h3>
+	        	</div>
                   <div class="box-body">
                           <div class="col-md-9">
 

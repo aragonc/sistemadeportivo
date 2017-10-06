@@ -9,9 +9,9 @@
  <jsp:include page="_sidebar.jsp" flush="true" />
    <div class="content-wrapper">
     <section class="content-header">
-      <h3>
+      <h1>
         Escritorio
-      </h3>
+      </h1>
     </section>
     <section class="content">
     	<div class="box box-primary">

@@ -8,13 +8,10 @@
  <c:set var="estado" value="<%= ca.getEstado() %>"/>
 
  <div class="content-wrapper">
-    <section class="content-header">
-      <h3>Actualizar categoria de disciplina</h3> 
-    </section>
     <section class="content">
         <div class="box box-primary">
         	<div class="box-header with-border">
-              <h3 class="box-title">Categoria de disciplina</h3>
+              <h3 class="box-title">Actualizar categoria de juego</h3>
             </div>
         	<div class="box-body">
             	<div class="col-md-9">

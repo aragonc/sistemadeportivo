@@ -13,11 +13,6 @@
  <jsp:include page="_sidebar.jsp" flush="true" />
  
    <div class="content-wrapper">
-    <section class="content-header">
-      <h3>
-        Eventos
-      </h3>
-    </section>
     <section class="content">
     	<div class="box box-primary">
     	<div class="box-header with-border">
@@ -41,7 +36,7 @@
 	            					<form class="form-inline">
 									  <div class="form-group">
 									    <div class="input-group">
-									      <input type="text" name="txtdni" class="form-control" id="txtdni" size="40" placeholder="Buscar por nombre de evento">
+									      <input type="text" name="txtdni" class="form-control" id="txtdni" size="25" placeholder="Buscar por nombre de evento">
 									    </div>
 									  </div>
 									  <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i>
