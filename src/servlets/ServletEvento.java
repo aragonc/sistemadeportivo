@@ -110,11 +110,12 @@ public class ServletEvento extends HttpServlet {
 		
 		int resultado = eventoService.registrarEvento(obj);
 		System.out.println(resultado);
-		if (resultado != -1)
+		if (resultado != -1){
+			request.setAttribute("codevento", resultado);
 			listar(request, response);
-		else
+		}else{
 			response.sendRedirect("error.html");
-		
+		}
 	}
 
 	public ServletEvento() {

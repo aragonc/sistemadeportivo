@@ -29,12 +29,29 @@
         	<div class="box-body">
             	<div class="col-md-9">
             		<div class="toolbar-actions">
-			        	<a href="${pageContext.request.contextPath}">
-			        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
-			        	</a>
-				        <a href="${pageContext.request.contextPath}/app/registrar_persona.jsp">
-				        	<img alt="Registrar persona" title="Crear nueva categoria" src="${pageContext.request.contextPath}/images/icons/32/nuevo_usuario.png">
-				        </a>
+            			<div class="row">
+            				<div class="col-md-6">
+            					<a href="${pageContext.request.contextPath}">
+					        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
+					        	</a>
+						        <a href="${pageContext.request.contextPath}/app/registrar_persona.jsp">
+						        	<img alt="Registrar persona" title="Crear nueva categoria" src="${pageContext.request.contextPath}/images/icons/32/nuevo_usuario.png">
+						        </a>
+            				</div>
+            				<div class="col-md-6">
+	            				<div class="pull-right">
+	            					<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									      <input type="text" name="txtdni" class="form-control" id="txtdni" placeholder="Buscar por DNI">
+									    </div>
+									  </div>
+									  <button type="submit" class="btn btn-primary">Buscar</button>
+									</form>
+	            				</div>
+            				</div>
+            			</div>
+			        	
 			       	</div>
             	
 					
@@ -42,7 +59,12 @@
 		              	<form class="form-horizontal">
 		               		<div class="table-responsive">
 		               			<display:table name="data" class="table table-bordered" pagesize="10" requestURI="ServletPersona?tipo=listar" excludedParams="tipo" id="lista">
-		               		 		<display:column property="codigo" title="Codigo" sortable="false"/>
+		               		 			<display:column title="Item" sortable="false" media="html" >
+		               		 				<div class="checkbox">
+											    <input type="checkbox" name="people[]" value="${lista.codigo}">
+											</div>
+		               		 			</display:column>
+		               		 			<display:column property="codigo" title="Codigo" sortable="false"/>
 										<display:column property="nombre" title="Nombres" sortable="false"/>
 										<display:column property="apaterno" title="Apellido Paterno" sortable="false"/>
 										<display:column property="amaterno" title="Apellido Materno" sortable="false"/>

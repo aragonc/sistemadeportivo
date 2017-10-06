@@ -38,7 +38,7 @@
             <li><a href="${pageContext.request.contextPath}/app/registrar_disciplina.jsp"><i class="fa fa-circle-o"></i> Registrar Disciplina</a></li>
             <li><a href="${pageContext.request.contextPath}/app/registrar_persona.jsp"><i class="fa fa-circle-o"></i> Registrar Persona</a></li>
             <li><a href="${pageContext.request.contextPath}/app/registrar_equipo.jsp"><i class="fa fa-circle-o"></i> Registrar Equipo</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Registrar Evento</a></li>
+            <li><a href="${pageContext.request.contextPath}/app/registrar_evento.jsp"><i class="fa fa-circle-o"></i> Registrar Evento</a></li>
           </ul>
         </li>
       </ul>
