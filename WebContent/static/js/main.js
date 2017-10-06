@@ -17,4 +17,16 @@ $(function () {
     });
 });
 
+function setCheckbox(value, table_id) {
+    checkboxes = $("#"+table_id+" input:checkbox");
+    $.each(checkboxes, function(index, checkbox) {
+        checkbox.checked = value;
+        /*if (value) {
+            $(checkbox).parentsUntil("tr").parent().addClass("row_selected");
+        } else {
+            $(checkbox).parentsUntil("tr").parent().removeClass("row_selected");
+        }*/
+    });
+    return false;
+}
 

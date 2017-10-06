@@ -30,6 +30,7 @@
 				        	<img alt="Crear nueva categoria" title="Crear nueva modalidad" src="${pageContext.request.contextPath}/images/icons/32/new_folder.png">
 				        </a>
 			       	</div>
+			       	<form action="" id="form-lista">
 			        <div class="box-body table-responsive no-padding">
 				        <display:table class="table table-bordered table-hover"  name="data" requestURI="../ServletModalidad?tipo=listar"	id="lista">
 			                <display:column title="Item" sortable="false" media="html" >
@@ -49,10 +50,11 @@
 				            </display:column>
 				        </display:table>
 			         </div>
+			         </form>
 			         <div class="btn-toolbar">
 			         	<div class="btn-group">
-			         		<a href="#" class="btn btn-default">Seleccionar todos</a>
-			         		<a href="#" class="btn btn-default">Anular selección</a>
+			         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(true, 'lista'); return false;">Seleccionar todos</a>
+			         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(false, 'lista'); return false;">Anular selección</a>
 			         	</div>
 			         	<div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
