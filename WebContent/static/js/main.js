@@ -4,6 +4,11 @@ $( document ).ready(function() {
 		   $("#txtcosto").attr('disabled',!this.checked)
 	});
 	 $('#modalidadtable').DataTable();
+	 //Para todos lo textarea con CKeditor
+	 CKEDITOR.replace ('txthtml',{
+		 toolbar : 'Basic', /* this does the magic */
+	        uiColor : '#FFFFFF'
+	 });
 });
 $(function () {
     $('.datefechahora').datetimepicker({
@@ -11,4 +16,5 @@ $(function () {
     	format: 'YYYY-MM-DD HH:mm'
     });
 });
+
 
