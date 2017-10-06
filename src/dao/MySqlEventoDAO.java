@@ -32,14 +32,11 @@ public class MySqlEventoDAO implements EventoDAO {
 				a.setCodigo(rs.getInt(1));
 				a.setNombre(rs.getString(2));
 				a.setDescripcion(rs.getString(3));
-				a.setAmaterno(rs.getString(4));
-				a.setSexo(rs.getString(5));
-				a.setTipodocumento(rs.getInt(6));
-				a.setNumdocumento(rs.getString(7));
-				a.setFnacimiento(rs.getDate(8));
-				a.setEmail(rs.getString(9));
-				a.setFono(rs.getString(10));
-				a.setEstado(rs.getInt(11));				
+				a.setFechaInicio(rs.getDate(4));
+				a.setFechaFin(rs.getDate(5));
+				a.setGratuito(rs.getBoolean(6));
+				a.setPrecio(rs.getDouble(7));
+				a.setEstado(rs.getInt(8));			
 				data.add(a);
 			}
 		} catch (Exception e) {

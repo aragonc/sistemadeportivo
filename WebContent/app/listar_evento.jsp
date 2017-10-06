@@ -13,13 +13,13 @@
    <div class="content-wrapper">
     <section class="content-header">
       <h3>
-        Eventos registrados
+        Eventos
       </h3>
     </section>
     <section class="content">
     	<div class="box box-primary">
     	<div class="box-header with-border">
-	              <h3 class="box-title">Listado de equipos</h3>
+	              <h3 class="box-title">Listado de eventos</h3>
 	        </div>
         	<div class="box-body">
             	<div class="col-md-9">
@@ -28,27 +28,32 @@
 		              	<form class="form-horizontal">
 		               		<div class="table-responsive">
 		               			<display:table name="data" class="table table-bordered" pagesize="10" requestURI="ServletEvento?tipo=listar" excludedParams="tipo" id="lista">
-		               		 		<display:column property="codigo" title="Codigo" sortable="false"/>
-										<display:column property="nombre" title="Nombre Equipo" sortable="false"/>
-										<display:column property="email" title="Email" sortable="false"/>
-										<display:column title="Telefono Contacto" sortable="false">
-											${lista.fono == '' ? 'No registrado' : lista.fono }
+		               		 			<display:column title="Item" sortable="false" media="html" >
+		               		 				<div class="checkbox">
+											    <input type="checkbox" name="evento[]" value="${lista.codigo}">
+											</div>
+		               		 			</display:column>
+		               		 			<display:column property="codigo" title="Codigo" sortable="false"/>
+										<display:column property="nombre" title="Titulo Evento" sortable="false"/>
+										<display:column property="descripcion" title="Descripción" sortable="false"/>
+										<display:column property="fechaInicio" title="Fecha Inicio" sortable="false">
+											
 										</display:column>
-										<display:column property="color" title="Color" sortable="false"/>	
+										<display:column property="fechaFin" title="Fecha Fin" sortable="false"/>	
 										
 										<display:column  title="Estado" sortable="false">
 											${lista.estado == 1 ? '<span class="label label-success"> Activo </span>' : '<span class="label label-danger"> Inactivo </span>'}
 										</display:column>
-										<display:column title="Acciones" sortable="false" media="html" >
 										
+										<display:column title="Acciones" sortable="false" media="html" >
 											<div class="btn-group btn-group-sm" role="group">
-												<a class="btn btn-default" title="Actualizar" href="ServletEquipo?tipo=buscar&cod=${lista.codigo}">
+												<a class="btn btn-default" title="Actualizar" href="ServletEvento?tipo=buscar&cod=${lista.codigo}">
 													<i class="fa fa-pencil" aria-hidden="true"></i>
 												</a>
-												<a class="btn btn-default" title="Detalle" href="ServletEquipo?tipo=detalle&cod=${lista.codigo}">
+												<a class="btn btn-default" title="Detalle" href="ServletEvento?tipo=detalle&cod=${lista.codigo}">
 													<i class="fa fa-info-circle" aria-hidden="true"></i>
 												</a>
-												<a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" class="btn btn-default" title="Eliminar" href="ServletEquipo?tipo=eliminar&cod=${lista.codigo}">
+												<a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" class="btn btn-default" title="Eliminar" href="ServletEvento?tipo=eliminar&cod=${lista.codigo}">
 													<i class="fa fa-trash" aria-hidden="true"></i>
 												</a>
 											</div>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.EquipoDTO;
 import beans.EventoDTO;
 import interfaces.EventoDAO;
 import service.EventoService;
@@ -45,9 +47,12 @@ public class ServletEvento extends HttpServlet {
 		
 	}
 
-	private void listar(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+    private void listar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<EventoDTO> info = eventoService.listarEvento();
+		request.setAttribute("data", info);
+		request.getRequestDispatcher("app/listar_evento.jsp").forward(request,
+				response);
 	}
 
 	private void actualizar(HttpServletRequest request, HttpServletResponse response) {
@@ -60,7 +65,7 @@ public class ServletEvento extends HttpServlet {
 		
 	}
 
-	private void registrar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void registrar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		EventoDTO obj = new EventoDTO();
 		
