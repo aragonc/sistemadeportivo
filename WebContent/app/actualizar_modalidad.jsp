@@ -24,7 +24,7 @@
         	<div class="box-body">
             	<div class="col-md-9">
 					<form action="${pageContext.request.contextPath}/ServletModalidad?tipo=actualizar" class="form-horizontal" id="frmregistrar" method="post">
-                         
+                         <input type="hidden" name="codigo" value="<%= obj.getCodigo() %>">
                          <div class="row">
                          	<div class="col-md-6">
                          		<div class="form-group">

@@ -135,8 +135,32 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 
 	@Override
 	public int actualizarModalidad(ModalidadDTO obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "UPDATE modalidad set descripcion = ?, categoria_idcategoria = ?, disciplina_iddisciplina = ? where idmodalidad = ?";
+			pstm = cn.prepareStatement(sql);
+			pstm.setString(1, obj.getDescripcion());
+			pstm.setInt(2, obj.getCodCategoria());
+			pstm.setInt(3, obj.getCodDisciplina());
+			pstm.setInt(4, obj.getCodigo());
+			
+			estado = pstm.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return estado;
 	}
 
 	@Override
