@@ -1,3 +1,4 @@
+<%@page import="beans.ModalidadDTO"%>
 <%@page import="beans.ComboDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="service.ComboService"%>
@@ -6,6 +7,7 @@
  <jsp:include page="_header.jsp" flush="true" />
  <jsp:include page="_sidebar.jsp" flush="true" />
  <%  
+ 	ModalidadDTO obj = (ModalidadDTO)request.getAttribute("registro");
 	ComboService listas = new ComboService();  
 	List<ComboDTO> listaCategoria = listas.listarComboSql("SELECT idcategoria, nombres FROM campeonato.categoria where estado = 1;");
 	List<ComboDTO> listaDisciplina = listas.listarComboSql("SELECT iddisciplina, nombre FROM campeonato.disciplina where estado = 1;");
@@ -32,10 +34,14 @@
 		                                   <option value="">-- Seleccione --</option>
 						                    	<%
 							                    	for (ComboDTO item : listaDisciplina ){
-							                    %>
-							                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
-							                   	<%
-							                   		}  
+							                    		
+							                    		if(item.getField().equals(obj.getDisciplina().getCodigo()+"")){
+							                    			out.println("<option value="+ item.getField() +" selected>" + item.getValor()+"</option>");
+							                    		} else {
+							                    			out.println("<option value="+ item.getField() +" >" + item.getValor()+"</option>");
+							                    		}
+							                    	}
+							                    
 							                   	%>
 		                             </select>
 		                           </div>
@@ -49,10 +55,13 @@
 		                                   <option value="">-- Seleccione --</option>
 						                    	<%
 							                    	for (ComboDTO item : listaCategoria ){
-							                    %>
-							                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
-							                   	<%
-							                   		}  
+							                    		if(item.getField().equals(obj.getCategoria().getCodigo()+"")){
+							                    			out.println("<option value="+ item.getField() +" selected>" + item.getValor()+"</option>");
+							                    		} else {
+							                    			out.println("<option value="+ item.getField() +" >" + item.getValor()+"</option>");
+							                    		}
+							                    	}
+							                    
 							                   	%>
 		                             </select>
 		                           </div>
@@ -61,9 +70,11 @@
                          </div>
                          
                          <div class="form-group">
-	                           <label class="col-sm-2 control-label">Descripcion</label>
+	                           <label class="col-sm-2 control-label">Descripción</label>
 	                           <div class="col-sm-10">
-	                             <textarea id=txthtml name="descripcion" rows="5" class="form-control"></textarea>
+	                             <textarea id=txthtml name="descripcion" rows="5" class="form-control">
+	                             	<%= obj.getDescripcion() %>
+	                             </textarea>
 	                           </div>
 		                 </div>
                                                                                       
