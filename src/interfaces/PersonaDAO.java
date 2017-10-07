@@ -15,5 +15,7 @@ public interface PersonaDAO {
 	public int actualizarPersona(PersonaDTO obj);
 	
 	public int eliminarPersona(int cod);
+	
+	public List<PersonaDTO> listarPersona(PersonaDTO personaDTO);
 
 }

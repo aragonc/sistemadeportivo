@@ -11,6 +11,7 @@
 <%  
 	ComboService listaDocumento = new ComboService();
 	List<ComboDTO> listaSexo = listaDocumento.listarCombo("sexo");
+	String data = request.getParameter("data");
 %>
  <jsp:include page="_header.jsp" flush="true" />
  <jsp:include page="_sidebar.jsp" flush="true" />
@@ -30,7 +31,7 @@
             	<div class="col-md-9">
             		<div class="toolbar-actions">
             			<div class="row">
-            				<div class="col-md-6">
+            				<div class="col-md-3">
             					<a href="${pageContext.request.contextPath}">
 					        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
 					        	</a>
@@ -38,18 +39,22 @@
 						        	<img alt="Registrar persona" title="Crear nueva categoria" src="${pageContext.request.contextPath}/images/icons/32/nuevo_usuario.png">
 						        </a>
             				</div>
-            				<div class="col-md-6">
+            				
+            				<div class="col-md-9">
 	            				<div class="pull-right">
-	            					<form class="form-inline">
+	            					<form class="form-inline" action="ServletPersona?tipo=buscarPersonaXNombre" method="post">
 									  <div class="form-group">
 									    <div class="input-group">
-									      <input type="text" name="txtdni" class="form-control" id="txtdni" placeholder="Buscar por DNI">
+									      <a><input type="text" name="txtNombre" class="form-control" id="txtNombre" placeholder="Ingrese Nombre"></a>
+									      <a><input type="text" name="txtApellido" class="form-control" id="txtApellido" placeholder="Ingrese Apellido"></a>
+									   <a><button type="submit" class="btn btn-primary">Buscar</button></a>
 									    </div>
 									  </div>
-									  <button type="submit" class="btn btn-primary">Buscar</button>
+									  
 									</form>
 	            				</div>
             				</div>
+            				
             			</div>
 			        	
 			       	</div>
@@ -58,11 +63,12 @@
 		              <div class="box-body">
 		              	<form class="form-horizontal">
 		               		<div class="table-responsive">
-		               			<display:table name="data" class="table table-bordered" pagesize="10" requestURI="ServletPersona?tipo=listar" excludedParams="tipo" id="lista">
-		               		 			<display:column title="Item" sortable="false" media="html" >
-		               		 				<div class="checkbox">
+		               		<%if( data == null) {%>
+		               		<display:table name="data" class="table table-bordered" requestURI="ServletPersona?tipo=listar" excludedParams="tipo" id="lista">
+		               		 			<display:column title="Item" sortable="false"  >
+		               		 				
 											    <input type="checkbox" name="people[]" value="${lista.codigo}">
-											</div>
+											
 		               		 			</display:column>
 		               		 			<display:column property="codigo" title="Codigo" sortable="false"/>
 										<display:column property="nombre" title="Nombres" sortable="false"/>
@@ -87,7 +93,17 @@
 											</div>
 										</display:column>
 								</display:table>
-		              		</div>
+		               		
+		               		
+		               		               		
+		               		<%}else{%>
+		               		
+		               		<div class="alert alert-warning alert-dismissable">
+  								<button type="button" class="close" data-dismiss="alert">&times;</button>
+  							<strong>No se encontraron datos</strong>
+								</div>		
+		               			
+		              		<%}%> </div>
 		              	</form>
 		              </div>
             		</div>

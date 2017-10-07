@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.CategoriaDTO;
+
 import beans.PersonaDTO;
 import service.PersonaService;
 
@@ -40,6 +40,8 @@ public class ServletPersona extends HttpServlet {
 				listar(request, response);
 			else if (tipo.equals("eliminar"))
 				eliminar(request, response);
+			else if (tipo.equals("buscarPersonaXNombre"))
+				buscarPersonaXNombre(request, response);
 		}
 	//metodos para registar una persona pero según su tipo;
 	 
@@ -158,5 +160,30 @@ public class ServletPersona extends HttpServlet {
 		} else {
 			response.sendRedirect("error.html");
 		}
+	}
+	
+	private void buscarPersonaXNombre(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PersonaDTO obj = new PersonaDTO();		
+		String nombre = request.getParameter("txtNombre");
+		String apaterno = request.getParameter("txtApellido");
+		
+		
+		if(nombre!=null && nombre.trim().equals("")){
+			nombre = null;	
+		}
+		
+		if(apaterno!=null && apaterno.trim().equals("")){
+			apaterno = null;	
+		}
+		
+		obj.setNombre(nombre);				
+		obj.setApaterno(apaterno);
+		
+		
+		List<PersonaDTO> info = personaService.listarPersona(obj);
+		request.setAttribute("data", info);
+		request.getRequestDispatcher("app/listar_persona.jsp").forward(request,
+				response);
 	}
 }

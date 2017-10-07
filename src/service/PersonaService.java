@@ -31,6 +31,10 @@ public class PersonaService {
 	public int eliminarPersona(int cod){
 		return personaDAO.eliminarPersona(cod);
 	}
+	
+	public List<PersonaDTO> listarPersona(PersonaDTO personaDTO ) {
+		return personaDAO.listarPersona(personaDTO);		
+	}
 
 }
 

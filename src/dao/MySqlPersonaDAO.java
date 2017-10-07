@@ -240,5 +240,78 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		}
 		return estado;
 	}
+	
+	@Override
+	public List<PersonaDTO> listarPersona(PersonaDTO personaDTO) {
+		PersonaDTO a = null;
+		List<PersonaDTO> data = new ArrayList<PersonaDTO>();
+		Connection cn = null;
+		ResultSet rs = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "select * from persona";
+			int countWhere=0;
+			if(personaDTO!=null && personaDTO.getNombre()!=null){
+				if(countWhere==0){
+					sql += " where ";
+				}
+				sql += " nombres like ? ";
+				countWhere++;		
+			}
+			if(personaDTO!=null && personaDTO.getApaterno()!=null){
+				if(countWhere==0){
+					sql += " where ";
+				}else {
+					sql += " and ";					
+				}
+				sql += " apaterno like ? ";
+				countWhere++;			
+			}
+			
+			
+			
+			pstm = cn.prepareStatement(sql);
+			countWhere=0;
+			if(personaDTO!=null && personaDTO.getNombre()!=null){
+				pstm.setString(++countWhere, "%"+personaDTO.getNombre()+"%");
+			}
+			
+			if(personaDTO!=null && personaDTO.getApaterno()!=null){
+				pstm.setString(++countWhere, "%"+personaDTO.getApaterno()+"%");
+			}
+			
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				a = new PersonaDTO();
+				a.setCodigo(rs.getInt(1));
+				a.setNombre(rs.getString(2));
+				a.setApaterno(rs.getString(3));
+				a.setAmaterno(rs.getString(4));
+				a.setSexo(rs.getString(5));
+				a.setTipodocumento(rs.getInt(6));
+				a.setNumdocumento(rs.getString(7));
+				a.setFnacimiento(rs.getDate(8));
+				a.setEmail(rs.getString(9));
+				a.setFono(rs.getString(10));
+				a.setEstado(rs.getInt(11));				
+				data.add(a);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return data;
+	}
 
 }
