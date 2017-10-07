@@ -2,11 +2,13 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <jsp:include page="_header.jsp" flush="true" />
- <jsp:include page="_sidebar.jsp" flush="true" />
+ <jsp:include page="../_header.jsp" flush="true" />
+ <jsp:include page="../_sidebar.jsp" flush="true" />
 
   <div class="content-wrapper">
-    
+    <section class="content-header">
+      <h1>Eventos</h1> 
+    </section>
     <section class="content">
     	<div class="box box-primary">
     		<div class="box-header with-border">
@@ -98,4 +100,4 @@
         </div>              
     </section>
  </div>	
- <jsp:include page="_footer.jsp" flush="true" />
+ <jsp:include page="../_footer.jsp" flush="true" />

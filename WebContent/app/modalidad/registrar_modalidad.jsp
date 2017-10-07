@@ -3,8 +3,8 @@
 <%@page import="service.ComboService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <jsp:include page="_header.jsp" flush="true" />
- <jsp:include page="_sidebar.jsp" flush="true" />
+ <jsp:include page="../_header.jsp" flush="true" />
+ <jsp:include page="../_sidebar.jsp" flush="true" />
  <%  
 	ComboService listas = new ComboService();  
 	List<ComboDTO> listaCategoria = listas.listarComboSql("SELECT idcategoria, nombres FROM campeonato.categoria where estado = 1;");
@@ -87,4 +87,5 @@
     </section>
   </div>
  
- <jsp:include page="_footer.jsp" flush="true" />
+ <jsp:include page="../_footer.jsp" flush="true" />
+ 

@@ -30,5 +30,9 @@ public class EventoService {
 	public int eliminarEvento(int cod){
 		return eventoDAO.eliminarEvento(cod);
 	}
+	
+	public int agregarModalidad(int codEvento, int codModalidad){
+		return eventoDAO.agregarModalidad(codEvento, codModalidad);
+	}
 
 }

@@ -14,35 +14,64 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.EquipoDTO;
 import beans.EventoDTO;
+import beans.ModalidadDTO;
 import interfaces.EventoDAO;
 import service.EventoService;
+import service.ModalidadService;
 
 @WebServlet("/ServletEvento")
 public class ServletEvento extends HttpServlet {
 	
 	EventoService eventoService = new EventoService();
+	ModalidadService modalidadService = new ModalidadService();
 	
 	private static final long serialVersionUID = 1L;
        
 	protected void service(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		
     	String tipo = request.getParameter("tipo");
-    	//String tipopersona = request.getParameter("tipo");
+    	String accion = request.getParameter("accion");
+
 		if (tipo.equals("registrar"))
 			registrar(request, response);
-		else if (tipo.equals("buscarpersona"))
-			buscarPersona(request, response);
+		else if (tipo.equals("buscarEventos"))
+			buscarEventos(request, response);
 		else if (tipo.equals("actualizar"))
 			actualizar(request, response);
 		else if (tipo.equals("buscar"))
-			buscarPersona(request, response);
+			buscar(request, response);
 		else if (tipo.equals("listar"))
 			listar(request, response);
 		else if (tipo.equals("eliminar"))
 			eliminar(request, response);
+		else if (tipo.equals("agregar"))
+			formRegistro(request, response);
+		else if (tipo.equals("listaModalidad"))
+			listaModalidad(request, response);
+		
+		// respuesta de accion
+		if (accion.equals("suscribirModalidad"))
+			suscribirModalidad(request, response);
 	}
 	
-	 private void eliminar(HttpServletRequest request,
+	 private void suscribirModalidad(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void buscar(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void listaModalidad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		List<ModalidadDTO> info = modalidadService.listarModalidad();
+		request.setAttribute("data", info);
+		request.getRequestDispatcher("app/modalidad/suscribir_modalidad.jsp").forward(request,response);
+	}
+
+	private void eliminar(HttpServletRequest request,
 				HttpServletResponse response) throws ServletException, IOException {
 			String dato = request.getParameter("cod");
 			int codigo = Integer.parseInt(dato);
@@ -55,16 +84,22 @@ public class ServletEvento extends HttpServlet {
 			throws ServletException, IOException {
 		List<EventoDTO> info = eventoService.listarEvento();
 		request.setAttribute("data", info);
-		request.getRequestDispatcher("app/listar_evento.jsp").forward(request,
+		request.getRequestDispatcher("app/evento/listar_evento.jsp").forward(request,
 				response);
 	}
-
+    
+    private void formRegistro(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request,
+				response);
+	}
+    
 	private void actualizar(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void buscarPersona(HttpServletRequest request, HttpServletResponse response) {
+	private void buscarEventos(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -121,7 +156,7 @@ public class ServletEvento extends HttpServlet {
 		if (resultado != -1){
 			request.setAttribute("nomevento", obj.getNombre());
 			request.setAttribute("codevento", resultado+"");
-			listar(request, response);
+			listaModalidad(request, response);
 		}else{
 			response.sendRedirect("error.html");
 		}

@@ -4,8 +4,8 @@
 <%@page import="service.ComboService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <jsp:include page="_header.jsp" flush="true" />
- <jsp:include page="_sidebar.jsp" flush="true" />
+ <jsp:include page="../_header.jsp" flush="true" />
+ <jsp:include page="../_sidebar.jsp" flush="true" />
  <%  
  	ModalidadDTO obj = (ModalidadDTO)request.getAttribute("registro");
 	ComboService listas = new ComboService();  
@@ -98,4 +98,4 @@
     </section>
   </div>
  
- <jsp:include page="_footer.jsp" flush="true" />
+ <jsp:include page="../_footer.jsp" flush="true" />

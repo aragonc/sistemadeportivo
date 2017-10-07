@@ -3,12 +3,13 @@
 <%@taglib prefix="ct" uri="http://libreria.registro" %>	
 <%@page import="beans.CategoriaDTO"%>
 <%@page import="java.util.List"%>
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<% String nombreEvento = (String)request.getAttribute("nomevento"); %>
+<% String codigoEvento = (String)request.getAttribute("codevento"); %>
 
- <jsp:include page="_header.jsp" flush="true" />
- <jsp:include page="_sidebar.jsp" flush="true" />
+ <jsp:include page="../_header.jsp" flush="true" />
+ <jsp:include page="../_sidebar.jsp" flush="true" />
  
   <div class="content-wrapper">
     <section class="content-header">
@@ -23,13 +24,45 @@
 	        <div class="body">
 	        	<div class="col-md-9">
 			        <div class="toolbar-actions">
-			        	<a href="${pageContext.request.contextPath}">
-			        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
-			        	</a>
-				        <a href="${pageContext.request.contextPath}/app/registrar_modalidad.jsp">
-				        	<img alt="Crear nueva categoria" title="Crear nueva modalidad" src="${pageContext.request.contextPath}/images/icons/32/new_folder.png">
-				        </a>
+			        	<div class="row">
+			        		<div class="col-md-6">
+			        			<% if(codigoEvento!=null) { %>
+						        	<a href="${pageContext.request.contextPath}">
+						        		<img alt="Regresar" title ="Regresar" src="${pageContext.request.contextPath}/images/icons/32/back.png">
+						        	</a>
+						        <% } else { %>
+						        	<a href="${pageContext.request.contextPath}">
+						        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
+						        	</a>
+							        <a href="${pageContext.request.contextPath}/app/modalidad/registrar_modalidad.jsp">
+							        	<img alt="Crear nueva categoria" title="Crear nueva modalidad" src="${pageContext.request.contextPath}/images/icons/32/new_folder.png">
+							        </a>
+						        <% } %>
+			        		</div>
+			        		<div class="col-md-6">
+			        			<div class="pull-right">
+	            					<form class="form-inline">
+									  <div class="form-group">
+									    <div class="input-group">
+									      <input type="text" name="txtdni" class="form-control" id="txtdni" size="25" placeholder="Buscar modalidad">
+									    </div>
+									  </div>
+									  <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i>
+									   Buscar</button>
+									</form>
+	            				</div>
+			        		</div>
+			        	</div>
+			        	
 			       	</div>
+			       	<!-- MENSAJE QUE APARECE CUANDO SE REGISTRA UN EVENTO -->
+			       	<% if(codigoEvento!=null) { %>
+		              	<div class="alert alert-success" role="alert">
+		              		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		              		Acabas de crear el evento a continuación procede a asignar las modalidesde de juego para el evento <span class="valor"><%= nombreEvento %></span> </a>
+		              	</div>
+		              <% } %>
+			       	<!-- FIN DEL MENSAJE -->
 			       	<form action="" id="form-lista">
 			        <div class="box-body table-responsive no-padding">
 				        <display:table class="table table-bordered table-hover"  name="data" requestURI="../ServletModalidad?tipo=listar"	id="lista">
@@ -40,12 +73,17 @@
 			                <display:column property="categoria.nombre" title="Categoria" />
 			                <display:column property="descripcion" title="Descripcion" />
 			                <display:column  title="Acciones" sortable="false">
-			               	<div class="text-center">
-			               		<div class="btn-group btn-group-sm" role="group" aria-label="...">
-			                    <a href="ServletModalidad?tipo=buscar&cod=${lista.codigo}" class="btn btn-default" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-			                    <a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" href="ServletModalidad?tipo=eliminar&cod=${lista.codigo}" class="btn btn-default" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-			                  </div>
-			               	</div>
+				               	<div class="text-center">
+				               		<% if(codigoEvento!=null) { %>
+				               			<a class="btn btn-primary" href="ServletEvento?accion=suscribirModalidad&codevento=<%= codigoEvento %>&codmodalidad=${lista.codigo}"><i class="fa fa-plus" aria-hidden="true"></i>
+				               			 Agregar</a>
+				               		<% } else {%>
+					               		<div class="btn-group btn-group-sm" role="group" aria-label="...">
+					                    	<a href="ServletModalidad?tipo=buscar&cod=${lista.codigo}" class="btn btn-default" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+					                    	<a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" href="ServletModalidad?tipo=eliminar&cod=${lista.codigo}" class="btn btn-default" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+					                  	</div>
+				                  	<% } %>
+				               	</div>
 			                  
 				            </display:column>
 				        </display:table>
@@ -57,14 +95,14 @@
 			         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(false, 'lista'); return false;">Anular selección</a>
 			         	</div>
 			         	<div class="btn-group">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Acciones <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="#">Eliminar de la plataforma</a></li>
-    
-  </ul>
-</div>
+						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    Acciones <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu">
+						    <li><a href="#">Eliminar de la plataforma</a></li>
+						    
+						  </ul>
+						</div>
 			         </div>
 	     	 	</div>
            		<div class="col-md-3">
@@ -76,4 +114,4 @@
     </section>
   </div>
  
- <jsp:include page="_footer.jsp" flush="true" />
+ <jsp:include page="../_footer.jsp" flush="true" />

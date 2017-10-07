@@ -64,7 +64,7 @@ public class ServletModalidad extends HttpServlet {
 			throws ServletException, IOException {
 		List<ModalidadDTO> info = modalidadService.listarModalidad();
 		request.setAttribute("data", info);
-		request.getRequestDispatcher("app/listar_modalidad.jsp").forward(request,
+		request.getRequestDispatcher("app/modalidad/listar_modalidad.jsp").forward(request,
 				response);
 	}
 
@@ -95,7 +95,7 @@ public class ServletModalidad extends HttpServlet {
 		int codigo = Integer.parseInt(dato);
 		ModalidadDTO obj = modalidadService.buscarModalidad(codigo);
 		request.setAttribute("registro", obj);
-		request.getRequestDispatcher("app/actualizar_modalidad.jsp").forward(request,
+		request.getRequestDispatcher("app/modalidad/actualizar_modalidad.jsp").forward(request,
 				response);
 	}
 

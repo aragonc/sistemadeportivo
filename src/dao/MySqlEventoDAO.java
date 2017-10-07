@@ -106,6 +106,33 @@ public class MySqlEventoDAO implements EventoDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public int agregarModalidad(int codEvento, int codModalidad){
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "INSERT INTO evento_modalidad VALUES (? ,? )";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, codEvento);
+			pstm.setInt(2, codModalidad);
+			estado = pstm.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return estado;
+	}
 
 	@Override
 	public int eliminarEvento(int cod) {

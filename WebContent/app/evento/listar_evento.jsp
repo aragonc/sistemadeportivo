@@ -9,8 +9,8 @@
 <% String xnombre = (String)request.getAttribute("nomevento"); %>
 <% String xcodigo = (String)request.getAttribute("codevento"); %>
 
- <jsp:include page="_header.jsp" flush="true" />
- <jsp:include page="_sidebar.jsp" flush="true" />
+ <jsp:include page="../_header.jsp" flush="true" />
+ <jsp:include page="../_sidebar.jsp" flush="true" />
  
    <div class="content-wrapper">
     <section class="content">
@@ -19,7 +19,7 @@
 	              <h3 class="box-title">Listado de eventos</h3>
 	        </div>
         	<div class="box-body">
-            	<div class="col-md-9">
+            	<div class="col-md-12">
             	
             		<div class="toolbar-actions">
             			<div class="row">
@@ -27,7 +27,7 @@
             					<a href="${pageContext.request.contextPath}">
 					        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
 					        	</a>
-						        <a href="${pageContext.request.contextPath}/app/registrar_evento.jsp">
+						        <a href="${pageContext.request.contextPath}/ServletEvento?tipo=agregar">
 						        	<img alt="Registrar persona" title="Crear nuevo evento" src="${pageContext.request.contextPath}/images/icons/32/nuevo_evento.png">
 						        </a>
             				</div>
@@ -59,9 +59,9 @@
 		               		<div class="table-responsive">
 		               			<display:table name="data" class="table table-bordered table-hover" pagesize="15" requestURI="ServletEvento?tipo=listar" excludedParams="tipo" id="lista">
 		               		 			<display:column title="Item" sortable="false" media="html" >
-		               		 				<div class="checkbox">
+		               		 				
 											    <input type="checkbox" name="evento[]" value="${lista.codigo}">
-											</div>
+											
 		               		 			</display:column>
 		               		 			
 										<display:column property="nombre" title="Titulo Evento" sortable="false"/>
@@ -93,9 +93,9 @@
 		              	</form>
 		              </div>
             		</div>
-                  <div class="col-md-3"></div>  
+                  
                </div>
              </div>
     </section>
     </div>
-  <jsp:include page="_footer.jsp" flush="true" />
+  <jsp:include page="../_footer.jsp" flush="true" />
