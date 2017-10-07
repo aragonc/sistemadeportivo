@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import beans.EquipoDTO;
 import beans.EventoDTO;
 import beans.ModalidadDTO;
+import beans.PersonaDTO;
 import interfaces.EventoDAO;
 import service.EventoService;
 import service.ModalidadService;
@@ -30,7 +31,6 @@ public class ServletEvento extends HttpServlet {
 	protected void service(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		
     	String tipo = request.getParameter("tipo");
-    	String accion = request.getParameter("accion");
 
 		if (tipo.equals("registrar"))
 			registrar(request, response);
@@ -40,6 +40,8 @@ public class ServletEvento extends HttpServlet {
 			actualizar(request, response);
 		else if (tipo.equals("buscar"))
 			buscar(request, response);
+		else if (tipo.equals("detalle"))
+			detalle(request, response);
 		else if (tipo.equals("listar"))
 			listar(request, response);
 		else if (tipo.equals("eliminar"))
@@ -48,15 +50,26 @@ public class ServletEvento extends HttpServlet {
 			formRegistro(request, response);
 		else if (tipo.equals("listaModalidad"))
 			listaModalidad(request, response);
-		
-		// respuesta de accion
-		if (accion.equals("suscribirModalidad"))
+		else if (tipo.equals("suscribirModalidad"))
 			suscribirModalidad(request, response);
 	}
 	
-	 private void suscribirModalidad(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	 private void detalle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 String dato = request.getParameter("cod");
+			int codigo = Integer.parseInt(dato);
+			EventoDTO obj = eventoService.buscarEvento(codigo);
+			request.setAttribute("registro", obj);
+			request.getRequestDispatcher("app/evento/detalle_evento.jsp").forward(request,
+					response);
 		
+	}
+
+	private void suscribirModalidad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 String codevento = request.getParameter("codevento");
+		 String codmodalidad = request.getParameter("codmodalidad");
+		 
+		 eventoService.agregarModalidad(Integer.parseInt(codevento), Integer.parseInt(codmodalidad));
+		 listar(request, response);
 	}
 
 	private void buscar(HttpServletRequest request, HttpServletResponse response) {

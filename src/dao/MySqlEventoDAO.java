@@ -9,12 +9,14 @@ import java.util.List;
 import com.mysql.jdbc.Statement;
 
 import beans.EventoDTO;
+import beans.ModalidadDTO;
 import beans.PersonaDTO;
 import interfaces.EventoDAO;
+import service.ModalidadService;
 import utils.MysqlDBConexion;
 
 public class MySqlEventoDAO implements EventoDAO {
-
+	ModalidadService modalidad = new ModalidadService();
 	@Override
 	public List<EventoDTO> listarEventos() {
 		EventoDTO a = null;
@@ -36,7 +38,7 @@ public class MySqlEventoDAO implements EventoDAO {
 				a.setFechaFin(rs.getTimestamp(5));
 				a.setGratuito(rs.getBoolean(6));
 				a.setPrecio(rs.getDouble(7));
-				a.setEstado(rs.getInt(8));			
+				a.setEstado(rs.getInt(8));
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -58,8 +60,44 @@ public class MySqlEventoDAO implements EventoDAO {
 
 	@Override
 	public EventoDTO buscarEvento(int cod) {
-		// TODO Auto-generated method stub
-		return null;
+		EventoDTO a = null;
+		Connection cn = null;
+		ResultSet rs = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "SELECT * FROM evento where idevento = ?;";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, cod);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				a = new EventoDTO();
+				a.setCodigo(rs.getInt(1));
+				a.setNombre(rs.getString(2));
+				a.setDescripcion(rs.getString(3));
+				a.setFechaInicio(rs.getTimestamp(4));
+				a.setFechaFin(rs.getTimestamp(5));
+				a.setGratuito(rs.getBoolean(6));
+				a.setPrecio(rs.getDouble(7));
+				a.setEstado(rs.getInt(8));
+				List<ModalidadDTO> mod = modalidad.buscarModalidadEvento(a.getCodigo());
+				a.setModalidades(mod);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return a;
 	}
 
 	@Override

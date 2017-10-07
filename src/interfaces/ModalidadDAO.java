@@ -1,6 +1,8 @@
 package interfaces;
 
 import java.util.List;
+
+import beans.EventoDTO;
 import beans.ModalidadDTO;
 
 public interface ModalidadDAO {
@@ -14,4 +16,6 @@ public interface ModalidadDAO {
 	public int actualizarModalidad(ModalidadDTO obj);
 	
 	public int eliminarModalidad(int cod);
+	
+	public List<ModalidadDTO> buscarModalidadEvento(int cod);
 }
