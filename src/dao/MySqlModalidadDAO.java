@@ -8,6 +8,7 @@ import java.util.List;
 
 import beans.CategoriaDTO;
 import beans.DisciplinaDTO;
+import beans.EventoDTO;
 import beans.ModalidadDTO;
 import beans.PersonaDTO;
 import interfaces.ModalidadDAO;
@@ -42,6 +43,54 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 				b.setNombre(rs.getString(6));
 				cat.setCategoria(b);
 				data.add(cat);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return data;
+	}
+	public List<ModalidadDTO> buscarModalidadEvento(int codEvento){
+		ModalidadDTO mod = null;
+		List<ModalidadDTO> data = new ArrayList<ModalidadDTO>();
+		Connection cn = null;
+		ResultSet rs = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "SELECT m.idmodalidad, m.descripcion, d.iddisciplina, d.nombre, c.idcategoria, c.nombres "
+					+ "FROM evento_modalidad em inner join modalidad m on m.idmodalidad = em.modalidad_idmodalidad "
+					+ "inner join categoria c on m.categoria_idcategoria = c.idcategoria "
+					+ "inner join disciplina d on  m.disciplina_iddisciplina = d.iddisciplina "
+					+ "where evento_idevento = ?;";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, codEvento);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				mod = new ModalidadDTO();
+				mod.setCodigo(rs.getInt(1));
+				mod.setDescripcion(rs.getString(2));
+				mod.setCodCategoria(rs.getInt(3));
+					DisciplinaDTO a = new DisciplinaDTO();
+					a.setCodigo(rs.getInt(3));
+					a.setNombre(rs.getString(4));
+					mod.setDisciplina(a);
+				mod.setCodDisciplina(rs.getInt(5));
+					CategoriaDTO b = new CategoriaDTO();
+					b.setCodigo(rs.getInt(5));
+					b.setNombre(rs.getString(6));
+					mod.setCategoria(b);
+				data.add(mod);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,6 +1,8 @@
 package service;
 
 import java.util.List;
+
+import beans.EventoDTO;
 import beans.ModalidadDTO;
 import dao.DAOFactory;
 import interfaces.ModalidadDAO;
@@ -29,6 +31,9 @@ public class ModalidadService {
 	
 	public int eliminarModalidad(int cod){
 		return modalidadDAO.eliminarModalidad(cod);
+	}
+	public List<ModalidadDTO> buscarModalidadEvento(int cod){
+		return modalidadDAO.buscarModalidadEvento(cod);
 	}
 	
 }

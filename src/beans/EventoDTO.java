@@ -12,7 +12,7 @@ public class EventoDTO {
 	private int estado;
 	private double precio;
 	private boolean gratuito;
-	private List<ModalidadDTO> listaModalidad;
+	private List<ModalidadDTO> modalidades;
 	
 	public int getCodigo() {
 		return codigo;
@@ -51,14 +51,12 @@ public class EventoDTO {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-	
-	public List<ModalidadDTO> getListaModalidad() {
-		return listaModalidad;
+	public List<ModalidadDTO> getModalidades() {
+		return modalidades;
 	}
-	public void setListaModalidad(List<ModalidadDTO> listaModalidad) {
-		this.listaModalidad = listaModalidad;
+	public void setModalidades(List<ModalidadDTO> modalidades) {
+		this.modalidades = modalidades;
 	}
-
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -72,8 +70,10 @@ public class EventoDTO {
 	public void setGratuito(boolean gratuito) {
 		this.gratuito = gratuito;
 	}
+	
+	
 	public EventoDTO(int codigo, String nombre, String descripcion, Date fechaInicio, Date fechaFin, int estado,
-			double precio, boolean gratuito, List<ModalidadDTO> listaModalidad) {
+			double precio, boolean gratuito, List<ModalidadDTO> modalidades) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -83,7 +83,7 @@ public class EventoDTO {
 		this.estado = estado;
 		this.precio = precio;
 		this.gratuito = gratuito;
-		this.listaModalidad = listaModalidad;
+		this.modalidades = modalidades;
 	}
 	public EventoDTO() {
 		super();
