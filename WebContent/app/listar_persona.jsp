@@ -1,3 +1,4 @@
+<%@page import="sun.invoke.empty.Empty"%>
 <%@page import="beans.ComboDTO"%>
 <%@page import="service.ComboService"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -63,9 +64,11 @@
 		              <div class="box-body">
 		              	<form class="form-horizontal">
 		               		<div class="table-responsive">
-		               		<%if( data == null) {%>
 		               		<display:table name="data" class="table table-bordered" requestURI="ServletPersona?tipo=listar" excludedParams="tipo" id="lista">
-		               		 			<display:column title="Item" sortable="false"  >
+		               		 			<display:setProperty name="basic.msg.empty_list" value="<strong>No se encontraron datos</strong>" />   
+		               		 					   	               		 					   
+		               		 					               		 				               		 			
+		               		 			<display:column title="Item" sortable="true"  >
 		               		 				
 											    <input type="checkbox" name="people[]" value="${lista.codigo}">
 											
@@ -94,16 +97,7 @@
 										</display:column>
 								</display:table>
 		               		
-		               		
-		               		               		
-		               		<%}else{%>
-		               		
-		               		<div class="alert alert-warning alert-dismissable">
-  								<button type="button" class="close" data-dismiss="alert">&times;</button>
-  							<strong>No se encontraron datos</strong>
-								</div>		
-		               			
-		              		<%}%> </div>
+		              		 </div>
 		              	</form>
 		              </div>
             		</div>
