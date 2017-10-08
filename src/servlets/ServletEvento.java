@@ -12,11 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.EquipoDTO;
+
 import beans.EventoDTO;
 import beans.ModalidadDTO;
-import beans.PersonaDTO;
-import interfaces.EventoDAO;
 import service.EventoService;
 import service.ModalidadService;
 
