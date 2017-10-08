@@ -10,6 +10,38 @@ $( document ).ready(function() {
 		 toolbar : 'Basic', /* this does the magic */
 	        uiColor : '#FFFFFF'
 	 });
+	}
+	 //Ajax para cargar modalidades del evento seleccionado
+	 if($('#listaevento').length > 0){
+		 $('#listaevento').on('change', function(){
+		        $.ajax({
+		            type: 'GET',
+		            url: '../../ServletAjax?tipo=listarModalidad',
+		            dataType: "JSON",
+		            data: 'codevento='+$('#listaevento').val(),
+		            statusCode: {
+		                404: function() {
+		                    console.log('Pagina no encontrada');
+		                },
+		                500: function(){
+		                    console.log('Error del servidor');
+		                }
+		            },
+		            success: function(datos){
+		            	$("#listamodalidad").empty(); // limpiamos la lista
+		                if(datos == '')
+		                	$("#listamodalidad").append($('<option>', { value:"0", text: "-- Seleccione una modalidad --" }));
+		                else{
+		                	$("#listamodalidad").append($('<option>', { value:"0", text: "-- Seleccione una modalidad --" }));
+		                	$.each(datos, function (i, fila){
+		                		 $("#listamodalidad").append($('<option>', { value: String(fila.codigo), text: fila.valor }));
+		                	});
+		                    //console.log("hola");
+		                }
+		            }
+		        }) 
+		        
+		    }); 
 	 }
 });
 $(function () {

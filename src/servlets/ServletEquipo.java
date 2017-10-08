@@ -44,7 +44,7 @@ public class ServletEquipo extends HttpServlet{
 			throws ServletException, IOException {
 		List<EquipoDTO> info = equipoService.listarEquipo();
 		request.setAttribute("data", info);
-		request.getRequestDispatcher("app/listar_equipo.jsp").forward(request,
+		request.getRequestDispatcher("app/equipo/listar_equipo.jsp").forward(request,
 				response);
 	}
 

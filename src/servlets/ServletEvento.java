@@ -52,20 +52,10 @@ public class ServletEvento extends HttpServlet {
 			listaModalidad(request, response);
 		else if (tipo.equals("suscribirModalidad"))
 			suscribirModalidad(request, response);
-		else if (tipo.equals("multipleModalidad"))
-			multipleModalidad(request, response);
+		
 		
 	}
 	
-	 private void multipleModalidad(HttpServletRequest request, HttpServletResponse response) {
-		 String codevento = request.getParameter("codevento");
-		 String codmodalidad = request.getParameter("modalidad[]");
-		 
-		 System.out.println(codevento);
-		 System.out.println(codmodalidad);
-		
-	}
-
 	private void detalle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dato = request.getParameter("cod");
 		int codigo = Integer.parseInt(dato);

@@ -1,4 +1,5 @@
 package dao;
+import interfaces.AjaxDAO;
 import interfaces.CategoriaDAO;
 import interfaces.ComboDAO;
 import interfaces.DelegadoDAO;
@@ -51,6 +52,9 @@ public class MySqlDAOFactory extends DAOFactory {
 	}
 	public ModalidadDAO getModalidadDAO(){
 		return new MySqlModalidadDAO();
+	}
+	public AjaxDAO getAjaxDAO(){
+		return new MySqlAjaxDAO();
 	}
 }
 

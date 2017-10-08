@@ -1,5 +1,6 @@
 package dao;
 
+import interfaces.AjaxDAO;
 import interfaces.CategoriaDAO;
 import interfaces.ComboDAO;
 import interfaces.DelegadoDAO;
@@ -28,6 +29,7 @@ public abstract class DAOFactory {
     public abstract ComboDAO getComboDAO();
     public abstract EventoDAO getEventoDAO();
     public abstract ModalidadDAO getModalidadDAO();
+    public abstract AjaxDAO getAjaxDAO();
 
     public static DAOFactory getDAOFactory(int whichFactory){
         switch(whichFactory){
