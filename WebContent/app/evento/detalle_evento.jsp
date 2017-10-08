@@ -19,11 +19,18 @@
               <h3 class="box-title">Detalle: <%= obj.getNombre() %> </h3>
             </div>
         	<div class="box-body">
-            	<div class="col-md-9">
-					
-						<div class="panel panel-primary">
+            	<div class="col-md-12">
+						<section class="detalle">
+						<div class="panel panel-default">
 							<div class="panel-heading">
+								<div class="pull-right">
+									<a href="ServletEvento?tipo=buscar&cod=<%= obj.getCodigo() %>" class="btn btn-default">
+										<i class="fa fa-pencil" aria-hidden="true"></i>
+										Modificar evento
+									</a>
+								</div>
 								<h3 class="panel-title">Información del evento</h3>
+								
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
@@ -48,12 +55,14 @@
 								<div class="table-responsive">
 									<table class="table tabler-hover">
 										<tr>
-											<th class="th-detalle" >Costo S/.</th>
+											<th class="th-detalle">Lugar del evento</th>
+											<th class="th-detalle">Costo S/.</th>
 											<th class="th-detalle">Gratuito</th>
 											<th class="th-detalle">Estado</th>
-											<th class="th-detalle">Fecha Registro</th>
+											<th class="th-detalle">Fecha registro</th>
 										</tr>
 										<tr>
+											<td><%= obj.getLugar() %></td>
 											<td><%= obj.getPrecio() %></td>
 											<td><%= obj.getGratuito() %></td>
 											<td><%= obj.getEstado() %></td>
@@ -64,15 +73,21 @@
 							</div>
 						</div>
 	                    
-	                    <div class="panel panel-primary">
+	                    <div class="panel panel-default">
 							<div class="panel-heading">
+								<div class="pull-right">
+									<a href="#" class="btn btn-default">
+										<i class="fa fa-plus" aria-hidden="true"></i>
+										Agregar modalidad
+									</a>
+								</div>
 								<h3 class="panel-title">Modalidades de Juego</h3>
 							</div>
 							<div class="panel-body">
 									<div class="table-responsive">
 									<table class="table tabler-hover">
 										<tr>
-											<th class="th-detalle" >Código</th>
+											<th class="th-detalle">Código</th>
 											<th class="th-detalle">Disciplina</th>
 											<th class="th-detalle">Cateogoria</th>
 											<th class="th-detalle">Acciones</th>
@@ -84,7 +99,7 @@
 							                    	<td> <%= item.getDisciplina().getNombre() %> </td>
 							                    	<td> <%= item.getCategoria().getNombre() %> </td>
 							                    	<td> 
-							                    		<a class="btn btn-default">Quitar</a>
+							                    		<a href="#" class="btn btn-default"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							                    	</td>	
 							                    </tr>
 							               <% } %>
@@ -93,15 +108,13 @@
 								</div>
 							</div>
 						</div>
-                        
+                        </section>
                         <div class="box-footer">
 							<a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver a lista </a>
 		              	</div>
 
                   </div>
-                  <div class="col-md-3">
                   
-                  </div> 
         	</div>
         </div>              
     </section>

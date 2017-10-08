@@ -39,6 +39,9 @@ public class MySqlEventoDAO implements EventoDAO {
 				a.setGratuito(rs.getBoolean(6));
 				a.setPrecio(rs.getDouble(7));
 				a.setEstado(rs.getInt(8));
+				a.setLugar(rs.getString(9));
+				a.setLatitud(rs.getString(10));
+				a.setLongitud(rs.getString(11));
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -80,6 +83,9 @@ public class MySqlEventoDAO implements EventoDAO {
 				a.setGratuito(rs.getBoolean(6));
 				a.setPrecio(rs.getDouble(7));
 				a.setEstado(rs.getInt(8));
+				a.setLugar(rs.getString(9));
+				a.setLatitud(rs.getString(10));
+				a.setLongitud(rs.getString(11));
 				List<ModalidadDTO> mod = modalidad.buscarModalidadEvento(a.getCodigo());
 				a.setModalidades(mod);
 			}
@@ -107,7 +113,7 @@ public class MySqlEventoDAO implements EventoDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "INSERT INTO evento VALUES (null,? ,? ,? ,? ,? ,? ,? , NOW())";
+			String sql = "INSERT INTO evento VALUES (null,? ,? ,? ,? ,? ,? ,? , ?, null, null, NOW())";
 			pstm = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDescripcion());
@@ -116,6 +122,7 @@ public class MySqlEventoDAO implements EventoDAO {
 			pstm.setBoolean(5, obj.getGratuito());
 			pstm.setDouble(6, obj.getPrecio());
 			pstm.setInt(7, obj.getEstado());
+			pstm.setString(8, obj.getLugar());
 			estado = pstm.executeUpdate();
 			
 			ResultSet rs = pstm.getGeneratedKeys();

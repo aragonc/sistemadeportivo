@@ -72,8 +72,13 @@ public class ServletEvento extends HttpServlet {
 		 listar(request, response);
 	}
 
-	private void buscar(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void buscar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String dato = request.getParameter("cod");
+		int codigo = Integer.parseInt(dato);
+		EventoDTO obj = eventoService.buscarEvento(codigo);
+		request.setAttribute("registro", obj);
+		request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request,
+				response);
 		
 	}
 
@@ -107,8 +112,58 @@ public class ServletEvento extends HttpServlet {
 				response);
 	}
     
-	private void actualizar(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void actualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		EventoDTO obj = new EventoDTO();
+		String nombre = request.getParameter("nombre");
+		String descripcion = request.getParameter("descripcion");
+		String fechainicio = request.getParameter("fechainicio");
+		String fechafin = request.getParameter("fechafin");
+		String costo = request.getParameter("costo");
+		String lugar = request.getParameter("lugar");
+		String gratuito = request.getParameter("gratuito");
+		String estado = request.getParameter("estado");
+		String cod = request.getParameter("codigo");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		
+		if(fechainicio!=null && !fechainicio.trim().equals("")){
+			Date dateinicio = null;
+			try {
+				dateinicio = sdf.parse(fechainicio);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			obj.setFechaInicio(dateinicio);
+		}
+		
+		if(fechafin!=null && !fechafin.trim().equals("")){
+			Date datefin = null;
+			try {
+				datefin = sdf.parse(fechafin);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			obj.setFechaFin(datefin);
+		}
+		obj.setCodigo(Integer.parseInt(cod));
+		obj.setNombre(nombre);
+		obj.setDescripcion(descripcion);
+		obj.setGratuito(Boolean.parseBoolean(gratuito));
+		obj.setPrecio(Double.parseDouble(costo));
+		obj.setEstado(Integer.parseInt(estado));
+		obj.setLugar(lugar);
+		
+		int resultado = eventoService.actualizarEvento(obj);
+		if (resultado != -1){
+			request.setAttribute("nomevento", obj.getNombre());
+			request.setAttribute("codevento", resultado+"");
+			listaModalidad(request, response);
+		}else{
+			response.sendRedirect("error.html");
+		}
 		
 	}
 
@@ -126,6 +181,7 @@ public class ServletEvento extends HttpServlet {
 		String fechainicio = request.getParameter("fechainicio");
 		String fechafin = request.getParameter("fechafin");
 		String costo = request.getParameter("costo");
+		String lugar = request.getParameter("lugar");
 		String gratuito = request.getParameter("gratuito");
 		String estado = request.getParameter("estado");
 		
@@ -164,6 +220,7 @@ public class ServletEvento extends HttpServlet {
 		obj.setGratuito(Boolean.parseBoolean(gratuito));
 		obj.setPrecio(Double.parseDouble(costo));
 		obj.setEstado(Integer.parseInt(estado));
+		obj.setLugar(lugar);
 		
 		int resultado = eventoService.registrarEvento(obj);
 		if (resultado != -1){

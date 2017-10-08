@@ -58,7 +58,18 @@
 						</div>
 					</div>
             	</div>
-            	
+            	<div class="col-md-2 col-xs-6">
+					<div class="app-tools">
+						<div class="icon">
+							<a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar">
+								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/001-games.png">
+							</a>
+						</div>
+						<div class="name">
+							<a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar">Mis Eventos</a>
+						</div>
+					</div>
+            	</div>
             	<div class="col-md-2 col-xs-6">
 					<div class="app-tools">
 						<div class="icon">
@@ -85,18 +96,7 @@
 					</div>
             	</div>
             	
-            	<div class="col-md-2 col-xs-6">
-					<div class="app-tools">
-						<div class="icon">
-							<a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar">
-								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/001-games.png">
-							</a>
-						</div>
-						<div class="name">
-							<a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar">Mis Eventos</a>
-						</div>
-					</div>
-            	</div>
+            	
            	</div>
        	</div>
     </section>

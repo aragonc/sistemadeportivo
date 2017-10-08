@@ -1,10 +1,14 @@
-
+<%@page import="beans.EventoDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <jsp:include page="../_header.jsp" flush="true" />
  <jsp:include page="../_sidebar.jsp" flush="true" />
-
+<%
+	EventoDTO obj = (EventoDTO)request.getAttribute("registro");
+%>
+  <c:set var="estado" value="<%= obj.getEstado() %>"/>
   <div class="content-wrapper">
     <section class="content-header">
       <h1>Eventos</h1> 
@@ -12,27 +16,30 @@
     <section class="content">
     	<div class="box box-primary">
     		<div class="box-header with-border">
-              <h3 class="box-title">Añadir un nuevo evento a la agenda</h3>
+              <h3 class="box-title">Actualizar evento</h3>
             </div>
         	<div class="box-body">
             	<div class="col-md-9">
-					<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletEvento?tipo=registrar" method="post" id="frmevento">
+					<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletEvento?tipo=actualizar" method="post" id="frmevento">
+						<input type="hidden" name="codigo" value="<%= obj.getCodigo() %>">
 						<div class="form-group">
 	                         <label for="nombre" class="col-sm-2 control-label">Titulo del Evento</label>
 	                         <div class="col-sm-10">
-	                           <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Escribe titulo del evento">
+	                           <input type="text" id="nombre" name="nombre" value="<%= obj.getNombre() %>" class="form-control" placeholder="Escribe titulo del evento">
 	                         </div>
 	                    </div>
 	                    <div class="form-group">
 	                         <label for="txthtml" class="col-sm-2 control-label">Descripción</label>
 	                         <div class="col-sm-10">
-	                         	<textarea class="form-control" id="txthtml" name="descripcion" rows="3"></textarea>
+	                         	<textarea class="form-control" id="txthtml" name="descripcion" rows="2">
+	                         		<%= obj.getDescripcion() %>
+	                         	</textarea>
 	                         </div>
 	                    </div>
 	                    <div class="form-group">
 	                         <label for="txthtml" class="col-sm-2 control-label">Lugar del Evento</label>
 	                         <div class="col-sm-10">
-	                         	<input type="text" id="lugar" name="lugar" class="form-control" placeholder="Escribe la dirección del evento">
+	                         	<input type="text" id="lugar" value="<%= obj.getLugar() %>" name="lugar" class="form-control" placeholder="Escribe la dirección del evento">
 	                         </div>
 	                    </div>
 	                    <div class="row">
@@ -44,7 +51,7 @@
 						                  <div class="input-group-addon">
 						                    <i class="fa fa-calendar"></i>
 						                  </div>
-						                  <input type="text" class="form-control datefechahora pull-right" id="fechainicio" name="fechainicio">
+						                  <input type="text" class="form-control datefechahora pull-right" id="fechainicio" value="<%= obj.getFechaInicio() %>" name="fechainicio">
 						                </div>
 	                    			</div>
 	                    		</div>
@@ -57,7 +64,7 @@
 						                  <div class="input-group-addon">
 						                    <i class="fa fa-calendar"></i>
 						                  </div>
-						                  <input type="text" class="form-control datefechahora pull-right" id="fechafin"  name="fechafin">
+						                  <input type="text" class="form-control datefechahora pull-right" id="fechafin" value="<%= obj.getFechaFin() %>" name="fechafin">
 						                </div>
 	                    			</div>
 	                    		</div>
@@ -68,7 +75,7 @@
 	                    		<div class="form-group">
 	                    			<label for="costo" class="col-sm-4 control-label">Costo S/.</label>
 	                    			<div class="col-sm-8">
-	                    				<input type="text" id="txtcosto" name="costo" class="form-control" placeholder="Ingrese costo S/.">
+	                    				<input type="text" id="txtcosto" name="costo" class="form-control" value="<%= obj.getPrecio() %>" placeholder="Ingrese costo S/.">
 	                    				<div class="checkbox">
 										  <label>
 										    <input id="gratuito" name="gratuito" type="checkbox" value="1" checked="checked">
@@ -84,8 +91,8 @@
 								    <label for="estado" class="col-sm-4 control-label">Estado:</label>
 								    <div class="col-sm-8">
 								      <select class="form-control" name="estado">
-					                    <option value="1">Activo</option>
-					                    <option value="2">Inactivo</option>
+					                    	<option value="1" ${estado == 1 ? 'selected' : ''}>Activo</option>
+                                   			<option value="2" ${estado == 2 ? 'selected' : ''}>Inactivo</option>
 					                  </select>
 								    </div>
 								</div>
@@ -95,7 +102,7 @@
                         
                         <div class="box-footer">
 							<a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver a lista </a>
-		                	<button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar evento</button>
+		                	<button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Actualizar evento</button>
 		              	</div>
 					</form>
                   </div>

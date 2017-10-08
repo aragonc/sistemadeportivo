@@ -13,6 +13,9 @@ public class EventoDTO {
 	private double precio;
 	private boolean gratuito;
 	private List<ModalidadDTO> modalidades;
+	private String lugar;
+	private String longitud;
+	private String latitud;
 	
 	public int getCodigo() {
 		return codigo;
@@ -63,17 +66,34 @@ public class EventoDTO {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
 	public boolean getGratuito() {
 		return gratuito;
 	}
 	public void setGratuito(boolean gratuito) {
 		this.gratuito = gratuito;
 	}
-	
-	
+	public String getLugar() {
+		return lugar;
+	}
+	public void setLugar(String lugar) {
+		this.lugar = lugar;
+	}
+	public String getLongitud() {
+		return longitud;
+	}
+	public void setLongitud(String longitud) {
+		this.longitud = longitud;
+	}
+	public String getLatitud() {
+		return latitud;
+	}
+	public void setLatitud(String latitud) {
+		this.latitud = latitud;
+	}
+
 	public EventoDTO(int codigo, String nombre, String descripcion, Date fechaInicio, Date fechaFin, int estado,
-			double precio, boolean gratuito, List<ModalidadDTO> modalidades) {
+			double precio, boolean gratuito, List<ModalidadDTO> modalidades, String lugar, String longitud,
+			String latitud) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -84,7 +104,11 @@ public class EventoDTO {
 		this.precio = precio;
 		this.gratuito = gratuito;
 		this.modalidades = modalidades;
+		this.lugar = lugar;
+		this.longitud = longitud;
+		this.latitud = latitud;
 	}
+	
 	public EventoDTO() {
 		super();
 		// TODO Auto-generated constructor stub

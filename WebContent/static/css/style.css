@@ -106,3 +106,11 @@
 	border-top: 1px solid #CCCCCC !important;
 	border-bottom: 2px solid #CCCCCC;
 }
+.detalle .panel-default {
+    border-color: #ECF0F1;
+}
+.detalle .panel-default .panel-heading {
+    color: #2c3e50;
+    background-color: #ECF0F1;
+    border-color: #ECF0F1;
+}
