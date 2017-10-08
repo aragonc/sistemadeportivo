@@ -63,8 +63,9 @@
 			        	
 			       	</div>
 			       	
-			       	<form action="" id="form-lista">
+			       	<form action="${pageContext.request.contextPath}/ServletEvento?tipo=suscribirModalidad" method="post" id="formlista">
 			        <div class="box-body table-responsive no-padding">
+			        	<input type="hidden" name="codevento" value="<%= codigoEvento %>">
 				        <display:table class="table table-bordered table-hover"  name="data" requestURI="../ServletModalidad?tipo=listar"	id="lista">
 			                <display:column title="Item" sortable="false" media="html" >
 							    	<input type="checkbox" name="modalidad[]" value="${lista.codigo}">
@@ -74,31 +75,38 @@
 			                <display:column property="descripcion" title="Descripcion" />
 			                <display:column  title="Acciones" sortable="false">
 				               	<div class="text-center">
-				               		
-				               			<a class="btn btn-primary" href="ServletEvento?tipo=suscribirModalidad&codevento=<%= codigoEvento %>&codmodalidad=${lista.codigo}"><i class="fa fa-plus" aria-hidden="true"></i>
-				               			 Agregar</a>
-				               		
+				               		<a class="btn btn-primary" href="ServletEvento?tipo=suscribirModalidad&codevento=<%= codigoEvento %>&modalidad[]=${lista.codigo}"><i class="fa fa-plus" aria-hidden="true"></i>
+				               			Agregar
+				               		</a>
 				               	</div>
-			                  
+
 				            </display:column>
 				        </display:table>
 			         </div>
-			         </form>
 			         <div class="btn-toolbar">
 			         	<div class="btn-group">
 			         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(true, 'lista'); return false;">Seleccionar todos</a>
 			         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(false, 'lista'); return false;">Anular selección</a>
 			         	</div>
+			         	
+			         	
 			         	<div class="btn-group">
 						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						    Acciones <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu">
-						    <li><a href="#">Agregar seleccionadas</a></li>
+						    <li><a href="#" id="seleccion">Agregar seleccionadas</a></li>
 						    
 						  </ul>
+						  <script type="text/javascript">
+						  	document.getElementById("seleccion").onclick = function() {
+							    document.getElementById("formlista").submit();
+							}
+						  </script>
 						</div>
+						
 			         </div>
+			         </form>
 	     	 	</div>
            		<div class="col-md-3">
                  

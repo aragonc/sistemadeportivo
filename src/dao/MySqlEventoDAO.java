@@ -10,7 +10,6 @@ import com.mysql.jdbc.Statement;
 
 import beans.EventoDTO;
 import beans.ModalidadDTO;
-import beans.PersonaDTO;
 import interfaces.EventoDAO;
 import service.ModalidadService;
 import utils.MysqlDBConexion;

@@ -52,23 +52,38 @@ public class ServletEvento extends HttpServlet {
 			listaModalidad(request, response);
 		else if (tipo.equals("suscribirModalidad"))
 			suscribirModalidad(request, response);
+		else if (tipo.equals("multipleModalidad"))
+			multipleModalidad(request, response);
+		
 	}
 	
-	 private void detalle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String dato = request.getParameter("cod");
-			int codigo = Integer.parseInt(dato);
-			EventoDTO obj = eventoService.buscarEvento(codigo);
-			request.setAttribute("registro", obj);
-			request.getRequestDispatcher("app/evento/detalle_evento.jsp").forward(request,
-					response);
+	 private void multipleModalidad(HttpServletRequest request, HttpServletResponse response) {
+		 String codevento = request.getParameter("codevento");
+		 String codmodalidad = request.getParameter("modalidad[]");
+		 
+		 System.out.println(codevento);
+		 System.out.println(codmodalidad);
+		
+	}
+
+	private void detalle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String dato = request.getParameter("cod");
+		int codigo = Integer.parseInt(dato);
+		EventoDTO obj = eventoService.buscarEvento(codigo);
+		request.setAttribute("registro", obj);
+		request.getRequestDispatcher("app/evento/detalle_evento.jsp").forward(request,
+				response);
 		
 	}
 
 	private void suscribirModalidad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 String codevento = request.getParameter("codevento");
-		 String codmodalidad = request.getParameter("codmodalidad");
+		 String[] codmodalidad = request.getParameterValues("modalidad[]");
 		 
-		 eventoService.agregarModalidad(Integer.parseInt(codevento), Integer.parseInt(codmodalidad));
+		 for(String item : codmodalidad){
+			 eventoService.agregarModalidad(Integer.parseInt(codevento), Integer.parseInt(item));
+		 }
+
 		 listar(request, response);
 	}
 
