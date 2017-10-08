@@ -29,7 +29,7 @@
 	              <h3 class="box-title">Listado de personas</h3>
 	        </div>
         	<div class="box-body">
-            	<div class="col-md-9">
+            	<div class="col-md-12">
             		<div class="toolbar-actions">
             			<div class="row">
             				<div class="col-md-3">
@@ -55,53 +55,67 @@
 									</form>
 	            				</div>
             				</div>
-            				
             			</div>
-			        	
 			       	</div>
-            	
-					
 		              <div class="box-body">
-		              	<form class="form-horizontal">
+		              	<form class="form-horizontal" action="ServletPersona?tipo=eliminar" method="post" id="formlista">
 		               		<div class="table-responsive">
-		               		<display:table name="data" class="table table-bordered" requestURI="ServletPersona?tipo=listar" excludedParams="tipo" id="lista">
-		               		 			<display:setProperty name="basic.msg.empty_list" value="<strong>No se encontraron datos</strong>" />   
-		               		 					   	               		 					   
-		               		 					               		 				               		 			
-		               		 			<display:column title="Item" sortable="true"  >
-		               		 				
-											    <input type="checkbox" name="people[]" value="${lista.codigo}">
-											
-		               		 			</display:column>
-		               		 			<display:column property="codigo" title="Codigo" sortable="false"/>
-										<display:column property="nombre" title="Nombres" sortable="false"/>
-										<display:column property="apaterno" title="Apellido Paterno" sortable="false"/>
-										<display:column property="amaterno" title="Apellido Materno" sortable="false"/>
-										<display:column property="email" title="Email" sortable="false"/>	
-										<display:column title="Sexo" sortable="false">
-											${lista.sexo == 'M' ? '<span> Masculino </span>' : '<span> Femenino </span>'}
-										</display:column>
-										<display:column  title="Estado" sortable="false">
-											${lista.estado == 1 ? '<span class="label label-success"> Activo </span>' : '<span class="label label-danger"> Inactivo </span>'}
-										</display:column>
-										<display:column title="Acciones" sortable="false" media="html" >
-										
-											<div class="btn-group btn-group-sm" role="group">
-												<a class="btn btn-default" title="Actualizar" href="ServletPersona?tipo=buscar&cod=${lista.codigo}">
-													<i class="fa fa-pencil" aria-hidden="true"></i>
-												</a>
-												<a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" class="btn btn-default" title="Eliminar" href="ServletPersona?tipo=eliminar&cod=${lista.codigo}">
-													<i class="fa fa-trash" aria-hidden="true"></i>
-												</a>
-											</div>
-										</display:column>
+		               			<display:table name="data" class="table table-bordered" requestURI="ServletPersona?tipo=listar" excludedParams="tipo" id="lista">
+	               		 			<display:setProperty name="basic.msg.empty_list">
+	               		 				<div class="alert alert-warning" role="alert">No se existe personas registradas</div>
+	               		 			</display:setProperty>                  		 				               		 			
+	               		 			<display:column title="Item" sortable="false"  >
+										<input type="checkbox" name="cod[]" value="${lista.codigo}">
+	               		 			</display:column>
+									<display:column property="nombre" title="Nombres" sortable="false"/>
+									<display:column property="apaterno" title="Apellido Paterno" sortable="false"/>
+									<display:column property="amaterno" title="Apellido Materno" sortable="false"/>
+									<display:column property="email" title="Email" sortable="false"/>	
+									<display:column title="Sexo" sortable="false">
+										${lista.sexo == 'M' ? '<span> Masculino </span>' : '<span> Femenino </span>'}
+									</display:column>
+									<display:column  title="Estado" sortable="false">
+										${lista.estado == 1 ? '<span class="label label-success"> Activo </span>' : '<span class="label label-danger"> Inactivo </span>'}
+									</display:column>
+									<display:column title="Acciones" sortable="false" media="html" >
+										<div class="btn-group btn-group-sm" role="group">
+											<a class="btn btn-default" title="Actualizar" href="ServletPersona?tipo=buscar&cod=${lista.codigo}">
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+											</a>
+											<a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" class="btn btn-default" title="Eliminar" href="ServletPersona?tipo=eliminar&cod[]=${lista.codigo}">
+												<i class="fa fa-trash" aria-hidden="true"></i>
+											</a>
+										</div>
+									</display:column>
 								</display:table>
-		               		
 		              		 </div>
+		              		 <div class="btn-toolbar">
+					         	<div class="btn-group">
+					         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(true, 'lista'); return false;">Seleccionar todos</a>
+					         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(false, 'lista'); return false;">Anular selección</a>
+					         	</div>
+					         	<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    Acciones <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu">
+								    <li><a href="#" id="seleccion">Eliminar</a></li>
+								  </ul>
+								  <script type="text/javascript">
+								  	document.getElementById("seleccion").onclick = function() {
+								  		if(confirm('Por favor, confirme su elección')){
+								  			document.getElementById("formlista").submit();
+								  		} else {
+								  			false;
+								  		}  
+									}
+								  </script>
+								</div>
+			         		</div>
 		              	</form>
 		              </div>
             		</div>
-                  <div class="col-md-3"></div>  
+                  
                </div>
              </div>
     </section>

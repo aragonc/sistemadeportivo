@@ -15,5 +15,7 @@ public interface EventoDAO {
 	
 	public int eliminarEvento(int cod);
 	
+	public int eliminarEventoModalidad(int cod);
+	
 	public int agregarModalidad(int codEvento, int codModalidad);
 }

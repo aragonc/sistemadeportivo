@@ -105,10 +105,15 @@ public class ServletEvento extends HttpServlet {
 	}
 
 	private void eliminar(HttpServletRequest request,
-				HttpServletResponse response) throws ServletException, IOException {
-			String dato = request.getParameter("cod");
-			int codigo = Integer.parseInt(dato);
-			eventoService.eliminarEvento(codigo);
+			HttpServletResponse response) throws ServletException, IOException {
+			String[] dato = request.getParameterValues("cod[]");
+			
+			for(String item : dato){
+				
+				eventoService.eliminarEventoModalidad(Integer.parseInt(item));
+				eventoService.eliminarEvento(Integer.parseInt(item));
+			}
+			
 			request.getRequestDispatcher("ServletEvento?tipo=listar").forward(request,
 					response);
 		}
@@ -116,6 +121,7 @@ public class ServletEvento extends HttpServlet {
     private void listar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<EventoDTO> info = eventoService.listarEvento();
+		
 		request.setAttribute("data", info);
 		request.getRequestDispatcher("app/evento/listar_evento.jsp").forward(request,
 				response);

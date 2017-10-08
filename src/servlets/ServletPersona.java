@@ -47,9 +47,11 @@ public class ServletPersona extends HttpServlet {
 	 
 	 private void eliminar(HttpServletRequest request,
 				HttpServletResponse response) throws ServletException, IOException {
-			String dato = request.getParameter("cod");
-			int codigo = Integer.parseInt(dato);
-			personaService.eliminarPersona(codigo);
+			String[] dato = request.getParameterValues("cod[]");
+			for(String item: dato){
+				int codigo = Integer.parseInt(item);
+				personaService.eliminarPersona(codigo);
+			}
 			request.getRequestDispatcher("ServletPersona?tipo=listar").forward(request,
 					response);
 		}

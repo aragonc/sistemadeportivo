@@ -88,8 +88,6 @@
 			         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(true, 'lista'); return false;">Seleccionar todos</a>
 			         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(false, 'lista'); return false;">Anular selección</a>
 			         	</div>
-			         	
-			         	
 			         	<div class="btn-group">
 						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						    Acciones <span class="caret"></span>
@@ -104,7 +102,6 @@
 							}
 						  </script>
 						</div>
-						
 			         </div>
 			         </form>
 	     	 	</div>

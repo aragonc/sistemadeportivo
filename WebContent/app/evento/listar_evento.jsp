@@ -1,13 +1,12 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="beans.EventoDTO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="beans.PersonaDTO"%>
 <%@page import="java.util.List"%>
-<% String xnombre = (String)request.getAttribute("nomevento"); %>
-<% String xcodigo = (String)request.getAttribute("codevento"); %>
 
  <jsp:include page="../_header.jsp" flush="true" />
  <jsp:include page="../_sidebar.jsp" flush="true" />
@@ -49,19 +48,12 @@
 			       	</div>
 					
 		              <div class="box-body">
-		              <% if(xnombre!=null) { %>
-		              	<div class="alert alert-success" role="alert">
-		              		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		              		Acabas de crear el evento <span class="valor"><%= xnombre %></span> sin modalidades de juego <a href="#cod?<%= xcodigo %>" class="btn btn-success">¿Deseas agregar modalidades?</a>
-		              	</div>
-		              <% } %>
-		              	<form class="form-horizontal">
+		              	
+		              	<form class="form-horizontal" action="ServletEvento?tipo=eliminar" method="post" id="formlista">
 		               		<div class="table-responsive">
 		               			<display:table name="data" class="table table-bordered table-hover" pagesize="15" requestURI="ServletEvento?tipo=listar" excludedParams="tipo" id="lista">
 		               		 			<display:column title="Item" sortable="false" media="html" >
-		               		 				
-											    <input type="checkbox" name="evento[]" value="${lista.codigo}">
-											
+											<input type="checkbox" name="cod[]" value="${lista.codigo}">
 		               		 			</display:column>
 		               		 			
 										<display:column property="nombre" title="Titulo Evento" sortable="false"/>
@@ -83,14 +75,38 @@
 												<a class="btn btn-default" title="Detalle" href="ServletEvento?tipo=detalle&cod=${lista.codigo}">
 													<i class="fa fa-info-circle" aria-hidden="true"></i>
 												</a>
-												<a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" class="btn btn-default" title="Eliminar" href="ServletEvento?tipo=eliminar&cod=${lista.codigo}">
+												<a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" class="btn btn-default" title="Eliminar" href="ServletEvento?tipo=eliminar&cod[]=${lista.codigo}">
 													<i class="fa fa-trash" aria-hidden="true"></i>
 												</a>
 											</div>
 										</display:column>
 								</display:table>
 		              		</div>
+		              		<div class="btn-toolbar">
+					         	<div class="btn-group">
+					         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(true, 'lista'); return false;">Seleccionar todos</a>
+					         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(false, 'lista'); return false;">Anular selección</a>
+					         	</div>
+					         	<div class="btn-group">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    Acciones <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu">
+								    <li><a href="#" id="seleccion">Eliminar</a></li>
+								  </ul>
+								  <script type="text/javascript">
+								  	document.getElementById("seleccion").onclick = function() {
+								  		if(confirm('Por favor, confirme su elección')){
+								  			document.getElementById("formlista").submit();
+								  		} else {
+								  			false;
+								  		}  
+									}
+								  </script>
+								</div>
+			         		</div>
 		              	</form>
+		              	
 		              </div>
             		</div>
                   

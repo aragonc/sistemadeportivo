@@ -177,7 +177,30 @@ public class MySqlEventoDAO implements EventoDAO {
 		}
 		return estado;
 	}
-
+	public int eliminarEventoModalidad(int cod){
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "DELETE FROM evento_modalidad WHERE evento_idevento = ? ";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, cod);
+			estado = pstm.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return estado;
+	}
 	@Override
 	public int eliminarEvento(int cod) {
 		int estado = -1;
@@ -185,7 +208,7 @@ public class MySqlEventoDAO implements EventoDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "delete from evento where idevento=?";
+			String sql = "DELETE FROM evento where idevento=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
 			estado = pstm.executeUpdate();
