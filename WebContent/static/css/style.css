@@ -114,3 +114,33 @@
     background-color: #ECF0F1;
     border-color: #ECF0F1;
 }
+.skin-blue .main-header .navbar {
+	background-color: #94BE1F;
+}
+.skin-blue .main-header .logo {
+	background-color: #065021;
+	color: #fff;
+	border-bottom: 0 solid transparent;
+}
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+	background-color: #065021;
+}
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {
+	background-color: #204556;
+}
+.skin-blue .sidebar-menu > li > a {
+	border-left: 3px solid transparent;
+	border-bottom: 1px solid #1A3847;
+}
+.skin-blue .sidebar-menu > li.header {
+	color: #FFF;
+	background: #1072a4;
+	font-weight: bold;
+	font-size: 13px;
+}
+.skin-blue .sidebar a {
+	color: #fff;
+}
+.box.box-primary {
+	border-top-color: #94be1f;
+}

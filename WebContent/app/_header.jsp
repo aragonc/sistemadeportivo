@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/AdminLTE.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css">
+  <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/favicon.png" />
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -39,7 +40,9 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>S</b>D</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Sistema</b>Deportivo</span>
+      <span class="logo-lg">
+      	<img alt="Sistema de gestión de campeonato" src="${pageContext.request.contextPath}/images/logoapp.svg">
+      </span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
