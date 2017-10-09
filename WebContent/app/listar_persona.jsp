@@ -20,7 +20,7 @@
    <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Listar Personas
+        Personas
       </h1>
     </section>
     <section class="content">
