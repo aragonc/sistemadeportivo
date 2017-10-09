@@ -9,10 +9,16 @@ import com.mysql.jdbc.Statement;
 
 import java.sql.Connection;
 import beans.EquipoDTO;
+import beans.PersonaDTO;
 import interfaces.EquipoDAO;
+import service.ModalidadService;
+import service.PersonaService;
 import utils.MysqlDBConexion;
 
 public class MySqlEquipoDAO implements EquipoDAO{
+	
+	ModalidadService modalidad = new ModalidadService();
+	PersonaService persona = new PersonaService();
 
 	@Override
 	public List<EquipoDTO> listarEquipo() {
@@ -73,13 +79,15 @@ public class MySqlEquipoDAO implements EquipoDAO{
 				a = new EquipoDTO();
 				a.setCodigo(rs.getInt(1));
 				a.setNombre(rs.getString(2));
-				a.setLogo(rs.getString(3));
-				a.setEmail(rs.getString(4));
-				a.setFono(rs.getString(5));
-				a.setColor(rs.getString(6));
-				a.setCodigo(rs.getInt(7));
-				a.setEstado(rs.getInt(8));	
-				
+				a.setDescripcion(rs.getString(3));
+				a.setLogo(rs.getString(4));
+				a.setEmail(rs.getString(5));
+				a.setFono(rs.getString(6));
+				a.setColor(rs.getString(7));
+				a.setCodModalidad(rs.getInt(8));
+				a.setEstado(rs.getInt(9));	
+				List<PersonaDTO> people = persona.buscarPersonaEquipo(a.getCodigo());
+				a.setJugadores(people);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -17,5 +17,7 @@ public interface PersonaDAO {
 	public int eliminarPersona(int cod);
 	
 	public List<PersonaDTO> listarPersona(PersonaDTO personaDTO);
+	
+	public List<PersonaDTO> buscarPersonaEquipo(int equipo);
 
 }

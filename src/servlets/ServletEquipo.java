@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import beans.EquipoDTO;
+import beans.EventoDTO;
 import beans.PersonaDTO;
 import service.EquipoService;
 import service.PersonaService;
@@ -42,8 +43,20 @@ public class ServletEquipo extends HttpServlet{
 			listaPersona(request, response);
 		else if (tipo.equals("suscribirPersona"))
 			suscribirPersona(request, response);
+		else if (tipo.equals("detalle"))
+			detalle(request, response);
 		
 	}
+	private void detalle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String dato = request.getParameter("cod");
+		int codigo = Integer.parseInt(dato);
+		EquipoDTO obj = equipoService.buscarEquipo(codigo);
+		request.setAttribute("registro", obj);
+		request.getRequestDispatcher("app/equipo/detalle_equipo.jsp").forward(request,
+				response);
+		
+	}
+
 	private void suscribirPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 String codequipo = request.getParameter("evento");
 		 String[] codjugador = request.getParameterValues("jugador[]");
