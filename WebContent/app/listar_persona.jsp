@@ -70,9 +70,11 @@
 									<display:column title="Apellidos y Nombres" sortable="false">
 	               		 				${lista.apaterno} ${lista.amaterno} , ${lista.nombre}
 	               		 			</display:column>
-									<display:column property="email" title="Email" sortable="false"/>	
+									<display:column property="email" title="Email" sortable="false"/>
+									<display:column property="numdocumento" title="N° Documento" sortable="false"/>
+									<display:column property="fnacimiento" title="Fecha Nacimiento" sortable="false"/>	
 									<display:column title="Sexo" sortable="false">
-										${lista.sexo == 'M' ? '<span> Masculino </span>' : '<span> Femenino </span>'}
+										${lista.sexo == '1' ? '<span> Masculino </span>' : '<span> Femenino </span>'}
 									</display:column>
 									<display:column  title="Estado" sortable="false">
 										${lista.estado == 1 ? '<span class="label label-success"> Activo </span>' : '<span class="label label-danger"> Inactivo </span>'}

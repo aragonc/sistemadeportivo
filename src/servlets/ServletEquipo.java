@@ -116,6 +116,7 @@ public class ServletEquipo extends HttpServlet{
 		obj.setDescripcion(descripcion);
 				
 		int codequipo = equipoService.registrarEquipo(obj);
+		System.out.println("Equipo: " + codequipo);
 		if (codequipo != -1){
 			//Para agregar al equipo al evento a participar
 			equipoService.agregarEquipoEvento(codequipo, obj.getCodEvento());
