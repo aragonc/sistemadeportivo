@@ -25,16 +25,16 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-			                         <label for="nombre" class="col-sm-3 control-label">Nombre del Equipo</label>
-			                         <div class="col-sm-9">
+			                         <label for="nombre" class="col-sm-4 control-label">Nombre del Equipo</label>
+			                         <div class="col-sm-8">
 			                           <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Escribe nombre del equipo">
 			                         </div>
 			                    </div>
 							</div>
 							<div class="col-md-6">
 		                    		<div class="form-group">
-		                    			<label for="email" class="col-sm-3 control-label">Email</label>
-		                    			<div class="col-sm-9">
+		                    			<label for="email" class="col-sm-4 control-label">Email</label>
+		                    			<div class="col-sm-8">
 		                    				<div class="input-group">
 		                    					<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 		                    					<input type="text" name="email" id="email" class="form-control" placeholder="Escriba el email de contacto del equipo">
@@ -47,8 +47,8 @@
 	                    <div class="row">
 	                    	<div class="col-md-6">
 	                    		<div class="form-group">
-			                         <label for="evento" class="col-sm-3 control-label">Evento</label>
-			                         <div class="col-sm-9">
+			                         <label for="evento" class="col-sm-4 control-label">Evento</label>
+			                         <div class="col-sm-8">
 			                           	<select id="listaevento" name="evento" class="form-control">
 			                           		<option value="0">-- Seleccione --</option>
 							                    <%
@@ -64,8 +64,8 @@
 	                    	</div>
 	                    	<div class="col-md-6">
 	                    		<div class="form-group">
-			                         <label for="evento" class="col-sm-3 control-label">Modalidad</label>
-			                         <div class="col-sm-9">
+			                         <label for="evento" class="col-sm-4 control-label">Modalidad</label>
+			                         <div class="col-sm-8">
 			                           	<select id="listamodalidad" name="modalidad" class="form-control">
 			                           		<option selected="selected">-- Seleccionar molalidad --</option>
 			                           	</select>
@@ -73,11 +73,17 @@
 	                    		</div>
 	                    	</div>
 	                    </div>
+	                    <div class="form-group">
+	                         <label for="txthtml" class="col-sm-2 control-label">Descripción</label>
+	                         <div class="col-sm-10">
+	                         	<textarea class="form-control" id="txthtml" name="descripcion" rows="3"></textarea>
+	                         </div>
+	                    </div>
 	                    <div class="row">
 	                 		<div class="col-md-6">
 	                 			<div class="form-group">
-	                    			<label for="fono" class="col-sm-3 control-label">Télefono</label>
-	                    			<div class="col-sm-9">
+	                    			<label for="fono" class="col-sm-4 control-label">Télefono</label>
+	                    			<div class="col-sm-8">
 	                    				<div class="input-group">
 	                    					<span class="input-group-addon"><i class="fa fa-mobile" aria-hidden="true"></i></span>
 	                    					<input type="text" id="fono" name="fono" class="form-control" placeholder="Escriba el télefono de contacto del equipo">
@@ -87,8 +93,8 @@
 	                 		</div>   
 	                 		<div class="col-md-6">
 	                 			<div class="form-group">
-	                    			<label for="color" class="col-sm-3 control-label">Color</label>
-	                    			<div class="col-sm-9">
+	                    			<label for="color" class="col-sm-4 control-label">Color</label>
+	                    			<div class="col-sm-8">
 	                    				<input type="text" id="color" name="color" class="form-control" placeholder="Escriba el color uniforme del equipo">
 	                    			</div>
 	                    		</div>
@@ -98,8 +104,8 @@
 	                    	<div class="col-md-6">
 	                    		
 	                    		<div class="form-group">
-								    <label for="estado" class="col-sm-3 control-label">Estado:</label>
-								    <div class="col-sm-9">
+								    <label for="estado" class="col-sm-4 control-label">Estado:</label>
+								    <div class="col-sm-8">
 								      <select class="form-control" name="estado">
 					                    <option value="1">Activo</option>
 					                    <option value="2">Inactivo</option>
@@ -109,8 +115,8 @@
 	                    	</div>
 	                    	<div class="col-md-6">
 	                    		<div class="form-group">
-		                           <label class="col-sm-3 control-label">Logotipo</label>
-		                           <div class="col-sm-4">
+		                           <label class="col-sm-4 control-label">Logotipo</label>
+		                           <div class="col-sm-8">
 		                             <input type="file" id="logotipo" name="logotipo" accept=".jpg, .jpeg, .png">
 		                           </div>
 		                        </div>

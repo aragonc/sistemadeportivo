@@ -63,8 +63,9 @@
 											<input type="checkbox" name="cod[]" value="${lista.codigo}">
 	               		 				</display:column>
 										<display:column property="nombre" title="Nombre Equipo" sortable="false"/>
+										<display:column property="descripcion" title="Descripción" sortable="false" style="width:30%"/>
 										<display:column property="email" title="Email" sortable="false"/>
-										<display:column title="Telefono Contacto" sortable="false">
+										<display:column title="Telefono" sortable="false">
 											${lista.fono == '' ? 'No registrado' : lista.fono }
 										</display:column>
 										<display:column property="color" title="Color" sortable="false"/>	

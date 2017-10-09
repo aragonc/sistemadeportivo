@@ -67,9 +67,9 @@
 	               		 			<display:column title="Item" sortable="false"  >
 										<input type="checkbox" name="cod[]" value="${lista.codigo}">
 	               		 			</display:column>
-									<display:column property="nombre" title="Nombres" sortable="false"/>
-									<display:column property="apaterno" title="Apellido Paterno" sortable="false"/>
-									<display:column property="amaterno" title="Apellido Materno" sortable="false"/>
+									<display:column title="Apellidos y Nombres" sortable="false">
+	               		 				${lista.apaterno} ${lista.amaterno} , ${lista.nombre}
+	               		 			</display:column>
 									<display:column property="email" title="Email" sortable="false"/>	
 									<display:column title="Sexo" sortable="false">
 										${lista.sexo == 'M' ? '<span> Masculino </span>' : '<span> Femenino </span>'}

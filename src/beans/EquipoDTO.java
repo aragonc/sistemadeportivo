@@ -16,6 +16,7 @@ public class EquipoDTO {
 	private EventoDTO evento;
 	private int codModalidad;
 	private ModalidadDTO modalidad;
+	private String descripcion;
 	
 	public EquipoDTO() {
 		super();
@@ -116,6 +117,14 @@ public class EquipoDTO {
 
 	public void setEvento(EventoDTO evento) {
 		this.evento = evento;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	
 }

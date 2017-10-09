@@ -59,6 +59,7 @@ public class ServletEquipo extends HttpServlet{
 
 	private void registrar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		EquipoDTO obj = new EquipoDTO();
 		String nombre = request.getParameter("nombre");
 		String logo = request.getParameter("logotipo");
@@ -67,6 +68,7 @@ public class ServletEquipo extends HttpServlet{
 		String evento = request.getParameter("evento");
 		String modalidad = request.getParameter("modalidad");
 		String color = request.getParameter("color");
+		String descripcion = request.getParameter("descripcion");
 		String estado = request.getParameter("estado");
 			
 		obj.setNombre(nombre);
@@ -77,12 +79,13 @@ public class ServletEquipo extends HttpServlet{
 		obj.setCodEvento(Integer.parseInt(evento));
 		obj.setCodModalidad(Integer.parseInt(modalidad));
 		obj.setEstado(Integer.parseInt(estado));
+		obj.setDescripcion(descripcion);
 				
 		int resultado = equipoService.registrarEquipo(obj);
 		if (resultado != -1){
 			request.setAttribute("nomequipo", obj.getNombre());
 			request.setAttribute("codequipo", resultado+"");
-			listar(request, response);
+			listaPersona(request, response);
 		} else {
 			response.sendRedirect("error.html");
 		}
