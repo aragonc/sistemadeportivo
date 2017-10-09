@@ -27,9 +27,12 @@
 				        	<img alt="Crear nueva categoria" title="Crear nueva categoria" src="${pageContext.request.contextPath}/images/icons/32/new_folder.png">
 				        </a>
 			       	</div>
-			        <div class="box-body table-responsive no-padding">
+			       	<form class="form-horizontal" action="ServletCategoria?tipo=eliminar" method="post" id="formlista">
+			        <div class="table-responsive">
 				        <display:table class="table table-bordered table-hover"  name="data" requestURI="../ServletCategoria?tipo=listar"	id="lista">
-			                <display:column property="codigo" title="Codigo" />
+			                <display:column title="Item" sortable="false" media="html" >
+								<input type="checkbox" name="cod[]" value="${lista.codigo}">
+             		 		</display:column>
 			                <display:column property="nombre" title="Nombre" />
 			                <display:column  title="Estado" sortable="false" >
 			                	${lista.estado == 1 ? '<span class="label label-success"> Activo </span>' : '<span class="label label-danger"> Inactivo </span>'}
@@ -41,11 +44,34 @@
 			                    <a href="ServletCategoria?tipo=buscar&cod=${lista.codigo}" class="btn btn-default" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 			                    <a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" href="ServletCategoria?tipo=eliminar&cod=${lista.codigo}" class="btn btn-default" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 			                  </div>
-			               	</div>
-			                  
+			               	</div>    
 				            </display:column>
 				        </display:table>
 			         </div>
+			         <div class="btn-toolbar">
+				         	<div class="btn-group">
+				         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(true, 'lista'); return false;">Seleccionar todos</a>
+				         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(false, 'lista'); return false;">Anular selección</a>
+				         	</div>
+				         	<div class="btn-group">
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    Acciones <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu">
+							    <li><a href="#" id="seleccion">Eliminar de la plataforma</a></li>
+							  </ul>
+							  	<script type="text/javascript">
+									  	document.getElementById("seleccion").onclick = function() {
+									  		if(confirm('Por favor, confirme su elección')){
+									  			document.getElementById("formlista").submit();
+									  		} else {
+									  			false;
+									  		}  
+										}
+								</script>
+							</div>
+			         	</div>
+			         </form>
 	     	 	</div>
            		<div class="col-md-3">
                  

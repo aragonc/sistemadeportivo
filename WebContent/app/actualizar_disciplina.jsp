@@ -18,27 +18,29 @@
                                 <form action="${pageContext.request.contextPath}/ServletDisciplina?tipo=actualizar" class="form-horizontal" id="frmdisciplina" method="post">
                                 <input type="hidden" name="txt_codigo" value="<%= di.getCodigo() %>">
                                   <div class="form-group">
-                                    <label for="txtdisciplina" class="col-sm-3 control-label">Nombre de Disciplina</label>
-                                    <div class="col-sm-9">
+                                    <label for="txtdisciplina" class="col-sm-2 control-label">Nombre de Disciplina</label>
+                                    <div class="col-sm-5">
                                       <input type="text" class="form-control" name="txt_nombre" id="txtdisciplina" placeholder="Escribe nombre de disciplina" value="<%= di.getNombre()%>">
                                     </div>
+                                    <div class="col-sm-5"></div>
                                   </div>
 
                                   <div class="form-group">
-                                    <label class="col-sm-3 control-label">Estado</label>
-                                    <div class="col-sm-9">
+                                    <label class="col-sm-2 control-label">Estado</label>
+                                    <div class="col-sm-5">
                                       <select id="cboestado" name="cbo_estado" class="form-control">
                                             <option value="1" ${estado == 1 ? 'selected' : ''}>Activo</option>
                                    			<option value="2" ${estado == 2 ? 'selected' : ''}>Inactivo</option>
                                           </select>
                                     </div>
+                                    <div class="col-sm-5"></div>
                                   </div>
                                   <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
                                       <a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=listar" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i>
                               	 		Atras
                              			</a>	
-                                      <button type="submit" class="btn btn-primary">
+                                      <button type="submit" class="btn btn-success">
                                       <i class="fa fa-pencil" aria-hidden="true"></i> Actualizar Disciplina</button>
                                     </div>
                                   </div>

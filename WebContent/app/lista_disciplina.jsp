@@ -51,28 +51,28 @@
 		                </display:table>
 		                </div>
 		                <div class="btn-toolbar">
-			         	<div class="btn-group">
-			         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(true, 'lista'); return false;">Seleccionar todos</a>
-			         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(false, 'lista'); return false;">Anular selección</a>
+				         	<div class="btn-group">
+				         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(true, 'lista'); return false;">Seleccionar todos</a>
+				         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(false, 'lista'); return false;">Anular selección</a>
+				         	</div>
+				         	<div class="btn-group">
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    Acciones <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu">
+							    <li><a href="#" id="seleccion">Eliminar de la plataforma</a></li>
+							  </ul>
+							  	<script type="text/javascript">
+									  	document.getElementById("seleccion").onclick = function() {
+									  		if(confirm('Por favor, confirme su elección')){
+									  			document.getElementById("formlista").submit();
+									  		} else {
+									  			false;
+									  		}  
+										}
+								</script>
+							</div>
 			         	</div>
-			         	<div class="btn-group">
-						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						    Acciones <span class="caret"></span>
-						  </button>
-						  <ul class="dropdown-menu">
-						    <li><a href="#" id="seleccion">Eliminar de la plataforma</a></li>
-						  </ul>
-						  	<script type="text/javascript">
-								  	document.getElementById("seleccion").onclick = function() {
-								  		if(confirm('Por favor, confirme su elección')){
-								  			document.getElementById("formlista").submit();
-								  		} else {
-								  			false;
-								  		}  
-									}
-							</script>
-						</div>
-			         </div>
 		        	</form>
 	         	
 	     	 </div>

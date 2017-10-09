@@ -100,9 +100,11 @@ public class ServletCategoria extends HttpServlet{
 
 	private void eliminar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String dato = request.getParameter("cod");
-		int codigo = Integer.parseInt(dato);
-		categoriaService.eliminarCategoria(codigo);
+		String[] dato = request.getParameterValues("cod[]");
+		for(String item : dato) {
+			int codigo = Integer.parseInt(item);
+			categoriaService.eliminarCategoria(codigo);
+		}
 		request.getRequestDispatcher("ServletCategoria?tipo=listar").forward(request,
 				response);
 	}

@@ -14,20 +14,22 @@
                           <div class="col-md-9">
                                 <form action="../ServletDisciplina?tipo=registrar" class="form-horizontal" id="frmdisciplina" method="post">
                                   <div class="form-group">
-                                    <label for="txtdisciplina" class="col-sm-3 control-label">Nombre de Disciplina</label>
-                                    <div class="col-sm-9">
+                                    <label for="txtdisciplina" class="col-sm-2 control-label">Nombre de Disciplina</label>
+                                    <div class="col-sm-5">
                                       <input type="text" class="form-control" name="txt_nombre" id="txtdisciplina" placeholder="Escribe nombre de disciplina">
                                     </div>
+                                    <div class="col-md-5"></div>
                                   </div>
 
                                   <div class="form-group">
-                                    <label class="col-sm-3 control-label">Estado</label>
-                                    <div class="col-sm-9">
+                                    <label class="col-sm-2 control-label">Estado</label>
+                                    <div class="col-sm-5">
                                       <select id="cboestado" name="cbo_estado" class="form-control">
                                             <option value="1">Activo</option>
                                             <option value="2">Inactivo</option>
                                           </select>
                                     </div>
+                                    <div class="col-md-5"></div>
                                   </div>
                                   <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
