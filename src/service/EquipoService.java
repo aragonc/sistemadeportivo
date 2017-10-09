@@ -35,6 +35,9 @@ public class EquipoService {
 	public int agregarPersona(int equipo, int jugador){
 		return equipoDAO.agregarPersona(equipo, jugador);
 	}
-
+	
+	public int agregarEquipoEvento(int equipo, int evento) {
+		return equipoDAO.agregarEquipoEvento(equipo, evento);
+	}
 }
 

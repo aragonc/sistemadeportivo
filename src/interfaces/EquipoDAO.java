@@ -18,5 +18,7 @@ public interface EquipoDAO {
 	public int eliminarEquipo(int cod);
 	
 	public int agregarPersona(int equipo, int jugador);
+	
+	public int agregarEquipoEvento(int equipo, int evento);
 
 }

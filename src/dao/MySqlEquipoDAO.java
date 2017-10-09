@@ -30,7 +30,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT * FROM equipo ";
+			String sql = "SELECT * FROM equipo;";
 			pstm = cn.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
@@ -71,7 +71,10 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		ResultSet rs = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT * FROM equipo WHERE idequipo=?";
+			String sql = "SELECT e.idequipo, e.nombre, e.descripcion, e.logo, e.email, e.telefono, e.color, e.modalidad_idmodalidad, " + 
+					"ep.evento_idevento, e.estado, e.fecha_registro FROM equipo e " + 
+					"inner join equipo_evento ep on e.idequipo = ep.equipo_idequipo " + 
+					"WHERE e.idequipo = ? ";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
@@ -85,7 +88,9 @@ public class MySqlEquipoDAO implements EquipoDAO{
 				a.setFono(rs.getString(6));
 				a.setColor(rs.getString(7));
 				a.setCodModalidad(rs.getInt(8));
-				a.setEstado(rs.getInt(9));	
+				a.setCodEvento(rs.getInt(9));
+				a.setEstado(rs.getInt(10));	
+				a.setFregistro(rs.getDate(11));
 				List<PersonaDTO> people = persona.buscarPersonaEquipo(a.getCodigo());
 				a.setJugadores(people);
 			}
@@ -189,6 +194,60 @@ public class MySqlEquipoDAO implements EquipoDAO{
 			String sql = "INSERT INTO persona_equipo VALUES (? ,? )";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, jugador);
+			pstm.setInt(2, equipo);
+			estado = pstm.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return estado;
+	}
+	
+	public int agregarEquipoEvento(int equipo, int evento){
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "INSERT INTO equipo_evento VALUES (? ,? )";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, equipo);
+			pstm.setInt(2, evento);
+			estado = pstm.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return estado;
+	}
+	
+	public int actualizarEquipoEvento(int equipo, int evento){
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "UPDATE equipo_evento SET evento_idevento = ? WHERE equipo_idequipo = ?;";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, evento);
 			pstm.setInt(2, equipo);
 			estado = pstm.executeUpdate();
 			

@@ -45,8 +45,16 @@ public class ServletEquipo extends HttpServlet{
 			suscribirPersona(request, response);
 		else if (tipo.equals("detalle"))
 			detalle(request, response);
+		else if (tipo.equals("agregar"))
+			agregar(request, response);
 		
 	}
+	private void agregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request,
+				response);
+		
+	}
+
 	private void detalle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dato = request.getParameter("cod");
 		int codigo = Integer.parseInt(dato);
@@ -107,10 +115,13 @@ public class ServletEquipo extends HttpServlet{
 		obj.setEstado(Integer.parseInt(estado));
 		obj.setDescripcion(descripcion);
 				
-		int resultado = equipoService.registrarEquipo(obj);
-		if (resultado != -1){
+		int codequipo = equipoService.registrarEquipo(obj);
+		if (codequipo != -1){
+			//Para agregar al equipo al evento a participar
+			equipoService.agregarEquipoEvento(codequipo, obj.getCodEvento());
+			//Enviamos los datos para registrar jugadores.
 			request.setAttribute("nomequipo", obj.getNombre());
-			request.setAttribute("codequipo", resultado+"");
+			request.setAttribute("codequipo", codequipo+"");
 			listaPersona(request, response);
 		} else {
 			response.sendRedirect("error.html");
@@ -121,35 +132,40 @@ public class ServletEquipo extends HttpServlet{
 			throws ServletException, IOException {
 		String dato = request.getParameter("cod");
 		int codigo = Integer.parseInt(dato);
-		EquipoDTO x = equipoService.buscarEquipo(codigo);
-		request.setAttribute("registro", x);
-		request.getRequestDispatcher("actualizarEquipo.jsp").forward(request,
+		EquipoDTO obj = equipoService.buscarEquipo(codigo);
+		request.setAttribute("registro", obj);
+		request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request,
 				response);
 	}
 	
 	private void actualizar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		EquipoDTO obj = new EquipoDTO();
-		String codigo = request.getParameter("txt_codigo");
+		String codigo = request.getParameter("codigo");
 		String nombre = request.getParameter("nombre");
 		String logo = request.getParameter("logotipo");
 		String email = request.getParameter("email");
 		String fono = request.getParameter("fono");
-		String disciplina = request.getParameter("disciplina");
-		String categoria = request.getParameter("categoria");
+		String evento = request.getParameter("evento");
+		String modalidad = request.getParameter("modalidad");
 		String color = request.getParameter("color");
-		String est = request.getParameter("estado");
+		String descripcion = request.getParameter("descripcion");
+		String estado = request.getParameter("estado");
 		
 		obj.setCodigo(Integer.parseInt(codigo));
 		obj.setNombre(nombre);
 		obj.setLogo(logo);
-		obj.setColor(color);
-		
 		obj.setEmail(email);
 		obj.setFono(fono);
-		obj.setEstado(Integer.parseInt(est));
-		int estado = equipoService.actualizarEquipo(obj);
-		if (estado != -1)
+		obj.setColor(color);
+		obj.setCodEvento(Integer.parseInt(evento));
+		obj.setCodModalidad(Integer.parseInt(modalidad));
+		obj.setEstado(Integer.parseInt(estado));
+		obj.setDescripcion(descripcion);
+		
+		int resultado = equipoService.actualizarEquipo(obj);
+		if (resultado != -1)
 			listar(request, response);
 		else
 			response.sendRedirect("error.html");

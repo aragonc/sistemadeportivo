@@ -38,6 +38,4 @@ public class EventoService {
 	public int agregarModalidad(int codEvento, int codModalidad){
 		return eventoDAO.agregarModalidad(codEvento, codModalidad);
 	}
-
-	
 }

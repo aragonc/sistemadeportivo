@@ -1,5 +1,6 @@
 package beans;
 
+import java.util.Date;
 import java.util.List;
 
 public class EquipoDTO {
@@ -17,6 +18,7 @@ public class EquipoDTO {
 	private int codModalidad;
 	private ModalidadDTO modalidad;
 	private String descripcion;
+	private Date fregistro;
 	
 	public EquipoDTO() {
 		super();
@@ -125,6 +127,14 @@ public class EquipoDTO {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public Date getFregistro() {
+		return fregistro;
+	}
+
+	public void setFregistro(Date fregistro) {
+		this.fregistro = fregistro;
 	}
 	
 }

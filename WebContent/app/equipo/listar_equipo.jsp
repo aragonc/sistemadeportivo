@@ -32,7 +32,7 @@
             					<a href="${pageContext.request.contextPath}">
 					        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
 					        	</a>
-						        <a href="${pageContext.request.contextPath}/app/equipo/registrar_equipo.jsp">
+						        <a href="${pageContext.request.contextPath}/ServletEquipo?tipo=agregar">
 						        	<img alt="Registrar equipo" title="Registrar equipo" src="${pageContext.request.contextPath}/images/icons/32/add-groups.png">
 						        </a>
             				</div>

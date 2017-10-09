@@ -16,7 +16,7 @@ $( document ).ready(function() {
 		 $('#listaevento').on('change', function(){
 		        $.ajax({
 		            type: 'GET',
-		            url: '../../ServletAjax?tipo=listarModalidad',
+		            url: 'ServletAjax?tipo=listarModalidad',
 		            dataType: "JSON",
 		            data: 'codevento='+$('#listaevento').val(),
 		            statusCode: {

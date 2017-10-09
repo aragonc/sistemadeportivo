@@ -15,4 +15,7 @@ public class ComboService {
 	public List<ComboDTO> listarComboSql(String misql){
 		return comboDAO.listarComboSql(misql);
 	}
+	public List<ComboDTO> listarComboModalidad(int evento){
+		return comboDAO.listarComboModalidad(evento);
+	}
 }
