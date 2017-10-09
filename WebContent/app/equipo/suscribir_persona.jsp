@@ -71,14 +71,15 @@
             			</div>
 			       	</div>
 		              <div class="box-body">
-		              	<form class="form-horizontal" action="ServletPersona?tipo=suscribirPersona" method="post" id="formlista">
+		              	<form class="form-horizontal" action="ServletEquipo?tipo=suscribirPersona" method="post" id="formlista">
+		              		<input type="hidden" name="evento" value="<%= codigoEquipo %>">
 		               		<div class="table-responsive">
 		               			<display:table name="data" class="table table-bordered" requestURI="ServletPersona?tipo=listar" excludedParams="tipo" id="lista">
 	               		 			<display:setProperty name="basic.msg.empty_list">
 	               		 				<div class="alert alert-warning" role="alert">No se existe personas registradas</div>
 	               		 			</display:setProperty>                  		 				               		 			
 	               		 			<display:column title="Item" sortable="false"  >
-										<input type="checkbox" name="cod[]" value="${lista.codigo}">
+										<input type="checkbox" name="jugador[]" value="${lista.codigo}">
 	               		 			</display:column>
 	               		 			<display:column title="Apellidos y nombres" sortable="false">
 	               		 				${lista.apaterno} ${lista.amaterno} , ${lista.nombre}
@@ -93,7 +94,7 @@
 									</display:column>
 									<display:column title="Acciones" sortable="false" media="html" >
 											<div class="text-center">
-							               		<a class="btn btn-primary" href="ServletEvento?tipo=suscribirPersona&codevento=<%= codigoEquipo %>&modalidad[]=${lista.codigo}"><i class="fa fa-plus" aria-hidden="true"></i>
+							               		<a class="btn btn-primary" href="ServletEquipo?tipo=suscribirPersona&equipo=<%= codigoEquipo %>&jugador[]=${lista.codigo}"><i class="fa fa-plus" aria-hidden="true"></i>
 							               			Agregar
 							               		</a>
 							               	</div>

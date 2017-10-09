@@ -40,8 +40,21 @@ public class ServletEquipo extends HttpServlet{
 			eliminar(request, response);
 		else if (tipo.equals("listaPersona"))
 			listaPersona(request, response);
+		else if (tipo.equals("suscribirPersona"))
+			suscribirPersona(request, response);
 		
 	}
+	private void suscribirPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 String codequipo = request.getParameter("evento");
+		 String[] codjugador = request.getParameterValues("jugador[]");
+		 
+		 for(String item : codjugador){
+			 System.out.println(item);
+			 equipoService.agregarPersona(Integer.parseInt(codequipo), Integer.parseInt(item));
+		 }
+		 listar(request, response);
+	}
+
 	private void listaPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<PersonaDTO> info = personaService.listarPersona();
 		request.setAttribute("data", info);

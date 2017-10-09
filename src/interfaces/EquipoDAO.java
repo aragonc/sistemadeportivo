@@ -16,5 +16,7 @@ public interface EquipoDAO {
 	public int actualizarEquipo(EquipoDTO obj);
 	
 	public int eliminarEquipo(int cod);
+	
+	public int agregarPersona(int equipo, int jugador);
 
 }

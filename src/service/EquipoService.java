@@ -31,6 +31,10 @@ public class EquipoService {
 	public int eliminarEquipo(int cod){
 		return equipoDAO.eliminarEquipo(cod);
 	}
+	
+	public int agregarPersona(int equipo, int jugador){
+		return equipoDAO.agregarPersona(equipo, jugador);
+	}
 
 }
 
