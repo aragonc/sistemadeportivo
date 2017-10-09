@@ -32,11 +32,15 @@
 
 .content-wrapper {
 	min-height: 100%;
-	background-color: #FFF;
+	background: url("../../images/bgfooter.png") repeat-x center bottom #FFF;
 	z-index: 800;
 }
 .box{
 	box-shadow: none;
+	background: transparent;
+}
+.box-footer{
+	background: transparent;
 }
 .app-tools{
 	padding: 10px;
@@ -143,4 +147,10 @@
 }
 .box.box-primary {
 	border-top-color: #94be1f;
+}
+.main-footer {
+	background: #1e282c;
+	padding: 15px;
+	color: #FFF;
+	border-top: 1px solid #d2d6de;
 }
