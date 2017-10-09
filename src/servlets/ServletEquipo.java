@@ -7,18 +7,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
-
 import beans.EquipoDTO;
-
+import beans.PersonaDTO;
 import service.EquipoService;
+import service.PersonaService;
 
 @WebServlet("/ServletEquipo")
 
 public class ServletEquipo extends HttpServlet{
 	
 	EquipoService equipoService = new EquipoService();
+	PersonaService personaService = new PersonaService();
+	
 	private static final long serialVersionUID = 1L;
 
 	public ServletEquipo() {
@@ -38,8 +38,17 @@ public class ServletEquipo extends HttpServlet{
 			actualizar(request, response);
 		else if (tipo.equals("eliminar"))
 			eliminar(request, response);
+		else if (tipo.equals("listaPersona"))
+			listaPersona(request, response);
 		
 	}
+	private void listaPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<PersonaDTO> info = personaService.listarPersona();
+		request.setAttribute("data", info);
+		request.getRequestDispatcher("app/equipo/suscribir_persona.jsp").forward(request,response);
+		
+	}
+
 	private void listar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<EquipoDTO> info = equipoService.listarEquipo();
@@ -55,26 +64,28 @@ public class ServletEquipo extends HttpServlet{
 		String logo = request.getParameter("logotipo");
 		String email = request.getParameter("email");
 		String fono = request.getParameter("fono");
-		String disciplina = request.getParameter("disciplina");
-		String categoria = request.getParameter("categoria");
+		String evento = request.getParameter("evento");
+		String modalidad = request.getParameter("modalidad");
 		String color = request.getParameter("color");
-		String est = request.getParameter("estado");
-		
-				
+		String estado = request.getParameter("estado");
+			
 		obj.setNombre(nombre);
 		obj.setLogo(logo);
 		obj.setEmail(email);
 		obj.setFono(fono);
 		obj.setColor(color);
-		obj.setIddisciplina(Integer.parseInt(disciplina));
-		obj.setIdcategoria(Integer.parseInt(categoria));
-		obj.setEstado(Integer.parseInt(est));
+		obj.setCodEvento(Integer.parseInt(evento));
+		obj.setCodModalidad(Integer.parseInt(modalidad));
+		obj.setEstado(Integer.parseInt(estado));
 				
-		int estado = equipoService.registrarEquipo(obj);
-		if (estado != -1)
+		int resultado = equipoService.registrarEquipo(obj);
+		if (resultado != -1){
+			request.setAttribute("nomequipo", obj.getNombre());
+			request.setAttribute("codequipo", resultado+"");
 			listar(request, response);
-		else
+		} else {
 			response.sendRedirect("error.html");
+		}
 	}
 
 	private void buscar(HttpServletRequest request, HttpServletResponse response)
@@ -104,8 +115,7 @@ public class ServletEquipo extends HttpServlet{
 		obj.setNombre(nombre);
 		obj.setLogo(logo);
 		obj.setColor(color);
-		obj.setIddisciplina(Integer.parseInt(disciplina));
-		obj.setIdcategoria(Integer.parseInt(categoria));
+		
 		obj.setEmail(email);
 		obj.setFono(fono);
 		obj.setEstado(Integer.parseInt(est));
@@ -118,9 +128,12 @@ public class ServletEquipo extends HttpServlet{
 
 	private void eliminar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String dato = request.getParameter("cod");
-		int codigo = Integer.parseInt(dato);
-		equipoService.eliminarEquipo(codigo);
+		String[] dato = request.getParameterValues("cod[]");
+		for(String item : dato){
+			int codigo = Integer.parseInt(item);
+			equipoService.eliminarEquipo(codigo);
+		}
+		
 		request.getRequestDispatcher("ServletEquipo?tipo=listar").forward(request,
 				response);
 	}

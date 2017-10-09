@@ -50,10 +50,9 @@
 	            				</div>
             				</div>
             			</div>
-			        	
 			       	</div>
 					
-		              	<form class="form-horizontal" id="formlista">
+		              	<form class="form-horizontal" action="ServletEquipo?tipo=eliminar" method="post" id="formlista">
 		               		<div class="table-responsive">
 		               			<display:table name="data" class="table table-bordered" pagesize="10" requestURI="ServletEquipo?tipo=listar" excludedParams="tipo" id="lista">
 		               		 			

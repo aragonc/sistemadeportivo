@@ -4,6 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mysql.jdbc.Statement;
+
 import java.sql.Connection;
 import beans.EquipoDTO;
 import interfaces.EquipoDAO;
@@ -102,7 +105,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "INSERT INTO equipo VALUES(null,? ,? ,? ,? ,?, ?, ?, now())";
-			pstm = cn.prepareStatement(sql);
+			pstm = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getLogo());
 			pstm.setString(3, obj.getEmail());
@@ -110,7 +113,13 @@ public class MySqlEquipoDAO implements EquipoDAO{
 			pstm.setString(5, obj.getColor());
 			pstm.setInt(6, obj.getCodModalidad());
 			pstm.setInt(7, obj.getEstado());
-			estado = pstm.executeUpdate();
+			pstm.executeUpdate();
+			
+			ResultSet rs = pstm.getGeneratedKeys();
+			if (rs.next()){
+			    estado = rs.getInt(1);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

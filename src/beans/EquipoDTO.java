@@ -12,6 +12,8 @@ public class EquipoDTO {
 	private String color;
 	private int estado;
 	private List<PersonaDTO> jugadores;
+	private int codEvento;
+	private EventoDTO evento;
 	private int codModalidad;
 	private ModalidadDTO modalidad;
 	
@@ -100,22 +102,20 @@ public class EquipoDTO {
 		this.codModalidad = codModalidad;
 	}
 
-	public EquipoDTO(int codigo, String nombre, String logo, String email, String fono, String color, int estado,
-			List<PersonaDTO> jugadores, int codModalidad, ModalidadDTO modalidad) {
-		super();
-		this.codigo = codigo;
-		this.nombre = nombre;
-		this.logo = logo;
-		this.email = email;
-		this.fono = fono;
-		this.color = color;
-		this.estado = estado;
-		this.jugadores = jugadores;
-		this.codModalidad = codModalidad;
-		this.modalidad = modalidad;
+	public int getCodEvento() {
+		return codEvento;
 	}
 
-	
-	
+	public void setCodEvento(int codEvento) {
+		this.codEvento = codEvento;
+	}
+
+	public EventoDTO getEvento() {
+		return evento;
+	}
+
+	public void setEvento(EventoDTO evento) {
+		this.evento = evento;
+	}
 	
 }
