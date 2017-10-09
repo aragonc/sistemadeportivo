@@ -101,9 +101,12 @@ public class ServletDisciplina extends HttpServlet{
 
 	private void eliminar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String dato = request.getParameter("cod");
-		int codigo = Integer.parseInt(dato);
-		disciplinaService.eliminarDisciplina(codigo);
+		String[] dato = request.getParameterValues("cod[]");
+		for(String item : dato) {
+			int codigo = Integer.parseInt(item);
+			disciplinaService.eliminarDisciplina(codigo);
+		}
+		
 		request.getRequestDispatcher("ServletDisciplina?tipo=listar").forward(request,
 				response);
 	}
