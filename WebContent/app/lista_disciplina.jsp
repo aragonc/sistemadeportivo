@@ -13,11 +13,14 @@
  <jsp:include page="_sidebar.jsp" flush="true" />
  
   <div class="content-wrapper">
+  	<section class="content-header">
+      <h1>Disciplina</h1> 
+    </section>
     <!-- Main content -->
     <section class="content">
        <div class="box box-primary">
        		<div class="box-header with-border">
-	              <h3 class="box-title">Listado de disciplinas</h3>
+	              <h3 class="box-title">Listado de disciplinas deportivas</h3>
 	        </div>
            <div class="box-body">
 	        <div class="col-md-9">
