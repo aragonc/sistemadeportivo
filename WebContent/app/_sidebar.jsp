@@ -15,31 +15,40 @@
       </div>
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENÚ OPCIONES</li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="${pageContext.request.contextPath}"><i class="fa fa-circle-o"></i> Escritorio</a></li>
-          </ul>
-        </li>
         <li class="treeview active">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Modulo Registro</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+          <a href="${pageContext.request.contextPath}">
+            <i class="fa fa-dashboard"></i> <span>Escritorio</span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="${pageContext.request.contextPath}/app/registrar_categoria.jsp"><i class="fa fa-circle-o"></i> Registrar Categoria</a></li>
-            <li><a href="${pageContext.request.contextPath}/app/registrar_disciplina.jsp"><i class="fa fa-circle-o"></i> Registrar Disciplina</a></li>
-            <li><a href="${pageContext.request.contextPath}/app/registrar_persona.jsp"><i class="fa fa-circle-o"></i> Registrar Persona</a></li>
-            <li><a href="${pageContext.request.contextPath}/app/registrar_equipo.jsp"><i class="fa fa-circle-o"></i> Registrar Equipo</a></li>
-            <li><a href="${pageContext.request.contextPath}/app/registrar_evento.jsp"><i class="fa fa-circle-o"></i> Registrar Evento</a></li>
-          </ul>
+        </li>
+        <li>
+          <a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=listar">
+            <i class="fa fa-futbol-o" aria-hidden="true"></i> <span>Disciplinas</span>
+          </a>
+        </li>
+        <li>
+          <a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar">
+            <i class="fa fa-folder" aria-hidden="true"></i> <span>Categorias</span>
+          </a>
+        </li>
+        <li>
+          <a href="${pageContext.request.contextPath}/ServletModalidad?tipo=listar">
+            <i class="fa fa-bookmark" aria-hidden="true"></i> <span>Modalidades</span>
+          </a>
+        </li>
+        <li>
+          <a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar">
+            <i class="fa fa-bell" aria-hidden="true"></i> <span>Eventos</span>
+          </a>
+        </li>
+        <li>
+          <a href="${pageContext.request.contextPath}/ServletPersona?tipo=listar">
+            <i class="fa fa-user" aria-hidden="true"></i> <span>Personas</span>
+          </a>
+        </li>
+        <li>
+          <a href="${pageContext.request.contextPath}/ServletEquipo?tipo=listar">
+            <i class="fa fa-users" aria-hidden="true"></i> <span>Equipos</span>
+          </a>
         </li>
       </ul>
     </section>
