@@ -15,7 +15,7 @@
       </div>
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENÚ OPCIONES</li>
-        <li class="treeview active">
+        <li class="active">
           <a href="${pageContext.request.contextPath}">
             <i class="fa fa-dashboard"></i> <span>Escritorio</span>
           </a>
