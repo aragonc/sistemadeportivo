@@ -1,7 +1,13 @@
 // Iniciando el codigo del main js
 $( document ).ready(function() {
-	$("#gratuito").click(function(){
-		   $("#txtcosto").attr('disabled',!this.checked)
+	$("#genero_3").click(function(){
+		   $(".mixto").show();
+	});
+	$("#genero_2").click(function(){
+		   $(".mixto").hide();
+	});
+	$("#genero_1").click(function(){
+		   $(".mixto").hide();
 	});
 	 $('#modalidadtable').DataTable();
 	 //Para todos lo textarea con CKeditor

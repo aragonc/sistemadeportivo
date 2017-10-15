@@ -9,6 +9,7 @@
 	ComboService listas = new ComboService();  
 	List<ComboDTO> listaCategoria = listas.listarComboSql("SELECT idcategoria, nombres FROM campeonato.categoria where estado = 1;");
 	List<ComboDTO> listaDisciplina = listas.listarComboSql("SELECT iddisciplina, nombre FROM campeonato.disciplina where estado = 1;");
+	List<ComboDTO> listaGenero = listas.listarCombo("genero");
 %>
  <div class="content-wrapper">
     <section class="content-header">
@@ -58,15 +59,56 @@
 		                           </div>
 		                         </div>  
                          	</div>
+                         	
                          </div>
                          
                          <div class="form-group">
 	                           <label class="col-sm-2 control-label">Descripcion</label>
 	                           <div class="col-sm-10">
-	                             <textarea id=txthtml name="descripcion" rows="5" class="form-control"></textarea>
+	                             <textarea id=txthtml name="descripcion" rows="3" class="form-control"></textarea>
 	                           </div>
 		                 </div>
-                                                                                      
+                         
+                         <div class="row">
+                         	<div class="col-md-12">
+                         		<div class="form-group">
+	                         		<label class="col-sm-2 control-label">N° Jugadores</label>
+		                            <div class="col-sm-3">
+		                             	<input type="text" name="cantidad" id="cantidad" class="form-control" placeholder="Ingrese cantidad de jugadores">
+		                            </div>
+		                            <div class="col-sm-3">
+		                            	<%
+							              for (ComboDTO item : listaGenero ){
+							             %>
+					                    	<label class="radio-inline">
+					                    		<input type="radio" name="genero" id="genero_<%= item.getField() %>" value="<%= item.getField() %>"> <%= item.getValor() %>
+					                    	</label>		
+					                   	<%
+					                   		}  
+					                   	%>
+		                            </div>
+		                            <div class="col-sm-4">
+		                            	<div id="mixto" class="mixto" style="display:none;">
+					                   		<div class="row">
+					                   			<div class="col-md-6">
+						                   			<div class="form-group">
+						                   				<input type="text" name="varones" id="txtvarones" class="form-control" placeholder="N° Varones">
+						                   			</div>
+					                   			</div>
+					                   			<div class="col-md-6">
+						                   			<div class="form-group">
+						                   				<input type="text" name="mujeres" id="txtmujeres" class="form-control" placeholder="N° Mujeres">
+						                   			</div>
+					                   			</div>
+					                   			
+					                   		</div>
+					                   	</div>
+		                            </div>
+	                            </div>
+                         	</div>
+                         	
+                         	
+                         </div>                                                       
                          
                          <div class="form-group">
                            <div class="col-sm-offset-2 col-sm-10">
