@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.CategoriaDTO;
 import beans.LugarDTO;
-import interfaces.LugarDAO;
 import service.LugarService;
 
 /**
@@ -63,8 +61,13 @@ public class ServletLugar extends HttpServlet {
 		
 	}
 
-	private void buscar(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void buscar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String dato = request.getParameter("cod");
+		int codigo = Integer.parseInt(dato);
+		LugarDTO obj = lugarService.buscarLugar(codigo);
+		request.setAttribute("registro", obj);
+		request.getRequestDispatcher("app/lugar/actualizar_lugar.jsp").forward(request,
+				response);
 		
 	}
 

@@ -22,7 +22,7 @@
 	              <h3 class="box-title">Listado de modalidades</h3>
 	        </div>
 	        <div class="body">
-	        	<div class="col-md-9">
+	        	<div class="col-md-12">
 			        <div class="toolbar-actions">
 			        	<div class="row">
 			        		<div class="col-md-6">
@@ -102,9 +102,7 @@
 			         </div>
 			         </form>
 	     	 	</div>
-           		<div class="col-md-3">
-                 
-                </div>  
+           		
 	        </div>
 	    </div>
 	   </div>

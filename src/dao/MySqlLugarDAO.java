@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.CategoriaDTO;
 import beans.LugarDTO;
 import interfaces.LugarDAO;
 import utils.MysqlDBConexion;
@@ -53,8 +54,40 @@ public class MySqlLugarDAO implements LugarDAO {
 
 	@Override
 	public LugarDTO buscarLugar(int cod) {
-		// TODO Auto-generated method stub
-		return null;
+		LugarDTO cat = null;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "select * from lugar where idlugar=?";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, cod);
+			rs = pstm.executeQuery();
+			if (rs.next()) {
+				cat = new LugarDTO();
+				cat.setCodigo(rs.getInt(1));
+				cat.setNombre(rs.getString(2));
+				cat.setDireccion(rs.getString(3));
+				cat.setLatitud(rs.getString(4));
+				cat.setLongitud(rs.getString(5));
+				cat.setEstado(rs.getInt(4));	
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return cat;
 	}
 
 	@Override
