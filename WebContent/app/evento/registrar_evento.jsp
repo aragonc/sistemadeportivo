@@ -1,10 +1,15 @@
 
+<%@page import="beans.ComboDTO"%>
+<%@page import="service.ComboService"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <jsp:include page="../_header.jsp" flush="true" />
  <jsp:include page="../_sidebar.jsp" flush="true" />
-
+ <%
+ 	ComboService listaDocumento = new ComboService();  
+	List<ComboDTO> listaLugar = listaDocumento.listarComboSql("SELECT idlugar, nombre FROM lugar where estado = 1;");
+ %>
   <div class="content-wrapper">
     <section class="content-header">
       <h1>Eventos</h1> 
@@ -32,7 +37,16 @@
 	                    <div class="form-group">
 	                         <label for="txthtml" class="col-sm-2 control-label">Lugar del Evento</label>
 	                         <div class="col-sm-10">
-	                         	<input type="text" id="lugar" name="lugar" class="form-control" placeholder="Escribe la dirección del evento">
+	                         	<select id="listaevento" name="lugar" class="form-control">
+	                           		<option value="0">-- Seleccione un lugar --</option>
+					                    <%
+					                    	for (ComboDTO item : listaLugar ){
+					                    %>
+					                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
+					                   	<%
+					                   		}  
+					                   	%>
+			                    	</select>
 	                         </div>
 	                    </div>
 	                    <div class="row">

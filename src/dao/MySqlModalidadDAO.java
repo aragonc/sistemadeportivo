@@ -25,22 +25,26 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT m.idmodalidad, m.descripcion, d.iddisciplina, d.nombre, c.idcategoria, c.nombres  FROM modalidad m "
-					+ "inner join categoria c on m.categoria_idcategoria = c.idcategoria inner join "
-					+ "disciplina d on  m.disciplina_iddisciplina = d.iddisciplina;";
+			String sql = "SELECT m.idmodalidad, m.descripcion, m.genero, m.njugadores, m.nmujeres, m.nvarones, d.iddisciplina, d.nombre, c.idcategoria, c.nombres FROM modalidad m "
+					+ "inner join categoria c on m.categoria_idcategoria = c.idcategoria "
+					+ "inner join disciplina d on  m.disciplina_iddisciplina = d.iddisciplina;";
 			pstm = cn.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
 				cat = new ModalidadDTO();
 				cat.setCodigo(rs.getInt(1));
 				cat.setDescripcion(rs.getString(2));
+				cat.setGenero(rs.getString(3));
+				cat.setNumJugadores(rs.getInt(4));
+				cat.setNumMujeres(rs.getInt(5));
+				cat.setNumVarones(rs.getInt(6));
 				DisciplinaDTO a = new DisciplinaDTO();
-				a.setCodigo(rs.getInt(3));
-				a.setNombre(rs.getString(4));
+				a.setCodigo(rs.getInt(7));
+				a.setNombre(rs.getString(8));
 				cat.setDisciplina(a);
 				CategoriaDTO b = new CategoriaDTO();
-				b.setCodigo(rs.getInt(5));
-				b.setNombre(rs.getString(6));
+				b.setCodigo(rs.getInt(9));
+				b.setNombre(rs.getString(10));
 				cat.setCategoria(b);
 				data.add(cat);
 			}
@@ -68,6 +72,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
+			
 			String sql = "SELECT m.idmodalidad, m.descripcion, d.iddisciplina, d.nombre, c.idcategoria, c.nombres "
 					+ "FROM evento_modalidad em inner join modalidad m on m.idmodalidad = em.modalidad_idmodalidad "
 					+ "inner join categoria c on m.categoria_idcategoria = c.idcategoria "
@@ -80,6 +85,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 				mod = new ModalidadDTO();
 				mod.setCodigo(rs.getInt(1));
 				mod.setDescripcion(rs.getString(2));
+				
 				mod.setCodCategoria(rs.getInt(3));
 					DisciplinaDTO a = new DisciplinaDTO();
 					a.setCodigo(rs.getInt(3));
@@ -117,7 +123,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 		ResultSet rs = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT m.idmodalidad, m.descripcion, d.iddisciplina, d.nombre, c.idcategoria, c.nombres  FROM modalidad m "
+			String sql = "SELECT m.idmodalidad, m.descripcion, m.genero, m.njugadores, m.nmujeres, m.nvarones, d.iddisciplina, d.nombre, c.idcategoria, c.nombres FROM modalidad m "
 					+ "inner join categoria c on m.categoria_idcategoria = c.idcategoria inner join "
 					+ "disciplina d on  m.disciplina_iddisciplina = d.iddisciplina WHERE m.idmodalidad=?;";
 			pstm = cn.prepareStatement(sql);
@@ -127,13 +133,17 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 				cat = new ModalidadDTO();
 				cat.setCodigo(rs.getInt(1));
 				cat.setDescripcion(rs.getString(2));
+				cat.setGenero(rs.getString(3));
+				cat.setNumJugadores(rs.getInt(4));
+				cat.setNumMujeres(rs.getInt(5));
+				cat.setNumVarones(rs.getInt(6));
 				DisciplinaDTO a = new DisciplinaDTO();
-					a.setCodigo(rs.getInt(3));
-					a.setNombre(rs.getString(4));
+					a.setCodigo(rs.getInt(7));
+					a.setNombre(rs.getString(8));
 				cat.setDisciplina(a);
 				CategoriaDTO b = new CategoriaDTO();
-				b.setCodigo(rs.getInt(5));
-				b.setNombre(rs.getString(6));
+				b.setCodigo(rs.getInt(9));
+				b.setNombre(rs.getString(10));
 				cat.setCategoria(b);
 			}
 		} catch (Exception e) {
@@ -160,11 +170,15 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "insert into modalidad values(null , ?, ?, ?)";
+			String sql = "insert into modalidad values(null , ?, ?, ?, ?, ?, ? , ? )";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getDescripcion());
 			pstm.setInt(2, obj.getCodCategoria());
 			pstm.setInt(3, obj.getCodDisciplina());
+			pstm.setString(4, obj.getGenero());
+			pstm.setInt(5,obj.getNumJugadores());
+			pstm.setInt(6, obj.getNumVarones());
+			pstm.setInt(7, obj.getNumMujeres());
 			
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
@@ -189,12 +203,16 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "UPDATE modalidad set descripcion = ?, categoria_idcategoria = ?, disciplina_iddisciplina = ? where idmodalidad = ?";
+			String sql = "UPDATE modalidad set descripcion = ?, categoria_idcategoria = ?, disciplina_iddisciplina = ?, genero=? , njugadores = ?, nvarones = ? , nmujeres = ? where idmodalidad = ?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getDescripcion());
 			pstm.setInt(2, obj.getCodCategoria());
 			pstm.setInt(3, obj.getCodDisciplina());
-			pstm.setInt(4, obj.getCodigo());
+			pstm.setString(4, obj.getGenero());
+			pstm.setInt(5, obj.getNumJugadores());
+			pstm.setInt(6, obj.getNumVarones());
+			pstm.setInt(7, obj.getNumMujeres());
+			pstm.setInt(8, obj.getCodigo());
 			
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {

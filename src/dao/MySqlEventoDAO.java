@@ -35,12 +35,10 @@ public class MySqlEventoDAO implements EventoDAO {
 				a.setDescripcion(rs.getString(3));
 				a.setFechaInicio(rs.getTimestamp(4));
 				a.setFechaFin(rs.getTimestamp(5));
-				a.setGratuito(rs.getBoolean(6));
+				a.setGratuito(rs.getInt(6));
 				a.setPrecio(rs.getDouble(7));
 				a.setEstado(rs.getInt(8));
-				a.setLugar(rs.getString(9));
-				a.setLatitud(rs.getString(10));
-				a.setLongitud(rs.getString(11));
+				a.setLugar(rs.getInt(9));
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -79,12 +77,10 @@ public class MySqlEventoDAO implements EventoDAO {
 				a.setDescripcion(rs.getString(3));
 				a.setFechaInicio(rs.getTimestamp(4));
 				a.setFechaFin(rs.getTimestamp(5));
-				a.setGratuito(rs.getBoolean(6));
+				a.setGratuito(rs.getInt(6));
 				a.setPrecio(rs.getDouble(7));
 				a.setEstado(rs.getInt(8));
-				a.setLugar(rs.getString(9));
-				a.setLatitud(rs.getString(10));
-				a.setLongitud(rs.getString(11));
+				a.setLugar(rs.getInt(9));
 				List<ModalidadDTO> mod = modalidad.buscarModalidadEvento(a.getCodigo());
 				a.setModalidades(mod);
 			}
@@ -112,16 +108,16 @@ public class MySqlEventoDAO implements EventoDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "INSERT INTO evento VALUES (null,? ,? ,? ,? ,? ,? ,? , ?, null, null, NOW())";
+			String sql = "INSERT INTO evento VALUES (null,? ,? ,? ,? ,? ,? ,? , ?, NOW())";
 			pstm = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDescripcion());
 			pstm.setTimestamp(3, new java.sql.Timestamp(obj.getFechaInicio().getTime()));
 			pstm.setTimestamp(4, new java.sql.Timestamp(obj.getFechaFin().getTime()));
-			pstm.setBoolean(5, obj.getGratuito());
+			pstm.setInt(5, obj.getGratuito());
 			pstm.setDouble(6, obj.getPrecio());
 			pstm.setInt(7, obj.getEstado());
-			pstm.setString(8, obj.getLugar());
+			pstm.setInt(8, obj.getLugar());
 			estado = pstm.executeUpdate();
 			
 			ResultSet rs = pstm.getGeneratedKeys();

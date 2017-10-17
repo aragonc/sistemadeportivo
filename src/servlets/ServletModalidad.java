@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,9 +54,13 @@ public class ServletModalidad extends HttpServlet {
 
 	private void eliminar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String dato = request.getParameter("cod");
-		int codigo = Integer.parseInt(dato);
-		modalidadService.eliminarModalidad(codigo);
+		
+		String[] dato = request.getParameterValues("cod[]");
+		
+		for(String item : dato) {
+			int codigo = Integer.parseInt(item);
+			modalidadService.eliminarModalidad(codigo);
+		}
 		request.getRequestDispatcher("ServletModalidad?tipo=listar").forward(request,
 				response);
 	}
@@ -71,17 +76,50 @@ public class ServletModalidad extends HttpServlet {
 	private void actualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ModalidadDTO obj = new ModalidadDTO();
+		String codigo = request.getParameter("codigo");
 		String descripcion = request.getParameter("descripcion");
 		String idcategoria = request.getParameter("cbocategoria");
 		String iddisciplina = request.getParameter("cbodisciplina");
-		String cod = request.getParameter("codigo");
+		String cantidad = null;
+		String nvarones = null;
+		String nmujeres = null;
+		String genero = request.getParameter("genero");
 		
-		obj.setCodigo(Integer.parseInt(cod));
+		if(request.getParameter("cantidad") != null){
+			cantidad = request.getParameter("cantidad");
+			obj.setNumJugadores(Integer.parseInt(cantidad));
+		}
+		if(request.getParameter("varones") != null && request.getParameter("mujeres") != null){
+			nvarones = request.getParameter("varones");
+			nmujeres = request.getParameter("mujeres");
+			
+			if(genero.trim().equals("V")){
+				obj.setNumVarones(Integer.parseInt(cantidad));
+			} else if(nvarones!=null && !(nvarones.trim().equals(""))){
+				obj.setNumVarones(Integer.parseInt(nvarones));
+			} else {
+				obj.setNumVarones(0);
+			}
+			if(genero.trim().equals("M")){
+				obj.setNumMujeres(Integer.parseInt(cantidad));
+			} else if(nmujeres!=null && !(nmujeres.trim().equals(""))){
+				obj.setNumMujeres(Integer.parseInt(nmujeres));
+			} else {
+				obj.setNumMujeres(0);
+			}
+			
+		}
+
+				
 		obj.setCodCategoria(Integer.parseInt(idcategoria));
 		obj.setCodDisciplina(Integer.parseInt(iddisciplina));
+		obj.setGenero(genero);
 		obj.setDescripcion(descripcion);
+		obj.setCodigo(Integer.parseInt(codigo));
+		
 		
 		int resultado = modalidadService.actualizarModalidad(obj);
+		
 		if (resultado != -1){
 			listar(request, response);
 		}else{
@@ -105,17 +143,60 @@ public class ServletModalidad extends HttpServlet {
 		String descripcion = request.getParameter("descripcion");
 		String idcategoria = request.getParameter("cbocategoria");
 		String iddisciplina = request.getParameter("cbodisciplina");
+		String cantidad = null;
+		String nvarones = null;
+		String nmujeres = null;
+		String genero = request.getParameter("genero");
 		
+		if(request.getParameter("cantidad") != null){
+			cantidad = request.getParameter("cantidad");
+			obj.setNumJugadores(Integer.parseInt(cantidad));
+		}
+		if(request.getParameter("varones") != null && request.getParameter("mujeres") != null){
+			nvarones = request.getParameter("varones");
+			nmujeres = request.getParameter("mujeres");
+			
+			if(genero.trim().equals("V")){
+				obj.setNumVarones(Integer.parseInt(cantidad));
+			} else if(nvarones!=null && !(nvarones.trim().equals(""))){
+				obj.setNumVarones(Integer.parseInt(nvarones));
+			} else {
+				obj.setNumVarones(0);
+			}
+			if(genero.trim().equals("M")){
+				obj.setNumMujeres(Integer.parseInt(cantidad));
+			} else if(nmujeres!=null && !(nmujeres.trim().equals(""))){
+				obj.setNumMujeres(Integer.parseInt(nmujeres));
+			} else {
+				obj.setNumMujeres(0);
+			}
+			
+		}
+
+				
 		obj.setCodCategoria(Integer.parseInt(idcategoria));
 		obj.setCodDisciplina(Integer.parseInt(iddisciplina));
+		obj.setGenero(genero);
 		obj.setDescripcion(descripcion);
 		
-		int resultado = modalidadService.registrarModalidad(obj);
-		if (resultado != -1){
-			listar(request, response);
-		}else{
-			response.sendRedirect("error.html");
+		
+		
+		int total = obj.getNumMujeres() + obj.getNumVarones();
+		if(obj.getNumJugadores()==0){
+			request.setAttribute("errorMessage", "Debe ingresar una cantidad.");
+			request.getRequestDispatcher("app/modalidad/registrar_modalidad.jsp").forward(request, response);
 		}
+		if(obj.getNumJugadores() == total){
+			int resultado = modalidadService.registrarModalidad(obj);
+			if (resultado != -1){
+				listar(request, response);
+			}
+		}else{
+			request.setAttribute("errorMessage", "Los jugadores ingresados no corresponde a la cantidad ingresada.");
+			request.getRequestDispatcher("app/modalidad/registrar_modalidad.jsp").forward(request, response);
+		}
+		
+		
 	}
 
 	/**

@@ -1,12 +1,13 @@
 // Iniciando el codigo del main js
 $( document ).ready(function() {
-	$("#genero_3").click(function(){
+		
+	$("#idMixto").click(function(){
 		   $(".mixto").show();
 	});
-	$("#genero_2").click(function(){
+	$("#idVarones").click(function(){
 		   $(".mixto").hide();
 	});
-	$("#genero_1").click(function(){
+	$("#idMujeres").click(function(){
 		   $(".mixto").hide();
 	});
 	 $('#modalidadtable').DataTable();

@@ -11,6 +11,7 @@
 	ComboService listas = new ComboService();  
 	List<ComboDTO> listaCategoria = listas.listarComboSql("SELECT idcategoria, nombres FROM campeonato.categoria where estado = 1;");
 	List<ComboDTO> listaDisciplina = listas.listarComboSql("SELECT iddisciplina, nombre FROM campeonato.disciplina where estado = 1;");
+	List<ComboDTO> listaGenero = listas.listarCombo("genero");
 %>
  <div class="content-wrapper">
     <section class="content-header">
@@ -77,6 +78,62 @@
 	                             </textarea>
 	                           </div>
 		                 </div>
+		                 
+		                 <div class="row">
+                         	<div class="col-md-12">
+                         		<div class="form-group">
+	                         		<label class="col-sm-2 control-label">N° Jugadores</label>
+		                            <div class="col-sm-2">
+		                             	<input type="text" name="cantidad" id="cantidad" class="form-control" value="<%= obj.getNumJugadores() %>" placeholder="Ingrese cantidad">
+		                            </div>
+		                            <div class="col-sm-4">
+		                            	<%
+		                            	
+		                            	String check = null;
+							              for (ComboDTO item : listaGenero ){
+							            	 if(item.getField().equals(obj.getGenero())){
+							            		 check = "checked='checked'";
+							            	 }else{
+							            		 check = "";
+							            	 }
+							             %>
+					                    	<label class="radio-inline">
+					                    		<input type="radio" name="genero" id="id<%= item.getValor() %>" value="<%= item.getField() %>" <%= check %> > <%= item.getValor() %>
+					                    	</label>		
+					                   	<%
+					                   		}  
+					                   	%>
+		                            </div>
+		                            <div class="col-sm-4">
+		                            	<% 
+		                            	
+		                            		if(obj.getGenero().trim().equals("MX")){
+
+		                            	%>
+		                            		<div id="mixto" class="mixto" style="display:block;">
+		                            	<% } else { %>
+		                            		<div id="mixto" class="mixto" style="display:none;">
+		                            	<% } %>
+					                   		<div class="row">
+					                   			<div class="col-md-6">
+						                   			<div class="form-group">
+						                   				<input type="text" name="varones" id="txtvarones" class="form-control" value="<%= obj.getNumVarones() %>" placeholder="N° Varones">
+						                   			</div>
+					                   			</div>
+					                   			<div class="col-md-6">
+						                   			<div class="form-group">
+						                   				<input type="text" name="mujeres" id="txtmujeres" class="form-control" value="<%= obj.getNumMujeres() %>" placeholder="N° Mujeres">
+						                   			</div>
+					                   			</div>
+					                   			
+					                   		</div>
+					                   	</div>
+		                            </div>
+	                            </div>
+                         	</div>
+                         	
+                         	
+                         </div>
                                                                                       
                          
                          <div class="form-group">

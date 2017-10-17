@@ -61,6 +61,18 @@
             	<div class="col-md-2 col-xs-6">
 					<div class="app-tools">
 						<div class="icon">
+							<a href="${pageContext.request.contextPath}/ServletLugar?tipo=listar">
+								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/location.png">
+							</a>
+						</div>
+						<div class="name">
+							<a href="${pageContext.request.contextPath}/ServletLugar?tipo=listar">Mis Lugares</a>
+						</div>
+					</div>
+            	</div>
+            	<div class="col-md-2 col-xs-6">
+					<div class="app-tools">
+						<div class="icon">
 							<a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar">
 								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/001-games.png">
 							</a>

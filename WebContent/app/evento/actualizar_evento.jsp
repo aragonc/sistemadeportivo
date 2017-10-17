@@ -1,3 +1,5 @@
+<%@page import="beans.ComboDTO"%>
+<%@page import="service.ComboService"%>
 <%@page import="beans.EventoDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -7,6 +9,8 @@
  <jsp:include page="../_sidebar.jsp" flush="true" />
 <%
 	EventoDTO obj = (EventoDTO)request.getAttribute("registro");
+	ComboService listaDocumento = new ComboService();  
+	List<ComboDTO> listaLugar = listaDocumento.listarComboSql("SELECT idlugar, nombre FROM lugar where estado = 1;");
 %>
   <c:set var="estado" value="<%= obj.getEstado() %>"/>
   <div class="content-wrapper">
@@ -39,7 +43,20 @@
 	                    <div class="form-group">
 	                         <label for="txthtml" class="col-sm-2 control-label">Lugar del Evento</label>
 	                         <div class="col-sm-10">
-	                         	<input type="text" id="lugar" value="<%= obj.getLugar() %>" name="lugar" class="form-control" placeholder="Escribe la dirección del evento">
+                         		<select id="listaevento" name="evento" class="form-control">
+		                           		<option value="0">-- Seleccione --</option>
+						                    <%
+						                    	
+						                    	for (ComboDTO item : listaLugar){
+						                    		if(item.getField().equals(obj.getLugar()+"")){
+						                    			out.println("<option value="+ item.getField() +" selected>" + item.getValor()+"</option>");
+						                    		} else {
+						                    			out.println("<option value="+ item.getField() +" >" + item.getValor()+"</option>");
+						                    		}
+						                    	}
+						                    
+						                   	%>
+		                           	</select>
 	                         </div>
 	                    </div>
 	                    <div class="row">

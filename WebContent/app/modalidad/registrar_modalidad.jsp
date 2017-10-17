@@ -10,6 +10,7 @@
 	List<ComboDTO> listaCategoria = listas.listarComboSql("SELECT idcategoria, nombres FROM campeonato.categoria where estado = 1;");
 	List<ComboDTO> listaDisciplina = listas.listarComboSql("SELECT iddisciplina, nombre FROM campeonato.disciplina where estado = 1;");
 	List<ComboDTO> listaGenero = listas.listarCombo("genero");
+	String error = (String)request.getAttribute("errorMessage");
 %>
  <div class="content-wrapper">
     <section class="content-header">
@@ -21,7 +22,17 @@
               <h3 class="box-title">Agregar modalidad de juego</h3>
             </div>
         	<div class="box-body">
+        	
             	<div class="col-md-9">
+            	
+            		<!-- MENSAJE QUE APARECE CUANDO SE REGISTRA UN EVENTO -->
+			       	<% if( error != null) { %>
+		              	<div class="alert alert-danger" role="alert">
+		              		<%= error %>
+		              	</div>
+		              <% } %>
+			       	<!-- FIN DEL MENSAJE -->
+            	
 					<form action="${pageContext.request.contextPath}/ServletModalidad?tipo=registrar" class="form-horizontal" id="frmregistrar" method="post">
                          
                          <div class="row">
@@ -73,15 +84,21 @@
                          	<div class="col-md-12">
                          		<div class="form-group">
 	                         		<label class="col-sm-2 control-label">N° Jugadores</label>
-		                            <div class="col-sm-3">
-		                             	<input type="text" name="cantidad" id="cantidad" class="form-control" placeholder="Ingrese cantidad de jugadores">
+		                            <div class="col-sm-2">
+		                             	<input type="text" name="cantidad" id="cantidad" class="form-control" placeholder="Ingrese cantidad">
 		                            </div>
-		                            <div class="col-sm-3">
+		                            <div class="col-sm-4">
 		                            	<%
+		                            		String check = null;
 							              for (ComboDTO item : listaGenero ){
+							            	 if(item.getField().equals("V")){
+							            		 check = "checked='checked'";
+							            	 }else{
+							            		 check = "";
+							            	 }
 							             %>
 					                    	<label class="radio-inline">
-					                    		<input type="radio" name="genero" id="genero_<%= item.getField() %>" value="<%= item.getField() %>"> <%= item.getValor() %>
+					                    		<input type="radio" name="genero" id="id<%= item.getValor() %>" value="<%= item.getField() %>" <%= check %> > <%= item.getValor() %>
 					                    	</label>		
 					                   	<%
 					                   		}  
