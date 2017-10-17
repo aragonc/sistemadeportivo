@@ -9,6 +9,7 @@ import java.util.List;
 import com.mysql.jdbc.Statement;
 
 import beans.EventoDTO;
+import beans.LugarDTO;
 import beans.ModalidadDTO;
 import interfaces.EventoDAO;
 import service.ModalidadService;
@@ -38,7 +39,7 @@ public class MySqlEventoDAO implements EventoDAO {
 				a.setGratuito(rs.getInt(6));
 				a.setPrecio(rs.getDouble(7));
 				a.setEstado(rs.getInt(8));
-				a.setLugar(rs.getInt(9));
+				a.setCodlugar(rs.getInt(9));
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -66,7 +67,8 @@ public class MySqlEventoDAO implements EventoDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT * FROM evento where idevento = ?;";
+			String sql = "SELECT e.idevento, e.nombre, e.descripcion, e.fecha_inicio, e.fecha_fin, e.modo, e.costo_evento, e.estado, l.idlugar, l.nombre, l.direccion, l.latitud, l.longitud "
+					+ "FROM evento e inner join lugar l on e.lugar_idlugar = l.idlugar where idevento = ?;";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
@@ -80,8 +82,15 @@ public class MySqlEventoDAO implements EventoDAO {
 				a.setGratuito(rs.getInt(6));
 				a.setPrecio(rs.getDouble(7));
 				a.setEstado(rs.getInt(8));
-				a.setLugar(rs.getInt(9));
+				a.setCodlugar(rs.getInt(9));
+				LugarDTO lugar = new LugarDTO();
+				lugar.setCodigo(rs.getInt(9));
+				lugar.setNombre(rs.getString(10));
+				lugar.setDireccion(rs.getString(11));
+				lugar.setLatitud(rs.getString(12));
+				lugar.setLongitud(rs.getString(13));
 				List<ModalidadDTO> mod = modalidad.buscarModalidadEvento(a.getCodigo());
+				a.setLugar(lugar);
 				a.setModalidades(mod);
 			}
 		} catch (Exception e) {
@@ -117,7 +126,7 @@ public class MySqlEventoDAO implements EventoDAO {
 			pstm.setInt(5, obj.getGratuito());
 			pstm.setDouble(6, obj.getPrecio());
 			pstm.setInt(7, obj.getEstado());
-			pstm.setInt(8, obj.getLugar());
+			pstm.setInt(8, obj.getCodlugar());
 			estado = pstm.executeUpdate();
 			
 			ResultSet rs = pstm.getGeneratedKeys();

@@ -36,6 +36,11 @@
           </a>
         </li>
         <li>
+          <a href="${pageContext.request.contextPath}/ServletLugar?tipo=listar">
+            <i class="fa fa-map-marker" aria-hidden="true"></i> <span>Lugares</span>
+          </a>
+        </li>
+        <li>
           <a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar">
             <i class="fa fa-bell" aria-hidden="true"></i> <span>Eventos</span>
           </a>

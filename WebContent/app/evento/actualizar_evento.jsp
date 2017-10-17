@@ -43,12 +43,12 @@
 	                    <div class="form-group">
 	                         <label for="txthtml" class="col-sm-2 control-label">Lugar del Evento</label>
 	                         <div class="col-sm-10">
-                         		<select id="listaevento" name="evento" class="form-control">
-		                           		<option value="0">-- Seleccione --</option>
+                         		<select id="listaevento" name="lugar" class="form-control">
+		                           		<option value="0">-- Seleccione un lugar --</option>
 						                    <%
 						                    	
 						                    	for (ComboDTO item : listaLugar){
-						                    		if(item.getField().equals(obj.getLugar()+"")){
+						                    		if(item.getField().equals(obj.getCodlugar()+"")){
 						                    			out.println("<option value="+ item.getField() +" selected>" + item.getValor()+"</option>");
 						                    		} else {
 						                    			out.println("<option value="+ item.getField() +" >" + item.getValor()+"</option>");

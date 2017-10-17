@@ -59,8 +59,8 @@
 											<input type="checkbox" name="cod[]" value="${lista.codigo}">
 		               		 			</display:column>
 		               		 			
-										<display:column property="nombre" title="Titulo Evento" sortable="false"/>
-										<display:column property="descripcion" title="Descripción" sortable="false"/>
+										<display:column property="nombre" title="Titulo Evento" sortable="false" style="width:20%;"/>
+										<display:column property="descripcion" title="Descripción" sortable="false" style="width:20%;"/>
 										<display:column property="fechaInicio" title="Fecha Inicio" sortable="false">
 											
 										</display:column>

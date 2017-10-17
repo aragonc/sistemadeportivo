@@ -6,9 +6,12 @@
     pageEncoding="ISO-8859-1"%>
  <jsp:include page="../_header.jsp" flush="true" />
  <jsp:include page="../_sidebar.jsp" flush="true" />
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% 
 	EventoDTO obj = (EventoDTO)request.getAttribute("registro"); 
 %>
+  <c:set var="latitud" value="<%= obj.getLugar().getLatitud() %>"/>
+  <c:set var="longitud" value="<%= obj.getLugar().getLongitud() %>"/>
   <div class="content-wrapper">
     <section class="content-header">
       <h1>Eventos</h1> 
@@ -33,43 +36,84 @@
 								
 							</div>
 							<div class="panel-body">
-								<div class="table-responsive">
-									<table class="table tabler-hover">
-										<tr>
-											<th class="th-detalle">Código</th>
-											<th class="th-detalle">Titulo del evento</th>
-											<th class="th-detalle">Descripción</th>
-											<th class="th-detalle">Fecha Inicio</th>
-											<th class="th-detalle">Fecha Fin</th>
-										</tr>
-										<tr>
-											<td><%= obj.getCodigo() %></td>
-											<td><%= obj.getNombre()%></td>
-											<td><%= obj.getDescripcion() %></td>
-											<td><%= obj.getFechaInicio() %></td>
-											<td><%= obj.getFechaFin() %></td>
-										</tr>
-									</table>
+								<div class="row">
+									<div class="col-md-9">
+										<div class="table-responsive">
+											<table class="table tabler-hover">
+												<tr>
+													<th class="th-detalle">Código</th>
+													<th class="th-detalle">Titulo del evento</th>
+													<th class="th-detalle" style="width: 300px">Descripción</th>
+													<th class="th-detalle">Fecha Inicio</th>
+													<th class="th-detalle">Fecha Fin</th>
+												</tr>
+												<tr>
+													<td><%= obj.getCodigo() %></td>
+													<td><%= obj.getNombre()%></td>
+													<td><%= obj.getDescripcion() %></td>
+													<td><%= obj.getFechaInicio() %></td>
+													<td><%= obj.getFechaFin() %></td>
+												</tr>
+											</table>
+										</div>
+										<div class="table-responsive">
+											<table class="table tabler-hover">
+												<tr>
+													<th class="th-detalle">Lugar del evento</th>
+													<th class="th-detalle">Costo S/.</th>
+													<th class="th-detalle">Gratuito</th>
+													<th class="th-detalle">Estado</th>
+													<th class="th-detalle">Fecha registro</th>
+												</tr>
+												<tr>
+													<td>
+														<strong><%= obj.getLugar().getNombre() %></strong><br>
+														<%= obj.getLugar().getDireccion() %>
+													</td>
+													<td><%= obj.getPrecio() %></td>
+													<td><%= obj.getGratuito() %></td>
+													<td>
+														<% if(obj.getEstado() == 1 ){
+															out.println("Activo");
+														} else {
+															out.println("Inactivo");
+														}
+														%>
+													</td>
+													<td><%= obj.getFechaInicio() %></td>
+												</tr>
+											</table>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div id="mapa" style="width: 300px; height: 250px;"></div>
+										<script type="text/javascript">
+						                  $( document ).ready(function() {
+						                		
+						                		var map;
+						                		var lat;
+						                		var lng;
+						                		
+						                		map = new GMaps({
+						                	        div: '#mapa',
+						                	        lat: ${latitud} ,
+						                	        lng: ${longitud},
+						                	        enableNewStyle: true
+						                	      });
+						                		
+						                		
+						                		map.addMarker({
+						                			  lat: ${latitud},
+						                			  lng: ${longitud},
+						                			  draggable: false
+						                			});
+						                  	});
+						                  </script>
+									</div>
 								</div>
 								
-								<div class="table-responsive">
-									<table class="table tabler-hover">
-										<tr>
-											<th class="th-detalle">Lugar del evento</th>
-											<th class="th-detalle">Costo S/.</th>
-											<th class="th-detalle">Gratuito</th>
-											<th class="th-detalle">Estado</th>
-											<th class="th-detalle">Fecha registro</th>
-										</tr>
-										<tr>
-											<td><%= obj.getLugar() %></td>
-											<td><%= obj.getPrecio() %></td>
-											<td><%= obj.getGratuito() %></td>
-											<td><%= obj.getEstado() %></td>
-											<td><%= obj.getFechaInicio() %></td>
-										</tr>
-									</table>
-								</div>
+								
+								
 							</div>
 						</div>
 	                    

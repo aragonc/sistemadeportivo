@@ -163,7 +163,7 @@ public class ServletEvento extends HttpServlet {
 		obj.setGratuito(Integer.parseInt(gratuito));
 		obj.setPrecio(Double.parseDouble(costo));
 		obj.setEstado(Integer.parseInt(estado));
-		obj.setLugar(Integer.parseInt(lugar));
+		obj.setCodlugar(Integer.parseInt(lugar));
 		
 		int resultado = eventoService.actualizarEvento(obj);
 		if (resultado != -1){
@@ -229,7 +229,7 @@ public class ServletEvento extends HttpServlet {
 		obj.setGratuito(Integer.parseInt(gratuito));
 		obj.setPrecio(Double.parseDouble(costo));
 		obj.setEstado(Integer.parseInt(estado));
-		obj.setLugar(Integer.parseInt(lugar));
+		obj.setCodlugar(Integer.parseInt(lugar));
 		
 		int resultado = eventoService.registrarEvento(obj);
 		if (resultado != -1){

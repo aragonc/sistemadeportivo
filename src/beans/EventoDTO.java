@@ -13,7 +13,8 @@ public class EventoDTO {
 	private double precio;
 	private int gratuito;
 	private List<ModalidadDTO> modalidades;
-	private int lugar;
+	private int codlugar;
+	private LugarDTO lugar;
 
 	
 	public int getCodigo() {
@@ -71,13 +72,19 @@ public class EventoDTO {
 	public void setGratuito(int gratuito) {
 		this.gratuito = gratuito;
 	}
-	public int getLugar() {
+	
+	public int getCodlugar() {
+		return codlugar;
+	}
+	public void setCodlugar(int codlugar) {
+		this.codlugar = codlugar;
+	}
+	public LugarDTO getLugar() {
 		return lugar;
 	}
-	public void setLugar(int lugar) {
+	public void setLugar(LugarDTO lugar) {
 		this.lugar = lugar;
 	}
-	
 	public EventoDTO() {
 		super();
 		// TODO Auto-generated constructor stub
