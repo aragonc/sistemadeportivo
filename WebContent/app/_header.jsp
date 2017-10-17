@@ -21,6 +21,10 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css">
   <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/images/favicon.png" />
+  <script src="${pageContext.request.contextPath}/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDLDyjyQtAUWyH-5z6ANlYcgwQ8le26_3w"></script>
+<script src="${pageContext.request.contextPath}/bower_components/gmaps/gmaps.js"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
