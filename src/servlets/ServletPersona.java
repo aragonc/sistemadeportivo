@@ -43,7 +43,7 @@ public class ServletPersona extends HttpServlet {
 			else if (tipo.equals("buscarPersonaXNombre"))
 				buscarPersonaXNombre(request, response);
 		}
-	//metodos para registar una persona pero según su tipo;
+	//metodos para registar una persona pero segï¿½n su tipo;
 	 
 	 private void eliminar(HttpServletRequest request,
 				HttpServletResponse response) throws ServletException, IOException {
@@ -59,7 +59,7 @@ public class ServletPersona extends HttpServlet {
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<PersonaDTO> info = personaService.listarPersona();
 		request.setAttribute("data", info);
-		request.getRequestDispatcher("app/listar_persona.jsp").forward(request, response);
+		request.getRequestDispatcher("app/persona/listar_persona.jsp").forward(request, response);
 	}
 
 	private void actualizar(HttpServletRequest request,
@@ -113,7 +113,7 @@ public class ServletPersona extends HttpServlet {
 		int codigo = Integer.parseInt(dato);
 		PersonaDTO x = personaService.buscarPersona(codigo);
 		request.setAttribute("registro", x);
-		request.getRequestDispatcher("app/actualizar_persona.jsp").forward(request,
+		request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request,
 				response);
 	}
 
@@ -185,7 +185,7 @@ public class ServletPersona extends HttpServlet {
 		
 		List<PersonaDTO> info = personaService.listarPersona(obj);
 		request.setAttribute("data", info);
-		request.getRequestDispatcher("app/listar_persona.jsp").forward(request,
+		request.getRequestDispatcher("app/persona/listar_persona.jsp").forward(request,
 				response);
 	}
 }

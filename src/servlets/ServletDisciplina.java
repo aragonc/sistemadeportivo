@@ -47,7 +47,7 @@ public class ServletDisciplina extends HttpServlet{
 			throws ServletException, IOException {
 		List<DisciplinaDTO> info = disciplinaService.listarDisciplina();
 		request.setAttribute("data", info);
-		request.getRequestDispatcher("app/lista_disciplina.jsp").forward(request,
+		request.getRequestDispatcher("app/disciplina/lista_disciplina.jsp").forward(request,
 				response);
 	}
 
@@ -77,7 +77,7 @@ public class ServletDisciplina extends HttpServlet{
 		int codigo = Integer.parseInt(dato);
 		DisciplinaDTO x = disciplinaService.buscarDisciplina(codigo);
 		request.setAttribute("registro", x);
-		request.getRequestDispatcher("app/actualizar_disciplina.jsp").forward(request,
+		request.getRequestDispatcher("app/disciplina/actualizar_disciplina.jsp").forward(request,
 				response);
 	}
 	
