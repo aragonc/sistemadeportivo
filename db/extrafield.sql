@@ -14,3 +14,8 @@ INSERT INTO `extrafield` (`idextrafield`,`tipo`,`field`,`valor`) VALUES (7,'sexo
 INSERT INTO `extrafield` (`idextrafield`,`tipo`,`field`,`valor`) VALUES (8,'genero','V','Varones');
 INSERT INTO `extrafield` (`idextrafield`,`tipo`,`field`,`valor`) VALUES (9,'genero','M','Mujeres');
 INSERT INTO `extrafield` (`idextrafield`,`tipo`,`field`,`valor`) VALUES (10,'genero','MX','Mixto');
+
+INSERT INTO `perfil` VALUES (1,'Administrador');
+INSERT INTO `perfil` VALUES (2,'Delegado Equipo');
+INSERT INTO `perfil` VALUES (3,'Cajera');
+INSERT INTO `perfil` VALUES (4,'Jugador');
