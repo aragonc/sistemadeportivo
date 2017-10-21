@@ -1,22 +1,29 @@
 package servlets;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
+import com.sun.org.apache.bcel.internal.generic.GETFIELD;
 
+import beans.Imagen;
 import beans.PersonaDTO;
 import service.PersonaService;
+import utils.CropImagen;
 
 @WebServlet("/ServletPersona")
+@MultipartConfig
 public class ServletPersona extends HttpServlet {
 	PersonaService personaService = new PersonaService();
 	private static final long serialVersionUID = 1L;
@@ -116,14 +123,13 @@ public class ServletPersona extends HttpServlet {
 		request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request,
 				response);
 	}
-
+	
 	private void registrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		PersonaDTO obj = new PersonaDTO();
-		//request.getRequestDispatcher("app/registar_persona.jsp").forward(request, response);
-
-		String nombre = request.getParameter("txtnombre");
+		
+		String nombre = request.getParameter("txtnombre");		
 		String apaterno = request.getParameter("txtapaterno");
 		String amaterno = request.getParameter("txtamaterno");
 		String sexo = request.getParameter("cmbsexo");
@@ -132,8 +138,35 @@ public class ServletPersona extends HttpServlet {
 		String fnacimiento = request.getParameter("txtfechanacimiento");
 		String email = request.getParameter("txtemail");
 		String fono = request.getParameter("txtfono");
-		String estado = request.getParameter("cmbestado");
-		
+		String estado = request.getParameter("cmbestado"); 
+
+		//Traemos las dimenciones de las variable del Jcrop
+    	String ladox = request.getParameter("x");
+    	String ladoy = request.getParameter("y");
+        String ancho = request.getParameter("w");
+        String alto = request.getParameter("h");
+        //Obtenemos el Archivo
+        String fileimagen=request.getParameter("file");
+        
+        String fileName = null;
+        //Get all the parts from request and write it to the file on server
+        for (Part part : request.getParts()) {
+            fileName = part.getName();
+            
+        }
+
+    	Imagen img = new Imagen();
+    	img.setLadox(Integer.parseInt(ladox));
+    	img.setLadoy(Integer.parseInt(ladoy));
+    	img.setAncho(Integer.parseInt(ancho));
+    	img.setAlto(Integer.parseInt(alto));
+    	img.setNombre(fileimagen);
+        
+        //Llamamos a la clase Cortar Imagen
+        CropImagen imagen = new CropImagen();
+      
+        imagen.recotarImagen(img);
+        
 		if(fnacimiento!=null && !fnacimiento.trim().equals("")){
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 			Date date = null;

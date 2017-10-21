@@ -33,7 +33,7 @@
     		<div class="box-header with-border">
   				<h3 class="box-title">Datos personales</h3>
   			</div>
-	  		<form class="form-horizontal" action="../ServletPersona?tipo=registrar" method="post" enctype="multipart/form-data">
+	  		<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletPersona?tipo=registrar" method="post" enctype="multipart/form-data">
 	  			<div class="box-body">
 	  				<div class="col-md-9">
 	  				<div class="row">
@@ -139,12 +139,13 @@
 		  						<p>Seleccione una imagen</p>
 		  						<input type="file" onchange="cargarImagen()" id="avatar" name="avatar" accept="image/x-png,image/gif,image/jpeg" />
 		  						<div id="data-imagen" class="form-group">
+		  							<input type="hidden" id="file" name="file" />
 		                            <input type="hidden" id="x" name="x" />
 		                            <input type="hidden" id="y" name="y" />
 		                            <input type="hidden" id="w" name="w" />
 		                            <input type="hidden" id="h" name="h" />
                         		</div>
-                        		<div id="cerror" class="alert alert-warning"></div>
+                        		<div id="cerror" class="alert alert-warning" style="display: none;"></div>
 		  					</div>
 		  					
 		  					<div id="panel-crop" class="panel-image">
@@ -159,14 +160,20 @@
 	  			</div>
 	  			<div class="col-md-3">
 	  				<script type="text/javascript">
+	  				
+		  				$(document).ready(function () {
+		  		            /* $("#cerror").hide();
+		  		            $("#recortarImagen").hide(); */
+		  		        });
 	  					
 	  					var jcrop_api, boundx, boundy;
 
 	  					function updateInfo(e) {
-	  					    $('#x').val(e.x);
-	  					    $('#y').val(e.y);
+	  					    $('#x').val(parseInt(e.x));
+	  					    $('#y').val(parseInt(e.y));
 	  					    $('#w').val(e.w);
-	  					    $('#h').val(e.h);			
+	  					    $('#h').val(e.h);
+	  					    
 	  					};
 	  					function clearInfo() {
   						    $('#w').val('');
@@ -184,12 +191,12 @@
 	  						//filtramos la imagen en JPG o PNG
 	  						var rFilter = /^(image\/jpeg|image\/png)$/i;
 	  						if (! rFilter.test(oFile.type)) {
-						    	$('.error').html('Seleccionar una imagen JPG o PNG').show();
+						    	$('.cerror').html('Seleccionar una imagen JPG o PNG').show();
   							    return;
 	  						}
 							//comparamos el tamaño de la imagen
 	  						if (oFile.size >  1024 * 1024) {
-	  					        $('.error').html('Solo se permite subir imagenes menor a 2,5 MB').show();
+	  					        $('.cerror').html('Solo se permite subir imagenes menor a 2,5 MB').show();
 	  					        return;
 	  					    }
 							
@@ -205,8 +212,8 @@
 	  		                        if (typeof jcrop_api != 'undefined') {
 	  		                            jcrop_api.destroy();
 	  		                            jcrop_api = null;
-	  		                         	$('#img-preview').width(oImage.naturalWidth);
-										$('#img-preview').height(oImage.naturalHeight);
+	  		                         	//$('#img-preview').width(oImage.naturalWidth);
+										//$('#img-preview').height(oImage.naturalHeight);
 	  		                        }
 	  		                      //mostramos la vista previa en segundo
 	  		                      setTimeout(function(){
@@ -216,7 +223,7 @@
 		  		                          	onChange: updateInfo,
 		  		                          	onRelease: clearInfo,
 		  		                            bgOpacity: .4,
-		  		                            setSelect: [100, 100, 50, 50],
+		  		                            setSelect: [350, 350, 50, 50],
 		  		                            aspectRatio: 1,
 		  		                            boxWidth: 300
 		  		                        }, function () {
@@ -226,7 +233,7 @@
 		  		                        	boundy = bounds[1];
 		  		                            jcrop_api = this;
 		  		                        });
-	  		                      },3000);
+	  		                      },10);
 	  		                        
 	  		                    };
 	  		                }
@@ -235,6 +242,19 @@
 	  						
 	  					}
 	  					
+	  					function cropImagen(){
+	  						var imgX = $("#x").val();
+	  			            var imgY = $("#y").val();
+	  			            var imgW = $("#w").val();
+	  			            var imgH = $("#h").val();
+	  			            var img = {
+	  			                'CorX': Math.round(imgX),
+	  			                'CorY': Math.round(imgY),
+	  			                'CorW': Math.round(imgW),
+	  			                'CorH': Math.round(imgH),
+	  			                NombreImagen
+	  			            }
+	  					}
 
 	  					
 	  				</script>
