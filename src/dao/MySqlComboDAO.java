@@ -59,7 +59,7 @@ public class MySqlComboDAO implements ComboDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT m.idmodalidad, CONCAT(d.nombre,' - ', c.nombres) as nombremodalidad FROM evento_modalidad em " + 
+			String sql = "SELECT m.idmodalidad, CONCAT(d.nombre,' - ', c.nombre) as nombremodalidad FROM evento_modalidad em " + 
 					"INNER JOIN modalidad m ON em.modalidad_idmodalidad = m.idmodalidad " + 
 					"INNER JOIN disciplina d ON m.disciplina_iddisciplina = d.iddisciplina " + 
 					"INNER JOIN categoria c ON m.categoria_idcategoria = c.idcategoria " + 

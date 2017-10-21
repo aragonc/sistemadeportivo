@@ -7,7 +7,7 @@
  <jsp:include page="../_sidebar.jsp" flush="true" />
  <%  
 	ComboService listas = new ComboService();  
-	List<ComboDTO> listaCategoria = listas.listarComboSql("SELECT idcategoria, nombres FROM campeonato.categoria where estado = 1;");
+	List<ComboDTO> listaCategoria = listas.listarComboSql("SELECT idcategoria, nombre FROM campeonato.categoria where estado = 1;");
 	List<ComboDTO> listaDisciplina = listas.listarComboSql("SELECT iddisciplina, nombre FROM campeonato.disciplina where estado = 1;");
 	List<ComboDTO> listaGenero = listas.listarCombo("genero");
 	String error = (String)request.getAttribute("errorMessage");

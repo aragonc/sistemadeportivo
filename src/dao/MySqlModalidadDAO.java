@@ -25,7 +25,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT m.idmodalidad, m.descripcion, m.genero, m.njugadores, m.nmujeres, m.nvarones, d.iddisciplina, d.nombre, c.idcategoria, c.nombres FROM modalidad m "
+			String sql = "SELECT m.idmodalidad, m.descripcion, m.genero, m.njugadores, m.nmujeres, m.nvarones, d.iddisciplina, d.nombre, c.idcategoria, c.nombre FROM modalidad m "
 					+ "inner join categoria c on m.categoria_idcategoria = c.idcategoria "
 					+ "inner join disciplina d on  m.disciplina_iddisciplina = d.iddisciplina;";
 			pstm = cn.prepareStatement(sql);
