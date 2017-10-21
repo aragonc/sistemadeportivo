@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `campeonato`.`categoria` ;
 
 CREATE TABLE IF NOT EXISTS `campeonato`.`categoria` (
   `idcategoria` INT NOT NULL AUTO_INCREMENT,
-  `nombres` VARCHAR(45) NULL,
+  `nombre` VARCHAR(45) NOT NULL ,
   `fecha_registro` DATETIME NULL,
   `estado` INT NULL,
   PRIMARY KEY (`idcategoria`))
@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS `campeonato`.`disciplina` ;
 
 CREATE TABLE IF NOT EXISTS `campeonato`.`disciplina` (
   `iddisciplina` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NULL,
+  `nombre` VARCHAR(45) NOT NULL,
   `fecha_registro` DATETIME NULL,
   `estado` INT NULL,
   PRIMARY KEY (`iddisciplina`))
@@ -192,7 +192,7 @@ DROP TABLE IF EXISTS `campeonato`.`evento` ;
 
 CREATE TABLE IF NOT EXISTS `campeonato`.`evento` (
   `idevento` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(50) NULL,
+  `nombre` VARCHAR(50) NOT NULL,
   `descripcion` VARCHAR(200) NULL,
   `fecha_inicio` DATETIME NULL,
   `fecha_fin` DATETIME NULL,

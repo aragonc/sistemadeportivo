@@ -28,7 +28,7 @@
 		        	<a href="${pageContext.request.contextPath}">
 				    	<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
 				    </a>
-			        <a href="${pageContext.request.contextPath}/app/registrar_disciplina.jsp" >
+			        <a href="${pageContext.request.contextPath}/app/disciplina/registrar_disciplina.jsp" >
 			        	<img alt="Regresar al escritorio" title ="Registrar nueva disciplina" src="${pageContext.request.contextPath}/images/icons/32/nueva_disciplina.png">
 			       	</a>
 		       	</div>
@@ -36,6 +36,9 @@
 	        		<form class="form-horizontal" action="ServletDisciplina?tipo=eliminar" method="post" id="formlista">
 	        		<div class="table-responsive">
 		        	<display:table class="table table-bordered table-hover"  name="data" requestURI="../ServletDisciplina?tipo=listar"	excludedParams="tipo" id="lista">
+		              	<display:setProperty name="basic.msg.empty_list">
+	               		 					<div class="alert alert-warning" role="alert">No se existen disciplinas registradas</div>
+	               		 				</display:setProperty>
 		              	<display:column title="Item" sortable="false" media="html" >
 							<input type="checkbox" name="cod[]" value="${lista.codigo}">
              		 	</display:column>
@@ -47,7 +50,7 @@
 				              <div class="text-center">
 				                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
 				                    <a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=buscar&cod=${lista.codigo}" class="btn btn-default" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-				                    <a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" href="ServletDisciplina?tipo=eliminar&cod=${lista.codigo}" class="btn btn-default" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+				                    <a onclick="javascript:if(!confirm('Por favor, confirme su elección')) return false;" href="ServletDisciplina?tipo=eliminar&cod[]=${lista.codigo}" class="btn btn-default" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 				                  </div>
 				              </div>
 		                  </display:column>

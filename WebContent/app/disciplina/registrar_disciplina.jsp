@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
- 
+    pageEncoding="ISO-8859-1"%> 
  <jsp:include page="../_header.jsp" flush="true" />
  <jsp:include page="../_sidebar.jsp" flush="true" />
- 
+ <%	String validar = (String) request.getAttribute("validaciones"); %>
  <div class="content-wrapper">
  <section class="content-header">
       <h1>Disciplina</h1> 
@@ -15,11 +14,14 @@
 	        	</div>
                   <div class="box-body">
                           <div class="col-md-9">
-                                <form action="../ServletDisciplina?tipo=registrar" class="form-horizontal" id="frmdisciplina" method="post">
+                                <form action="${pageContext.request.contextPath}/ServletDisciplina?tipo=registrar" class="form-horizontal" id="frmdisciplina" method="post">
                                   <div class="form-group">
+                                  <% if (validar != null) { %>
+                                 <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
+                                 <% } %>
                                     <label for="txtdisciplina" class="col-sm-2 control-label">Nombre de Disciplina</label>
                                     <div class="col-sm-5">
-                                      <input type="text" class="form-control" name="txt_nombre" id="txtdisciplina" placeholder="Escribe nombre de disciplina">
+                                      <input type="text" class="form-control"  name="txt_nombre" id="disciplina" placeholder="Escribe nombre de disciplina">
                                     </div>
                                     <div class="col-md-5"></div>
                                   </div>
@@ -39,10 +41,12 @@
                                       <a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=listar" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i>
                                         Atras
                                       </a>
-                                      <button type="submit" class="btn btn-success">
+                                      <button type="submit" class="btn btn-success" id="btnAceptar">
                                       <i class="fa fa-plus" aria-hidden="true"></i> Registrar Disciplina</button>
+                                                                             
                                     </div>
                                   </div>
+                                  
                                 </form>
 			                    
                            </div>
@@ -55,3 +59,5 @@
   <!-- /.content-wrapper -->
  
  <jsp:include page="../_footer.jsp" flush="true" />
+
+

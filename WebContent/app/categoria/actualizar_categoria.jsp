@@ -3,8 +3,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <jsp:include page="../_header.jsp" flush="true" />
- <jsp:include page=../_sidebar.jsp" flush="true" />
- <% CategoriaDTO ca = (CategoriaDTO) request.getAttribute("registro"); %>
+ <jsp:include page="../_sidebar.jsp" flush="true" />
+ <% 
+ CategoriaDTO ca = (CategoriaDTO) request.getAttribute("registro"); 
+ String validar = (String) request.getAttribute("validaciones");
+ %>
  <c:set var="estado" value="<%= ca.getEstado() %>"/>
 
  <div class="content-wrapper">
@@ -21,9 +24,12 @@
 					<form action="${pageContext.request.contextPath}/ServletCategoria?tipo=actualizar" class="form-horizontal" id="frmregistrar" method="post">
                          <input type="hidden" name="codigo" value="<%= ca.getCodigo() %>">
                          <div class="form-group">
+                          <% if (validar != null) { %>
+                                 <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
+                                 <% } %>
                            <label class="col-sm-2 control-label">Nombre Categoria</label>
                            <div class="col-sm-5">
-                             <input type="text"  id="txtnombre" name="txtnombre" class="form-control" value="<%= ca.getNombre() %>">
+                             <input type="text"  id="txt_nombre" name="txt_nombre" class="form-control" value="<%= ca.getNombre() %>">
                            </div>
                            <div class="col-sm-5"></div>
                          </div>                            

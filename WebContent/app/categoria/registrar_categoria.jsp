@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
  <jsp:include page="../_header.jsp" flush="true" />
  <jsp:include page="../_sidebar.jsp" flush="true" />
- 
+  <%	String validar = (String) request.getAttribute("validaciones"); %>
  <div class="content-wrapper">
     <section class="content-header">
       <h1>Categoria</h1> 
@@ -16,9 +16,12 @@
             	<div class="col-md-9">
 					<form action="${pageContext.request.contextPath}/ServletCategoria?tipo=registrar" class="form-horizontal" id="frmregistrar" method="post">
                          <div class="form-group">
-                           <label class="col-sm-2 control-label">Nombre Categoria</label>
+                          <% if (validar != null) { %>
+                                 <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
+                                 <% } %>
+                         <label class="col-sm-2 control-label">Nombre Categoria</label>
                            <div class="col-sm-5">
-                             <input type="text"  id="txtnombre" name="txtnombre" class="form-control" placeholder="Escribe nombre de Categoria">
+                             <input type="text"  id="txt_nombre" name="txt_nombre" class="form-control" placeholder="Escribe nombre de Categoria">
                            </div>
                            <div class="col-sm-5"></div>
                          </div>                                                                

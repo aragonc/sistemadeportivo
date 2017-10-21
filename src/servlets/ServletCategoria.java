@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.CategoriaDTO;
+
+import service.AjaxService;
 import service.CategoriaService;
 
 
@@ -17,6 +19,7 @@ import service.CategoriaService;
 public class ServletCategoria extends HttpServlet{
 	
 	CategoriaService categoriaService = new CategoriaService();
+	AjaxService ajaxService = new AjaxService();
 	private static final long serialVersionUID = 1L;
 
 	public ServletCategoria() {
@@ -54,18 +57,40 @@ public class ServletCategoria extends HttpServlet{
 	private void registrar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		CategoriaDTO obj = new CategoriaDTO();
-		String nombre = request.getParameter("txtnombre");
+		String nombre = request.getParameter("txt_nombre");
 		String est = request.getParameter("cboestado");
 		
-		obj.setNombre(nombre);
-		obj.setEstado(Integer.parseInt(est));
+		String validaciones = "";
 		
+		boolean count = ajaxService.mismoNombre("categoria",nombre);
 		
-		int estado = categoriaService.registrarCategoria(obj);
-		if (estado != -1)
-			listar(request, response);
-		else
-			response.sendRedirect("error.html");
+		if (nombre.replaceAll(" ", "").equals("")) {
+            validaciones += "El campo Nombre de Categoria esta vacio";
+            request.setAttribute("validaciones", validaciones);
+	        request.getRequestDispatcher("app/categoria/registrar_categoria.jsp").forward(request, response);
+        }		
+		else if(!(nombre.matches("[a-zA-Z 0-9]*"))){
+			validaciones += "Ingrese un nombre válido";
+            request.setAttribute("validaciones", validaciones);
+	        request.getRequestDispatcher("app/categoria/registrar_categoria.jsp").forward(request, response);
+		}
+		else if(count==true) {
+    		validaciones = "Ya hay una categoria con el mismo nombre"; 
+    		request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/categoria/registrar_categoria.jsp").forward(request, response);
+        }else{
+	        obj.setNombre(nombre);		
+    		obj.setEstado(Integer.parseInt(est));
+	        int estado = categoriaService.registrarCategoria(obj);
+	        if (estado != -1){
+				listar(request, response);
+			}
+			else{
+				response.sendRedirect("error.html");
+				
+			}
+			
+	        }   
 	}
 
 	private void buscar(HttpServletRequest request, HttpServletResponse response)
@@ -79,23 +104,45 @@ public class ServletCategoria extends HttpServlet{
 		//System.out.println(baseURL);
 	}
 	
+	
+	
 	private void actualizar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		CategoriaDTO obj = new CategoriaDTO();
 		String codigo = request.getParameter("codigo");
-		String nombre = request.getParameter("txtnombre");
+		String nombre = request.getParameter("txt_nombre");
 		String est = request.getParameter("cboestado");
+		String validaciones = "";
 		
-		obj.setNombre(nombre);
-		obj.setCodigo(Integer.parseInt(codigo));
-		obj.setEstado(Integer.parseInt(est));
+		CategoriaDTO x = categoriaService.buscarCategoria(Integer.parseInt(codigo));
 		
-		int estado = categoriaService.actualizarCategoria(obj);
-		System.out.println(estado);
-		if (estado != -1)
-			listar(request, response);
-		else
-			response.sendRedirect("error.html");
+		
+		
+		if (nombre.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones += "El campo Nombre de Categoria esta vacio";
+            request.setAttribute("validaciones", validaciones);
+	        request.getRequestDispatcher("app/categoria/actualizar_categoria.jsp").forward(request, response);
+        }		
+		else if(!(nombre.matches("[a-zA-Z 0-9]*"))){
+			request.setAttribute("registro", x);
+			validaciones += "Ingrese un nombre válido";
+            request.setAttribute("validaciones", validaciones);
+	        request.getRequestDispatcher("app/categoria/actualizar_categoria.jsp").forward(request, response);
+		}
+		else{
+        	obj.setCodigo(Integer.parseInt(codigo));
+	        obj.setNombre(nombre);		
+    		obj.setEstado(Integer.parseInt(est));
+	        int estado = categoriaService.actualizarCategoria(obj);
+	        if (estado != -1){
+				listar(request, response);
+			}
+			else{
+				response.sendRedirect("error.html");
+				
+			}
+        }
 	}
 
 	private void eliminar(HttpServletRequest request,

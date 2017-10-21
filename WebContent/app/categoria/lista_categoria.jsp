@@ -26,13 +26,16 @@
 			        	<a href="${pageContext.request.contextPath}">
 			        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
 			        	</a>
-				        <a href="${pageContext.request.contextPath}/app/registrar_categoria.jsp">
+				        <a href="${pageContext.request.contextPath}/app/categoria/registrar_categoria.jsp">
 				        	<img alt="Crear nueva categoria" title="Crear nueva categoria" src="${pageContext.request.contextPath}/images/icons/32/new_folder.png">
 				        </a>
 			       	</div>
 			       	<form class="form-horizontal" action="ServletCategoria?tipo=eliminar" method="post" id="formlista">
 			        <div class="table-responsive">
 				        <display:table class="table table-bordered table-hover"  name="data" requestURI="../ServletCategoria?tipo=listar"	id="lista">
+			                <display:setProperty name="basic.msg.empty_list">
+	               		 					<div class="alert alert-warning" role="alert">No se existen categorias registradas</div>
+	               		 				</display:setProperty>
 			                <display:column title="Item" sortable="false" media="html" >
 								<input type="checkbox" name="cod[]" value="${lista.codigo}">
              		 		</display:column>

@@ -55,6 +55,10 @@
 		              	<form class="form-horizontal" action="ServletEvento?tipo=eliminar" method="post" id="formlista">
 		               		<div class="table-responsive">
 		               			<display:table name="data" class="table table-bordered table-hover" pagesize="15" requestURI="ServletEvento?tipo=listar" excludedParams="tipo" id="lista">
+		               		 			<display:setProperty name="basic.msg.empty_list">
+	               		 					<div class="alert alert-warning" role="alert">No se existe eventos registrados</div>
+	               		 				</display:setProperty>
+		               		 			
 		               		 			<display:column title="Item" sortable="false" media="html" >
 											<input type="checkbox" name="cod[]" value="${lista.codigo}">
 		               		 			</display:column>

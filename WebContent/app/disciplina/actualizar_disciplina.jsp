@@ -4,8 +4,14 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <jsp:include page="../_header.jsp" flush="true" />
  <jsp:include page="../_sidebar.jsp" flush="true" />
- <% DisciplinaDTO di = (DisciplinaDTO) request.getAttribute("registro"); %>
-  <c:set var="estado" value="<%= di.getEstado() %>"/>
+ <% 
+ String validar = (String) request.getAttribute("validaciones");
+ DisciplinaDTO di = (DisciplinaDTO) request.getAttribute("registro"); 
+ 
+ %>
+
+<c:set var="estado" value="<%= di.getEstado() %>"/>
+
  <div class="content-wrapper">
  	<section class="content-header">
       <h1>Disciplina</h1> 
@@ -21,9 +27,12 @@
                                 <form action="${pageContext.request.contextPath}/ServletDisciplina?tipo=actualizar" class="form-horizontal" id="frmdisciplina" method="post">
                                 <input type="hidden" name="txt_codigo" value="<%= di.getCodigo() %>">
                                   <div class="form-group">
+                                  <% if (validar != null) { %>
+                                 <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
+                                 <% } %>
                                     <label for="txtdisciplina" class="col-sm-2 control-label">Nombre de Disciplina</label>
                                     <div class="col-sm-5">
-                                      <input type="text" class="form-control" name="txt_nombre" id="txtdisciplina" placeholder="Escribe nombre de disciplina" value="<%= di.getNombre()%>">
+                                      <input type="text" class="form-control" name="txt_nombre" id="txt_disciplina" placeholder="Escribe nombre de disciplina" value="<%= di.getNombre()%>">
                                     </div>
                                     <div class="col-sm-5"></div>
                                   </div>

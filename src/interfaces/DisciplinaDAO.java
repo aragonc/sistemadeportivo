@@ -16,5 +16,7 @@ public interface DisciplinaDAO {
 	public int actualizarDisciplina(DisciplinaDTO obj);
 	
 	public int eliminarDisciplina(int cod);
+	
+	
 
 }

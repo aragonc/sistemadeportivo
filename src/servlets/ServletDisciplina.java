@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import beans.DisciplinaDTO;
-
+import service.AjaxService;
 import service.DisciplinaService;
 
 @WebServlet("/ServletDisciplina")
@@ -19,8 +19,9 @@ import service.DisciplinaService;
 public class ServletDisciplina extends HttpServlet{
 	
 	DisciplinaService disciplinaService = new DisciplinaService();
+	AjaxService ajaxService = new AjaxService();
 	private static final long serialVersionUID = 1L;
-
+	 
 	public ServletDisciplina() {
 		super();
 	}
@@ -58,17 +59,33 @@ public class ServletDisciplina extends HttpServlet{
 		DisciplinaDTO obj = new DisciplinaDTO();
 		String nombre = request.getParameter("txt_nombre");
 		String est = request.getParameter("cbo_estado");
+		String validaciones = "";
 		
-				
-		obj.setNombre(nombre);		
-		obj.setEstado(Integer.parseInt(est));
+		boolean count = ajaxService.mismoNombre("disciplina",nombre);
 		
-		
-		int estado = disciplinaService.registrarDisciplina(obj);
-		if (estado != -1)
-			listar(request, response);
-		else
-			response.sendRedirect("error.html");
+        if (nombre.replaceAll(" ", "").equals("")) {
+            validaciones = "El campo Nombre de Disciplina esta vacio";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/disciplina/registrar_disciplina.jsp").forward(request, response);
+        } else if(!(nombre.matches("[a-zA-Z]*"))){
+        	validaciones = "Ingrese un nombre válido";
+        	request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/disciplina/registrar_disciplina.jsp").forward(request, response);
+    	} else if(count==true) {
+    		validaciones = "Ya hay una disciplina con el mismo nombre"; 
+    		request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/disciplina/registrar_disciplina.jsp").forward(request, response);
+        } else {
+        	obj.setNombre(nombre);		
+    		obj.setEstado(Integer.parseInt(est));
+            int estado = disciplinaService.registrarDisciplina(obj);
+            if (estado != -1){
+    			listar(request, response);
+            }
+            else{
+            	response.sendRedirect("error.html");
+            }
+        } 	
 	}
 
 	private void buscar(HttpServletRequest request, HttpServletResponse response)
@@ -82,21 +99,38 @@ public class ServletDisciplina extends HttpServlet{
 	}
 	
 	private void actualizar(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+			HttpServletResponse response) throws ServletException, IOException {		
 		DisciplinaDTO obj = new DisciplinaDTO();
 		String cod = request.getParameter("txt_codigo");
 		String nombre = request.getParameter("txt_nombre");		
 		String est = request.getParameter("cbo_estado");
+		String validaciones = "";
 		
-		obj.setCodigo(Integer.parseInt(cod));		
-		obj.setNombre(nombre);
-		obj.setEstado(Integer.parseInt(est));
 		
-		int estado = disciplinaService.actualizarDisciplina(obj);
-		if (estado != -1)
-			listar(request, response);
-		else
-			response.sendRedirect("error.html");
+		DisciplinaDTO x = disciplinaService.buscarDisciplina(Integer.parseInt(cod));
+		
+        if (nombre.replaceAll(" ", "").equals("")) {        	
+    		request.setAttribute("registro", x);
+            validaciones = "El campo Nombre de Disciplina esta vacio";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/disciplina/actualizar_disciplina.jsp").forward(request, response);
+        } else if(!(nombre.matches("[a-zA-Z]*"))){
+        	request.setAttribute("registro", x);
+        	validaciones = "Ingrese un nombre válido";
+        	request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/disciplina/actualizar_disciplina.jsp").forward(request, response);
+    	} else {
+        	obj.setCodigo(Integer.parseInt(cod));
+        	obj.setNombre(nombre);		
+    		obj.setEstado(Integer.parseInt(est));
+            int estado = disciplinaService.actualizarDisciplina(obj);
+            if (estado != -1){
+    			listar(request, response);
+            }
+            else{
+            	response.sendRedirect("error.html");
+            }
+        } 	
 	}
 
 	private void eliminar(HttpServletRequest request,
@@ -110,5 +144,7 @@ public class ServletDisciplina extends HttpServlet{
 		request.getRequestDispatcher("ServletDisciplina?tipo=listar").forward(request,
 				response);
 	}
+	
+	
 
 }

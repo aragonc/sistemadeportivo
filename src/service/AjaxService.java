@@ -13,5 +13,8 @@ public class AjaxService {
 	public List<ModalidadDTO> listarModalidadEvento(int codevento) {
 		return ajaxDAO.listarModalidadEvento(codevento);
 	}
+	public boolean mismoNombre(String tabla, String nom){
+		return ajaxDAO.mismoNombre(tabla, nom);
+	}
 }
 

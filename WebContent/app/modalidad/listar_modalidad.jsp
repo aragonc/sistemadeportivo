@@ -53,6 +53,9 @@
 			       	<form class="form-horizontal" action="ServletModalidad?tipo=eliminar" method="post" id="formlista">
 			        <div class="box-body table-responsive no-padding">
 				        <display:table class="table table-bordered table-hover"  name="data" requestURI="../ServletModalidad?tipo=listar"	id="lista">
+			               <display:setProperty name="basic.msg.empty_list">
+	               		 					<div class="alert alert-warning" role="alert">No se existe modalidades registradas</div>
+	               		 				</display:setProperty>
 			                <display:column title="Item" sortable="false" media="html" >
 							    	<input type="checkbox" name="cod[]" value="${lista.codigo}">
              		 		</display:column>
