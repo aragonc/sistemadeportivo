@@ -20,6 +20,7 @@
   	"datatables.net": "^1.10.15",
     "datatables.net-bs": "^2.1.1",
     "ckeditor": "4.5.7",
-    "gmaps": "0.4.25"
+    "gmaps": "0.4.25",
+    "Jcrop": "0.9.12"
   }
 }

@@ -20,10 +20,7 @@
       <h1>
         Registrar Persona
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Registrar persona</li>
-      </ol>
+      
     </section>
 	<!-- /.FIN DE CABECERA INFO PAGE -->
 	
@@ -32,61 +29,81 @@
     
     <div class="box box-primary">
     	<div class="row">
-    	<div class="col-md-9">
+    	<div class="col-md-12">
     		<div class="box-header with-border">
-  				<h3 class="box-title">Registrar persona</h3>
+  				<h3 class="box-title">Datos personales</h3>
   			</div>
 	  		<form class="form-horizontal" action="../ServletPersona?tipo=registrar" method="post">
 	  			<div class="box-body">
-		  			<div class="form-group">
-					    <label for="txtnombre" class="col-sm-2 control-label">Nombres:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Escribir el nombre">
-					    </div>
-					</div>
-					<div class="form-group">
-					    <label for="txtapaterno" class="col-sm-2 control-label">Apellido Paterno:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtapaterno" name="txtapaterno" placeholder="Escribir el apellido paterno">
-					    </div>
-					</div>
-					<div class="form-group">
-					    <label for="txtamaterno" class="col-sm-2 control-label">Apellido Materno:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtamaterno" name="txtamaterno" placeholder="Escribir el apellido materno">
-					    </div>
-					</div>
-					<div class="form-group">
-					    <label for="cmbsexo" class="col-sm-2 control-label">Sexo:</label>
-					    <div class="col-sm-10">
-					      <select class="form-control" id="cmbsexo" name="cmbsexo">
-		                    <option value="">-- Seleccione --</option>
-		                    	<%
-			                    	for (ComboDTO item : listaSexo ){
-			                    %>
-			                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
-			                   	<%
-			                   		}  
-			                   	%>
-		                  </select>
-					    </div>
-					</div>
-					<div class="form-group">
-					    <label for="cbotipodocumento" class="col-sm-2 control-label">Documento de identidad:</label>
-					    <div class="col-sm-10">
-					    	 <select class="form-control" id="cbotipodocumento" name="cbotipodocumento">
-			                    <option value="0">-- Seleccione --</option>
-			                    <%
-			                    	for (ComboDTO item : listaDoc ){
-			                    %>
-			                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
-			                   	<%
-			                   		}  
-			                   	%>
-		                  	</select>
-					      	<input type="text" class="form-control" id="txtnumdocumento" name="txtnumdocumento" placeholder="Escribir el número de documento">
-					    </div>
-					</div>
+	  				<div class="row">
+		  				<div class="col-md-6">
+		  					<div class="form-group">
+							    <label for="txtnombre" class="col-sm-3 control-label">Nombres:</label>
+							    <div class="col-sm-7">
+							      <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Escribir el nombre">
+							    </div>
+							    <div class="col-sm-2"></div>
+							</div>
+							<div class="form-group">
+							    <label for="txtapaterno" class="col-sm-3 control-label">Apellido Paterno:</label>
+							    <div class="col-sm-7">
+							      <input type="text" class="form-control" id="txtapaterno" name="txtapaterno" placeholder="Escribir el apellido paterno">
+							    </div>
+							    <div class="col-sm-2"></div>
+							</div>
+							<div class="form-group">
+							    <label for="txtamaterno" class="col-sm-3 control-label">Apellido Materno:</label>
+							    <div class="col-sm-7">
+							      <input type="text" class="form-control" id="txtamaterno" name="txtamaterno" placeholder="Escribir el apellido materno">
+							    </div>
+							    <div class="col-sm-2"></div>
+							</div>
+							<div class="form-group">
+							    <label for="cmbsexo" class="col-sm-3 control-label">Sexo:</label>
+							    <div class="col-sm-7">
+							      <select class="form-control" id="cmbsexo" name="cmbsexo">
+				                    <option value="">-- Seleccione --</option>
+				                    	<%
+					                    	for (ComboDTO item : listaSexo ){
+					                    %>
+					                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
+					                   	<%
+					                   		}  
+					                   	%>
+				                  </select>
+							    </div>
+							    <div class="col-sm-2"></div>
+							</div>
+							<div class="form-group">
+							    <label for="cbotipodocumento" class="col-sm-3 control-label">Documento de identidad:</label>
+							    <div class="col-sm-7">
+							    	 <select class="form-control" id="cbotipodocumento" name="cbotipodocumento">
+					                    <option value="0">-- Seleccione --</option>
+					                    <%
+					                    	for (ComboDTO item : listaDoc ){
+					                    %>
+					                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
+					                   	<%
+					                   		}  
+					                   	%>
+				                  	</select>
+				                  	<div class="separate">
+				                  		<input type="text" class="form-control" id="txtnumdocumento" name="txtnumdocumento" placeholder="Escribir el número de documento">
+				                  	</div>
+							    </div>
+							    <div class="col-sm-2"></div>
+							</div>
+		  				</div>
+		  				<div class="col-md-6">
+		  					<div id="useravatar">
+		  						<img alt="" src="${pageContext.request.contextPath}/images/avatar.jpg">
+		  					</div>
+		  				</div>
+	  				</div>
+		  			
+					
+					
+					
 					<div class="form-group">
 					    <label for="txtfechanacimiento" class="col-sm-2 control-label">Fecha Nacimiento:</label>
 					    <div class="col-sm-10">
@@ -129,9 +146,7 @@
               	</div>
 	  		</form>
     	</div>
-    	<div class="col-md-3">
     	
-    	</div>
   		</div>
 	</div>
       
