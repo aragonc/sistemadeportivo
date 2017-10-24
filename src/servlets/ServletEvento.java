@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.EventoDTO;
 import beans.ModalidadDTO;
+import service.AjaxService;
 import service.EventoService;
 import service.ModalidadService;
 
@@ -22,6 +23,7 @@ import service.ModalidadService;
 public class ServletEvento extends HttpServlet {
 	
 	EventoService eventoService = new EventoService();
+	AjaxService ajaxService = new AjaxService();
 	ModalidadService modalidadService = new ModalidadService();
 	
 	private static final long serialVersionUID = 1L;
@@ -121,49 +123,163 @@ public class ServletEvento extends HttpServlet {
 				response);
 	}
     
+    
 	private void actualizar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		EventoDTO obj = new EventoDTO();
+		String cod = request.getParameter("codigo");
 		String nombre = request.getParameter("nombre");
 		String descripcion = request.getParameter("descripcion");
 		String fechainicio = request.getParameter("fechainicio");
 		String fechafin = request.getParameter("fechafin");
 		String costo = request.getParameter("costo");
-		String lugar = request.getParameter("lugar");
+		String lugar = request.getParameter("cbougar");
 		String gratuito = request.getParameter("gratuito");
 		String estado = request.getParameter("estado");
-		String cod = request.getParameter("codigo");
+		String validaciones = "";
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		EventoDTO x = eventoService.buscarEvento(Integer.parseInt(cod));
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date hoy = new Date();
+		
+		Date dateinicio = null;
+		
+		Date datefin = null;
+		
+					
 		if(fechainicio!=null && !fechainicio.trim().equals("")){
-			Date dateinicio = null;
+		
 			try {
 				dateinicio = sdf.parse(fechainicio);
+				
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
 			obj.setFechaInicio(dateinicio);
 		}
 		
 		if(fechafin!=null && !fechafin.trim().equals("")){
-			Date datefin = null;
+		
 			try {
 				datefin = sdf.parse(fechafin);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		
 			obj.setFechaFin(datefin);
 		}
-		obj.setCodigo(Integer.parseInt(cod));
+		
+				
+		if(nombre.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "El campo Titulo de Evento no puede estar vacío";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
+        }
+		
+		else if(!(nombre.matches("[a-zA-Z 0-9]*"))) {
+			request.setAttribute("registro", x);
+            validaciones = "Ingrese un título de evento válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
+        }
+		
+		boolean count = ajaxService.mismoNombre("evento",nombre);
+		
+		if(count==true) {
+    		validaciones = "Ya existe un evento con el mismo nombre"; 
+    		request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
+        }
+		
+		else if(lugar.equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "Debe seleccionar un lugar";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
+        }
+		
+		else if(fechainicio.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "No ha seleccionado una fecha de inicio";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
+        }
+		
+		else if(dateinicio.before(hoy)) {
+			request.setAttribute("registro", x);
+            validaciones = "La fecha de inicio no puede ser menor a la de hoy";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
+        }
+		
+		else if(dateinicio.equals(hoy)) {
+			request.setAttribute("registro", x);
+            validaciones = "No puede crear un evento con la fecha de hoy";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
+        }
+				
+		else if(fechafin.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "No ha seleccionado una fecha de finalización";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
+        }
+		
+		else if(datefin.before(dateinicio)) {
+			request.setAttribute("registro", x);
+            validaciones = "La fecha de finalización no puede ser antes que la fecha de inicio";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
+        }
+		
+		else if(datefin.compareTo(dateinicio) < 1) {
+			request.setAttribute("registro", x);
+            validaciones = "La hora de finalización no puede empezar antes que la hora de inicio";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
+        }
+		
+		else if(dateinicio.equals(datefin)) {
+			request.setAttribute("registro", x);
+            validaciones = "La hora de inicio no puede ser igual a la hora de finalizacion";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
+        }
+		
+		
+		int codlugar = Integer.parseInt(lugar);
+		
+		boolean count1 = ajaxService.mismoEvento("evento", dateinicio,codlugar);
+		
+		if(count1==true) {
+			request.setAttribute("registro", x);
+    		validaciones = "Ya existe un evento con el mismo lugar y fecha ingresada"; 
+    		request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
+        }
+				
+		else if(!(costo.matches("[0-9]*[.][0.9]*"))) {
+			request.setAttribute("registro", x);
+            validaciones = "Ingrese un monto válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
+        }
+		
+		else{
 		obj.setNombre(nombre);
 		obj.setDescripcion(descripcion);
 		obj.setGratuito(Integer.parseInt(gratuito));
 		obj.setPrecio(Double.parseDouble(costo));
 		obj.setEstado(Integer.parseInt(estado));
 		obj.setCodlugar(Integer.parseInt(lugar));
+		obj.setCodigo(Integer.parseInt(cod));
 		
 		int resultado = eventoService.actualizarEvento(obj);
 		if (resultado != -1){
@@ -173,6 +289,7 @@ public class ServletEvento extends HttpServlet {
 		}else{
 			response.sendRedirect("error.html");
 		}
+	}
 		
 	}
 
@@ -190,18 +307,25 @@ public class ServletEvento extends HttpServlet {
 		String fechainicio = request.getParameter("fechainicio");
 		String fechafin = request.getParameter("fechafin");
 		String costo = request.getParameter("costo");
-		String lugar = request.getParameter("lugar");
+		String lugar = request.getParameter("cbougar");
 		String gratuito = request.getParameter("gratuito");
 		String estado = request.getParameter("estado");
+		String validaciones = "";
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
+		Date hoy = new Date();
+		
+		Date dateinicio = null;
+		
+		Date datefin = null;
+		
+					
 		if(fechainicio!=null && !fechainicio.trim().equals("")){
-			
-			Date dateinicio = null;
-			
+		
 			try {
 				dateinicio = sdf.parse(fechainicio);
+				
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -211,9 +335,7 @@ public class ServletEvento extends HttpServlet {
 		}
 		
 		if(fechafin!=null && !fechafin.trim().equals("")){
-			
-			Date datefin = null;
-			
+		
 			try {
 				datefin = sdf.parse(fechafin);
 			} catch (ParseException e) {
@@ -224,6 +346,94 @@ public class ServletEvento extends HttpServlet {
 			obj.setFechaFin(datefin);
 		}
 		
+		System.out.print(fechainicio);
+		
+		if(nombre.replaceAll(" ", "").equals("")) {
+            validaciones = "El campo Titulo de Evento no puede estar vacío";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
+        }
+		
+		else if(!(nombre.matches("[a-zA-Z 0-9]*"))) {
+            validaciones = "Ingrese un título de evento válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
+        }
+		
+		boolean count = ajaxService.mismoNombre("evento",nombre);
+		
+		if(count==true) {
+    		validaciones = "Ya existe un evento con el mismo nombre"; 
+    		request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
+        }
+		
+		else if(lugar.equals("")) {
+            validaciones = "Debe seleccionar un lugar";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
+        }
+		
+		else if(fechainicio.replaceAll(" ", "").equals("")) {
+            validaciones = "No ha seleccionado una fecha de inicio";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
+        }
+		
+		else if(dateinicio.before(hoy)) {
+            validaciones = "La fecha de inicio no puede ser menor a la de hoy";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
+        }
+		
+		else if(dateinicio.equals(hoy)) {
+            validaciones = "No puede crear un evento con la fecha de hoy";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
+        }
+				
+		else if(fechafin.replaceAll(" ", "").equals("")) {
+            validaciones = "No ha seleccionado una fecha de finalización";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
+        }
+		
+		else if(datefin.before(dateinicio)) {
+            validaciones = "La fecha de finalización no puede ser antes que la fecha de inicio";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
+        }
+		
+		else if(datefin.compareTo(dateinicio) < 1) {
+            validaciones = "La hora de finalización no puede empezar antes que la hora de inicio";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
+        }
+		
+		else if(dateinicio.equals(datefin)) {
+            validaciones = "La hora de inicio no puede ser igual a la hora de finalizacion";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
+        }
+		
+		
+		int codlugar = Integer.parseInt(lugar);
+		
+		boolean count1 = ajaxService.mismoEvento("evento", dateinicio,codlugar);
+		
+		if(count1==true) {
+    		validaciones = "Ya existe un evento con el mismo lugar y fecha ingresada"; 
+    		request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
+        }
+				
+		else if(!(costo.matches("[0-9]*[.][0.9]*"))) {
+            validaciones = "Ingrese un monto válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
+        }
+		
+		else{
 		obj.setNombre(nombre);
 		obj.setDescripcion(descripcion);
 		obj.setGratuito(Integer.parseInt(gratuito));
@@ -240,7 +450,7 @@ public class ServletEvento extends HttpServlet {
 			response.sendRedirect("error.html");
 		}
 	}
-
+	}
 	public ServletEvento() {
         super();
         // TODO Auto-generated constructor stub

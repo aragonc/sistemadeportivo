@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `campeonato`.`modalidad` (
   `descripcion` VARCHAR(150) NULL,
   `categoria_idcategoria` INT NOT NULL,
   `disciplina_iddisciplina` INT NOT NULL,
-  `genero` INT NULL,
+  `genero` CHAR(2) NULL,
   `njugadores` INT NULL,
   `nvarones` INT NULL,
   `nmujeres` INT NULL,
@@ -89,16 +89,24 @@ CREATE TABLE IF NOT EXISTS `campeonato`.`equipo` (
   `email` VARCHAR(50) NULL,
   `telefono` CHAR(9) NULL,
   `color` VARCHAR(50) NULL,
+  `evento_idevento` INT NOT NULL,
   `modalidad_idmodalidad` INT NOT NULL,
   `estado` INT NULL,
   `fecha_registro` DATETIME NULL,
   PRIMARY KEY (`idequipo`),
   INDEX `fk_equipo_modalidad1_idx` (`modalidad_idmodalidad` ASC),
+  INDEX `fk_equipo_evento1_idx` (`evento_idevento` ASC),
   CONSTRAINT `fk_equipo_modalidad1`
     FOREIGN KEY (`modalidad_idmodalidad`)
     REFERENCES `campeonato`.`modalidad` (`idmodalidad`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+     CONSTRAINT `fk_equipo_evento1`
+    FOREIGN KEY (`evento_idevento`)
+    REFERENCES `campeonato`.`evento` (`idevento`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+    
 ENGINE = InnoDB;
 
 

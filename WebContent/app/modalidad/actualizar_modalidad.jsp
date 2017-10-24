@@ -9,9 +9,11 @@
  <%  
  	ModalidadDTO obj = (ModalidadDTO)request.getAttribute("registro");
 	ComboService listas = new ComboService();  
-	List<ComboDTO> listaCategoria = listas.listarComboSql("SELECT idcategoria, nombres FROM campeonato.categoria where estado = 1;");
+	List<ComboDTO> listaCategoria = listas.listarComboSql("SELECT idcategoria, nombre FROM campeonato.categoria where estado = 1;");
 	List<ComboDTO> listaDisciplina = listas.listarComboSql("SELECT iddisciplina, nombre FROM campeonato.disciplina where estado = 1;");
 	List<ComboDTO> listaGenero = listas.listarCombo("genero");
+	String error = (String)request.getAttribute("errorMessage");
+	String validar = (String) request.getAttribute("validaciones");
 %>
  <div class="content-wrapper">
     <section class="content-header">
@@ -24,9 +26,23 @@
             </div>
         	<div class="box-body">
             	<div class="col-md-9">
+            	
+            	<!-- MENSAJE QUE APARECE CUANDO SE REGISTRA UN EVENTO -->
+			       	<% if( error != null) { %>
+		              	<div class="alert alert-danger" role="alert">
+		              		<%= error %>
+		              	</div>
+		              <% } %>
+			       	<!-- FIN DEL MENSAJE -->
+            	
 					<form action="${pageContext.request.contextPath}/ServletModalidad?tipo=actualizar" class="form-horizontal" id="frmregistrar" method="post">
                          <input type="hidden" name="codigo" value="<%= obj.getCodigo() %>">
                          <div class="row">
+                         
+                         <% if (validar != null) { %>
+                                 <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
+                                 <% } %>
+                         
                          	<div class="col-md-6">
                          		<div class="form-group">
 		                           <label class="col-sm-4 control-label">Disciplina</label>

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import beans.CategoriaDTO;
 import beans.LugarDTO;
 import interfaces.LugarDAO;
 import utils.MysqlDBConexion;

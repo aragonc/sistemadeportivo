@@ -118,7 +118,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "INSERT INTO equipo VALUES(null,? ,? ,? ,? ,? ,?, ?, ?, now())";
+			String sql = "INSERT INTO equipo VALUES(null,? ,? ,? ,?,? ,? ,?, ?, ?, now())";
 			pstm = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDescripcion());
@@ -126,8 +126,9 @@ public class MySqlEquipoDAO implements EquipoDAO{
 			pstm.setString(4, obj.getEmail());
 			pstm.setString(5, obj.getFono());
 			pstm.setString(6, obj.getColor());
-			pstm.setInt(7, obj.getCodModalidad());
-			pstm.setInt(8, obj.getEstado());
+			pstm.setInt(7, obj.getCodEvento());
+			pstm.setInt(8, obj.getCodModalidad());
+			pstm.setInt(9, obj.getEstado());
 			pstm.executeUpdate();
 			
 			ResultSet rs = pstm.getGeneratedKeys();
@@ -157,17 +158,19 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "UPDATE equipo SET nombre=?,logo=?, "
-					+ " email=?,telefono=?, telefono=?, estado=? fecha_contacto=? where idequipo=?";
+			String sql = "UPDATE equipo SET nombre=?,descripcion=?, "
+					+ " logo=?,email=?, telefono=?, color=? evento_idevento=? modalidad_idmodalidad=? estado=? where idequipo=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
-			pstm.setString(2, obj.getLogo());
-			pstm.setString(3, obj.getEmail());
-			pstm.setString(4, obj.getFono());
-			pstm.setString(5, obj.getColor());
-			pstm.setInt(6, obj.getCodModalidad());
-			pstm.setInt(7, obj.getEstado());
-			pstm.setInt(8, obj.getCodigo());
+			pstm.setString(2, obj.getDescripcion());
+			pstm.setString(3, obj.getLogo());
+			pstm.setString(4, obj.getEmail());
+			pstm.setString(5, obj.getFono());
+			pstm.setString(6, obj.getColor());
+			pstm.setInt(7, obj.getCodEvento());
+			pstm.setInt(8, obj.getCodModalidad());
+			pstm.setInt(9, obj.getEstado());
+			pstm.setInt(10, obj.getCodigo());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

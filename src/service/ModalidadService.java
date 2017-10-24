@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 
-import beans.EventoDTO;
+
 import beans.ModalidadDTO;
 import dao.DAOFactory;
 import interfaces.ModalidadDAO;

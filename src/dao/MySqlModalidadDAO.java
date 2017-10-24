@@ -8,9 +8,8 @@ import java.util.List;
 
 import beans.CategoriaDTO;
 import beans.DisciplinaDTO;
-import beans.EventoDTO;
 import beans.ModalidadDTO;
-import beans.PersonaDTO;
+
 import interfaces.ModalidadDAO;
 import utils.MysqlDBConexion;
 
@@ -73,7 +72,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 		try {
 			cn = MysqlDBConexion.getConexion();
 			
-			String sql = "SELECT m.idmodalidad, m.descripcion, d.iddisciplina, d.nombre, c.idcategoria, c.nombres "
+			String sql = "SELECT m.idmodalidad, m.descripcion, d.iddisciplina, d.nombre, c.idcategoria, c.nombre "
 					+ "FROM evento_modalidad em inner join modalidad m on m.idmodalidad = em.modalidad_idmodalidad "
 					+ "inner join categoria c on m.categoria_idcategoria = c.idcategoria "
 					+ "inner join disciplina d on  m.disciplina_iddisciplina = d.iddisciplina "
@@ -123,7 +122,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 		ResultSet rs = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT m.idmodalidad, m.descripcion, m.genero, m.njugadores, m.nmujeres, m.nvarones, d.iddisciplina, d.nombre, c.idcategoria, c.nombres FROM modalidad m "
+			String sql = "SELECT m.idmodalidad, m.descripcion, m.genero, m.njugadores, m.nmujeres, m.nvarones, d.iddisciplina, d.nombre, c.idcategoria, c.nombre FROM modalidad m "
 					+ "inner join categoria c on m.categoria_idcategoria = c.idcategoria inner join "
 					+ "disciplina d on  m.disciplina_iddisciplina = d.iddisciplina WHERE m.idmodalidad=?;";
 			pstm = cn.prepareStatement(sql);

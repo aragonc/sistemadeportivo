@@ -9,13 +9,14 @@
  <%
  	ComboService listaDocumento = new ComboService();  
 	List<ComboDTO> listaLugar = listaDocumento.listarComboSql("SELECT idlugar, nombre FROM lugar where estado = 1;");
+	String validar = (String) request.getAttribute("validaciones"); 
  %>
   <div class="content-wrapper">
     <section class="content-header">
       <h1>Eventos</h1> 
     </section>
     <section class="content">
-    	<div class="box box-primary">
+    	<div class="box box-primary">  
     		<div class="box-header with-border">
               <h3 class="box-title">Añadir un nuevo evento a la agenda</h3>
             </div>
@@ -23,6 +24,9 @@
             	<div class="col-md-9">
 					<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletEvento?tipo=registrar" method="post" id="frmevento">
 						<div class="form-group">
+						<% if (validar != null) { %>
+                                 <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
+                                 <% } %>
 	                         <label for="nombre" class="col-sm-2 control-label">Titulo del Evento</label>
 	                         <div class="col-sm-10">
 	                           <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Escribe titulo del evento">
@@ -37,8 +41,8 @@
 	                    <div class="form-group">
 	                         <label for="txthtml" class="col-sm-2 control-label">Lugar del Evento</label>
 	                         <div class="col-sm-10">
-	                         	<select id="listaevento" name="lugar" class="form-control">
-	                           		<option value="0">-- Seleccione un lugar --</option>
+	                         	<select id="cbougar" name="cbougar" class="form-control">
+	                           		<option value="">-- Seleccione un lugar --</option>
 					                    <%
 					                    	for (ComboDTO item : listaLugar ){
 					                    %>

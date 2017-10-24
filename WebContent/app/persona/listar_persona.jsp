@@ -36,7 +36,7 @@
             					<a href="${pageContext.request.contextPath}">
 					        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
 					        	</a>
-						        <a href="${pageContext.request.contextPath}/app/registrar_persona.jsp">
+						        <a href="${pageContext.request.contextPath}/app/persona/registrar_persona.jsp">
 						        	<img alt="Registrar persona" title="Crear nueva categoria" src="${pageContext.request.contextPath}/images/icons/32/nuevo_usuario.png">
 						        </a>
             				</div>

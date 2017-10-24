@@ -11,6 +11,7 @@
 	List<ComboDTO> listaDisciplina = listas.listarComboSql("SELECT iddisciplina, nombre FROM campeonato.disciplina where estado = 1;");
 	List<ComboDTO> listaGenero = listas.listarCombo("genero");
 	String error = (String)request.getAttribute("errorMessage");
+	String validar = (String) request.getAttribute("validaciones");
 %>
  <div class="content-wrapper">
     <section class="content-header">
@@ -36,8 +37,14 @@
 					<form action="${pageContext.request.contextPath}/ServletModalidad?tipo=registrar" class="form-horizontal" id="frmregistrar" method="post">
                          
                          <div class="row">
+                         
+                         <% if (validar != null) { %>
+                                 <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
+                                 <% } %>
+                         
                          	<div class="col-md-6">
                          		<div class="form-group">
+                         		 
 		                           <label class="col-sm-4 control-label">Disciplina</label>
 		                           <div class="col-sm-8">
 		                             <select id="cbodisciplina" name="cbodisciplina" class="form-control">

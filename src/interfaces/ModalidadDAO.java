@@ -2,7 +2,7 @@ package interfaces;
 
 import java.util.List;
 
-import beans.EventoDTO;
+
 import beans.ModalidadDTO;
 
 public interface ModalidadDAO {

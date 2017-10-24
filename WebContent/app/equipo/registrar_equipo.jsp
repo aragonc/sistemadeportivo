@@ -1,13 +1,18 @@
+<%@page import="beans.EquipoDTO"%>
 <%@page import="beans.ComboDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="service.ComboService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <jsp:include page="../_header.jsp" flush="true" />
  <jsp:include page="../_sidebar.jsp" flush="true" />
  <%
+ 	EquipoDTO obj = new EquipoDTO();
  	ComboService listaDocumento = new ComboService();  
 	List<ComboDTO> listaEventos = listaDocumento.listarComboSql("SELECT idevento, nombre FROM evento where estado = 1;");
+	List<ComboDTO> listaModalidad = listaDocumento.listarComboModalidad(obj.getCodEvento());
+	String validar = (String) request.getAttribute("validaciones"); 
  %>
   <div class="content-wrapper">
     <section class="content-header">
@@ -23,8 +28,12 @@
 					<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletEquipo?tipo=registrar" method="post" id="frmequipo">
 						
 						<div class="row">
+						<% if (validar != null) { %>
+                                 <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
+                                 <% } %>
 							<div class="col-md-6">
 								<div class="form-group">
+								
 			                         <label for="nombre" class="col-sm-4 control-label">Nombre del Equipo</label>
 			                         <div class="col-sm-8">
 			                           <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Escribe nombre del equipo">
@@ -49,14 +58,17 @@
 	                    		<div class="form-group">
 			                         <label for="evento" class="col-sm-4 control-label">Evento</label>
 			                         <div class="col-sm-8">
-			                           	<select id="listaevento" name="evento" class="form-control">
-			                           		<option value="0">-- Seleccione --</option>
+			                           	<select id="cboEvento" name="cboEvento" class="form-control">
+			                           		<option value="0">-- Seleccione Evento--</option>
 							                    <%
-							                    	for (ComboDTO item : listaEventos ){
-							                    %>
-							                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
-							                   	<%
-							                   		}  
+
+						                    	for (ComboDTO item : listaEventos ){
+						                    		if(item.getField().equals(obj.getCodEvento()+"")){
+						                    			out.println("<option value="+ item.getField() +" selected>" + item.getValor()+"</option>");
+						                    		} else {
+						                    			out.println("<option value="+ item.getField() +" >" + item.getValor()+"</option>");
+						                    		}
+						                    	}
 							                   	%>
 			                           	</select>
 			                       	</div>
@@ -66,8 +78,18 @@
 	                    		<div class="form-group">
 			                         <label for="evento" class="col-sm-4 control-label">Modalidad</label>
 			                         <div class="col-sm-8">
-			                           	<select id="listamodalidad" name="modalidad" class="form-control">
-			                           		<option selected="selected">-- Seleccionar molalidad --</option>
+			                           	<select id="cboMod" name="cboMod" class="form-control">
+			                           		<option selected="selected">-- Seleccionar modalidad --</option>
+			                           		<%
+			                           		
+					                    	for (ComboDTO item : listaModalidad ){
+					                    		if(item.getField().equals(obj.getCodModalidad()+"")){
+					                    			out.println("<option value="+ item.getField() +" selected>" + item.getValor()+"</option>");
+					                    		} else {
+					                    			out.println("<option value="+ item.getField() +" >" + item.getValor()+"</option>");
+					                    		}
+					                    	} 
+							                   	%>
 			                           	</select>
 			                       	</div>
 	                    		</div>
