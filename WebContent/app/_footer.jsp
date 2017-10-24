@@ -21,6 +21,7 @@
 <script src="${pageContext.request.contextPath}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="${pageContext.request.contextPath}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/bower_components/ckeditor/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/jquery-mask-plugin/dist/jquery.mask.js"></script>
 
 <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
 <script type="text/javascript">
