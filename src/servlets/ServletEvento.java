@@ -140,6 +140,8 @@ public class ServletEvento extends HttpServlet {
 		
 		EventoDTO x = eventoService.buscarEvento(Integer.parseInt(cod));
 		
+		
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		Date hoy = new Date();
@@ -173,7 +175,9 @@ public class ServletEvento extends HttpServlet {
 		
 			obj.setFechaFin(datefin);
 		}
-		
+		int codlugar = Integer.parseInt(lugar);
+		boolean count = ajaxService.mismoNombre("evento",nombre);
+		boolean count1 = ajaxService.mismoEvento("evento", dateinicio,codlugar);
 				
 		if(nombre.replaceAll(" ", "").equals("")) {
 			request.setAttribute("registro", x);
@@ -189,9 +193,9 @@ public class ServletEvento extends HttpServlet {
             request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
         }
 		
-		boolean count = ajaxService.mismoNombre("evento",nombre);
 		
-		if(count==true) {
+		
+		else if(count==true) {
     		validaciones = "Ya existe un evento con el mismo nombre"; 
     		request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
@@ -254,11 +258,7 @@ public class ServletEvento extends HttpServlet {
         }
 		
 		
-		int codlugar = Integer.parseInt(lugar);
-		
-		boolean count1 = ajaxService.mismoEvento("evento", dateinicio,codlugar);
-		
-		if(count1==true) {
+		else if(count1==true) {
 			request.setAttribute("registro", x);
     		validaciones = "Ya existe un evento con el mismo lugar y fecha ingresada"; 
     		request.setAttribute("validaciones", validaciones);
@@ -314,6 +314,7 @@ public class ServletEvento extends HttpServlet {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
+		
 		Date hoy = new Date();
 		
 		Date dateinicio = null;
@@ -346,7 +347,10 @@ public class ServletEvento extends HttpServlet {
 			obj.setFechaFin(datefin);
 		}
 		
-		System.out.print(fechainicio);
+		boolean count = ajaxService.mismoNombre("evento",nombre);
+		int codlugar = Integer.parseInt(lugar);
+		
+		boolean count1 = ajaxService.mismoEvento("evento", dateinicio,codlugar);
 		
 		if(nombre.replaceAll(" ", "").equals("")) {
             validaciones = "El campo Titulo de Evento no puede estar vacío";
@@ -354,15 +358,13 @@ public class ServletEvento extends HttpServlet {
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 		
-		else if(!(nombre.matches("[a-zA-Z 0-9]*"))) {
+		else if(!(nombre.matches("[a-zA-Z´0-9]*"))) {
             validaciones = "Ingrese un título de evento válido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 		
-		boolean count = ajaxService.mismoNombre("evento",nombre);
-		
-		if(count==true) {
+		else if(count==true) {
     		validaciones = "Ya existe un evento con el mismo nombre"; 
     		request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
@@ -416,12 +418,7 @@ public class ServletEvento extends HttpServlet {
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 		
-		
-		int codlugar = Integer.parseInt(lugar);
-		
-		boolean count1 = ajaxService.mismoEvento("evento", dateinicio,codlugar);
-		
-		if(count1==true) {
+		else if(count1==true) {
     		validaciones = "Ya existe un evento con el mismo lugar y fecha ingresada"; 
     		request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
