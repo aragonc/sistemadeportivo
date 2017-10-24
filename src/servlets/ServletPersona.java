@@ -1,6 +1,8 @@
 package servlets;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.sun.org.apache.bcel.internal.generic.GETFIELD;
 
 import beans.Imagen;
 import beans.PersonaDTO;
@@ -26,7 +27,7 @@ import utils.CropImagen;
 @MultipartConfig
 public class ServletPersona extends HttpServlet {
 	PersonaService personaService = new PersonaService();
-	private static final long serialVersionUID = 1L;
+	
 	public ServletPersona(){
 		super();
 	}
@@ -128,7 +129,7 @@ public class ServletPersona extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		PersonaDTO obj = new PersonaDTO();
-		
+
 		String nombre = request.getParameter("txtnombre");		
 		String apaterno = request.getParameter("txtapaterno");
 		String amaterno = request.getParameter("txtamaterno");
@@ -145,27 +146,39 @@ public class ServletPersona extends HttpServlet {
     	String ladoy = request.getParameter("y");
         String ancho = request.getParameter("w");
         String alto = request.getParameter("h");
-        //Obtenemos el Archivo
-        String fileimagen=request.getParameter("file");
         
-        String fileName = null;
-        //Get all the parts from request and write it to the file on server
-        for (Part part : request.getParts()) {
-            fileName = part.getName();
+        //Guardando la imagen
+       
+        //Obtenemos el Archivo        
+        
+        
+        
+        
+        Part filePart = request.getPart("avatar");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        String sourcePath =   request.getRealPath("") + "uploads/";
+        String serverPath = sourcePath + fileName;
+        serverPath = serverPath.replace("\\", "/");
+        
+        
+        
+        /*String webAppPath = getServletContext().getRealPath("/");
+        System.out.println(webAppPath);*/
+        
+        // OBTENEMOS LA IMAGEN Y CREAMOS EL ARCHIVO RECORTADO NUEVAMENTE.
+        if (filePart != null) {        	
+        	Imagen img = new Imagen();
+        	img.setLadox(Integer.parseInt(ladox));
+        	img.setLadoy(Integer.parseInt(ladoy));
+        	img.setAncho(Integer.parseInt(ancho));
+        	img.setAlto(Integer.parseInt(alto));
+        	img.setNombre(fileName);
+
+            CropImagen imagen = new CropImagen();
+            imagen.recotarImagen(img, serverPath, sourcePath);
             
         }
-
-    	Imagen img = new Imagen();
-    	img.setLadox(Integer.parseInt(ladox));
-    	img.setLadoy(Integer.parseInt(ladoy));
-    	img.setAncho(Integer.parseInt(ancho));
-    	img.setAlto(Integer.parseInt(alto));
-    	img.setNombre(fileimagen);
         
-        //Llamamos a la clase Cortar Imagen
-        CropImagen imagen = new CropImagen();
-      
-        imagen.recotarImagen(img);
         
 		if(fnacimiento!=null && !fnacimiento.trim().equals("")){
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");

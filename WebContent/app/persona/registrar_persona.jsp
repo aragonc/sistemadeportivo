@@ -137,7 +137,7 @@
 		  					
 		  					<div id="btnaction" class="action-toolbars">
 		  						<p>Seleccione una imagen</p>
-		  						<input type="file" onchange="cargarImagen()" id="avatar" name="avatar" accept="image/x-png,image/gif,image/jpeg" />
+		  						<input type="file" onchange="cargarImagen()" id="file" name="file" accept="image/x-png,image/gif,image/jpeg" />
 		  						<div id="data-imagen" class="form-group">
 		  							<input type="hidden" id="file" name="file" />
 		                            <input type="hidden" id="x" name="x" />
@@ -184,7 +184,7 @@
 
 	  					function cargarImagen(){
 	  						
-	  						var oFile = $("#avatar")[0].files[0];
+	  						var oFile = $("#file")[0].files[0];
 	  						
 	  						//ocultamos todos los errores
 	  						$("#cerror").hide();
@@ -199,6 +199,28 @@
 	  					        $('.cerror').html('Solo se permite subir imagenes menor a 2,5 MB').show();
 	  					        return;
 	  					    }
+							
+							if (oFile){
+								if (window.FormData !== undefined) {
+			                        var formData = new FormData();
+			                        formData.append("file", oFile);
+			                        $.ajax({
+			                            type: "POST",
+			                            url: '../../ServletImagen?tipo=cargar',
+			                            contentType: false,
+			                            processData: false,
+			                            data: formData,
+			                            success: function (result) {
+			                                NombreImagen = result
+			                            },
+			                            error: function (xhr) {
+			                                console.log(xhr.responseText);
+			                            }
+			                        });
+			                    } else {
+			                        alert("Error al subir imagen");
+			                    }
+							}
 							
 	  						var oImagen = document.getElementById('img-preview');
 	  						
