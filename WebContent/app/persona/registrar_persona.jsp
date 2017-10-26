@@ -37,7 +37,7 @@
 	  			<div class="box-body">
 	  				<div class="col-md-9">
 	  				<div class="row">
-		  				<div class="col-md-6">
+		  				<div class="col-md-7">
 		  					<div class="form-group">
 							    <label for="txtnombre" class="col-sm-4 control-label">Nombres:</label>
 							    <div class="col-sm-8">
@@ -133,26 +133,35 @@
 							    </div>
 							</div>
 		  				</div>
-		  				<div class="col-md-6">
+		  				<div class="col-md-5">
 		  					
 		  					<div id="btnaction" class="action-toolbars">
 		  						<p>Seleccione una imagen</p>
-		  						<input type="file" onchange="cargarImagen()" id="file" name="file" accept="image/x-png,image/gif,image/jpeg" />
-		  						<div id="data-imagen" class="form-group">
+		  						<input type="file" onchange="uploadImagen();" id="file" name="file" accept="image/x-png,image/gif,image/jpeg" />
+		  						<div id="imagen-data" class="form-group">
 		  							<input type="hidden" id="file" name="file" />
 		                            <input type="hidden" id="x" name="x" />
 		                            <input type="hidden" id="y" name="y" />
 		                            <input type="hidden" id="w" name="w" />
 		                            <input type="hidden" id="h" name="h" />
                         		</div>
-                        		<div id="cerror" class="alert alert-warning" style="display: none;"></div>
+                        		
+                        		<div id="imagen-crop" class="panel-image" style="display: none;">
+			                        <div class="preview">
+			                            <img id="img-preview" class="crop" />
+			                        </div>
+			                        <div class="actions">
+			                        	<button class="btn btn-default" type="button" onclick="cropImagen();"><i class="fa fa-crop" aria-hidden="true"></i>
+			                        	 Recortar imagen</button>
+			                        	 <button class="btn btn-danger"><i class="fa fa-crop" aria-hidden="true"></i>
+			                        	 Quitar imagen</button>
+			                        </div>
+		                    	</div>
+		                    	
+		                    	<div id="imagen-error" class="alert alert-warning" style="display: none;"></div>
 		  					</div>
 		  					
-		  					<div id="panel-crop" class="panel-image">
-		                        <div class="preview-image">
-		                            <img id="img-preview" class="crop" />
-		                        </div>
-		                    </div>
+		  					
 		  					
 		  					
 		  				</div>
@@ -182,21 +191,21 @@
 	  					    $('#y').val('');
 	  					};
 
-	  					function cargarImagen(){
+	  					function uploadImagen(){
 	  						
 	  						var oFile = $("#file")[0].files[0];
 	  						
 	  						//ocultamos todos los errores
-	  						$("#cerror").hide();
+	  						$("#imagen-error").hide();
 	  						//filtramos la imagen en JPG o PNG
 	  						var rFilter = /^(image\/jpeg|image\/png)$/i;
 	  						if (! rFilter.test(oFile.type)) {
-						    	$('.cerror').html('Seleccionar una imagen JPG o PNG').show();
+						    	$("#imagen-error").html("Seleccionar una imagen JPG o PNG").show();
   							    return;
 	  						}
 							//comparamos el tamaño de la imagen
 	  						if (oFile.size >  1024 * 1024) {
-	  					        $('.cerror').html('Solo se permite subir imagenes menor a 2,5 MB').show();
+	  					        $("#imagen-error").html("Solo se permite subir imagenes menor a 2,5 MB").show();
 	  					        return;
 	  					    }
 							
@@ -206,12 +215,13 @@
 			                        formData.append("file", oFile);
 			                        $.ajax({
 			                            type: "POST",
-			                            url: '../../ServletImagen?tipo=cargar',
+			                            url: '../../ServletImagen?tipo=upload',
 			                            contentType: false,
 			                            processData: false,
 			                            data: formData,
 			                            success: function (result) {
-			                                NombreImagen = result
+			                                imagenName = result
+			                                console.log(imagenName);
 			                            },
 			                            error: function (xhr) {
 			                                console.log(xhr.responseText);
@@ -221,7 +231,7 @@
 			                        alert("Error al subir imagen");
 			                    }
 							}
-							
+							$("#imagen-crop").show();
 	  						var oImagen = document.getElementById('img-preview');
 	  						
 	  						var oReader = new FileReader();
@@ -274,10 +284,32 @@
 	  			                'CorY': Math.round(imgY),
 	  			                'CorW': Math.round(imgW),
 	  			                'CorH': Math.round(imgH),
-	  			                NombreImagen
+	  			                'imagen' : imagenName
 	  			            }
+	  			            
+	  			          $.ajax({
+	  		                type: "POST",
+	  		                url: '../../ServletImagen?tipo=crop',
+	  		                contentType: "application/json; charset=utf-8",
+	  		                processData: false,
+	  		                data: JSON.stringify(img),
+	  		                success: function (result) {
+	  		                    $fileupload = $('#ImagenProducto');
+	  		                    $fileupload.replaceWith($fileupload.clone(true));
+	  		                    $("#imgAvatar").attr('src', result);
+	  		                    $('#recortarImagen').hide();
+	  		                    $('#btnaction').append('<button type="button" id="borrarImagen" class="btn btn-danger">' +
+	  		                        '<i class="fa fa-trash-o" aria-hidden="true"></i>Quitar imagen</button>');
+	  		                    $('#ImagenProducto').remove();
+	  		                    $('#form-imagen').append('<input id="ImagenProducto" name="ImagenProducto" type="hidden" value="' + NombreImagen + '">');
+	  		                },
+	  		               	 	error: function (xhr) {
+	  		                    	console.log(xhr.responseText);
+	  		                	}
+	  		            	});
+	  			            
 	  					}
-
+						
 	  					
 	  				</script>
 	  			</div>

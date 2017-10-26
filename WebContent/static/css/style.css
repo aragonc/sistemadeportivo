@@ -162,3 +162,14 @@
 .separate{
 	margin-top:10px;
 }
+.panel-image{
+	width: 310px;
+}
+.panel-image .preview{
+	text-align: center;
+}
+.panel-image .actions{
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}

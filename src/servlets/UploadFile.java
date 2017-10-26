@@ -36,28 +36,37 @@ public class UploadFile extends HttpServlet {
 		
     	String tipo = request.getParameter("tipo");
     	
-		if (tipo.equals("cargar"))
+		if (tipo.equals("upload"))
 			cargarImage(request, response);
+		else if (tipo.equals("crop"))
+			recortarImage(request, response);
+		else if (tipo.equals("delete"))
+			recortarImage(request, response);
 		
 	}
  
-    /**
-     * Upon receiving file upload submission, parses the request to read
-     * upload data and saves the file on disk.
+    private void recortarImage(HttpServletRequest request, HttpServletResponse response) {
+		
+    	response.setContentType("application/json;charset=UTF-8");
+    	String message = null;
+    	String dataJson = null;
+    	Gson gson = new Gson();
+    	
+	}
+
+	/**
+     * Metodo para cargar imagen
      */
     protected void cargarImage(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         
     	response.setContentType("application/json;charset=UTF-8");
-    	System.out.println("ok");
-    	String message = null;
-        //RESPONDEREMOS EN JSON
     	
+    	String message = null;
     	String dataJson = null;
     	Gson gson = new Gson();
     	
     	if (!ServletFileUpload.isMultipartContent(request)) {
-
     		message = "Error en el enctype=multipart/form-data";
             return;
         }
@@ -71,18 +80,13 @@ public class UploadFile extends HttpServlet {
         factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
  
         ServletFileUpload upload = new ServletFileUpload(factory);
-        
-         
         // MAXIMO PESO DE ARCHIVO A SUBIR
         upload.setSizeMax(MAX_FILE_SIZE); 
-        
         // MAXIMA CANTIDAD DE INFO EN EL FORMULARIO (include file + form data)
         upload.setSizeMax(MAX_REQUEST_SIZE);
         
-        // RUTA DONDE SE GUARDARAN LAS IMAGENES
+        // RUTA DONDE SE GUARDARAN LAS IMAGENES y CREAMOS EL DIRECTORIO SI NO EXISTE.
         String uploadPath = getServletContext().getRealPath("") + "uploads";
-        
-        // CREAMOS EL DIRECTORIO SI NO EXISTE.
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
@@ -90,11 +94,7 @@ public class UploadFile extends HttpServlet {
         
         try {
             // SOLO EXTRAE LOS DATOS DE SOLOS ARCHIVOS
-            @SuppressWarnings("unchecked")
-         
             List<FileItem> formItems = upload.parseRequest(request);
-            
- 
             if (formItems != null && formItems.size() > 0) {
                 // INTERACTUAMOS CON TODOS LOS CAMPOS Y ESCOGEMOS EL UNICO DE TIPO ARCHIVO
                 for (FileItem item : formItems) {
@@ -106,7 +106,7 @@ public class UploadFile extends HttpServlet {
  
                         // GUARDAMOS EL ARCHIVO EN EL DISCO
                         item.write(storeFile);
-                        message = "Success";
+                        message = fileName;
                     }
                 }
             }
