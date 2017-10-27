@@ -1,5 +1,9 @@
 // Iniciando el codigo del main js
 $( document ).ready(function() {
+	
+	$("#gratuito").click(function(){
+		$("#txtcosto").attr('disabled',!this.checked)
+		});
 		
 	$("#idMixto").click(function(){
 		   $(".mixto").show();

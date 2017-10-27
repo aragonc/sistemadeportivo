@@ -8,6 +8,7 @@
  <%
  	ComboService listaDocumento = new ComboService();  
 	List<ComboDTO> listaEventos = listaDocumento.listarComboSql("SELECT idevento, nombre FROM evento where estado = 1;");
+	String validar = (String) request.getAttribute("validaciones"); 
  %>
   <div class="content-wrapper">
     <section class="content-header">
@@ -23,8 +24,14 @@
 					<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletEquipo?tipo=registrar" method="post" id="frmequipo">
 						
 						<div class="row">
+						
+						<% if (validar != null) { %>
+                                 <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
+                                 <% } %>
+                                 
 							<div class="col-md-6">
 								<div class="form-group">
+								
 			                         <label for="nombre" class="col-sm-4 control-label">Nombre del Equipo</label>
 			                         <div class="col-sm-8">
 			                           <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Escribe nombre del equipo">
@@ -67,7 +74,7 @@
 			                         <label for="evento" class="col-sm-4 control-label">Modalidad</label>
 			                         <div class="col-sm-8">
 			                           	<select id="listamodalidad" name="modalidad" class="form-control">
-			                           		<option selected="selected">-- Seleccionar molalidad --</option>
+			                           		<option value="0">-- Seleccionar molalidad --</option>
 			                           	</select>
 			                       	</div>
 	                    		</div>

@@ -69,7 +69,7 @@ public class ServletCategoria extends HttpServlet{
             request.setAttribute("validaciones", validaciones);
 	        request.getRequestDispatcher("app/categoria/registrar_categoria.jsp").forward(request, response);
         }		
-		else if(!(nombre.matches("[a-zA-Z 0-9]*"))){
+		else if(!(nombre.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ 0-9]*"))){
 			validaciones += "Ingrese un nombre válido";
             request.setAttribute("validaciones", validaciones);
 	        request.getRequestDispatcher("app/categoria/registrar_categoria.jsp").forward(request, response);
@@ -124,7 +124,7 @@ public class ServletCategoria extends HttpServlet{
             request.setAttribute("validaciones", validaciones);
 	        request.getRequestDispatcher("app/categoria/actualizar_categoria.jsp").forward(request, response);
         }		
-		else if(!(nombre.matches("[a-zA-Z 0-9]*"))){
+		else if(!(nombre.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ 0-9]*"))){
 			request.setAttribute("registro", x);
 			validaciones += "Ingrese un nombre válido";
             request.setAttribute("validaciones", validaciones);

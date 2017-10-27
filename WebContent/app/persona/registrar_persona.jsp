@@ -1,15 +1,16 @@
-<%@page import="service.ComboService"%>
+ <%@page import="service.ComboService"%>
 <%@page import="dao.MySqlComboDAO"%>
 <%@page import="interfaces.ComboDAO"%>
 <%@page import="beans.ComboDTO"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%  
 	ComboService listaDocumento = new ComboService();  
 	List<ComboDTO> listaDoc = listaDocumento.listarCombo("documento");
 	List<ComboDTO> listaSexo = listaDocumento.listarCombo("sexo");
+	String validar = (String) request.getAttribute("validaciones"); 
 %>
  <jsp:include page="../_header.jsp" flush="true" />
   <jsp:include page="../_sidebar.jsp" flush="true" />
@@ -36,9 +37,12 @@
     		<div class="box-header with-border">
   				<h3 class="box-title">Registrar persona</h3>
   			</div>
-	  		<form class="form-horizontal" action="../ServletPersona?tipo=registrar" method="post">
+	  		<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletPersona?tipo=registrar" method="post">
 	  			<div class="box-body">
 		  			<div class="form-group">
+		  			<% if (validar != null) { %>
+                                 <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
+                                 <% } %>
 					    <label for="txtnombre" class="col-sm-2 control-label">Nombres:</label>
 					    <div class="col-sm-10">
 					      <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Escribir el nombre">
@@ -60,7 +64,7 @@
 					    <label for="cmbsexo" class="col-sm-2 control-label">Sexo:</label>
 					    <div class="col-sm-10">
 					      <select class="form-control" id="cmbsexo" name="cmbsexo">
-		                    <option value="">-- Seleccione --</option>
+		                    <option value="0">-- Seleccione --</option>
 		                    	<%
 			                    	for (ComboDTO item : listaSexo ){
 			                    %>
@@ -84,7 +88,7 @@
 			                   		}  
 			                   	%>
 		                  	</select>
-					      	<input type="text" class="form-control" id="txtnumdocumento" name="txtnumdocumento" placeholder="Escribir el nÃºmero de documento">
+					      	<input type="text" class="form-control" id="txtnumdocumento" name="txtnumdocumento" placeholder="Escribir el número de documento">
 					    </div>
 					</div>
 					<div class="form-group">
@@ -108,9 +112,9 @@
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="txtfono" class="col-sm-2 control-label">TelÃ©fono:</label>
+					    <label for="txtfono" class="col-sm-2 control-label">Teléfono:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtfono" name="txtfono" placeholder="Escribir el nÃºmero de telÃ©fono">
+					      <input type="text" class="form-control" id="txtfono" name="txtfono" placeholder="Escribir el número de teléfono">
 					    </div>
 					</div>
 					<div class="form-group">

@@ -25,7 +25,7 @@
             </div>
         	<div class="box-body">
             	<div class="col-md-9">
-					<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletEquipo?tipo=registrar" method="post" id="frmequipo">
+					<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletEquipo?tipo=actualizar" method="post" id="frmequipo">
 						<input type="hidden" name="codigo" value="<%= obj.getCodigo() %>">
 						<div class="row">
 							<div class="col-md-6">
@@ -148,7 +148,7 @@
                         
                         <div class="box-footer">
 							<a href="${pageContext.request.contextPath}/ServletEquipo?tipo=listar" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver a lista </a>
-		                	<button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar equipo</button>
+		                	<button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Actualizar equipo</button>
 		              	</div>
 					</form>
                   </div>

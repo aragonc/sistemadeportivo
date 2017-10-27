@@ -147,7 +147,7 @@ public class MySqlAjaxDAO implements AjaxDAO {
 	}
 	
 	@Override
-	public boolean mismoEvento(String tabla, Date fechini, int codlug) {
+	public boolean mismoEvento(String tabla, Date fechini,Date fechfin, int codlug) {
 		boolean unico = false;
 		int valor = 0;
 		Connection cn = null;
@@ -155,11 +155,12 @@ public class MySqlAjaxDAO implements AjaxDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select COUNT(*) from evento where fecha_inicio=? and lugar_idlugar=?";
+			String sql = "select count(*) from "+tabla+" where fecha_inicio <=? AND fecha_fin >=? and lugar_idlugar=?";
 			
 			pstm = cn.prepareStatement(sql);
 			pstm.setDate(1, new java.sql.Date(fechini.getTime()));
-			pstm.setInt(2, codlug);
+			pstm.setDate(2, new java.sql.Date(fechfin.getTime()));
+			pstm.setInt(3, codlug);
 			rs = pstm.executeQuery();
 			while(rs.next()){
 				valor = rs.getInt(1);
@@ -169,6 +170,132 @@ public class MySqlAjaxDAO implements AjaxDAO {
 				
 			}
 			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return unico;
+	}
+	
+	@Override
+	public boolean mismoEvento1(String tabla, Date fechini,Date fechfin, int codlug) {
+		boolean unico = false;
+		int valor = 0;
+		Connection cn = null;
+		ResultSet rs = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "select count(*) from "+tabla+" where fecha_inicio >=? AND fecha_fin <=? and lugar_idlugar=?";
+			
+			pstm = cn.prepareStatement(sql);
+			pstm.setDate(1, new java.sql.Date(fechini.getTime()));
+			pstm.setDate(2, new java.sql.Date(fechfin.getTime()));
+			pstm.setInt(3, codlug);
+			rs = pstm.executeQuery();
+			while(rs.next()){
+				valor = rs.getInt(1);
+				if(valor != 0){
+					unico = true;
+				}
+				
+			}
+		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return unico;
+	}
+	
+	@Override
+	public boolean mismoEventoInicio(String tabla, Date fechini,Date fechfin, int codlug) {
+		boolean unico = false;
+		int valor = 0;
+		Connection cn = null;
+		ResultSet rs = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "select count(*) from "+tabla+" where fecha_inicio between ? and ? and lugar_idlugar=?";
+			
+			pstm = cn.prepareStatement(sql);
+			pstm.setDate(1, new java.sql.Date(fechini.getTime()));
+			pstm.setDate(2, new java.sql.Date(fechfin.getTime()));
+			pstm.setInt(3, codlug);
+			rs = pstm.executeQuery();
+			while(rs.next()){
+				valor = rs.getInt(1);
+				if(valor != 0){
+					unico = true;
+				}
+				
+			}
+		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return unico;
+	}
+	
+	@Override
+	public boolean mismoEventoFin(String tabla, Date fechini,Date fechfin, int codlug) {
+		boolean unico = false;
+		int valor = 0;
+		Connection cn = null;
+		ResultSet rs = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "select count(*) from "+tabla+" where fecha_fin between ? and ? and lugar_idlugar=?";
+			
+			pstm = cn.prepareStatement(sql);
+			pstm.setDate(1, new java.sql.Date(fechini.getTime()));
+			pstm.setDate(2, new java.sql.Date(fechfin.getTime()));
+			pstm.setInt(3, codlug);
+			rs = pstm.executeQuery();
+			while(rs.next()){
+				valor = rs.getInt(1);
+				if(valor != 0){
+					unico = true;
+				}
+				
+			}
+		
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -251,6 +378,45 @@ public class MySqlAjaxDAO implements AjaxDAO {
 				
 			}
 			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return unico;
+	}
+	
+	@Override
+	public boolean mismoDoc(String tabla, String doc ) {
+		boolean unico = false;
+		int valor = 0;
+		Connection cn = null;
+		ResultSet rs = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "select COUNT(*) from "+tabla+" where dni=?";
+			
+			pstm = cn.prepareStatement(sql);
+			pstm.setString(1, doc);
+			rs = pstm.executeQuery();
+			while(rs.next()){
+				valor = rs.getInt(1);
+				if(valor != 0){
+					unico = true;
+				}
+				
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();

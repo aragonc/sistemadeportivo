@@ -152,8 +152,36 @@ public class MySqlEventoDAO implements EventoDAO {
 
 	@Override
 	public int actualizarEvento(EventoDTO obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "update evento set nombre=?,descripcion=?,fecha_inicio=?,fecha_fin=?,modo=?,costo_evento=?,estado=?,lugar_idlugar=? where idevento=?";
+			pstm = cn.prepareStatement(sql);
+			pstm.setString(1, obj.getNombre());
+			pstm.setString(2, obj.getDescripcion());
+			pstm.setTimestamp(3, new java.sql.Timestamp(obj.getFechaInicio().getTime()));
+			pstm.setTimestamp(4, new java.sql.Timestamp(obj.getFechaFin().getTime()));
+			pstm.setInt(5, obj.getGratuito());
+			pstm.setDouble(6, obj.getPrecio());
+			pstm.setInt(7, obj.getEstado());
+			pstm.setInt(8, obj.getCodlugar());
+			pstm.setInt(9, obj.getCodigo());
+			estado = pstm.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return estado;
 	}
 	
 	public int agregarModalidad(int codEvento, int codModalidad){

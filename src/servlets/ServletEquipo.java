@@ -101,8 +101,8 @@ public class ServletEquipo extends HttpServlet{
 		String logo = request.getParameter("logotipo");
 		String email = request.getParameter("email");
 		String fono = request.getParameter("fono");
-		String evento = request.getParameter("cboEvento");
-		String modalidad = request.getParameter("cboMod");
+		String evento = request.getParameter("evento");
+		String modalidad = request.getParameter("modalidad");
 		String color = request.getParameter("color");
 		String descripcion = request.getParameter("descripcion");
 		String estado = request.getParameter("estado");
@@ -124,13 +124,18 @@ public class ServletEquipo extends HttpServlet{
             validaciones = "El campo Email está vacío";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
+        }		
+		else if(!(email.matches("[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})"))) {
+            validaciones = "Ingrese un email válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
-		else if(evento.equals("")) {
+		else if(ev == 0) {
             validaciones = "Debe seleccionar un evento";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
-		else if(modalidad.equals("")) {
+		else if(mod == 0) {
             validaciones = "Debe seleccionar una modalidad";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
@@ -145,7 +150,7 @@ public class ServletEquipo extends HttpServlet{
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
-		else if(!(nombre.matches("[a-zA-Z 0-9]*"))) {
+		else if(!(nombre.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ 0-9]*"))) {
             validaciones = "Ingrese un nombre válido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
@@ -161,12 +166,6 @@ public class ServletEquipo extends HttpServlet{
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
 				
-		else if(!(email.matches("[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})"))) {
-            validaciones = "Ingrese un email válido";
-            request.setAttribute("validaciones", validaciones);
-            request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
-        }
-		
 		else if(!(color.matches("[a-zA-Z]*"))) {
             validaciones = "Ingrese un color válido";
             request.setAttribute("validaciones", validaciones);
@@ -180,7 +179,7 @@ public class ServletEquipo extends HttpServlet{
         }
 		
 		else if(count1==true) {
-	    		validaciones = "El equipo que está registrando ya existe en la modalidad seleccionada"; 
+	    		validaciones = "Ya existe un equipo con el mismo nombre en la modalidad seleccionada"; 
 	    		request.setAttribute("validaciones", validaciones);
 	            request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
 	    }
@@ -221,6 +220,9 @@ public class ServletEquipo extends HttpServlet{
 				response);
 	}
 	
+	
+	
+	
 	private void actualizar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
@@ -235,8 +237,81 @@ public class ServletEquipo extends HttpServlet{
 		String color = request.getParameter("color");
 		String descripcion = request.getParameter("descripcion");
 		String estado = request.getParameter("estado");
+		String validaciones = "";
 		
-		obj.setCodigo(Integer.parseInt(codigo));
+		int ev = Integer.parseInt(evento);
+		int mod = Integer.parseInt(modalidad);
+		
+		EquipoDTO x = equipoService.buscarEquipo(Integer.parseInt(codigo));
+	
+		if(nombre.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "Es necesario ingresar un nombre al equipo";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
+        }
+		else if(email.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "El campo Email está vacío";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
+        }		
+		else if(!(email.matches("[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})"))) {
+			request.setAttribute("registro", x);
+            validaciones = "Ingrese un email válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
+        }
+		else if(ev == 0) {
+			request.setAttribute("registro", x);
+            validaciones = "Debe seleccionar un evento";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
+        }
+		else if(mod == 0) {
+			request.setAttribute("registro", x);
+            validaciones = "Debe seleccionar una modalidad";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
+        }
+		else if(fono.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "El campo Teléfono esta vacío";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
+        }
+		else if(color.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "El campo Color esta vacío";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
+        }
+		else if(!(nombre.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ 0-9]*"))) {
+			request.setAttribute("registro", x);
+            validaciones = "Ingrese un nombre válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
+        }
+		else if(!(fono.matches("[0-9]*"))) {
+			request.setAttribute("registro", x);
+            validaciones = "Ingrese un teléfono válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
+        }
+		else if(!(fono.length() == 7) && !(fono.length() == 9)) {
+			request.setAttribute("registro", x);
+            validaciones = "El teléfono solo debe tener 7 o 9 dígitos";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
+        }
+				
+		else if(!(color.matches("[a-zA-Z]*"))) {
+			request.setAttribute("registro", x);
+            validaciones = "Ingrese un color válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
+        }
+		else{	
 		obj.setNombre(nombre);
 		obj.setLogo(logo);
 		obj.setEmail(email);
@@ -246,12 +321,16 @@ public class ServletEquipo extends HttpServlet{
 		obj.setCodModalidad(Integer.parseInt(modalidad));
 		obj.setEstado(Integer.parseInt(estado));
 		obj.setDescripcion(descripcion);
+		obj.setCodigo(Integer.parseInt(codigo));
+				
+		int codequipo = equipoService.actualizarEquipo(obj);
 		
-		int resultado = equipoService.actualizarEquipo(obj);
-		if (resultado != -1)
+		if (codequipo != -1){
 			listar(request, response);
-		else
+		} else {
 			response.sendRedirect("error.html");
+		}
+		}
 	}
 
 	private void eliminar(HttpServletRequest request,

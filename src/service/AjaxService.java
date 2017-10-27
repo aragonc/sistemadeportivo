@@ -22,8 +22,20 @@ public class AjaxService {
 		return ajaxDAO.mismaModalidad(tabla, codcategoria, coddisciplina, gen);
 	}
 	
-	public boolean mismoEvento(String tabla, Date fechini, int codlug){
-		return ajaxDAO.mismoEvento(tabla, fechini,codlug);
+	public boolean mismoEvento(String tabla, Date fechini,Date fechfin, int codlug){
+		return ajaxDAO.mismoEvento(tabla, fechini,fechfin,codlug);
+	}
+	
+	public boolean mismoEvento1(String tabla, Date fechini,Date fechfin, int codlug){
+		return ajaxDAO.mismoEvento1(tabla, fechini,fechfin,codlug);
+	}
+	
+	public boolean mismoEventoInicio(String tabla, Date fechini,Date fechfin, int codlug){
+		return ajaxDAO.mismoEventoInicio(tabla, fechini,fechfin,codlug);
+	}
+	
+	public boolean mismoEventoFin(String tabla, Date fechini,Date fechfin, int codlug){
+		return ajaxDAO.mismoEventoFin(tabla, fechini,fechfin,codlug);
 	}
 	
 	public boolean mismoEquipoEvento(String tabla, String nom, int codev){
@@ -32,6 +44,9 @@ public class AjaxService {
 	
 	public boolean mismoEquipoModalidad(String tabla, String nom, int codmod){
 		return ajaxDAO.mismoEquipoModalidad(tabla, nom,codmod);
+	}
+	public boolean mismoDoc(String tabla, String doc){
+		return ajaxDAO.mismoDoc(tabla, doc);
 	}
 }
 

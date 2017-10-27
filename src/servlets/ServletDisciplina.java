@@ -67,7 +67,7 @@ public class ServletDisciplina extends HttpServlet{
             validaciones = "El campo Nombre de Disciplina esta vacio";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/disciplina/registrar_disciplina.jsp").forward(request, response);
-        } else if(!(nombre.matches("[a-zA-Z]*"))){
+        } else if(!(nombre.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ]*"))){
         	validaciones = "Ingrese un nombre válido";
         	request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/disciplina/registrar_disciplina.jsp").forward(request, response);
@@ -114,7 +114,7 @@ public class ServletDisciplina extends HttpServlet{
             validaciones = "El campo Nombre de Disciplina esta vacio";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/disciplina/actualizar_disciplina.jsp").forward(request, response);
-        } else if(!(nombre.matches("[a-zA-Z]*"))){
+        } else if(!(nombre.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ]*"))){
         	request.setAttribute("registro", x);
         	validaciones = "Ingrese un nombre válido";
         	request.setAttribute("validaciones", validaciones);

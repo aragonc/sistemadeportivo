@@ -1,7 +1,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@page import="beans.PersonaDTO"%>
 <%@page import="service.ComboService"%>
 <%@page import="dao.MySqlComboDAO"%>
@@ -14,6 +14,7 @@
 	ComboService listaDocumento = new ComboService();  
 	List<ComboDTO> listaDoc = listaDocumento.listarCombo("documento");
 	List<ComboDTO> listaSexo = listaDocumento.listarCombo("sexo");
+	String validar = (String) request.getAttribute("validaciones"); 
 %>
 <c:set var="estado" value="<%= pe.getEstado() %>"/>
 
@@ -42,6 +43,9 @@
 	  		<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletPersona?tipo=actualizar" method="post">
 	  			<input type="hidden" name="codigo" value="<%= pe.getCodigo() %>">
 	  			<div class="box-body">
+	  			<% if (validar != null) { %>
+                                 <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
+                                 <% } %>
 		  			<div class="form-group">
 					    <label for="txtnombre" class="col-sm-2 control-label">Nombres:</label>
 					    <div class="col-sm-10">
@@ -93,7 +97,7 @@
 			                    	}
 			                   	%>
 		                  	</select>
-					      	<input type="text" class="form-control" id="txtnumdocumento" value="<%= pe.getNumdocumento() %>" name="txtnumdocumento" placeholder="Escribir el nÃºmero de documento">
+					      	<input type="text" class="form-control" id="txtnumdocumento" value="<%= pe.getNumdocumento() %>" name="txtnumdocumento" placeholder="Escribir el número de documento">
 					    </div>
 					</div>
 					<div class="form-group">
@@ -117,9 +121,9 @@
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="txtfono" class="col-sm-2 control-label">TelÃ©fono:</label>
+					    <label for="txtfono" class="col-sm-2 control-label">Teléfono:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="txtfono" value="<%= pe.getFono() %>" name="txtfono" placeholder="Escribir el nÃºmero de telÃ©fono">
+					      <input type="text" class="form-control" id="txtfono" value="<%= pe.getFono() %>" name="txtfono" placeholder="Escribir el número de teléfono">
 					    </div>
 					</div>
 					<div class="form-group">

@@ -42,7 +42,7 @@
 	                         <label for="txthtml" class="col-sm-2 control-label">Lugar del Evento</label>
 	                         <div class="col-sm-10">
 	                         	<select id="cbougar" name="cbougar" class="form-control">
-	                           		<option value="">-- Seleccione un lugar --</option>
+	                           		<option value="0">-- Seleccione un lugar --</option>
 					                    <%
 					                    	for (ComboDTO item : listaLugar ){
 					                    %>

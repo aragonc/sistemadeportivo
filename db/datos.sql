@@ -94,16 +94,16 @@ CREATE TABLE IF NOT EXISTS `campeonato`.`equipo` (
   `estado` INT NULL,
   `fecha_registro` DATETIME NULL,
   PRIMARY KEY (`idequipo`),
-  INDEX `fk_equipo_modalidad1_idx` (`modalidad_idmodalidad` ASC),
   INDEX `fk_equipo_evento1_idx` (`evento_idevento` ASC),
+  INDEX `fk_equipo_modalidad1_idx` (`modalidad_idmodalidad` ASC),  
+  CONSTRAINT `fk_equipo_evento1`
+    FOREIGN KEY (`evento_idevento`)
+    REFERENCES `campeonato`.`evento` (`idevento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_equipo_modalidad1`
     FOREIGN KEY (`modalidad_idmodalidad`)
     REFERENCES `campeonato`.`modalidad` (`idmodalidad`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-     CONSTRAINT `fk_equipo_evento1`
-    FOREIGN KEY (`evento_idevento`)
-    REFERENCES `campeonato`.`evento` (`idevento`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `campeonato`.`persona` (
   `amaterno` VARCHAR(50) NULL,
   `sexo` CHAR(1) NULL,
   `tipo_documento` INT NULL,
-  `dni` CHAR(8) NULL,
+  `dni` CHAR(15) NULL,
   `fecha_nacimiento` DATE NULL,
   `email` VARCHAR(50) NULL,
   `telefono_contacto` CHAR(9) NULL,

@@ -14,11 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import beans.PersonaDTO;
+import service.AjaxService;
 import service.PersonaService;
 
 @WebServlet("/ServletPersona")
 public class ServletPersona extends HttpServlet {
 	PersonaService personaService = new PersonaService();
+	AjaxService ajaxService = new AjaxService();
 	private static final long serialVersionUID = 1L;
 	public ServletPersona(){
 		super();
@@ -27,7 +29,7 @@ public class ServletPersona extends HttpServlet {
 	 protected void service(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 			
 	    	String tipo = request.getParameter("tipo");
-	    	//String tipopersona = request.getParameter("tipo");
+	    	
 			if (tipo.equals("registrar"))
 				registrar(request, response);
 			else if (tipo.equals("buscarpersona"))
@@ -61,27 +63,38 @@ public class ServletPersona extends HttpServlet {
 		request.setAttribute("data", info);
 		request.getRequestDispatcher("app/persona/listar_persona.jsp").forward(request, response);
 	}
+	
+	
 
 	private void actualizar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		PersonaDTO obj = new PersonaDTO();
-		
-		String nombre = request.getParameter("txtnombre");		
-		String paterno = request.getParameter("txtapaterno");
-		String materno = request.getParameter("txtamaterno");
-		String sexo = request.getParameter("cmbsexo");
-		String dni = request.getParameter("cbotipodocumento");
-		String fechanac = request.getParameter("txtfechanacimiento");
-		String email = request.getParameter("txtemail");
-		String telefono = request.getParameter("txtfono");
-		String est = request.getParameter("cmbestado");
 		String cod = request.getParameter("codigo");
+		String nombre = request.getParameter("txtnombre");
+		String apaterno = request.getParameter("txtapaterno");
+		String amaterno = request.getParameter("txtamaterno");
+		String sexo = request.getParameter("cmbsexo");
+		String tipodocumento = request.getParameter("cbotipodocumento");
+		String numdocumento = request.getParameter("txtnumdocumento");
+		String fnacimiento = request.getParameter("txtfechanacimiento");
+		String email = request.getParameter("txtemail");
+		String fono = request.getParameter("txtfono");
+		String estado = request.getParameter("cmbestado");
+		String validaciones = "";
 		
-		if(fechanac!=null && !fechanac.trim().equals("")){
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-			Date date = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date hoy = new Date();
+		
+		Date date = null;
+		
+		if(fnacimiento!=null && !fnacimiento.trim().equals("")){
+			
+			
 			try {
-				date = sdf.parse(fechanac);
+				
+				date = sdf.parse(fnacimiento);
+				
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -89,22 +102,166 @@ public class ServletPersona extends HttpServlet {
 			obj.setFnacimiento(date);
 		}
 		
-			
-		obj.setNombre(nombre);
-		obj.setApaterno(paterno);
-		obj.setAmaterno(materno);
-		obj.setSexo(sexo);
-		obj.setTipodocumento(Integer.parseInt(dni));;
-		obj.setEmail(email);
-		obj.setFono(telefono);
-		obj.setEstado(Integer.parseInt(est));
-		obj.setCodigo(Integer.parseInt(cod));	
+		int sex = Integer.parseInt(sexo);
+		int doc = Integer.parseInt(tipodocumento);	
 		
-		int estado = personaService.actualizarPersona(obj);
-		if (estado != -1)
+		PersonaDTO x = personaService.buscarPersona(Integer.parseInt(cod));
+		
+		if(nombre.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "El campo Nombres está no puede vacío";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(apaterno.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "El campo Apellido Paterno no puede estar vacío";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(amaterno.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "El campo Apellido Materno no puede estar vacío";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(sex == 0) {
+			request.setAttribute("registro", x);
+            validaciones = "Debe seleccionar su sexo";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(doc== 0) {
+			request.setAttribute("registro", x);
+            validaciones = "Debe seleccionar un tipo de documento";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(numdocumento.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "No ha ingresado un número de documento";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(fnacimiento.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "No ha ingresado su fecha de nacimiento";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(email.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "El campo email no puede estar vacío";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(email.replaceAll(" ", "").equals("")) {
+			request.setAttribute("registro", x);
+            validaciones = "Tiene que ingresar un número de teléfono";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(!(nombre.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ ]*"))) {
+			request.setAttribute("registro", x);
+            validaciones = "Ingrese nombres válidos";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(!(apaterno.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ ]*"))) {
+			request.setAttribute("registro", x);
+            validaciones = "Debe ingresar un apellido paterno válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(!(apaterno.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ ]*"))) {
+			request.setAttribute("registro", x);
+            validaciones = "Debe ingresar un apellido materno válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(!(numdocumento.matches("[0-9]*"))) {
+			request.setAttribute("registro", x);
+            validaciones = "Solo debe ingresar caracteres numéricos en el campo de documento de identidad";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		
+		else if((doc == 1) && !(numdocumento.length() == 8 )) {
+			request.setAttribute("registro", x);
+            validaciones = "El Documento nacional de identidad debe tener 8 caracteres";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+			
+		else if((doc == 2) && !(numdocumento.length() == 12 )) {
+			request.setAttribute("registro", x);
+            validaciones = "El Carnet de Extranjería debe tener 12 caracteres";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if((doc == 3) && !(numdocumento.length() == 11 )) {
+			request.setAttribute("registro", x);
+            validaciones = "El Registro Unico de Contribuyentes debe tener 8 caracteres";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if((doc == 4) && !(numdocumento.length() == 12 )) {
+			request.setAttribute("registro", x);
+            validaciones = "El Pasaporte debe tener 12 caracteres";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if((doc == 5) && !(numdocumento.length() == 15 )) {
+			request.setAttribute("registro", x);
+            validaciones = "El Partida de Nacimiento debe tener 15 caracteres";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if((date.after(hoy))) {
+			request.setAttribute("registro", x);
+            validaciones = "La fecha de nacimiento no puede ser mayor a hoy";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }	
+		else if(!(email.matches("[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})"))) {
+			request.setAttribute("registro", x);
+            validaciones = "Ingrese un email válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(!(fono.matches("[0-9]*"))) {
+			request.setAttribute("registro", x);
+            validaciones = "Solo debe ingresar caracteres numéricos en su teléfono";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		else if(!(fono.length() == 7) && !(fono.length() == 9)) {
+			request.setAttribute("registro", x);
+            validaciones = "El teléfono solo debe tener 7 o 9 dígitos";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
+        }
+		
+		
+		else{
+		obj.setNombre(nombre);
+		obj.setApaterno(apaterno);
+		obj.setAmaterno(amaterno);
+		obj.setSexo(sexo);
+		obj.setTipodocumento(Integer.parseInt(tipodocumento));
+		obj.setNumdocumento(numdocumento);
+		obj.setEmail(email);
+		obj.setFono(fono);
+		obj.setEstado(Integer.parseInt(estado));
+		obj.setCodigo(Integer.parseInt(cod));
+		int proceso = personaService.actualizarPersona(obj);
+		
+		if(proceso != -1){
 			listar(request, response);
-		else
+		} else {
 			response.sendRedirect("error.html");
+		}
+		}
 	}
 
 	private void buscarPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -121,8 +278,6 @@ public class ServletPersona extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		PersonaDTO obj = new PersonaDTO();
-		//request.getRequestDispatcher("app/registar_persona.jsp").forward(request, response);
-
 		String nombre = request.getParameter("txtnombre");
 		String apaterno = request.getParameter("txtapaterno");
 		String amaterno = request.getParameter("txtamaterno");
@@ -133,18 +288,155 @@ public class ServletPersona extends HttpServlet {
 		String email = request.getParameter("txtemail");
 		String fono = request.getParameter("txtfono");
 		String estado = request.getParameter("cmbestado");
+		String validaciones = "";
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date hoy = new Date();
+		
+		Date date = null;
 		
 		if(fnacimiento!=null && !fnacimiento.trim().equals("")){
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-			Date date = null;
+			
+			
 			try {
+				
 				date = sdf.parse(fnacimiento);
+				
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			obj.setFnacimiento(date);
 		}
+		
+		int sex = Integer.parseInt(sexo);
+		int doc = Integer.parseInt(tipodocumento);	
+		
+		boolean count = ajaxService.mismoDoc("persona",numdocumento);
+		
+		
+		if(nombre.replaceAll(" ", "").equals("")) {
+            validaciones = "El campo Nombres está no puede vacío";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if(!(nombre.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ ]*"))) {
+            validaciones = "Ingrese nombres válidos";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		
+		else if(apaterno.replaceAll(" ", "").equals("")) {
+            validaciones = "El campo Apellido Paterno no puede estar vacío";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if(amaterno.replaceAll(" ", "").equals("")) {
+            validaciones = "El campo Apellido Materno no puede estar vacío";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if(sex == 0) {
+            validaciones = "Debe seleccionar su sexo";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if(doc== 0) {
+            validaciones = "Debe seleccionar un tipo de documento";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if(numdocumento.replaceAll(" ", "").equals("")) {
+            validaciones = "No ha ingresado un número de documento";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if(fnacimiento.replaceAll(" ", "").equals("")) {
+            validaciones = "No ha ingresado su fecha de nacimiento";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if(email.replaceAll(" ", "").equals("")) {
+            validaciones = "El campo email no puede estar vacío";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if(email.replaceAll(" ", "").equals("")) {
+            validaciones = "Tiene que ingresar un número de teléfono";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		
+		else if(!(apaterno.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ ]*"))) {
+            validaciones = "Debe ingresar un apellido paterno válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if(!(apaterno.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ ]*"))) {
+            validaciones = "Debe ingresar un apellido materno válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if(!(numdocumento.matches("[0-9]*"))) {
+            validaciones = "Solo debe ingresar caracteres numéricos en el campo de documento de identidad";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		
+		else if((doc == 1) && !(numdocumento.length() == 8 )) {
+            validaciones = "El Documento nacional de identidad debe tener 8 caracteres";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+			
+		else if((doc == 2) && !(numdocumento.length() == 12 )) {
+            validaciones = "El Carnet de Extranjería debe tener 12 caracteres";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if((doc == 3) && !(numdocumento.length() == 11 )) {
+            validaciones = "El Registro Unico de Contribuyentes debe tener 8 caracteres";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if((doc == 4) && !(numdocumento.length() == 12 )) {
+            validaciones = "El Pasaporte debe tener 12 caracteres";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if((doc == 5) && !(numdocumento.length() == 15 )) {
+            validaciones = "El Partida de Nacimiento debe tener 15 caracteres";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if((date.after(hoy))) {
+            validaciones = "La fecha de nacimiento no puede ser mayor a hoy";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }	
+		else if(!(email.matches("[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})"))) {
+            validaciones = "Ingrese un email válido";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if(!(fono.matches("[0-9]*"))) {
+            validaciones = "Solo debe ingresar caracteres numéricos en su teléfono";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else if(!(fono.length() == 7) && !(fono.length() == 9)) {
+            validaciones = "El teléfono solo debe tener 7 o 9 dígitos";
+            request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		
+		else if(count==true) {
+    		validaciones = "Ya hay una persona  registrada con el mismo número de documento"; 
+    		request.setAttribute("validaciones", validaciones);
+            request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
+        }
+		else{
 		obj.setNombre(nombre);
 		obj.setApaterno(apaterno);
 		obj.setAmaterno(amaterno);
@@ -161,6 +453,7 @@ public class ServletPersona extends HttpServlet {
 			listar(request, response);
 		} else {
 			response.sendRedirect("error.html");
+		}
 		}
 	}
 	
