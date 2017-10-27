@@ -6,17 +6,22 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import beans.Imagen;
+import beans.ImagenDTO;
 
 public class CropImagen {
-	public boolean recotarImagen(Imagen file, String serverPath, String sourcePath) throws IOException{
+	public boolean recotarImagen(ImagenDTO file, String imagePath) throws IOException{
 		
 		boolean resultado = false;
+		//String formato = CropImagen.getFormate(file.getNombre());
+		BufferedImage outImage=ImageIO.read(new File(imagePath + file.getNombre()));
+        BufferedImage cropped = outImage.getSubimage(file.getLadox(), file.getLadoy(), file.getAncho(), file.getAlto());
+        resultado  = ImageIO.write(cropped, "jpg", new File(imagePath + file.getNombre()));
+        
+		//System.out.println(this.getFormate(file.getNombre()));
 		
-		BufferedImage entrada = ImageIO.read(new File(serverPath));
-        BufferedImage salida = entrada.getSubimage(file.getLadox(), file.getLadoy(), file.getAncho(), file.getAlto());
-        resultado  = ImageIO.write(salida,"jpg",new File(sourcePath + file.getNombre()));
-		System.out.println(resultado);
 		return resultado;
+	}
+	public static String getFormate(String ImageName) {
+		return (ImageName.substring(ImageName.indexOf('.'),ImageName.length()));
 	}
 }

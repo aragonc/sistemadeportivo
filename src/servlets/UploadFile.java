@@ -1,8 +1,12 @@
 package servlets;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
  
 import javax.servlet.ServletException;
@@ -10,14 +14,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
+import javax.servlet.http.Part;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import beans.ImagenDTO;
+import utils.CropImagen;
  
 @WebServlet("/ServletImagen")
 public class UploadFile extends HttpServlet {
@@ -44,13 +54,61 @@ public class UploadFile extends HttpServlet {
 			recortarImage(request, response);
 		
 	}
+    class imgBean{
+    	
+    	protected int ancho;
+    	protected int alto;
+    	protected int ladox;
+    	protected int ladoy;
+    	protected String nombre;
+    }
  
-    private void recortarImage(HttpServletRequest request, HttpServletResponse response) {
+    private void recortarImage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
-    	response.setContentType("application/json;charset=UTF-8");
-    	String message = null;
-    	String dataJson = null;
-    	Gson gson = new Gson();
+    	 response.setContentType("application/json;charset=UTF-8");
+    	 
+    	 StringBuffer url = request.getRequestURL();
+    	 String uri = request.getRequestURI();
+    	 String ctx = request.getContextPath();
+    	 String base = url.substring(0, url.length() - uri.length() + ctx.length()) + "/";
+    	 
+    	 //System.out.println(base);
+    	 
+    	 String message = null;
+    	 String dataJson = null;
+    	 BufferedReader reader = request.getReader(); //OBTENEMOS LOS DATOS DEL AJAX
+         Gson gson = new Gson();
+         
+         try {
+        	 
+        	 imgBean data = gson.fromJson(reader, imgBean.class); //SE INSTANCIA LA CLASE IMAGEN
+             
+             //CREAMOS EL OBJETO IMAGEN
+             ImagenDTO imgRecorte = new ImagenDTO();
+             imgRecorte.setNombre(data.nombre);
+             imgRecorte.setAncho(data.ancho);
+             imgRecorte.setAlto(data.alto);
+             imgRecorte.setLadox(data.ladox);
+             imgRecorte.setLadoy(data.ladoy);
+             
+             String uploadPath = getServletContext().getRealPath("") + "uploads/";
+             
+             CropImagen crop = new CropImagen();
+             //System.out.println(uploadPath + imgRecorte.getNombre());
+             crop.recotarImagen(imgRecorte, uploadPath);
+             message = base + "uploads/" + imgRecorte.getNombre();
+             
+		} catch (Exception ex) {
+			
+			message = "Error : " + ex.getMessage();
+			
+		}
+         
+        try(PrintWriter out = response.getWriter()){
+        	dataJson = gson.toJson(message);
+    		out.println(dataJson);
+        }
+         
     	
 	}
 

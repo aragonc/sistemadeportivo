@@ -37,7 +37,7 @@
 	  			<div class="box-body">
 	  				<div class="col-md-9">
 	  				<div class="row">
-		  				<div class="col-md-7">
+		  				<div class="col-md-8">
 		  					<div class="form-group">
 							    <label for="txtnombre" class="col-sm-4 control-label">Nombres:</label>
 							    <div class="col-sm-8">
@@ -133,13 +133,13 @@
 							    </div>
 							</div>
 		  				</div>
-		  				<div class="col-md-5">
+		  				<div class="col-md-4">
 		  					
 		  					<div id="btnaction" class="action-toolbars">
 		  						<p>Seleccione una imagen</p>
 		  						<input type="file" onchange="uploadImagen();" id="file" name="file" accept="image/x-png,image/gif,image/jpeg" />
 		  						<div id="imagen-data" class="form-group">
-		  							<input type="hidden" id="file" name="file" />
+		  							<input type="hidden" id="avatar" name="avatar" />
 		                            <input type="hidden" id="x" name="x" />
 		                            <input type="hidden" id="y" name="y" />
 		                            <input type="hidden" id="w" name="w" />
@@ -147,11 +147,14 @@
                         		</div>
                         		
                         		<div id="imagen-crop" class="panel-image" style="display: none;">
-			                        <div class="preview">
+			                        <div id="preview-upload" style="display: none;">
 			                            <img id="img-preview" class="crop" />
 			                        </div>
+			                        <div id="preview-crop" style="display: none;">
+			                            <img id="img-crop" class="img-responsive" />
+			                        </div>
 			                        <div class="actions">
-			                        	<button class="btn btn-default" type="button" onclick="cropImagen();"><i class="fa fa-crop" aria-hidden="true"></i>
+			                        	<button id="recortar" class="btn btn-default" type="button" onclick="cropImagen();"><i class="fa fa-crop" aria-hidden="true"></i>
 			                        	 Recortar imagen</button>
 			                        	 <button class="btn btn-danger"><i class="fa fa-crop" aria-hidden="true"></i>
 			                        	 Quitar imagen</button>
@@ -232,6 +235,7 @@
 			                    }
 							}
 							$("#imagen-crop").show();
+							$("#preview-upload").show();
 	  						var oImagen = document.getElementById('img-preview');
 	  						
 	  						var oReader = new FileReader();
@@ -279,29 +283,29 @@
 	  			            var imgY = $("#y").val();
 	  			            var imgW = $("#w").val();
 	  			            var imgH = $("#h").val();
-	  			            var img = {
-	  			                'CorX': Math.round(imgX),
-	  			                'CorY': Math.round(imgY),
-	  			                'CorW': Math.round(imgW),
-	  			                'CorH': Math.round(imgH),
-	  			                'imagen' : imagenName
+	  			            var datos = {
+	  			                'ladox': Math.round(imgX),
+	  			                'ladoy': Math.round(imgY),
+	  			                'ancho': Math.round(imgW),
+	  			                'alto': Math.round(imgH),
+	  			                'nombre' : imagenName
 	  			            }
 	  			            
 	  			          $.ajax({
 	  		                type: "POST",
 	  		                url: '../../ServletImagen?tipo=crop',
+	  		              	dataType: "json", 
 	  		                contentType: "application/json; charset=utf-8",
 	  		                processData: false,
-	  		                data: JSON.stringify(img),
+	  		                data: JSON.stringify(datos),
 	  		                success: function (result) {
-	  		                    $fileupload = $('#ImagenProducto');
+	  		                    $fileupload = $('#file');
 	  		                    $fileupload.replaceWith($fileupload.clone(true));
-	  		                    $("#imgAvatar").attr('src', result);
-	  		                    $('#recortarImagen').hide();
-	  		                    $('#btnaction').append('<button type="button" id="borrarImagen" class="btn btn-danger">' +
-	  		                        '<i class="fa fa-trash-o" aria-hidden="true"></i>Quitar imagen</button>');
-	  		                    $('#ImagenProducto').remove();
-	  		                    $('#form-imagen').append('<input id="ImagenProducto" name="ImagenProducto" type="hidden" value="' + NombreImagen + '">');
+	  		                    $("#img-crop").attr('src', result);
+	  		                  	$("#avatar").attr('value', result);
+	  		                    $('#recortar').hide();
+	  		                    $("#preview-upload").hide();
+	  		                  	$("#preview-crop").show();
 	  		                },
 	  		               	 	error: function (xhr) {
 	  		                    	console.log(xhr.responseText);
@@ -309,7 +313,9 @@
 	  		            	});
 	  			            
 	  					}
-						
+						function deleteImagen(){
+							
+						}
 	  					
 	  				</script>
 	  			</div>

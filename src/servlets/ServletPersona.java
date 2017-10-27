@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 
-import beans.Imagen;
+import beans.ImagenDTO;
 import beans.PersonaDTO;
 import service.PersonaService;
 import utils.CropImagen;
@@ -140,45 +140,6 @@ public class ServletPersona extends HttpServlet {
 		String email = request.getParameter("txtemail");
 		String fono = request.getParameter("txtfono");
 		String estado = request.getParameter("cmbestado"); 
-
-		//Traemos las dimenciones de las variable del Jcrop
-    	String ladox = request.getParameter("x");
-    	String ladoy = request.getParameter("y");
-        String ancho = request.getParameter("w");
-        String alto = request.getParameter("h");
-        
-        //Guardando la imagen
-       
-        //Obtenemos el Archivo        
-        
-        
-        
-        
-        Part filePart = request.getPart("avatar");
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        String sourcePath =   request.getRealPath("") + "uploads/";
-        String serverPath = sourcePath + fileName;
-        serverPath = serverPath.replace("\\", "/");
-        
-        
-        
-        /*String webAppPath = getServletContext().getRealPath("/");
-        System.out.println(webAppPath);*/
-        
-        // OBTENEMOS LA IMAGEN Y CREAMOS EL ARCHIVO RECORTADO NUEVAMENTE.
-        if (filePart != null) {        	
-        	Imagen img = new Imagen();
-        	img.setLadox(Integer.parseInt(ladox));
-        	img.setLadoy(Integer.parseInt(ladoy));
-        	img.setAncho(Integer.parseInt(ancho));
-        	img.setAlto(Integer.parseInt(alto));
-        	img.setNombre(fileName);
-
-            CropImagen imagen = new CropImagen();
-            imagen.recotarImagen(img, serverPath, sourcePath);
-            
-        }
-        
         
 		if(fnacimiento!=null && !fnacimiento.trim().equals("")){
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
