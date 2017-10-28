@@ -135,8 +135,24 @@
 		  				</div>
 		  				<div class="col-md-4">
 		  					
-		  					<div id="btnaction" class="action-toolbars">
-		  						<p>Seleccione una imagen</p>
+		  					<div id="btnaction" class="photo-perfil">
+		  						<p><strong>Foto de perfil</strong></p>
+		  						
+		  						<div id="imagen-crop" class="panel-image" >
+                        			<div id="preview-crop" >
+			                            <img id="img-crop" width="160px" height="160px" class="thumbnail" src="${pageContext.request.contextPath}/images/avatar.jpg" />
+			                        </div>
+			                        <div id="preview-upload" style="display: none;">
+			                            <img id="img-preview" class="crop" />
+			                        </div>
+			                        <div id="actions" class="actions" style="display: none;">
+			                        	<button id="recortar" class="btn btn-default" type="button" onclick="cropImagen();"><i class="fa fa-crop" aria-hidden="true"></i>
+			                        	 Recortar</button>
+			                        	 <button class="btn btn-danger" type="button" onclick="deleteImagen();"><i class="fa fa-crop" aria-hidden="true"></i>
+			                        	 Quitar</button>
+			                        </div>
+		                    	</div>
+		  						
 		  						<input type="file" onchange="uploadImagen();" id="file" name="file" accept="image/x-png,image/gif,image/jpeg" />
 		  						<div id="imagen-data" class="form-group">
 		  							<input type="hidden" id="avatar" name="avatar" />
@@ -146,20 +162,7 @@
 		                            <input type="hidden" id="h" name="h" />
                         		</div>
                         		
-                        		<div id="imagen-crop" class="panel-image" style="display: none;">
-			                        <div id="preview-upload" style="display: none;">
-			                            <img id="img-preview" class="crop" />
-			                        </div>
-			                        <div id="preview-crop" style="display: none;">
-			                            <img id="img-crop" class="img-responsive" />
-			                        </div>
-			                        <div class="actions">
-			                        	<button id="recortar" class="btn btn-default" type="button" onclick="cropImagen();"><i class="fa fa-crop" aria-hidden="true"></i>
-			                        	 Recortar imagen</button>
-			                        	 <button class="btn btn-danger"><i class="fa fa-crop" aria-hidden="true"></i>
-			                        	 Quitar imagen</button>
-			                        </div>
-		                    	</div>
+                        		
 		                    	
 		                    	<div id="imagen-error" class="alert alert-warning" style="display: none;"></div>
 		  					</div>
@@ -173,13 +176,7 @@
 	  			<div class="col-md-3">
 	  				<script type="text/javascript">
 	  				
-		  				$(document).ready(function () {
-		  		            /* $("#cerror").hide();
-		  		            $("#recortarImagen").hide(); */
-		  		        });
-	  					
-	  					var jcrop_api, boundx, boundy;
-
+		  				
 	  					function updateInfo(e) {
 	  					    $('#x').val(parseInt(e.x));
 	  					    $('#y').val(parseInt(e.y));
@@ -218,7 +215,7 @@
 			                        formData.append("file", oFile);
 			                        $.ajax({
 			                            type: "POST",
-			                            url: '../../ServletImagen?tipo=upload',
+			                            url: '${pageContext.request.contextPath}/ServletImagen?tipo=upload',
 			                            contentType: false,
 			                            processData: false,
 			                            data: formData,
@@ -234,7 +231,7 @@
 			                        alert("Error al subir imagen");
 			                    }
 							}
-							$("#imagen-crop").show();
+							$("#actions").show();
 							$("#preview-upload").show();
 	  						var oImagen = document.getElementById('img-preview');
 	  						
@@ -258,10 +255,10 @@
 		  		                            onSelect: updateInfo,
 		  		                          	onChange: updateInfo,
 		  		                          	onRelease: clearInfo,
-		  		                            bgOpacity: .4,
+		  		                            bgOpacity: .3,
 		  		                            setSelect: [350, 350, 50, 50],
 		  		                            aspectRatio: 1,
-		  		                            boxWidth: 300
+		  		                            boxWidth: 200
 		  		                        }, function () {
 		  		                       // use the Jcrop API to get the real image size
 		  		                        	var bounds = this.getBounds();
@@ -279,6 +276,7 @@
 	  					}
 	  					
 	  					function cropImagen(){
+	  						
 	  						var imgX = $("#x").val();
 	  			            var imgY = $("#y").val();
 	  			            var imgW = $("#w").val();
@@ -293,7 +291,7 @@
 	  			            
 	  			          $.ajax({
 	  		                type: "POST",
-	  		                url: '../../ServletImagen?tipo=crop',
+	  		                url: '${pageContext.request.contextPath}/ServletImagen?tipo=crop',
 	  		              	dataType: "json", 
 	  		                contentType: "application/json; charset=utf-8",
 	  		                processData: false,
@@ -302,9 +300,10 @@
 	  		                    $fileupload = $('#file');
 	  		                    $fileupload.replaceWith($fileupload.clone(true));
 	  		                    $("#img-crop").attr('src', result);
-	  		                  	$("#avatar").attr('value', result);
+	  		                  	$("#avatar").attr('value', imagenName);
 	  		                    $('#recortar').hide();
 	  		                    $("#preview-upload").hide();
+	  		                  	$("#file").hide();
 	  		                  	$("#preview-crop").show();
 	  		                },
 	  		               	 	error: function (xhr) {
@@ -315,6 +314,25 @@
 	  					}
 						function deleteImagen(){
 							
+				            var imgAvatar = {
+				            		'nombre' : $("#avatar").val()
+				            }
+				            
+				            $.ajax({
+				                type: "POST",
+				                url: "${pageContext.request.contextPath}/ServletImagen?tipo=delete",
+				                contentType: "application/json; charset=utf-8",
+				                processData: false,
+				                data: JSON.stringify(imgAvatar),
+				                success: function (result) {
+				                    $("#img-crop").attr('src', '${pageContext.request.contextPath}/images/avatar.jpg');
+				                    $('#actions').hide();
+				                    $('#recortar').show();
+				                    $("#file").val("");
+				                    $("#file").show();
+				                    
+				                }
+				            });
 						}
 	  					
 	  				</script>

@@ -51,10 +51,39 @@ public class UploadFile extends HttpServlet {
 		else if (tipo.equals("crop"))
 			recortarImage(request, response);
 		else if (tipo.equals("delete"))
-			recortarImage(request, response);
+			deleteImage(request, response);
 		
 	}
-    class imgBean{
+    private void deleteImage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		// MEDOTO PARA ELIMINAR LA IMAGEN.
+    	
+    	BufferedReader reader = request.getReader(); //OBTENEMOS LOS DATOS DEL AJAX
+        Gson gson = new Gson();
+        String message = null;
+        try {
+        	
+        	imgValue data = gson.fromJson(reader, imgValue.class);
+     	   	String rutaFile = getServletContext().getRealPath("") + "uploads/" + data.nombre;
+     	   	CropImagen crop = new CropImagen();
+     	   	//System.out.println(rutaFile);
+     	   	crop.eliminarImagen(rutaFile);
+     	   	
+		} catch (Exception e) {
+			message = "Error : " + e.getMessage();
+		}
+        try(PrintWriter out = response.getWriter()){
+        	String dataJson = gson.toJson(message);
+    		out.println(dataJson);
+        }
+    	   
+    	   
+       
+		
+	}
+    class imgValue{
+    	protected String nombre;
+    }
+	class imgBean{
     	
     	protected int ancho;
     	protected int alto;

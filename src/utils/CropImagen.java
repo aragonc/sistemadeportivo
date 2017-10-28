@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import beans.ImagenDTO;
 
 public class CropImagen {
+	
 	public boolean recotarImagen(ImagenDTO file, String imagePath) throws IOException{
 		
 		boolean resultado = false;
@@ -24,4 +25,15 @@ public class CropImagen {
 	public static String getFormate(String ImageName) {
 		return (ImageName.substring(ImageName.indexOf('.'),ImageName.length()));
 	}
+	
+	public boolean eliminarImagen(String rutaFile){
+		boolean resultado = false;
+		File archivo = new File(rutaFile);
+		if(archivo.exists()){
+			resultado  = archivo.delete();
+		}
+		
+		return resultado;
+	}
+	
 }
