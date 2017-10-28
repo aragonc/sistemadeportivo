@@ -22,6 +22,6 @@
     "ckeditor": "4.5.7",
     "gmaps": "0.4.25",
     "jquery-mask-plugin": "1.14.12",
-    "Jcrop": "0.9.12"
-    }
+    "jcrop": "0.9.12"
+   }
 }

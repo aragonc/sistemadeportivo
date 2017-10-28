@@ -165,15 +165,8 @@
 		                            <input type="hidden" id="w" name="w" />
 		                            <input type="hidden" id="h" name="h" />
                         		</div>
-                        		
-                        		
-		                    	
 		                    	<div id="imagen-error" class="alert alert-warning" style="display: none;"></div>
 		  					</div>
-		  					
-		  					
-		  					
-		  					
 		  				</div>
 	  				</div>
 	  			</div>
