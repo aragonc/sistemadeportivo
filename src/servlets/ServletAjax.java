@@ -1,10 +1,13 @@
 package servlets;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,10 +39,21 @@ public class ServletAjax extends HttpServlet {
 			listarModalidad(request, response);
 		else if (tipo.equals("eliminarModalidad"))
 			listarModalidad(request, response);
+		else if (tipo.equals("crop"))
+			cortarImagen(request, response);
 	}
 
     
-    private void listarModalidad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+    private void cortarImagen(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+    	
+        
+        
+
+	}
+
+
+	private void listarModalidad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 		
     	response.setContentType("application/json;charset=UTF-8");
     	String dato =  request.getParameter("codevento");

@@ -159,3 +159,27 @@
 	margin-right: 0;
 	margin-bottom: 0;
 }
+.jcrop-holder{
+	margin: auto;
+}
+.separate{
+	margin-top:10px;
+}
+.panel-image{
+	width: 310px;
+	margin-bottom: 20px;
+}
+.panel-image .preview{
+	text-align: center;
+}
+.panel-image .actions{
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#preview-upload{
+	margin-top: 20px;
+}
+#preview-crop .thumbnail{
+	margin: auto;
+}
