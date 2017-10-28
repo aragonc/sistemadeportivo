@@ -155,7 +155,7 @@ public class MySqlAjaxDAO implements AjaxDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select count(*) from "+tabla+" where fecha_inicio <=? AND fecha_fin >=? and lugar_idlugar=?";
+			String sql = "select count(*) from "+tabla+" where fecha_inicio <=? AND fecha_fin >=? and idlugar=?";
 			
 			pstm = cn.prepareStatement(sql);
 			pstm.setDate(1, new java.sql.Date(fechini.getTime()));
@@ -197,7 +197,7 @@ public class MySqlAjaxDAO implements AjaxDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select count(*) from "+tabla+" where fecha_inicio >=? AND fecha_fin <=? and lugar_idlugar=?";
+			String sql = "select count(*) from "+tabla+" where fecha_inicio >=? AND fecha_fin <=? and idlugar=?";
 			
 			pstm = cn.prepareStatement(sql);
 			pstm.setDate(1, new java.sql.Date(fechini.getTime()));
@@ -239,7 +239,7 @@ public class MySqlAjaxDAO implements AjaxDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select count(*) from "+tabla+" where fecha_inicio between ? and ? and lugar_idlugar=?";
+			String sql = "select count(*) from "+tabla+" where fecha_inicio between ? and ? and idlugar=?";
 			
 			pstm = cn.prepareStatement(sql);
 			pstm.setDate(1, new java.sql.Date(fechini.getTime()));
@@ -281,7 +281,7 @@ public class MySqlAjaxDAO implements AjaxDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select count(*) from "+tabla+" where fecha_fin between ? and ? and lugar_idlugar=?";
+			String sql = "select count(*) from "+tabla+" where fecha_fin between ? and ? and idlugar=?";
 			
 			pstm = cn.prepareStatement(sql);
 			pstm.setDate(1, new java.sql.Date(fechini.getTime()));

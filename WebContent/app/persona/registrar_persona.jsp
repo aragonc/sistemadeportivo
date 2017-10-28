@@ -178,7 +178,7 @@
 			                        <div id="actions" class="actions" style="display: none;">
 			                        	<button id="recortar" class="btn btn-default" type="button" onclick="cropImagen();"><i class="fa fa-crop" aria-hidden="true"></i>
 			                        	 Recortar</button>
-			                        	 <button class="btn btn-danger" type="button" onclick="deleteImagen();"><i class="fa fa-crop" aria-hidden="true"></i>
+			                        	 <button class="btn btn-danger" type="button" onclick="deleteImagen();"><i class="fa fa-trash" aria-hidden="true"></i>
 			                        	 Quitar</button>
 			                        </div>
 		                    	</div>

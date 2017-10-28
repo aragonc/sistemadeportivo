@@ -180,9 +180,9 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setFono(rs.getString(10));
 				avatar = rs.getString(11);
 				if(avatar.equals("")){
-					a.setAvatar("/images/avatar.jpg");
+					a.setAvatar("avatar.jpg");
 				}else{
-					a.setAvatar("/uploads/"+rs.getString(11));
+					a.setAvatar(rs.getString(11));
 				}
 				a.setEstado(rs.getInt(12));	
 			}
