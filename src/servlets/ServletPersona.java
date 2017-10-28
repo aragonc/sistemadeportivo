@@ -297,6 +297,7 @@ public class ServletPersona extends HttpServlet {
 		String email = request.getParameter("txtemail");
 		String fono = request.getParameter("txtfono");
 		String estado = request.getParameter("cmbestado");
+		String foto = request.getParameter("avatar");
 		String validaciones = "";
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -454,6 +455,7 @@ public class ServletPersona extends HttpServlet {
 		obj.setNumdocumento(numdocumento);
 		obj.setEmail(email);
 		obj.setFono(fono);
+		obj.setAvatar(foto);
 		obj.setEstado(Integer.parseInt(estado));
 		
 		int proceso = personaService.registrarPersona(obj);

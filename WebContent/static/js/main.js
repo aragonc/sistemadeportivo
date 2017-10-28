@@ -54,6 +54,49 @@ $( document ).ready(function() {
 		        
 		    }); 
 	 }
+	 
+	 //CARGAR DATOS DE LA RENIEC
+	 $("#btn-sincronizar").click(function(e){
+			var $this = $(this);
+			e.preventDefault();
+			$("#progreso").show();
+			$.ajax({
+				data: { "ndni" : $("#txtnumdocumento").val() },
+				type: "POST",
+				dataType: "json",
+				url: "https://demos.geekdev.ml/reniec/consulta.php",
+			}).done(function( data, textStatus, jqXHR ){
+				
+				if(data['success']!="false" && data['success']!=false)
+				{
+					console.log("hay respuesta");
+					if(typeof(data['result'])!='undefined')
+					{
+						$("#progreso").hide();
+						$("#txtnombre").val(data['result'].Nombre);
+						$("#txtapaterno").val(data['result'].Paterno);
+						$("#txtamaterno").val(data['result'].Materno);
+						/* $.each(data['result'], function(i, v)
+						{
+							console.log(v);
+							//$("#txtnombre").value(v);
+						}); */
+					}
+				}
+				else
+				{
+					if(typeof(data['msg'])!='undefined')
+					{
+						alert( data['msg'] );
+					}
+				}
+			}).fail(function( jqXHR, textStatus, errorThrown ){
+				alert( "Solicitud fallida:" + textStatus );
+				$this.button('reset');
+				
+			});
+		});
+	 
 });
 $(function () {
     $('.datefechahora').datetimepicker({

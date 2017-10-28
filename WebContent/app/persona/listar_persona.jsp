@@ -67,6 +67,9 @@
 	               		 			<display:column title="Item" sortable="false"  >
 										<input type="checkbox" name="cod[]" value="${lista.codigo}">
 	               		 			</display:column>
+	               		 			<display:column title="Foto" sortable="false">
+	               		 				<img width="40px" src="${pageContext.request.contextPath}${lista.avatar}" class="img-thumbnail">
+	               		 			</display:column>
 									<display:column title="Apellidos y Nombres" sortable="false">
 	               		 				${lista.apaterno} ${lista.amaterno} , ${lista.nombre}
 	               		 			</display:column>

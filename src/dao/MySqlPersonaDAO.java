@@ -19,6 +19,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		Connection cn = null;
 		ResultSet rs = null;
 		PreparedStatement pstm = null;
+		String avatar = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "SELECT * FROM persona;";
@@ -36,7 +37,14 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setFnacimiento(rs.getDate(8));
 				a.setEmail(rs.getString(9));
 				a.setFono(rs.getString(10));
-				a.setEstado(rs.getInt(11));				
+				avatar = rs.getString(11);
+				
+				if(avatar.equals("")){
+					a.setAvatar("/images/avatar.jpg");
+				}else{
+					a.setAvatar("/uploads/"+rs.getString(11));
+				}
+				a.setEstado(rs.getInt(12));				
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -107,7 +115,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT p.idpersona, p.nombres, p.apaterno, p.amaterno, p.sexo, p.tipo_documento, p.dni, p.fecha_nacimiento, "
+			String sql = "SELECT p.idpersona, p.nombres, p.apaterno, p.amaterno, p.sexo, p.tipo_documento, p.num_documento, p.fecha_nacimiento, "
 					+ "p.email, p.telefono_contacto, p.estado FROM persona p inner join "
 					+ "persona_equipo pe on p.idpersona = pe.persona_idpersona where pe.equipo_idequipo = ?";
 			pstm = cn.prepareStatement(sql);
@@ -151,6 +159,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		Connection cn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
+		String avatar = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "SELECT * FROM persona WHERE idpersona=?;";
@@ -169,7 +178,13 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setFnacimiento(rs.getDate(8));
 				a.setEmail(rs.getString(9));
 				a.setFono(rs.getString(10));
-				a.setEstado(rs.getInt(11));	
+				avatar = rs.getString(11);
+				if(avatar.equals("")){
+					a.setAvatar("/images/avatar.jpg");
+				}else{
+					a.setAvatar("/uploads/"+rs.getString(11));
+				}
+				a.setEstado(rs.getInt(12));	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -197,7 +212,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "INSERT INTO persona VALUES (null,? ,? ,? ,? ,? ,? ,? , ? ,? ,? , NOW())";
+			String sql = "INSERT INTO persona VALUES (null,? ,? ,? ,? ,? ,? ,? , ? ,? ,? ,? , NOW())";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getApaterno());
@@ -208,7 +223,8 @@ public class MySqlPersonaDAO implements PersonaDAO{
 			pstm.setDate(7, new java.sql.Date(obj.getFnacimiento().getTime()));
 			pstm.setString(8, obj.getEmail());
 			pstm.setString(9, obj.getFono());
-			pstm.setInt(10, obj.getEstado());
+			pstm.setString(10, obj.getAvatar());
+			pstm.setInt(11, obj.getEstado());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

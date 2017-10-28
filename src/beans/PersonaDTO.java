@@ -13,7 +13,7 @@ public class PersonaDTO {
 	private Date fnacimiento;
 	private String email;
 	private String fono;
-	private String movil;
+	private String avatar;
 	private int estado;
 	
 	public int getCodigo() {
@@ -70,12 +70,6 @@ public class PersonaDTO {
 	public void setFono(String fono) {
 		this.fono = fono;
 	}
-	public String getMovil() {
-		return movil;
-	}
-	public void setMovil(String movil) {
-		this.movil = movil;
-	}
 	public int getEstado() {
 		return estado;
 	}
@@ -89,8 +83,15 @@ public class PersonaDTO {
 		this.tipodocumento = tipodocumento;
 	}
 
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	
 	public PersonaDTO(int codigo, String nombre, String apaterno, String amaterno, String sexo, int tipodocumento,
-			String numdocumento, Date fnacimiento, String email, String fono, String movil, int estado) {
+			String numdocumento, Date fnacimiento, String email, String fono, String avatar, int estado) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -102,7 +103,7 @@ public class PersonaDTO {
 		this.fnacimiento = fnacimiento;
 		this.email = email;
 		this.fono = fono;
-		this.movil = movil;
+		this.avatar = avatar;
 		this.estado = estado;
 	}
 	public PersonaDTO() {

@@ -37,11 +37,54 @@
 	  		<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletPersona?tipo=registrar" method="post" enctype="multipart/form-data">
 	  			<div class="box-body">
 	  				<div class="col-md-9">
-				<% if (validar != null) { %>
-                                 <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
-                                 <% } %>
+					<% if (validar != null) { %>
+                    	<div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
+                    <% } %>
 	  				<div class="row">
 		  				<div class="col-md-8">
+		  					<!-- OBTENER DNI -->
+		  					<div class="form-group">
+							    <label for="cbotipodocumento" class="col-sm-4 control-label">Documento de identidad:</label>
+							    <div class="col-sm-8">
+							    	 <select class="form-control" id="cbotipodocumento" name="cbotipodocumento">
+					                    
+					                    <%
+					                    	for (ComboDTO item : listaDoc ){
+					                    %>
+					                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
+					                   	<%
+					                   		}  
+					                   	%>
+				                  	</select>
+				                  	<div class="separate">
+				                  		<span  id="progreso" style="display: none;">
+				                  				<div class="sk-circle">
+												  <div class="sk-circle1 sk-child"></div>
+												  <div class="sk-circle2 sk-child"></div>
+												  <div class="sk-circle3 sk-child"></div>
+												  <div class="sk-circle4 sk-child"></div>
+												  <div class="sk-circle5 sk-child"></div>
+												  <div class="sk-circle6 sk-child"></div>
+												  <div class="sk-circle7 sk-child"></div>
+												  <div class="sk-circle8 sk-child"></div>
+												  <div class="sk-circle9 sk-child"></div>
+												  <div class="sk-circle10 sk-child"></div>
+												  <div class="sk-circle11 sk-child"></div>
+												  <div class="sk-circle12 sk-child"></div>
+												</div>
+				                  		</span>
+				                  		<div class="input-group">
+				                  			
+				                  			<input type="text" class="form-control" id="txtnumdocumento" name="txtnumdocumento" placeholder="Escribir el número de documento">
+				                  			<span class="input-group-btn">
+				                  				<button id="btn-sincronizar" class="btn btn-success" type="button"><i class="fa fa-refresh" aria-hidden="true"></i>
+				                  				 Sincronizar</button>
+				                  			</span>
+				                  		</div>
+				                  	</div>
+							    </div>
+							</div>
+		  					<!-- FIN OBTENER DOCUMENTO -->
 		  					<div class="form-group">
 							    <label for="txtnombre" class="col-sm-4 control-label">Nombres:</label>
 							    <div class="col-sm-8">
@@ -92,25 +135,8 @@
 							    </div>
 							</div>
 							
-							<div class="form-group">
-							    <label for="cbotipodocumento" class="col-sm-4 control-label">Documento de identidad:</label>
-							    <div class="col-sm-8">
-							    	 <select class="form-control" id="cbotipodocumento" name="cbotipodocumento">
-					                    <option value="0">-- Seleccione --</option>
-					                    <%
-					                    	for (ComboDTO item : listaDoc ){
-					                    %>
-					                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
-					                   	<%
-					                   		}  
-					                   	%>
-				                  	</select>
-				                  	<div class="separate">
-				                  		<input type="text" class="form-control" id="txtnumdocumento" name="txtnumdocumento" placeholder="Escribir el número de documento">
-				                  	</div>
-							    </div>
-							    
-							</div>
+							
+							
 							<div class="form-group">
 							    <label for="txtemail" class="col-sm-4 control-label">Email:</label>
 							    <div class="col-sm-8">

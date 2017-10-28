@@ -113,7 +113,7 @@ public class MySqlAjaxDAO implements AjaxDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select COUNT(*) from "+tabla+" where categoria_idcategoria=? and disciplina_iddisciplina=? and genero=?";
+			String sql = "select COUNT(*) from "+tabla+" where idcategoria=? and iddisciplina=? and tipo_genero=?";
 			
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, codcategoria);
@@ -405,7 +405,7 @@ public class MySqlAjaxDAO implements AjaxDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select COUNT(*) from "+tabla+" where dni=?";
+			String sql = "select COUNT(*) from "+tabla+" where num_documento=?";
 			
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, doc);

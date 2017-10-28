@@ -24,9 +24,9 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT m.idmodalidad, m.descripcion, m.genero, m.njugadores, m.nmujeres, m.nvarones, d.iddisciplina, d.nombre, c.idcategoria, c.nombre FROM modalidad m "
-					+ "inner join categoria c on m.categoria_idcategoria = c.idcategoria "
-					+ "inner join disciplina d on  m.disciplina_iddisciplina = d.iddisciplina;";
+			String sql = "SELECT m.idmodalidad, m.descripcion, m.tipo_genero, m.cantidad_jugadores, m.num_mujeres, m.num_varones, d.iddisciplina, d.nombre, c.idcategoria, c.nombre FROM modalidad m "
+					+ "inner join categoria c on m.idcategoria = c.idcategoria "
+					+ "inner join disciplina d on  m.iddisciplina = d.iddisciplina;";
 			pstm = cn.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
@@ -74,8 +74,8 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 			
 			String sql = "SELECT m.idmodalidad, m.descripcion, d.iddisciplina, d.nombre, c.idcategoria, c.nombre "
 					+ "FROM evento_modalidad em inner join modalidad m on m.idmodalidad = em.modalidad_idmodalidad "
-					+ "inner join categoria c on m.categoria_idcategoria = c.idcategoria "
-					+ "inner join disciplina d on  m.disciplina_iddisciplina = d.iddisciplina "
+					+ "inner join categoria c on m.idcategoria = c.idcategoria "
+					+ "inner join disciplina d on  m.iddisciplina = d.iddisciplina "
 					+ "where evento_idevento = ?;";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, codEvento);
@@ -122,9 +122,9 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 		ResultSet rs = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT m.idmodalidad, m.descripcion, m.genero, m.njugadores, m.nmujeres, m.nvarones, d.iddisciplina, d.nombre, c.idcategoria, c.nombre FROM modalidad m "
-					+ "inner join categoria c on m.categoria_idcategoria = c.idcategoria inner join "
-					+ "disciplina d on  m.disciplina_iddisciplina = d.iddisciplina WHERE m.idmodalidad=?;";
+			String sql = "SELECT m.idmodalidad, m.descripcion, m.tipo_genero, m.cantidad_jugadores, m.num_mujeres, m.num_varones, d.iddisciplina, d.nombre, c.idcategoria, c.nombre FROM modalidad m "
+					+ "inner join categoria c on m.idcategoria = c.idcategoria inner join "
+					+ "disciplina d on  m.iddisciplina = d.iddisciplina WHERE m.idmodalidad=?;";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
@@ -169,7 +169,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "insert into modalidad values(null , ?, ?, ?, ?, ?, ? , ? )";
+			String sql = "INSERT INTO modalidad VALUES(null , ?, ?, ?, ?, ?, ? , ? )";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getDescripcion());
 			pstm.setInt(2, obj.getCodCategoria());
@@ -202,7 +202,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "UPDATE modalidad set descripcion = ?, categoria_idcategoria = ?, disciplina_iddisciplina = ?, genero=? , njugadores = ?, nvarones = ? , nmujeres = ? where idmodalidad = ?";
+			String sql = "UPDATE modalidad set descripcion = ?, idcategoria = ?, iddisciplina = ?, tipo_genero=? , cantidad_jugadores = ?, num_varones = ? , num_mujeres = ? where idmodalidad = ?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getDescripcion());
 			pstm.setInt(2, obj.getCodCategoria());
@@ -236,7 +236,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "delete from modalidad where idmodalidad=?";
+			String sql = "DELETE FROM modalidad WHERE idmodalidad=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
 			estado = pstm.executeUpdate();
