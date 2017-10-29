@@ -297,6 +297,7 @@ public class ServletPersona extends HttpServlet {
 		String perfil = request.getParameter("cmbperfil");
 		String estado = request.getParameter("cmbestado");
 		String foto = request.getParameter("avatar");
+		String plataforma = request.getParameter("plataforma");
 		String validaciones = "";
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -452,17 +453,18 @@ public class ServletPersona extends HttpServlet {
 			obj.setEmail(email);
 			obj.setFono(fono);
 			obj.setAvatar(foto);
+			obj.setPlataforma(Boolean.parseBoolean(plataforma));
 			obj.setEstado(Integer.parseInt(estado));
 			
 			int persona = personaService.registrarPersona(obj);
-			user.setUsuario(email);
-			user.setPassword(password);
-			user.setPerfil(Integer.parseInt(perfil));
-			user.setCodpersona(persona);
-			
-			System.out.println(persona);
-			
-			usuarioService.registarUsuario(user);
+
+			if(plataforma!=null && !plataforma.trim().equals("")){
+				user.setUsuario(email);
+				user.setPassword(password);
+				user.setPerfil(Integer.parseInt(perfil));
+				user.setCodpersona(persona);
+				usuarioService.registarUsuario(user);
+			}
 			
 			if(persona != -1){
 				
