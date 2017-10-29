@@ -2,11 +2,9 @@ package dao;
 import interfaces.AjaxDAO;
 import interfaces.CategoriaDAO;
 import interfaces.ComboDAO;
-import interfaces.DelegadoDAO;
 import interfaces.DisciplinaDAO;
 import interfaces.EquipoDAO;
 import interfaces.EventoDAO;
-import interfaces.JugadorDAO;
 import interfaces.LugarDAO;
 import interfaces.ModalidadDAO;
 import interfaces.PerfilDAO;
@@ -21,11 +19,6 @@ public class MySqlDAOFactory extends DAOFactory {
 		return new MySqlCategoriaDAO();
 	}
 	@Override
-	public DelegadoDAO getDelegadoDAO() {
-		// TODO Auto-generated method stub
-		return new MySqlDelegadoDAO();
-	}
-	@Override
 	public DisciplinaDAO getDisciplinaDAO() {
 		// TODO Auto-generated method stub
 		return new MySqlDisciplinaDAO();
@@ -34,11 +27,6 @@ public class MySqlDAOFactory extends DAOFactory {
 	public EquipoDAO getEquipoDAO() {
 		// TODO Auto-generated method stub
 		return new MySqlEquipoDAO();
-	}
-	@Override
-	public JugadorDAO getJugadorDAO() {
-		// TODO Auto-generated method stub
-		return new MySqlJugadorDAO();
 	}
 	@Override
 	public PersonaDAO getPersonaDAO() {

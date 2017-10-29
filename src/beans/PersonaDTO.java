@@ -14,6 +14,7 @@ public class PersonaDTO {
 	private String email;
 	private String fono;
 	private String avatar;
+	private Boolean plataforma;
 	private int estado;
 	
 	public int getCodigo() {
@@ -89,9 +90,18 @@ public class PersonaDTO {
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
+
+	public Boolean getPlataforma() {
+		return plataforma;
+	}
+	public void setPlataforma(Boolean plataforma) {
+		this.plataforma = plataforma;
+	}
+	
 	
 	public PersonaDTO(int codigo, String nombre, String apaterno, String amaterno, String sexo, int tipodocumento,
-			String numdocumento, Date fnacimiento, String email, String fono, String avatar, int estado) {
+			String numdocumento, Date fnacimiento, String email, String fono, String avatar, Boolean plataforma,
+			int estado) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -104,8 +114,10 @@ public class PersonaDTO {
 		this.email = email;
 		this.fono = fono;
 		this.avatar = avatar;
+		this.plataforma = plataforma;
 		this.estado = estado;
 	}
+	
 	public PersonaDTO() {
 		super();
 		// TODO Auto-generated constructor stub

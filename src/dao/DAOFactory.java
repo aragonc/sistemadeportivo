@@ -3,11 +3,9 @@ package dao;
 import interfaces.AjaxDAO;
 import interfaces.CategoriaDAO;
 import interfaces.ComboDAO;
-import interfaces.DelegadoDAO;
 import interfaces.DisciplinaDAO;
 import interfaces.EquipoDAO;
 import interfaces.EventoDAO;
-import interfaces.JugadorDAO;
 import interfaces.LugarDAO;
 import interfaces.ModalidadDAO;
 import interfaces.PerfilDAO;
@@ -24,10 +22,8 @@ public abstract class DAOFactory {
     public static final int XML = 5;
     
     public abstract CategoriaDAO getCategoriaDAO();
-    public abstract DelegadoDAO getDelegadoDAO();
     public abstract DisciplinaDAO getDisciplinaDAO();
     public abstract EquipoDAO getEquipoDAO();
-    public abstract JugadorDAO getJugadorDAO();
     public abstract PersonaDAO getPersonaDAO();
     public abstract ComboDAO getComboDAO();
     public abstract EventoDAO getEventoDAO();
