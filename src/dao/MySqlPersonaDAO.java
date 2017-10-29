@@ -46,7 +46,8 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				}else{
 					a.setAvatar("/uploads/"+rs.getString(11));
 				}
-				a.setEstado(rs.getInt(12));				
+				a.setPlataforma(rs.getBoolean(12));
+				a.setEstado(rs.getInt(13));				
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -186,7 +187,8 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				}else{
 					a.setAvatar(rs.getString(11));
 				}
-				a.setEstado(rs.getInt(12));	
+				a.setPlataforma(rs.getBoolean(12));
+				a.setEstado(rs.getInt(13));	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -214,7 +216,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "INSERT INTO persona VALUES (null,? ,? ,? ,? ,? ,? ,? , ? ,? ,? ,? , NOW())";
+			String sql = "INSERT INTO persona VALUES (null,? ,? ,? ,? ,? ,? ,? , ? ,? ,? ,? , ?,  NOW())";
 			pstm = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getApaterno());
@@ -226,7 +228,8 @@ public class MySqlPersonaDAO implements PersonaDAO{
 			pstm.setString(8, obj.getEmail());
 			pstm.setString(9, obj.getFono());
 			pstm.setString(10, obj.getAvatar());
-			pstm.setInt(11, obj.getEstado());
+			pstm.setBoolean(11, obj.getPlataforma());
+			pstm.setInt(12, obj.getEstado());
 			estado = pstm.executeUpdate();
 			
 			ResultSet rs = pstm.getGeneratedKeys();

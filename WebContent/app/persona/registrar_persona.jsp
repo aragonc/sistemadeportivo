@@ -161,7 +161,7 @@
 							    <div class="col-sm-8">
 							      <div class="checkbox">
 								    <label>
-								      <input id="plataforma" type="checkbox" > Activar opciones de usuario de plataforma
+								      <input id="plataforma" name="plataforma" type="checkbox" value="true" > Activar opciones de usuario de plataforma
 								    </label>
 								  </div>
 							    </div>
