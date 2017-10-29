@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.jdbc.Statement;
+
 import beans.PersonaDTO;
 import interfaces.PersonaDAO;
 import utils.MysqlDBConexion;
@@ -213,7 +215,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "INSERT INTO persona VALUES (null,? ,? ,? ,? ,? ,? ,? , ? ,? ,? ,? , NOW())";
-			pstm = cn.prepareStatement(sql);
+			pstm = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getApaterno());
 			pstm.setString(3, obj.getAmaterno());
@@ -226,6 +228,13 @@ public class MySqlPersonaDAO implements PersonaDAO{
 			pstm.setString(10, obj.getAvatar());
 			pstm.setInt(11, obj.getEstado());
 			estado = pstm.executeUpdate();
+			
+			ResultSet rs = pstm.getGeneratedKeys();
+
+			if (rs.next()){
+				estado = rs.getInt(1);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -238,6 +247,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				e2.printStackTrace();
 			}
 		}
+		
 		return estado;
 	}
 

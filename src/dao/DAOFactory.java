@@ -10,7 +10,9 @@ import interfaces.EventoDAO;
 import interfaces.JugadorDAO;
 import interfaces.LugarDAO;
 import interfaces.ModalidadDAO;
+import interfaces.PerfilDAO;
 import interfaces.PersonaDAO;
+import interfaces.UsuarioDAO;
 
 
 public abstract class DAOFactory {
@@ -32,6 +34,8 @@ public abstract class DAOFactory {
     public abstract ModalidadDAO getModalidadDAO();
     public abstract AjaxDAO getAjaxDAO();
     public abstract LugarDAO getLugarDAO();
+    public abstract PerfilDAO getPerfilDAO();
+    public abstract UsuarioDAO getUsuarioDAO();
 
     public static DAOFactory getDAOFactory(int whichFactory){
         switch(whichFactory){

@@ -9,7 +9,9 @@ import interfaces.EventoDAO;
 import interfaces.JugadorDAO;
 import interfaces.LugarDAO;
 import interfaces.ModalidadDAO;
+import interfaces.PerfilDAO;
 import interfaces.PersonaDAO;
+import interfaces.UsuarioDAO;
 
 public class MySqlDAOFactory extends DAOFactory {
 	
@@ -59,6 +61,12 @@ public class MySqlDAOFactory extends DAOFactory {
 	}
 	public LugarDAO getLugarDAO(){
 		return new MySqlLugarDAO();
+	}
+	public PerfilDAO getPerfilDAO(){
+		return new MySqlPerfilDAO();
+	}
+	public UsuarioDAO getUsuarioDAO(){
+		return new MySqlUsuarioDAO();
 	}
 }
 

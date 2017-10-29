@@ -1,9 +1,6 @@
 package servlets;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.text.ParseException;
@@ -15,19 +12,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-
-
-import beans.ImagenDTO;
 import beans.PersonaDTO;
+import beans.UsuarioDTO;
 import service.AjaxService;
 import service.PersonaService;
-import utils.CropImagen;
+import service.UsuarioService;
 
 @WebServlet("/ServletPersona")
 @MultipartConfig
 public class ServletPersona extends HttpServlet {
 	PersonaService personaService = new PersonaService();
+	UsuarioService usuarioService = new UsuarioService();
+	
 	AjaxService ajaxService = new AjaxService();
 	private static final long serialVersionUID = 1L;
 	public ServletPersona(){
@@ -286,6 +282,7 @@ public class ServletPersona extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		PersonaDTO obj = new PersonaDTO();
+		UsuarioDTO user = new UsuarioDTO();
 
 		String nombre = request.getParameter("txtnombre");
 		String apaterno = request.getParameter("txtapaterno");
@@ -296,6 +293,8 @@ public class ServletPersona extends HttpServlet {
 		String fnacimiento = request.getParameter("txtfechanacimiento");
 		String email = request.getParameter("txtemail");
 		String fono = request.getParameter("txtfono");
+		String password = request.getParameter("txtpassword");
+		String perfil = request.getParameter("cmbperfil");
 		String estado = request.getParameter("cmbestado");
 		String foto = request.getParameter("avatar");
 		String validaciones = "";
@@ -307,10 +306,7 @@ public class ServletPersona extends HttpServlet {
 		Date date = null;
 		
 		if(fnacimiento!=null && !fnacimiento.trim().equals("")){
-			
-			
 			try {
-				
 				date = sdf.parse(fnacimiento);
 				
 			} catch (ParseException e) {
@@ -447,24 +443,33 @@ public class ServletPersona extends HttpServlet {
             request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
         }
 		else{
-		obj.setNombre(nombre);
-		obj.setApaterno(apaterno);
-		obj.setAmaterno(amaterno);
-		obj.setSexo(sexo);
-		obj.setTipodocumento(Integer.parseInt(tipodocumento));
-		obj.setNumdocumento(numdocumento);
-		obj.setEmail(email);
-		obj.setFono(fono);
-		obj.setAvatar(foto);
-		obj.setEstado(Integer.parseInt(estado));
-		
-		int proceso = personaService.registrarPersona(obj);
-		
-		if(proceso != -1){
-			listar(request, response);
-		} else {
-			response.sendRedirect("error.html");
-		}
+			obj.setNombre(nombre);
+			obj.setApaterno(apaterno);
+			obj.setAmaterno(amaterno);
+			obj.setSexo(sexo);
+			obj.setTipodocumento(Integer.parseInt(tipodocumento));
+			obj.setNumdocumento(numdocumento);
+			obj.setEmail(email);
+			obj.setFono(fono);
+			obj.setAvatar(foto);
+			obj.setEstado(Integer.parseInt(estado));
+			
+			int persona = personaService.registrarPersona(obj);
+			user.setUsuario(email);
+			user.setPassword(password);
+			user.setPerfil(Integer.parseInt(perfil));
+			user.setCodpersona(persona);
+			
+			System.out.println(persona);
+			
+			usuarioService.registarUsuario(user);
+			
+			if(persona != -1){
+				
+				listar(request, response);
+			} else {
+				response.sendRedirect("error.html");
+			}
 		}
 	}
 	

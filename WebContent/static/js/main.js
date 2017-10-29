@@ -3,8 +3,18 @@ $( document ).ready(function() {
 	
 	$("#gratuito").click(function(){
 		$("#txtcosto").attr('disabled',!this.checked)
-		});
-		
+	});
+	
+	
+	if( $("#plataforma").is(':checked') ) {
+		$("#opciones-usuario").show();
+	}
+	
+	$("#plataforma").click(function(){
+		$("#opciones-usuario").toggle();
+		//$("#opciones-usuario").attr('disabled',!this.checked)
+	});
+	
 	$("#idMixto").click(function(){
 		   $(".mixto").show();
 	});
