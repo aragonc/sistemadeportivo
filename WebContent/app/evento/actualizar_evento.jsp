@@ -2,11 +2,9 @@
 <%@page import="service.ComboService"%>
 <%@page import="beans.EventoDTO"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <jsp:include page="../_header.jsp" flush="true" />
- <jsp:include page="../_sidebar.jsp" flush="true" />
+ <%@ include file="../_header.jsp" %>
+ <%@ include file="../_sidebar.jsp" %>
 <%
 	EventoDTO obj = (EventoDTO)request.getAttribute("registro");
 	ComboService listaDocumento = new ComboService();  
@@ -134,4 +132,4 @@
         </div>              
     </section>
  </div>	
- <jsp:include page="../_footer.jsp" flush="true" />
+ <%@ include file="../_footer.jsp" %>

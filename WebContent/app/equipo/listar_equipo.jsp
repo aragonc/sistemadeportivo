@@ -4,16 +4,15 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
 <%@page import="beans.PersonaDTO"%>
 <%@page import="java.util.List"%>
 <%  
 	ComboService listaDocumento = new ComboService();
 	List<ComboDTO> listaSexo = listaDocumento.listarCombo("sexo");
 %>
- <jsp:include page="../_header.jsp" flush="true" />
- <jsp:include page="../_sidebar.jsp" flush="true" />
+ <%@ include file="../_header.jsp" %>
+ <%@ include file="../_sidebar.jsp" %>
  
    <div class="content-wrapper">
    <section class="content-header">
@@ -120,4 +119,4 @@
              </div>
     </section>
     </div>
-  <jsp:include page="../_footer.jsp" flush="true" />
+  <%@ include file="../_footer.jsp" %>

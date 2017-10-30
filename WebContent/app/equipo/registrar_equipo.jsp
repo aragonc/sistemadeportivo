@@ -1,10 +1,9 @@
 <%@page import="beans.ComboDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="service.ComboService"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
- <jsp:include page="../_header.jsp" flush="true" />
- <jsp:include page="../_sidebar.jsp" flush="true" />
+
+ <%@ include file="../_header.jsp" %>
+ <%@ include file="../_sidebar.jsp" %>
  <%
  	ComboService listaDocumento = new ComboService();  
 	List<ComboDTO> listaEventos = listaDocumento.listarComboSql("SELECT idevento, nombre FROM evento where estado = 1;");
@@ -144,4 +143,4 @@
         </div>              
     </section>
  </div>	
- <jsp:include page="../_footer.jsp" flush="true" />
+ <%@ include file="../_footer.jsp" %>

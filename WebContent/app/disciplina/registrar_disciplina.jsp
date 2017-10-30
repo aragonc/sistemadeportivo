@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%> 
 <%@ include file="../_header.jsp" %>
 <%@ include file="../_sidebar.jsp" %>
  <%	String validar = (String) request.getAttribute("validaciones"); %>
