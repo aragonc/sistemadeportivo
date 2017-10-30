@@ -18,3 +18,7 @@ INSERT INTO `extrafield` (`idextrafield`,`tipo`,`field`,`valor`) VALUES (10,'gen
 INSERT INTO `perfil` VALUES (1,'Administrador');
 INSERT INTO `perfil` VALUES (2,'Delegado');
 INSERT INTO `perfil` VALUES (3,'Cajero');
+
+/* PARA INSERTAR UN USUARIO PARA LOGEO */
+INSERT INTO persona VALUES (1, 'ALEX RUBEN', 'ARAGON', 'CALIXTO', '1', 1, '44197172', '2017-10-08', 'aragcar@gmail.com', '954189939', NULL , 1, 1, now());
+INSERT INTO usuario VALUES (1, 'admin', '1234', 1 , 1 );
