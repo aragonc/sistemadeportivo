@@ -29,7 +29,7 @@
 		              	<div class="toolbar-actions">
             			<div class="row">
             				<div class="col-md-6">
-            					<a href="${pageContext.request.contextPath}">
+            					<a href="${pageContext.request.contextPath}/ServletUsuario?tipo=panel">
 					        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
 					        	</a>
 						        <a href="${pageContext.request.contextPath}/ServletEquipo?tipo=agregar">

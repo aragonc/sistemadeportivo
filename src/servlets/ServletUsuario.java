@@ -35,8 +35,18 @@ public class ServletUsuario extends HttpServlet {
     	String tipo = request.getParameter("tipo");
     	if (tipo.equals("autenticar"))
     		autenticar(request, response);
+    	if (tipo.equals("panel"))
+    		panel(request, response);
     }
     
+	private void panel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		RequestDispatcher rd = request.getRequestDispatcher("app/dashboard.jsp");
+        rd.forward(request, response);
+        
+		
+	}
+
 	private void autenticar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
@@ -44,21 +54,22 @@ public class ServletUsuario extends HttpServlet {
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
-		System.out.println(username);
-		System.out.println(password);
+		String validar = null;
+		//System.out.println(username);
+		//System.out.println(password);
 		
 		if(serviceUsuario.loginUsuario(username, password)){
 			HttpSession session = request.getSession();
 			UsuarioDTO usuario = serviceUsuario.buscaroUsuario(username, password);
 			session.setAttribute("user", usuario);
+			panel(request, response);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("app/dashboard.jsp");
-	        rd.forward(request, response);
-	        
 			System.out.println("Logeado con exito");
 		}else{
-			System.out.println("Error en el inicio de sesion");
+			 validar = "El usuario y/o la contraseña es incorrecta";
+	         request.setAttribute("validar", validar);
+	         request.getRequestDispatcher("app/index.jsp").forward(request, response);
+	         System.out.println("Error en el inicio de sesion");
 		}
 		
 		

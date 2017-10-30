@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%
+	String validar = (String) request.getAttribute("validar");
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -33,9 +36,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
-                            <h1><strong>Bootstrap</strong> Login Form</h1>
+                           <img src="${pageContext.request.contextPath}/images/logoapp.svg" width="350px" />
                             <div class="description">
-                            	
+                            	<% if (validar != null) { %>
+                    				<div class="alert alert-warning" role="alert">${requestScope.validar}</div>
+                    			<% } %>
                             </div>
                         </div>
                     </div>
