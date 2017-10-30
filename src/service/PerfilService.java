@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+import beans.ModuloDTO;
 import beans.PerfilDTO;
 import dao.DAOFactory;
 import interfaces.PerfilDAO;
@@ -15,6 +16,9 @@ DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
 		return perfilDAO.listar();
 	}
 	public PerfilDTO buscarPefil(int cod){
-		return perfilDAO.buscarPefil(cod);
+		return perfilDAO.buscarPerfil(cod);
+	}
+	public List<ModuloDTO> listarModuloPerfil(int codPerfil){
+		return perfilDAO.listarModuloPerfil(codPerfil);
 	}
 }

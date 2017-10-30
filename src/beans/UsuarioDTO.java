@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.List;
+
 public class UsuarioDTO {
 	public int codigo;
 	public String usuario;
@@ -8,6 +10,8 @@ public class UsuarioDTO {
 	public int codperfil;
 	public PerfilDTO perfil;
 	public PersonaDTO persona;
+	private List<ModuloDTO> modulo;
+	
 	public int getCodigo() {
 		return codigo;
 	}
@@ -52,8 +56,17 @@ public class UsuarioDTO {
 		this.codperfil = codperfil;
 	}
 	
+	public List<ModuloDTO> getModulo() {
+		return modulo;
+	}
+	
+	public void setModulo(List<ModuloDTO> modulo) {
+		this.modulo = modulo;
+	}
+	
+	
 	public UsuarioDTO(int codigo, String usuario, String password, int codpersona, int codperfil, PerfilDTO perfil,
-			PersonaDTO persona) {
+			PersonaDTO persona, List<ModuloDTO> modulo) {
 		super();
 		this.codigo = codigo;
 		this.usuario = usuario;
@@ -62,6 +75,7 @@ public class UsuarioDTO {
 		this.codperfil = codperfil;
 		this.perfil = perfil;
 		this.persona = persona;
+		this.modulo = modulo;
 	}
 	public UsuarioDTO() {
 		super();

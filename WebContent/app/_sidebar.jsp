@@ -1,3 +1,5 @@
+<%@page import="beans.ModuloDTO"%>
+<%@page import="java.util.List"%>
 <%@page import="beans.UsuarioDTO"%>
 
   <!-- INICIO SIDEBAR IZQUIERDO -->
@@ -15,7 +17,7 @@
     } else {
     	usuario = (UsuarioDTO)session.getAttribute("user");
     	nombre = usuario.getPersona().getApaterno() + " " +usuario.getPersona().getAmaterno();
-  	
+  		List<ModuloDTO> menus = usuario.getModulo();
   %>
   <aside class="main-sidebar">
     <section class="sidebar">
@@ -42,41 +44,16 @@
             <i class="fa fa-dashboard"></i> <span>Escritorio</span>
           </a>
         </li>
-        <li>
-          <a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=listar">
-            <i class="fa fa-futbol-o" aria-hidden="true"></i> <span>Disciplinas</span>
-          </a>
-        </li>
-        <li>
-          <a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar">
-            <i class="fa fa-folder" aria-hidden="true"></i> <span>Categorias</span>
-          </a>
-        </li>
-        <li>
-          <a href="${pageContext.request.contextPath}/ServletModalidad?tipo=listar">
-            <i class="fa fa-bookmark" aria-hidden="true"></i> <span>Modalidades</span>
-          </a>
-        </li>
-        <li>
-          <a href="${pageContext.request.contextPath}/ServletLugar?tipo=listar">
-            <i class="fa fa-map-marker" aria-hidden="true"></i> <span>Lugares</span>
-          </a>
-        </li>
-        <li>
-          <a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar">
-            <i class="fa fa-bell" aria-hidden="true"></i> <span>Eventos</span>
-          </a>
-        </li>
-        <li>
-          <a href="${pageContext.request.contextPath}/ServletPersona?tipo=listar">
-            <i class="fa fa-user" aria-hidden="true"></i> <span>Personas</span>
-          </a>
-        </li>
-        <li>
-          <a href="${pageContext.request.contextPath}/ServletEquipo?tipo=listar">
-            <i class="fa fa-users" aria-hidden="true"></i> <span>Equipos</span>
-          </a>
-        </li>
+        
+        <% for (ModuloDTO item : menus) { %>
+	        <li>
+	          <a href="${pageContext.request.contextPath}/<%= item.getUrl() %>">
+	            <i class="fa <%= item.getIconsmall() %>" aria-hidden="true"></i> <span><%= item.getNombre() %></span>
+	          </a>
+	        </li>
+        <% } %>
+        
+        
       </ul>
     </section>
   </aside>

@@ -3,7 +3,9 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
+import beans.ModuloDTO;
 import beans.PerfilDTO;
 import beans.PersonaDTO;
 import beans.UsuarioDTO;
@@ -69,6 +71,8 @@ public class MySqlUsuarioDAO implements UsuarioDAO{
 				a.setPersona(datosPersona);
 				PerfilDTO datosPerfil = servicePerfil.buscarPefil(a.getCodperfil());
 				a.setPerfil(datosPerfil);
+				List<ModuloDTO> modulos = servicePerfil.listarModuloPerfil(a.getCodperfil());
+				a.setModulo(modulos);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

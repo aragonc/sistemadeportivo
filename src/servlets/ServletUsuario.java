@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
+import beans.ModuloDTO;
 import beans.UsuarioDTO;
 import service.UsuarioService;
 
@@ -23,6 +26,7 @@ public class ServletUsuario extends HttpServlet {
 	UsuarioService serviceUsuario = new UsuarioService();
 	
 	private static final long serialVersionUID = 1L;
+	public static final String NameUSER = "Robin Wilson";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -53,11 +57,12 @@ public class ServletUsuario extends HttpServlet {
 		
 		HttpSession sesion = request.getSession(true);
         sesion.invalidate();
-        response.sendRedirect("app/index.jsp");
+        response.sendRedirect(request.getContextPath());
 	}
 
 	private void panel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		RequestDispatcher rd = request.getRequestDispatcher("app/dashboard.jsp");
         rd.forward(request, response);
         
@@ -81,13 +86,14 @@ public class ServletUsuario extends HttpServlet {
 			UsuarioDTO usuario = serviceUsuario.buscaroUsuario(username, password);
 			session.setAttribute("inicio", "ok");
 			session.setAttribute("user", usuario);
+			session.setAttribute("menus", usuario.getModulo());
 			panel(request, response);
-			Long ultimoAcceso = session.getLastAccessedTime();
+			//Long ultimoAcceso = session.getLastAccessedTime();
 			
-			System.out.println(this.getServletName()+" ultimoAcceso: "+new Date(ultimoAcceso));
+			/*System.out.println(this.getServletName()+" ultimoAcceso: "+new Date(ultimoAcceso));
 			System.out.println(this.getServletName()+" Id: "+session.getId());
 			System.out.println(this.getServletName()+" MaxInactividad: "+session.getMaxInactiveInterval());
-			System.out.println("Logeado con exito");
+			System.out.println("Logeado con exito"); */
 			
 		}else{
 			 validar = "El usuario y/o la contraseña es incorrecta";

@@ -2,9 +2,15 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<% 
+String xSession = (String) session.getAttribute("inicio");
 
+//CONTROLA SESSION
+if ( ( xSession == null || xSession.equalsIgnoreCase("") ) ) {
+	response.sendRedirect(request.getContextPath());
+} else {
+	List<ModuloDTO> modulos = (List<ModuloDTO>)session.getAttribute("menus"); 
+%>
 <%@page import="java.util.List" %>
  <%@ include file="_header.jsp"  %>
  <%@ include file="_sidebar.jsp" %>
@@ -21,97 +27,26 @@
 	        </div>
         	<div class="box-body">
             	
-            	<div class="col-md-2 col-xs-6">
-					<div class="app-tools">
-						<div class="icon">
-							<a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=listar">
-								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/021-football.png">
-							</a>
-						</div>
-						<div class="name">
-							<a href="${pageContext.request.contextPath}/ServletDisciplina?tipo=listar">Disciplinas</a>
-						</div>
-					</div>
-            	</div>
+            	<% for (ModuloDTO item : modulos) { %>
             	
             	<div class="col-md-2 col-xs-6">
-					<div class="app-tools">
+					<div id="tool_<%= item.getCodigo() %>" class="app-tools">
 						<div class="icon">
-							<a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar">
-								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/014-ball.png">
+							<a href="${pageContext.request.contextPath}/<%= item.getUrl() %>">
+								<img class="touch" src="${pageContext.request.contextPath}/images/icons/tools/<%= item.getIconbing() %>">
 							</a>
 						</div>
 						<div class="name">
-							<a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar">Categorias</a>
+							<a href="${pageContext.request.contextPath}/<%= item.getUrl() %>"><%= item.getNombre() %></a>
 						</div>
 					</div>
             	</div>
-            	
-            	<div class="col-md-2 col-xs-6">
-					<div class="app-tools">
-						<div class="icon">
-							<a href="${pageContext.request.contextPath}/ServletModalidad?tipo=listar">
-								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/035-strategy.png">
-							</a>
-						</div>
-						<div class="name">
-							<a href="${pageContext.request.contextPath}/ServletCategoria?tipo=listar">Modalidades</a>
-						</div>
-					</div>
-            	</div>
-            	<div class="col-md-2 col-xs-6">
-					<div class="app-tools">
-						<div class="icon">
-							<a href="${pageContext.request.contextPath}/ServletLugar?tipo=listar">
-								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/location.png">
-							</a>
-						</div>
-						<div class="name">
-							<a href="${pageContext.request.contextPath}/ServletLugar?tipo=listar">Mis Lugares</a>
-						</div>
-					</div>
-            	</div>
-            	<div class="col-md-2 col-xs-6">
-					<div class="app-tools">
-						<div class="icon">
-							<a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar">
-								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/001-games.png">
-							</a>
-						</div>
-						<div class="name">
-							<a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar">Mis Eventos</a>
-						</div>
-					</div>
-            	</div>
-            	<div class="col-md-2 col-xs-6">
-					<div class="app-tools">
-						<div class="icon">
-							<a href="${pageContext.request.contextPath}/ServletPersona?tipo=listar">
-								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/004-exercise-1.png">
-							</a>
-						</div>
-						<div class="name">
-							<a href="${pageContext.request.contextPath}/ServletPersona?tipo=listar">Personas</a>
-						</div>
-					</div>
-            	</div>
-            	
-            	<div class="col-md-2 col-xs-6">
-					<div class="app-tools">
-						<div class="icon">
-							<a href="${pageContext.request.contextPath}/ServletEquipo?tipo=listar">
-								<img class="touch" src="${pageContext.request.contextPath}/images/icons/64/007-game-2.png">
-							</a>
-						</div>
-						<div class="name">
-							<a href="${pageContext.request.contextPath}/ServletEquipo?tipo=listar">Mis Equipos</a>
-						</div>
-					</div>
-            	</div>
-            	
+            	<% } %>
             	
            	</div>
        	</div>
     </section>
     </div>
   <%@ include file="_footer.jsp" %>
+  <% } %>
+  
