@@ -14,4 +14,7 @@ DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
 	public List<PerfilDTO> listar(){
 		return perfilDAO.listar();
 	}
+	public PerfilDTO buscarPefil(int cod){
+		return perfilDAO.buscarPefil(cod);
+	}
 }

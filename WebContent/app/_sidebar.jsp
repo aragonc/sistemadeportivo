@@ -1,16 +1,28 @@
+<%@page import="beans.UsuarioDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <!-- INICIO SIDEBAR IZQUIERDO -->
+  <%
+  	UsuarioDTO usuario = (UsuarioDTO)session.getAttribute("user");
+  	String nombre = usuario.getPersona().getApaterno() + " " +usuario.getPersona().getAmaterno();
+  	System.out.println(usuario.getUsuario());
+  %>
   <aside class="main-sidebar">
     <section class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="${pageContext.request.contextPath}/images/avatar.jpg" class="img-circle" alt="User Image">
+          <%
+          	if(usuario.getPersona().getAvatar().equals("avatar.jpg")){
+          %>
+          	<img src="${pageContext.request.contextPath}/images/<%= usuario.getPersona().getAvatar() %>" class="img-circle" alt="<%= nombre %>">
+          <% } else { %>
+          	<img src="${pageContext.request.contextPath}/uploads/<%= usuario.getPersona().getAvatar() %>" class="img-circle" alt="<%= nombre %>">
+          <% } %>
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <p><%= nombre %></p>
+          <a href="#"><i class="fa fa-circle text-success"></i> <%= usuario.getPerfil().getNombre() %></a>
         </div>
       </div>
       <ul class="sidebar-menu" data-widget="tree">

@@ -5,7 +5,8 @@ public class UsuarioDTO {
 	public String usuario;
 	public String password;
 	public int codpersona;
-	public int perfil;
+	public int codperfil;
+	public PerfilDTO perfil;
 	public PersonaDTO persona;
 	public int getCodigo() {
 		return codigo;
@@ -37,24 +38,31 @@ public class UsuarioDTO {
 	public void setPersona(PersonaDTO persona) {
 		this.persona = persona;
 	}
-	public int getPerfil() {
+	public PerfilDTO getPerfil() {
 		return perfil;
 	}
-	public void setPerfil(int perfil) {
+	public void setPerfil(PerfilDTO perfil) {
 		this.perfil = perfil;
 	}
+		
+	public int getCodperfil() {
+		return codperfil;
+	}
+	public void setCodperfil(int codperfil) {
+		this.codperfil = codperfil;
+	}
 	
-	public UsuarioDTO(int codigo, String usuario, String password, int codpersona, int perfil,
+	public UsuarioDTO(int codigo, String usuario, String password, int codpersona, int codperfil, PerfilDTO perfil,
 			PersonaDTO persona) {
 		super();
 		this.codigo = codigo;
 		this.usuario = usuario;
 		this.password = password;
 		this.codpersona = codpersona;
+		this.codperfil = codperfil;
 		this.perfil = perfil;
 		this.persona = persona;
 	}
-	
 	public UsuarioDTO() {
 		super();
 		// TODO Auto-generated constructor stub

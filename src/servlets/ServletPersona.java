@@ -461,7 +461,7 @@ public class ServletPersona extends HttpServlet {
 			if(plataforma!=null && !plataforma.trim().equals("")){
 				user.setUsuario(email);
 				user.setPassword(password);
-				user.setPerfil(Integer.parseInt(perfil));
+				user.setCodperfil(Integer.parseInt(perfil));
 				user.setCodpersona(persona);
 				usuarioService.registarUsuario(user);
 			}

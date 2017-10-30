@@ -6,4 +6,5 @@ import beans.PerfilDTO;
 
 public interface PerfilDAO {
 	public List<PerfilDTO> listar();
+	public PerfilDTO buscarPefil(int cod);
 }

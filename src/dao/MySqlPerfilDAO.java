@@ -44,4 +44,38 @@ public class MySqlPerfilDAO implements PerfilDAO{
 		}
 		return data;
 	}
+	
+	public PerfilDTO buscarPefil(int cod){
+		PerfilDTO a = null;
+		Connection cn = null;
+		ResultSet rs = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "SELECT * FROM perfil WHERE idperfil = ?";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, cod);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				a = new PerfilDTO();
+				a.setCodigo(rs.getInt(1));
+				a.setNombre(rs.getString(2));
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return a;
+	}
 }

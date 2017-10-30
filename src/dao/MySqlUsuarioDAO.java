@@ -4,14 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import beans.PerfilDTO;
 import beans.PersonaDTO;
 import beans.UsuarioDTO;
 import interfaces.UsuarioDAO;
+import service.PerfilService;
 import service.PersonaService;
 import utils.MysqlDBConexion;
 
 public class MySqlUsuarioDAO implements UsuarioDAO{
 	PersonaService servicePersona = new PersonaService();
+	PerfilService servicePerfil = new PerfilService();
 	
 	public int registarUsuario(UsuarioDTO obj){
 		int estado = -1;
@@ -24,7 +27,7 @@ public class MySqlUsuarioDAO implements UsuarioDAO{
 			pstm.setString(1, obj.getUsuario());
 			pstm.setString(2, obj.getPassword());
 			pstm.setInt(3, obj.getCodpersona());
-			pstm.setInt(4, obj.getPerfil());
+			pstm.setInt(4, obj.getCodperfil());
 			estado = pstm.executeUpdate();
 			
 		} catch (Exception e) {
@@ -61,9 +64,11 @@ public class MySqlUsuarioDAO implements UsuarioDAO{
 				a.setUsuario(rs.getString(2));
 				a.setPassword(rs.getString(3));
 				a.setCodpersona(rs.getInt(4));
-				a.setPerfil(rs.getInt(5));
-				PersonaDTO datos = servicePersona.buscarPersona(a.getCodpersona());
-				a.setPersona(datos);
+				a.setCodperfil(rs.getInt(5));
+				PersonaDTO datosPersona = servicePersona.buscarPersona(a.getCodpersona());
+				a.setPersona(datosPersona);
+				PerfilDTO datosPerfil = servicePerfil.buscarPefil(a.getCodperfil());
+				a.setPerfil(datosPerfil);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
