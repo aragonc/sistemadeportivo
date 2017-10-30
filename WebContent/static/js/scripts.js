@@ -5,7 +5,7 @@ jQuery(document).ready(function() {
         Fullscreen background
     */
     $.backstretch([
-                    "images/bg-fondo.jpg"
+                    "${pageContext.request.contextPath}/images/bg-fondo.jpg"
 	             ], {duration: 3000, fade: 750});
     
     /*

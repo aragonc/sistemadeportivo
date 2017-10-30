@@ -35,10 +35,24 @@ public class ServletUsuario extends HttpServlet {
     	String tipo = request.getParameter("tipo");
     	if (tipo.equals("autenticar"))
     		autenticar(request, response);
-    	if (tipo.equals("panel"))
+    	else if (tipo.equals("panel"))
     		panel(request, response);
+    	else if (tipo.equals("cerrar"))
+    		cerrar(request, response);
     }
     
+	private void cerrar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// TODO Auto-generated method stub
+		
+		HttpSession sesion = request.getSession(true);
+        
+        //Cerrar sesion
+        sesion.invalidate();
+        
+        //Redirecciono a index.jsp
+        response.sendRedirect("app/index.jsp");
+	}
+
 	private void panel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		RequestDispatcher rd = request.getRequestDispatcher("app/dashboard.jsp");

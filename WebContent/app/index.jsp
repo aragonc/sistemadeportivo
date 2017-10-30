@@ -9,7 +9,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap Login Form Template</title>
+        <title>Sistema de Campeonato Deportivo</title>
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -25,7 +25,7 @@
         <![endif]-->
 
         <!-- Favicon and touch icons -->
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/icons/favicon.png">
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.png">
     </head>
     <body>
 
@@ -81,7 +81,42 @@
        	<script src="${pageContext.request.contextPath}/bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/static/js/jquery.backstretch.min.js"></script>
-        <script src="${pageContext.request.contextPath}/static/js/scripts.js"></script>
+        <script type="text/javascript">
+        
+        jQuery(document).ready(function() {
+        	
+            /*
+                Fullscreen background
+            */
+            $.backstretch([
+                            "${pageContext.request.contextPath}/images/bg-fondo.jpg"
+        	             ], {duration: 3000, fade: 750});
+            
+            /*
+                Form validation
+            */
+            $('.login-form input[type="text"], .login-form input[type="password"], .login-form textarea').on('focus', function() {
+            	$(this).removeClass('input-error');
+            });
+            
+            $('.login-form').on('submit', function(e) {
+            	
+            	$(this).find('input[type="text"], input[type="password"], textarea').each(function(){
+            		if( $(this).val() == "" ) {
+            			e.preventDefault();
+            			$(this).addClass('input-error');
+            		}
+            		else {
+            			$(this).removeClass('input-error');
+            		}
+            	});
+            	
+            });
+            
+            
+        });
+        
+        </script>
         
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>

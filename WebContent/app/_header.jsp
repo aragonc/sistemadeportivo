@@ -62,7 +62,7 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">         
           <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i> Salir</a>
+            <a href="${pageContext.request.contextPath}/ServletUsuario?tipo=cerrar"><i class="fa fa-gears"></i> Salir</a>
           </li>
         </ul>
       </div>
