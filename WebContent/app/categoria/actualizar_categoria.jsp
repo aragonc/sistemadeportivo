@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <jsp:include page="../_header.jsp" flush="true" />
- <jsp:include page="../_sidebar.jsp" flush="true" />
+<%@ include file="../_header.jsp" %>
+<%@ include file="../_sidebar.jsp" %>
  <% 
  CategoriaDTO ca = (CategoriaDTO) request.getAttribute("registro"); 
  String validar = (String) request.getAttribute("validaciones");
@@ -63,4 +63,4 @@
     </section>
   </div>
  
- <jsp:include page="../_footer.jsp" flush="true" />
+<%@ include file="../_footer.jsp" %>

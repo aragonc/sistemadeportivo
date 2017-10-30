@@ -4,11 +4,8 @@
 <%@page import="beans.CategoriaDTO"%>
 <%@page import="java.util.List"%>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
- <jsp:include page="../_header.jsp" flush="true" />
- <jsp:include page="../_sidebar.jsp" flush="true" />
+ <%@ include file="../_header.jsp"  %>
+ <%@ include file="../_sidebar.jsp" %>
  
   <div class="content-wrapper">
   <section class="content-header">
@@ -88,4 +85,4 @@
     </section>
   </div>
  
- <jsp:include page="../_footer.jsp" flush="true" />
+ <%@ include file="../_footer.jsp" %>

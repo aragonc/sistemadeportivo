@@ -9,8 +9,8 @@
     
 
 
- <jsp:include page="../_header.jsp" flush="true" />
- <jsp:include page="../_sidebar.jsp" flush="true" />
+ <%@ include file="../_header.jsp" %>
+ <%@ include file="../_sidebar.jsp" %>
  
   <div class="content-wrapper">
   	<section class="content-header">

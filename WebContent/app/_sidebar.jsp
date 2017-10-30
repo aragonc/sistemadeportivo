@@ -1,11 +1,21 @@
 <%@page import="beans.UsuarioDTO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
   <!-- INICIO SIDEBAR IZQUIERDO -->
   <%
-  	UsuarioDTO usuario = (UsuarioDTO)session.getAttribute("user");
-  	String nombre = usuario.getPersona().getApaterno() + " " +usuario.getPersona().getAmaterno();
-  	System.out.println(usuario.getUsuario());
+  	UsuarioDTO usuario = null;
+  	String nombre = null;
+  	String avatar = null;
+  	String validarSession = (String) session.getAttribute("inicio");
+	
+	//CONTROLA SESSION
+	if ( ( validarSession == null || validarSession.equalsIgnoreCase("") ) ) {
+		System.out.println("ValidaSesion.jsp -> usuario mal");
+		//procesar = false;
+		response.sendRedirect(request.getContextPath());
+    } else {
+    	usuario = (UsuarioDTO)session.getAttribute("user");
+    	nombre = usuario.getPersona().getApaterno() + " " +usuario.getPersona().getAmaterno();
+  	
   %>
   <aside class="main-sidebar">
     <section class="sidebar">
@@ -26,7 +36,7 @@
         </div>
       </div>
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MENÃš OPCIONES</li>
+        <li class="header">MENÚ OPCIONES</li>
         <li class="active">
           <a href="${pageContext.request.contextPath}/ServletUsuario?tipo=panel">
             <i class="fa fa-dashboard"></i> <span>Escritorio</span>
@@ -70,4 +80,5 @@
       </ul>
     </section>
   </aside>
+  <% } %>
  <!-- /.FIN DE SIDEBAR IZQUIERDO -->

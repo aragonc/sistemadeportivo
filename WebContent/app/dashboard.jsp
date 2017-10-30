@@ -4,9 +4,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="java.util.List"%>
- <jsp:include page="_header.jsp" flush="true" />
- <jsp:include page="_sidebar.jsp" flush="true" />
+
+<%@page import="java.util.List" %>
+ <%@ include file="_header.jsp"  %>
+ <%@ include file="_sidebar.jsp" %>
    <div class="content-wrapper">
     <section class="content-header">
       <h1>
@@ -113,4 +114,4 @@
        	</div>
     </section>
     </div>
-  <jsp:include page="_footer.jsp" flush="true" />
+  <%@ include file="_footer.jsp" %>

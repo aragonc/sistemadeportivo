@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,7 +31,11 @@ public class ServletUsuario extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    public void destroy() {
+	}
 
+    
     protected void service(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
     	String tipo = request.getParameter("tipo");
     	if (tipo.equals("autenticar"))
@@ -39,17 +44,15 @@ public class ServletUsuario extends HttpServlet {
     		panel(request, response);
     	else if (tipo.equals("cerrar"))
     		cerrar(request, response);
+    	
     }
     
+
 	private void cerrar(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		
 		HttpSession sesion = request.getSession(true);
-        
-        //Cerrar sesion
         sesion.invalidate();
-        
-        //Redirecciono a index.jsp
         response.sendRedirect("app/index.jsp");
 	}
 
@@ -64,7 +67,8 @@ public class ServletUsuario extends HttpServlet {
 	private void autenticar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-
+		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(100);
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -73,12 +77,18 @@ public class ServletUsuario extends HttpServlet {
 		//System.out.println(password);
 		
 		if(serviceUsuario.loginUsuario(username, password)){
-			HttpSession session = request.getSession();
+			
 			UsuarioDTO usuario = serviceUsuario.buscaroUsuario(username, password);
+			session.setAttribute("inicio", "ok");
 			session.setAttribute("user", usuario);
 			panel(request, response);
+			Long ultimoAcceso = session.getLastAccessedTime();
 			
+			System.out.println(this.getServletName()+" ultimoAcceso: "+new Date(ultimoAcceso));
+			System.out.println(this.getServletName()+" Id: "+session.getId());
+			System.out.println(this.getServletName()+" MaxInactividad: "+session.getMaxInactiveInterval());
 			System.out.println("Logeado con exito");
+			
 		}else{
 			 validar = "El usuario y/o la contraseña es incorrecta";
 	         request.setAttribute("validar", validar);
@@ -105,7 +115,7 @@ public class ServletUsuario extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		autenticar(request, response);
 	}
 
 }
