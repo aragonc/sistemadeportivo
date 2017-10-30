@@ -6,8 +6,7 @@
 <%@page import="beans.ComboDTO"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
 <%  
 	ComboService listaDocumento = new ComboService();
 	PerfilService perfiles = new PerfilService();
@@ -16,8 +15,8 @@
 	List<PerfilDTO> listaPerfil = perfiles.listar();
 	String validar = (String) request.getAttribute("validaciones"); 
 %>
- <jsp:include page="../_header.jsp" flush="true" />
-  <jsp:include page="../_sidebar.jsp" flush="true" />
+ <%@ include file="../_header.jsp" %>
+ <%@ include file="../_sidebar.jsp" %>
   <!-- INICIO DE CABECERA INFO PAGE  -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -79,7 +78,7 @@
 				                  		</span>
 				                  		<div class="input-group">
 				                  			
-				                  			<input type="text" class="form-control" id="txtnumdocumento" name="txtnumdocumento" placeholder="Escribir el nÃºmero de documento">
+				                  			<input type="text" class="form-control" id="txtnumdocumento" name="txtnumdocumento" placeholder="Escribir el número de documento">
 				                  			<span class="input-group-btn">
 				                  				<button id="btn-sincronizar" class="btn btn-success" type="button"><i class="fa fa-refresh" aria-hidden="true"></i>
 				                  				 Sincronizar</button>
@@ -140,9 +139,9 @@
 							</div>
 							
 							<div class="form-group">
-							    <label for="txtfono" class="col-sm-4 control-label">TelÃ©fono:</label>
+							    <label for="txtfono" class="col-sm-4 control-label">Teléfono:</label>
 							    <div class="col-sm-8">
-							      <input type="text" class="form-control" id="txtfono" name="txtfono" placeholder="Escribir el nÃºmero de telÃ©fono">
+							      <input type="text" class="form-control" id="txtfono" name="txtfono" placeholder="Escribir el número de teléfono">
 							    </div>
 							</div>
 							
@@ -184,11 +183,11 @@
 							</div>
 
 							<div class="form-group">
-							    <label for="txtfono" class="col-sm-4 control-label">ContraseÃ±a:</label>
+							    <label for="txtfono" class="col-sm-4 control-label">Contraseña:</label>
 							    <div class="col-sm-8">
 							    	<div class="input-group">
 							    		<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-							      		<input type="password" class="form-control" id="txtpassword" name="txtpassword" placeholder="Escribir una contraseÃ±a">
+							      		<input type="password" class="form-control" id="txtpassword" name="txtpassword" placeholder="Escribir una contraseña">
 							      	</div>
 							    </div>
 							</div>
@@ -267,7 +266,7 @@
 						    	$("#imagen-error").html("Seleccionar una imagen JPG o PNG").show();
   							    return;
 	  						}
-							//comparamos el tamaÃ±o de la imagen
+							//comparamos el tamaño de la imagen
 	  						if (oFile.size >  1024 * 1024) {
 	  					        $("#imagen-error").html("Solo se permite subir imagenes menor a 2,5 MB").show();
 	  					        return;
@@ -419,4 +418,4 @@
     <!-- /.FIN DE CABECERA INFO PAGE-->
   </div>
   <!-- /.FIN DE SECCION DE CONTENIDO -->
-  <jsp:include page="../_footer.jsp" flush="true" />
+  <%@ include file="../_footer.jsp" %>

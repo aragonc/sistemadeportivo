@@ -1,7 +1,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
 <%@page import="beans.PersonaDTO"%>
 <%@page import="service.ComboService"%>
 <%@page import="dao.MySqlComboDAO"%>
@@ -18,8 +17,8 @@
 %>
 <c:set var="estado" value="<%= pe.getEstado() %>"/>
 
-<jsp:include page="../_header.jsp" flush="true" />
-  <jsp:include page="../_sidebar.jsp" flush="true" />
+<%@ include file="../_header.jsp" %>
+<%@ include file="../_sidebar.jsp" %>
   <!-- INICIO DE CABECERA INFO PAGE  -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -379,4 +378,4 @@
     <!-- /.FIN DE CABECERA INFO PAGE-->
   </div>
   <!-- /.FIN DE SECCION DE CONTENIDO -->
-  <jsp:include page="../_footer.jsp" flush="true" />
+  <%@ include file="../_footer.jsp" %>

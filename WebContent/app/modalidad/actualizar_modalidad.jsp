@@ -2,10 +2,9 @@
 <%@page import="beans.ComboDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="service.ComboService"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
- <jsp:include page="../_header.jsp" flush="true" />
- <jsp:include page="../_sidebar.jsp" flush="true" />
+
+ <%@ include file="../_header.jsp" %>
+ <%@ include file="../_sidebar.jsp" %>
  <%  
  	ModalidadDTO obj = (ModalidadDTO)request.getAttribute("registro");
 	ComboService listas = new ComboService();  
@@ -171,4 +170,4 @@
     </section>
   </div>
  
- <jsp:include page="../_footer.jsp" flush="true" />
+ <%@ include file="../_footer.jsp" %>

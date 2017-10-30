@@ -3,8 +3,8 @@
 <%@page import="service.ComboService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <jsp:include page="../_header.jsp" flush="true" />
- <jsp:include page="../_sidebar.jsp" flush="true" />
+ <%@ include file="../_header.jsp" %>
+ <%@ include file="../_sidebar.jsp" %>
  <%  
 	String error = (String)request.getAttribute("errorMessage");
 %>
@@ -104,5 +104,5 @@
     </section>
   </div>
  
- <jsp:include page="../_footer.jsp" flush="true" />
+ <%@ include file="../_footer.jsp" %>
  
