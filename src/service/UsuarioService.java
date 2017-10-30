@@ -12,4 +12,10 @@ public class UsuarioService {
 	public int registarUsuario(UsuarioDTO obj){
 		return usuarioDAO.registarUsuario(obj);
 	}
+	public UsuarioDTO buscaroUsuario(String usuario, String password){
+		return usuarioDAO.buscarUsuario(usuario, password);
+	}
+	public boolean loginUsuario(String usuario, String password){
+		return usuarioDAO.loginUsuario(usuario, password);
+	}
 }
