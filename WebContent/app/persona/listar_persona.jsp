@@ -42,15 +42,14 @@
             				
             				<div class="col-md-9">
 	            				<div class="pull-right">
-	            					<form class="form-inline" action="ServletPersona?tipo=buscarPersonaXNombre" method="post">
+	            					<form class="form-inline">
 									  <div class="form-group">
 									    <div class="input-group">
-									      <a><input type="text" name="txtNombre" class="form-control" id="txtNombre" placeholder="Ingrese Nombre"></a>
-									      <a><input type="text" name="txtApellido" class="form-control" id="txtApellido" placeholder="Ingrese Apellido"></a>
-									   <a><button type="submit" class="btn btn-primary">Buscar</button></a>
+									      <input type="text" name="txtdni" class="form-control" id="txtdni" size="25" placeholder="Buscar persona">
 									    </div>
 									  </div>
-									  
+									  <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i>
+									   Buscar</button>
 									</form>
 	            				</div>
             				</div>
@@ -67,7 +66,15 @@
 										<input type="checkbox" name="cod[]" value="${lista.codigo}">
 	               		 			</display:column>
 	               		 			<display:column title="Foto" sortable="false">
-	               		 				<img width="40px" src="${pageContext.request.contextPath}${lista.avatar}" class="img-thumbnail">
+	               		 				<c:choose>
+										    <c:when test="${lista.avatar != null }">
+										        <img width="40px" src="${pageContext.request.contextPath}/uploads/${lista.avatar}" class="img-thumbnail">
+										    </c:when>    
+										    <c:otherwise>
+										        <img width="40px" src="${pageContext.request.contextPath}/images/avatar.jpg" class="img-thumbnail">
+										    </c:otherwise>
+										</c:choose>
+	               		 				
 	               		 			</display:column>
 									<display:column title="Apellidos y Nombres" sortable="false">
 	               		 				${lista.apaterno} ${lista.amaterno} , ${lista.nombre}

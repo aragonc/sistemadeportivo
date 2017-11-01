@@ -73,7 +73,7 @@ public class ServletUsuario extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		HttpSession session = request.getSession();
-		session.setMaxInactiveInterval(10*60);
+		//session.setMaxInactiveInterval(10*60);
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");

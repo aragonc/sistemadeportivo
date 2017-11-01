@@ -21,7 +21,6 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		Connection cn = null;
 		ResultSet rs = null;
 		PreparedStatement pstm = null;
-		String avatar = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "SELECT * FROM persona;";
@@ -39,13 +38,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setFnacimiento(rs.getDate(8));
 				a.setEmail(rs.getString(9));
 				a.setFono(rs.getString(10));
-				avatar = rs.getString(11);
-				
-				if(avatar.equals("")){
-					a.setAvatar("/images/avatar.jpg");
-				}else{
-					a.setAvatar("/uploads/"+rs.getString(11));
-				}
+				a.setAvatar(rs.getString(11));
 				a.setPlataforma(rs.getBoolean(12));
 				a.setEstado(rs.getInt(13));				
 				data.add(a);
@@ -162,7 +155,6 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		Connection cn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		String avatar = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "SELECT * FROM persona WHERE idpersona=?;";
@@ -181,8 +173,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setFnacimiento(rs.getDate(8));
 				a.setEmail(rs.getString(9));
 				a.setFono(rs.getString(10));
-				avatar = rs.getString(11);
-				if(avatar.equals("")){
+				if(rs.getString(11)==null){
 					a.setAvatar("avatar.jpg");
 				}else{
 					a.setAvatar(rs.getString(11));

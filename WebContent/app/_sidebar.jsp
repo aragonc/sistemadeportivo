@@ -25,7 +25,7 @@
       <div class="user-panel">
         <div class="pull-left image">
           <%
-          	if(usuario.getPersona().getAvatar().equals("avatar.jpg")){
+          	if(usuario.getPersona().getAvatar().equals("avatar.jpg") || usuario.getPersona().getAvatar().equals("") ){
           %>
           	<img src="${pageContext.request.contextPath}/images/<%= usuario.getPersona().getAvatar() %>" class="img-circle" alt="<%= nombre %>">
           <% } else { %>

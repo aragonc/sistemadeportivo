@@ -3,10 +3,7 @@ package servlets;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
  
 import javax.servlet.ServletException;
@@ -14,17 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemIterator;
-import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.json.simple.JSONObject;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+
 
 import beans.ImagenDTO;
 import utils.CropImagen;
@@ -32,10 +24,6 @@ import utils.CropImagen;
 @WebServlet("/ServletImagen")
 public class UploadFile extends HttpServlet {
     private static final long serialVersionUID = 1L;
-     
-    // location to store file uploaded
-    
-    private static final String UPLOAD_DIRECTORY = "/home/aragonc/upload";
  
     // upload settings
     private static final int MEMORY_THRESHOLD   = 1024 * 1024 * 3;  // 3MB

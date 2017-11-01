@@ -154,7 +154,7 @@
 		  						
 		  						<% //condición para mostrar si tiene imagen o no
 		  						
-									if(pe.getAvatar().equals("/images/avatar.jpg")){  						
+									if(pe.getAvatar().equals("")){  						
 		  						%>
 		  						
 		  						<div id="imagen-crop" class="panel-image" >
