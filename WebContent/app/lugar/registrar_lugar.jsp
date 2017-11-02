@@ -44,7 +44,7 @@
 		                            	<input class="form-control" name="direccion" id="direccion">
 		                           </div>
 		                           <div class="col-sm-2">
-		                           	
+		                           		
 									</div>
 		                        </div>
 		                        
@@ -54,9 +54,11 @@
                          <div class="form-group">
 	                           <label class="col-sm-2 control-label">Ubicación</label>
 	                           <div class="col-sm-8">
-	                             <div id="mapa" style="width: 750px; height: 400px;"></div>
+	                             <div id="mapa" style="width: 100%; height: 400px;"></div>
 	                           </div>
-	                           <div class="col-sm-2"></div>
+	                           <div class="col-sm-2">
+	                           		
+	                           </div>
 		                 </div>
                          
                          <input type="hidden" name="latitud" id="latitud">    
@@ -78,7 +80,8 @@
 	                  var map;
 	                  var latlng;
 	                  var address;
-	                  
+	                  var mlat;
+	                  var mlog;
 	                  $(document).ready(function(){
 						  // CREAMOS EL MAPA
 	                	  map = new GMaps({
@@ -131,8 +134,16 @@
 	                    			  document.getElementById('latitud').value = latlng.lat();
 	                	              document.getElementById('longitud').value = latlng.lng();
 	                	              document.getElementById('direccion').value = address;
+	                	              console.log(latlng.lat());
+	                	              map = GMaps.createPanorama({
+	  	                		        el: '#panorama',
+	  	                		        lat : latlng.lat(),
+	  	                		        lng : latlng.lng()
+	  	                		      });
 	                    		  }
 	                    	  });
+	                		  
+	                		  
 	                	  });
 		                     
 	                    });
@@ -143,6 +154,7 @@
 		</div>
     </section>
   </div>
- 
+ <!-- INICIO DEL MODAL -->
+
  <%@ include file="../_footer.jsp" %>
  

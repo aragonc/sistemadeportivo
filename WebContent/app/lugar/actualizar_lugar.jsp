@@ -51,14 +51,14 @@
 
                          	</div>
                          	
-                         	
                          </div>
                          
                          <div class="form-group">
 	                           <label class="col-sm-2 control-label">Ubicación</label>
-	                           <div class="col-sm-10">
-	                             <div id="mapa" style="width: 750px; height: 400px;"></div>
+	                           <div class="col-sm-8">
+	                             <div id="mapa" style="width: 100%; height: 400px;"></div>
 	                           </div>
+	                           <div class="col-sm-2"></div>
 		                 </div>
                          
                          <input type="hidden" name="latitud" id="latitud">    
