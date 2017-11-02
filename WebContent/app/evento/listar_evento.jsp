@@ -64,7 +64,8 @@
 		               		 			
 										<display:column property="nombre" title="Titulo Evento" sortable="false" style="width:20%;"/>
 										<display:column title="Lugar" sortable="false" media="html" style="width:20%;">
-											${lista.lugar}
+											<strong>${lista.lugar.nombre}</strong><br>
+											${lista.lugar.direccion}
 										</display:column>
 										<display:column property="fechaInicio" title="Fecha Inicio" sortable="false">
 											

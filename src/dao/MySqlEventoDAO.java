@@ -48,7 +48,6 @@ public class MySqlEventoDAO implements EventoDAO {
 				lugar.setNombre(rs.getString(9));
 				lugar.setDireccion(rs.getString(10));
 				a.setLugar(lugar);
-				System.out.println(lugar.getNombre());
 				a.setEstado(rs.getInt(11));
 				data.add(a);
 			}

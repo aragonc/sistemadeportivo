@@ -110,9 +110,6 @@ public class ServletEvento extends HttpServlet {
     private void listar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<EventoDTO> info = eventoService.listarEvento();
-		for (EventoDTO eventoDTO : info) {
-			System.out.println(eventoDTO.getLugar().getNombre());
-		}
 		request.setAttribute("data", info);
 		request.getRequestDispatcher("app/evento/listar_evento.jsp").forward(request,
 				response);
