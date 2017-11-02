@@ -21,7 +21,7 @@
 	              <h3 class="box-title">Asignar modalidad a evento al <span class="valor"><%= nombreEvento %></span></h3>
 	        </div>
 	        <div class="body">
-	        	<div class="col-md-9">
+	        	<div class="col-md-12">
 	        		<!-- MENSAJE QUE APARECE CUANDO SE REGISTRA UN EVENTO -->
 			       	<% if(codigoEvento!=null) { %>
 		              	<div class="alert alert-success" role="alert">
@@ -33,17 +33,9 @@
 			        <div class="toolbar-actions">
 			        	<div class="row">
 			        		<div class="col-md-6">
-			        			
-						        	<a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar">
-						        		<img alt="Regresar a lista de eventos" title ="Regresar a lista de eventos" src="${pageContext.request.contextPath}/images/icons/32/back.png">
-						        	</a>
-						        	<a href="${pageContext.request.contextPath}">
-						        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
-						        	</a>
-							        <a href="${pageContext.request.contextPath}/app/modalidad/registrar_modalidad.jsp">
-							        	<img alt="Crear nueva categoria" title="Crear nueva modalidad" src="${pageContext.request.contextPath}/images/icons/32/new_folder.png">
-							        </a>
-						        
+					        	<a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar">
+					        		<img alt="Regresar a lista de eventos" title ="Regresar a lista de eventos" src="${pageContext.request.contextPath}/images/icons/32/back.png">
+					        	</a>
 			        		</div>
 			        		<div class="col-md-6">
 			        			<div class="pull-right">
@@ -59,7 +51,6 @@
 	            				</div>
 			        		</div>
 			        	</div>
-			        	
 			       	</div>
 			       	
 			       	<form action="${pageContext.request.contextPath}/ServletEvento?tipo=suscribirModalidad" method="post" id="formlista">
@@ -78,7 +69,6 @@
 				               			Agregar
 				               		</a>
 				               	</div>
-
 				            </display:column>
 				        </display:table>
 			         </div>
@@ -88,13 +78,12 @@
 			         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(false, 'lista'); return false;">Anular selección</a>
 			         	</div>
 			         	<div class="btn-group">
-						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						    Acciones <span class="caret"></span>
+						  <button type="button" id="seleccion" class="btn btn-sucess">
+						    Agregar modalidades 
 						  </button>
-						  <ul class="dropdown-menu">
-						    <li><a href="#" id="seleccion">Agregar seleccionadas</a></li>
-						    
-						  </ul>
+						  <a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar" class="btn btn-default">
+					        	Regresar a lista
+					      </a>
 						  <script type="text/javascript">
 						  	document.getElementById("seleccion").onclick = function() {
 							    document.getElementById("formlista").submit();
@@ -104,9 +93,7 @@
 			         </div>
 			         </form>
 	     	 	</div>
-           		<div class="col-md-3">
-                 
-                </div>  
+           		 
 	        </div>
 	    </div>
 	   </div>

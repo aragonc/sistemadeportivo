@@ -304,3 +304,7 @@
             transform: scale(1);
   }
 }
+
+.fechainicial, .fechafinal{
+	cursor: pointer;
+}

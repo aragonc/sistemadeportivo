@@ -12,11 +12,14 @@ import beans.EventoDTO;
 import beans.LugarDTO;
 import beans.ModalidadDTO;
 import interfaces.EventoDAO;
+import service.LugarService;
 import service.ModalidadService;
 import utils.MysqlDBConexion;
 
 public class MySqlEventoDAO implements EventoDAO {
 	ModalidadService modalidad = new ModalidadService();
+	LugarService lugarService = new LugarService();
+	
 	@Override
 	public List<EventoDTO> listarEventos() {
 		EventoDTO a = null;
@@ -24,9 +27,11 @@ public class MySqlEventoDAO implements EventoDAO {
 		Connection cn = null;
 		ResultSet rs = null;
 		PreparedStatement pstm = null;
+		
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT * FROM evento;";
+			String sql = "SELECT e.idevento, e.nombre, e.descripcion, e.fecha_fin, e.fecha_fin, e.modo, "
+					+ "e.costo, l.idlugar, l.nombre, l.direccion , e.estado FROM evento e inner join lugar l on e.idlugar = l.idlugar;";
 			pstm = cn.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
@@ -36,10 +41,15 @@ public class MySqlEventoDAO implements EventoDAO {
 				a.setDescripcion(rs.getString(3));
 				a.setFechaInicio(rs.getTimestamp(4));
 				a.setFechaFin(rs.getTimestamp(5));
-				a.setGratuito(rs.getInt(6));
+				a.setModo(rs.getInt(6));
 				a.setPrecio(rs.getDouble(7));
-				a.setEstado(rs.getInt(8));
-				a.setCodlugar(rs.getInt(9));
+				LugarDTO lugar = new LugarDTO();
+				lugar.setCodigo(rs.getInt(8));
+				lugar.setNombre(rs.getString(9));
+				lugar.setDireccion(rs.getString(10));
+				a.setLugar(lugar);
+				System.out.println(lugar.getNombre());
+				a.setEstado(rs.getInt(11));
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -67,7 +77,7 @@ public class MySqlEventoDAO implements EventoDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT e.idevento, e.nombre, e.descripcion, e.fecha_inicio, e.fecha_fin, e.modo, e.costo_evento, e.estado, l.idlugar, l.nombre, l.direccion, l.latitud, l.longitud "
+			String sql = "SELECT e.idevento, e.nombre, e.descripcion, e.fecha_inicio, e.fecha_fin, e.modo, e.costo, e.estado, l.idlugar, l.nombre, l.direccion, l.latitud, l.longitud "
 					+ "FROM evento e inner join lugar l on e.lugar_idlugar = l.idlugar where idevento = ?;";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
@@ -79,7 +89,7 @@ public class MySqlEventoDAO implements EventoDAO {
 				a.setDescripcion(rs.getString(3));
 				a.setFechaInicio(rs.getTimestamp(4));
 				a.setFechaFin(rs.getTimestamp(5));
-				a.setGratuito(rs.getInt(6));
+				a.setModo(rs.getInt(6));
 				a.setPrecio(rs.getDouble(7));
 				a.setEstado(rs.getInt(8));
 				a.setCodlugar(rs.getInt(9));
@@ -123,7 +133,7 @@ public class MySqlEventoDAO implements EventoDAO {
 			pstm.setString(2, obj.getDescripcion());
 			pstm.setTimestamp(3, new java.sql.Timestamp(obj.getFechaInicio().getTime()));
 			pstm.setTimestamp(4, new java.sql.Timestamp(obj.getFechaFin().getTime()));
-			pstm.setInt(5, obj.getGratuito());
+			pstm.setInt(5, obj.getModo());
 			pstm.setDouble(6, obj.getPrecio());
 			pstm.setInt(7, obj.getEstado());
 			pstm.setInt(8, obj.getCodlugar());
@@ -163,7 +173,7 @@ public class MySqlEventoDAO implements EventoDAO {
 			pstm.setString(2, obj.getDescripcion());
 			pstm.setTimestamp(3, new java.sql.Timestamp(obj.getFechaInicio().getTime()));
 			pstm.setTimestamp(4, new java.sql.Timestamp(obj.getFechaFin().getTime()));
-			pstm.setInt(5, obj.getGratuito());
+			pstm.setInt(5, obj.getModo());
 			pstm.setDouble(6, obj.getPrecio());
 			pstm.setInt(7, obj.getEstado());
 			pstm.setInt(8, obj.getCodlugar());

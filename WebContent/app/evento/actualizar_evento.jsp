@@ -66,11 +66,11 @@
 	                    		<div class="form-group">
 	                    			<label for="fechainicio" class="col-sm-4 control-label">Fecha/Hora Inicio</label>
 	                    			<div class="col-sm-8">
-	                    				<div class="input-group date">
+	                    				<div class="input-group fechainicial">
 						                  <div class="input-group-addon">
 						                    <i class="fa fa-calendar"></i>
 						                  </div>
-						                  <input type="text" class="form-control datefechahora pull-right" id="fechainicio" value="<%= obj.getFechaInicio() %>" name="fechainicio">
+						                  <input type="text" class="form-control fechahoraformato pull-right" id="fechainicio" value="<%= obj.getFechaInicio() %>" name="fechainicio">
 						                </div>
 	                    			</div>
 	                    		</div>
@@ -79,11 +79,11 @@
 	                    		<div class="form-group">
 	                    			<label for="fechafin" class="col-sm-4 control-label">Fecha/Hora Fin</label>
 	                    			<div class="col-sm-8">
-	                    				<div class="input-group date">
+	                    				<div class="input-group fechafinal">
 						                  <div class="input-group-addon">
 						                    <i class="fa fa-calendar"></i>
 						                  </div>
-						                  <input type="text" class="form-control datefechahora pull-right" id="fechafin" value="<%= obj.getFechaFin() %>" name="fechafin">
+						                  <input type="text" class="form-control fechahoraformato pull-right" id="fechafin" value="<%= obj.getFechaFin() %>" name="fechafin">
 						                </div>
 	                    			</div>
 	                    		</div>

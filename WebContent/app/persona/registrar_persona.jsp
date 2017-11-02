@@ -133,7 +133,7 @@
 					                  <div class="input-group-addon">
 					                    <i class="fa fa-calendar"></i>
 					                  </div>
-					                  <input type="text" class="form-control midatepicker pull-right" id="txtfechanacimiento" data-date-format="yyyy-mm-dd" name="txtfechanacimiento">
+					                  <input type="text" class="form-control fechaformato" id="txtfechanacimiento" data-date-format="yyyy-mm-dd" name="txtfechanacimiento">
 					                </div>
 							    </div>
 							</div>

@@ -11,7 +11,7 @@ public class EventoDTO {
 	private Date fechaFin;
 	private int estado;
 	private double precio;
-	private int gratuito;
+	private int modo;
 	private List<ModalidadDTO> modalidades;
 	private int codlugar;
 	private LugarDTO lugar;
@@ -66,11 +66,11 @@ public class EventoDTO {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public int getGratuito() {
-		return gratuito;
+	public int getModo() {
+		return modo;
 	}
-	public void setGratuito(int gratuito) {
-		this.gratuito = gratuito;
+	public void setModo(int modo) {
+		this.modo = modo;
 	}
 	
 	public int getCodlugar() {

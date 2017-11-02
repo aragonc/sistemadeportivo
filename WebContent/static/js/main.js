@@ -109,10 +109,30 @@ $( document ).ready(function() {
 	 
 });
 $(function () {
-    $('.datefechahora').datetimepicker({
+	var date = new Date();
+	var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+	
+    $('.fechainicial').datetimepicker({
     	locale: 'es',
-    	format: 'YYYY-MM-DD HH:mm'
+    	format: 'YYYY-MM-DD HH:mm',
+    	minDate: today
     });
+    
+    $('.fechafinal').datetimepicker({
+    	locale: 'es',
+    	format: 'YYYY-MM-DD HH:mm',
+    	useCurrent: false
+    });
+    
+    $(".fechainicial").on("dp.change", function (e) {
+        $('.fechafinal').data("DateTimePicker").minDate(e.date);
+    });
+    $(".fechafinal").on("dp.change", function (e) {
+        $('.fechainicial').data("DateTimePicker").maxDate(e.date);
+    });
+    
+    $('.fechaformato').mask("0000-00-00", {placeholder: "____-__-__"});
+    $('.fechahoraformato').mask("0000-00-00 00:00", {placeholder: "____-__-__ __:__"});
 });
 
 function setCheckbox(value, table_id) {
