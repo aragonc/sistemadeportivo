@@ -57,7 +57,7 @@
              		 		</display:column>
              		 		<display:column property="disciplina.nombre" title="Disciplina" />
 			                <display:column property="categoria.nombre" title="Categoria" />
-			                <display:column property="descripcion" title="Descripcion" />
+			                <display:column property="descripcion" title="Descripcion" style="width:30%" />
 			                <display:column property="numJugadores" title="N° Jugadores" />
 			                <display:column title="Género">
 			                	${lista.genero == 'V' ? '<span> Varones </span>' : lista.genero == 'M' ? '<span> Mujeres </span>' : '<span> Mixto </span>'}

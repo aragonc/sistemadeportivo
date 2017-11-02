@@ -31,11 +31,15 @@
 	        		<form class="form-horizontal" action="ServletLugar?tipo=eliminar" method="post" id="formlista">
 	        		<div class="table-responsive">
 		        	<display:table class="table table-bordered table-hover"  name="data" requestURI="../ServletLugar?tipo=listar"	excludedParams="tipo" id="lista">
+		              	<display:setProperty name="basic.msg.empty_list">
+   		 					<div class="alert alert-warning" role="alert">No se existe lugares registrados</div>
+   		 				</display:setProperty>
+	               		 				
 		              	<display:column title="Item" sortable="false" media="html" >
 							<input type="checkbox" name="cod[]" value="${lista.codigo}">
              		 	</display:column>
 		                <display:column property="nombre" title="Nombre Lugar" sortable="false"/>
-		                <display:column property="direccion" title="Dirección" sortable="false"/>
+		                <display:column property="direccion" title="Dirección" style="width:30%;" sortable="false"/>
 		                <display:column property="latitud" title="Latitud" sortable="false"/>
 		                <display:column property="longitud" title="Longitud" sortable="false"/>
 		                <display:column title="Estado" sortable="false">

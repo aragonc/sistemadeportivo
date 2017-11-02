@@ -25,30 +25,38 @@
 					<form action="${pageContext.request.contextPath}/ServletLugar?tipo=registrar" class="form-horizontal" id="frmregistrar" method="post">
                          
                          <div class="row">
-                         	<div class="col-md-6">
+                         	<div class="col-md-12">
                          		<div class="form-group">
-		                           <label class="col-sm-4 control-label">Nombre lugar</label>
+		                           <label class="col-sm-2 control-label">Nombre lugar</label>
 		                           <div class="col-sm-8">
 		                             <input class="form-control" name="nombre" id="nombre">
 		                           </div>
+		                           <div class="col-sm-2">
+		                           		<button type="button" class="btn btn-primary" id="search">
+		                           		<i class="fa fa-search" aria-hidden="true"></i>
+										Ubicar en el mapa
+										</button>
+		                           </div>
 		                         </div>
-                         	</div>
-                         	<div class="col-md-6">
-                         		<div class="form-group">
-		                           <label class="col-sm-4 control-label">Dirección</label>
+		                         <div class="form-group">
+		                           <label class="col-sm-2 control-label">Dirección</label>
 		                           <div class="col-sm-8">
 		                            	<input class="form-control" name="direccion" id="direccion">
 		                           </div>
-		                         </div>  
+		                           <div class="col-sm-2">
+		                           	
+									</div>
+		                        </div>
+		                        
                          	</div>
-                         	
                          </div>
                          
                          <div class="form-group">
 	                           <label class="col-sm-2 control-label">Ubicación</label>
-	                           <div class="col-sm-10">
+	                           <div class="col-sm-8">
 	                             <div id="mapa" style="width: 750px; height: 400px;"></div>
 	                           </div>
+	                           <div class="col-sm-2"></div>
 		                 </div>
                          
                          <input type="hidden" name="latitud" id="latitud">    
@@ -67,36 +75,68 @@
                  </div> 
                  <div class="col-md-3">
 	                  <script type="text/javascript">
-	                  $( document ).ready(function() {
-	                		
-	                		var map;
-	                		var lat;
-	                		var lng;
-	                		
-	                		map = new GMaps({
-	                	        div: '#mapa',
-	                	        lat: -12.043333,
-	                	        lng: -77.028333,
-	                	        enableNewStyle: true
-	                	      });
-	                		
-	                		
-	                		map.addMarker({
-	                			  lat: -12.043333,
-	                			  lng: -77.028333,
-	                			  draggable: true,
-	                			  dragend: function(event) {
-	                	              lat = event.latLng.lat();
-	                	              lng = event.latLng.lng();
-	                	              console.log(lat);
-	                	              console.log(lng);
-	                	              document.getElementById('latitud').value = lat;
-	                	              document.getElementById('longitud').value = lng;
-
-	                	          }
-	                			  
-	                			});
-	                  	});
+	                  var map;
+	                  var latlng;
+	                  var address;
+	                  
+	                  $(document).ready(function(){
+						  // CREAMOS EL MAPA
+	                	  map = new GMaps({
+	                        div: '#mapa',
+	                        zoom: 6,
+	                        lat: -12.0266383,
+	                        lng: -76.9877791,
+	                        enableNewStyle: true
+	                      });
+	                	  
+	                	  //GEOLOCALIZACION
+	                	  
+	                	  GMaps.geolocate({
+					        success: function(position){
+					          map.setCenter(position.coords.latitude, position.coords.longitude);
+					          map.setZoom(16);
+					          map.addMarker({
+              	                lat: position.coords.latitude,
+              	                lng: position.coords.longitude,
+              	                draggable: false,
+              	              });
+					        },
+					        error: function(error){
+					          alert('Geolocalización fallida: '+error.message);
+					        },
+					        not_supported: function(){
+					          alert("Tu navegador no soporta la geolocazacion");
+					        },
+					        always: function(){
+					          alert("Listo hemos ubicado tu posición...!");
+					        }
+					      });
+	                	  
+	                	  //BUSCAR LUGAR
+	                	  $('#search').click(function(){
+	                		  GMaps.geocode({
+	                    		  address: $('#nombre').val().trim(),
+	                    		  callback: function(results, status){
+	                    			  if(status=='OK'){
+	                    				  latlng = results[0].geometry.location;
+	                    				  address = results[0].formatted_address;
+	                    	              map.setCenter(latlng.lat(), latlng.lng());
+	                    	              map.addMarker({
+	                    	                lat: latlng.lat(),
+	                    	                lng: latlng.lng(),
+	                    	                draggable: false,
+	                    	              });
+	                    	              
+	                    			  }
+	                    			  document.getElementById('latitud').value = latlng.lat();
+	                	              document.getElementById('longitud').value = latlng.lng();
+	                	              document.getElementById('direccion').value = address;
+	                    		  }
+	                    	  });
+	                	  });
+		                     
+	                    });
+	                  
 	                  </script>
 	             </div>
 			</div>
