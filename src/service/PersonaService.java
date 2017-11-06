@@ -39,5 +39,8 @@ public class PersonaService {
 	public List<PersonaDTO> buscarPersonaEquipo(int equipo) {
 		return personaDAO.buscarPersonaEquipo(equipo);
 	}
+	public List<PersonaDTO> listarDelegados() {
+		return personaDAO.listarDelegados();
+	}
 }
 

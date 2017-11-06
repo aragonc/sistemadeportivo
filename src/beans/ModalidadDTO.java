@@ -11,6 +11,8 @@ public class ModalidadDTO {
 	private int numMujeres;
 	private CategoriaDTO categoria;
 	private DisciplinaDTO disciplina;
+	private boolean checked;
+	
 	public int getCodigo() {
 		return codigo;
 	}
@@ -71,6 +73,14 @@ public class ModalidadDTO {
 	public void setDisciplina(DisciplinaDTO disciplina) {
 		this.disciplina = disciplina;
 	}
+	
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
+	
 	public ModalidadDTO(int codigo, int codDisciplina, int codCategoria, String descripcion, String genero,
 			int numJugadores, int numVarones, int numMujeres, CategoriaDTO categoria, DisciplinaDTO disciplina) {
 		super();
@@ -85,6 +95,7 @@ public class ModalidadDTO {
 		this.categoria = categoria;
 		this.disciplina = disciplina;
 	}
+	
 	public ModalidadDTO() {
 		super();
 		// TODO Auto-generated constructor stub

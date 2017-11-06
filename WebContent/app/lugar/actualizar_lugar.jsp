@@ -100,7 +100,7 @@
 	                		});
 	                	  //GEOLOCALIZACION
 	                	  
-	                	  GMaps.geolocate({
+	                	  /* GMaps.geolocate({
 					        success: function(position){
 					          map.setCenter(position.coords.latitude, position.coords.longitude);
 					          map.setZoom(16);
@@ -119,7 +119,7 @@
 					        always: function(){
 					          alert("Listo hemos ubicado tu posición...!");
 					        }
-					      });
+					      });*/
 	                	  
 	                	  //BUSCAR LUGAR
 	                	  $('#search').click(function(){

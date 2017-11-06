@@ -59,6 +59,52 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		}
 		return data;
 	}
+	
+	public List<PersonaDTO> listarDelegados() {
+		PersonaDTO a = null;
+		List<PersonaDTO> data = new ArrayList<PersonaDTO>();
+		Connection cn = null;
+		ResultSet rs = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "SELECT p.idpersona, p.nombres, p.apaterno, p.amaterno, p.sexo, p.tipo_documento, p.num_documento, p.fecha_nacimiento, p.email, "
+					+ "p.telefono, p.avatar, p.es_usuario, p.estado FROM persona p inner join usuario u on p.idpersona = u.idpersona where u.idperfil = 2;";
+			pstm = cn.prepareStatement(sql);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				a = new PersonaDTO();
+				a.setCodigo(rs.getInt(1));
+				a.setNombre(rs.getString(2));
+				a.setApaterno(rs.getString(3));
+				a.setAmaterno(rs.getString(4));
+				a.setSexo(rs.getString(5));
+				a.setTipodocumento(rs.getInt(6));
+				a.setNumdocumento(rs.getString(7));
+				a.setFnacimiento(rs.getDate(8));
+				a.setEmail(rs.getString(9));
+				a.setFono(rs.getString(10));
+				a.setAvatar(rs.getString(11));
+				a.setPlataforma(rs.getBoolean(12));
+				a.setEstado(rs.getInt(13));				
+				data.add(a);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return data;
+	}
 
 	public List<PersonaDTO> listarPersonaBuscar(String criterio) {
 		PersonaDTO a = null;

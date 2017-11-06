@@ -1,3 +1,4 @@
+<%@page import="service.PersonaService"%>
 <%@page import="beans.ComboDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="service.ComboService"%>
@@ -5,8 +6,9 @@
  <%@ include file="../_header.jsp" %>
  <%@ include file="../_sidebar.jsp" %>
  <%
- 	ComboService listaDocumento = new ComboService();  
+ 	ComboService listaDocumento = new ComboService();
 	List<ComboDTO> listaEventos = listaDocumento.listarComboSql("SELECT idevento, nombre FROM evento where estado = 1;");
+	List<ComboDTO> listaPersona = listaDocumento.listarComboSql("SELECT p.idpersona, concat(p.nombres,space(1),p.apaterno,space(1), p.amaterno) as nombre FROM persona p inner join usuario u on p.idpersona = u.idpersona where u.idperfil = 2");
 	String validar = (String) request.getAttribute("validaciones"); 
  %>
   <div class="content-wrapper">
@@ -39,12 +41,18 @@
 							</div>
 							<div class="col-md-6">
 		                    		<div class="form-group">
-		                    			<label for="email" class="col-sm-4 control-label">Email</label>
+		                    			<label for="delegado" class="col-sm-4 control-label">Delegado</label>
 		                    			<div class="col-sm-8">
-		                    				<div class="input-group">
-		                    					<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-		                    					<input type="text" name="email" id="email" class="form-control" placeholder="Escriba el email de contacto del equipo">
-		                    				</div>
+		                    				<select id="listadelegado" name="delegado" id="delegado" class="form-control">
+		                    					<option value="0">-- Seleccione --</option>
+							                    <%
+							                    	for (ComboDTO item : listaPersona ){
+							                    %>
+							                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
+							                   	<%
+							                   		}  
+							                   	%>
+							                   	</select>
 		                    			</div>
 		                    		</div>
 							</div>
@@ -88,28 +96,14 @@
 	                    <div class="row">
 	                 		<div class="col-md-6">
 	                 			<div class="form-group">
-	                    			<label for="fono" class="col-sm-4 control-label">Télefono</label>
-	                    			<div class="col-sm-8">
-	                    				<div class="input-group">
-	                    					<span class="input-group-addon"><i class="fa fa-mobile" aria-hidden="true"></i></span>
-	                    					<input type="text" id="fono" name="fono" class="form-control" placeholder="Escriba el télefono de contacto del equipo">
-	                    				</div>
-	                    			</div>
-	                    		</div>
-	                 		</div>   
-	                 		<div class="col-md-6">
-	                 			<div class="form-group">
 	                    			<label for="color" class="col-sm-4 control-label">Color</label>
 	                    			<div class="col-sm-8">
 	                    				<input type="text" id="color" name="color" class="form-control" placeholder="Escriba el color uniforme del equipo">
 	                    			</div>
 	                    		</div>
-	                 		</div>
-	                    </div>
-	                    <div class="row">
-	                    	<div class="col-md-6">
-	                    		
-	                    		<div class="form-group">
+	                 		</div>   
+	                 		<div class="col-md-6">
+	                 			<div class="form-group">
 								    <label for="estado" class="col-sm-4 control-label">Estado:</label>
 								    <div class="col-sm-8">
 								      <select class="form-control" name="estado">
@@ -118,17 +112,8 @@
 					                  </select>
 								    </div>
 								</div>
-	                    	</div>
-	                    	<div class="col-md-6">
-	                    		<div class="form-group">
-		                           <label class="col-sm-4 control-label">Logotipo</label>
-		                           <div class="col-sm-8">
-		                             <input type="file" id="logotipo" name="logotipo" accept=".jpg, .jpeg, .png">
-		                           </div>
-		                        </div>
-	                    	</div>
-	                    </div>
-	                    
+	                 		</div>
+	                    </div>	                    
                         
                         <div class="box-footer">
 							<a href="${pageContext.request.contextPath}/ServletEquipo?tipo=listar" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver a lista </a>

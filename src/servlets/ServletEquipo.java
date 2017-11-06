@@ -120,16 +120,6 @@ public class ServletEquipo extends HttpServlet{
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
-		else if(email.replaceAll(" ", "").equals("")) {
-            validaciones = "El campo Email está vacío";
-            request.setAttribute("validaciones", validaciones);
-            request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
-        }		
-		else if(!(email.matches("[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})"))) {
-            validaciones = "Ingrese un email válido";
-            request.setAttribute("validaciones", validaciones);
-            request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
-        }
 		else if(ev == 0) {
             validaciones = "Debe seleccionar un evento";
             request.setAttribute("validaciones", validaciones);
@@ -140,34 +130,26 @@ public class ServletEquipo extends HttpServlet{
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
-		else if(fono.replaceAll(" ", "").equals("")) {
-            validaciones = "El campo Teléfono esta vacío";
-            request.setAttribute("validaciones", validaciones);
-            request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
-        }
+
 		else if(color.replaceAll(" ", "").equals("")) {
-            validaciones = "El campo Color esta vacío";
+            validaciones = "El campo Color esta vacio";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
-		else if(!(nombre.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ 0-9]*"))) {
-            validaciones = "Ingrese un nombre válido";
+		else if(!(nombre.matches("[A-Za-z 0-9]*"))) {
+            validaciones = "Ingrese un nombre valido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
-		else if(!(fono.matches("[0-9]*"))) {
-            validaciones = "Ingrese un teléfono válido";
-            request.setAttribute("validaciones", validaciones);
-            request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
-        }
+
 		else if(!(fono.length() == 7) && !(fono.length() == 9)) {
-            validaciones = "El teléfono solo debe tener 7 o 9 dígitos";
+            validaciones = "El telefono solo debe tener 7 o 9 digitos";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
 				
 		else if(!(color.matches("[a-zA-Z]*"))) {
-            validaciones = "Ingrese un color válido";
+            validaciones = "Ingrese un color valido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
@@ -187,8 +169,6 @@ public class ServletEquipo extends HttpServlet{
 			
 		obj.setNombre(nombre);
 		obj.setLogo(logo);
-		obj.setEmail(email);
-		obj.setFono(fono);
 		obj.setColor(color);
 		obj.setCodEvento(Integer.parseInt(evento));
 		obj.setCodModalidad(Integer.parseInt(modalidad));
@@ -252,13 +232,13 @@ public class ServletEquipo extends HttpServlet{
         }
 		else if(email.replaceAll(" ", "").equals("")) {
 			request.setAttribute("registro", x);
-            validaciones = "El campo Email está vacío";
+            validaciones = "El campo Email estï¿½ vacï¿½o";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }		
 		else if(!(email.matches("[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})"))) {
 			request.setAttribute("registro", x);
-            validaciones = "Ingrese un email válido";
+            validaciones = "Ingrese un email vï¿½lido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
@@ -276,46 +256,44 @@ public class ServletEquipo extends HttpServlet{
         }
 		else if(fono.replaceAll(" ", "").equals("")) {
 			request.setAttribute("registro", x);
-            validaciones = "El campo Teléfono esta vacío";
+            validaciones = "El campo Telï¿½fono esta vacï¿½o";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
 		else if(color.replaceAll(" ", "").equals("")) {
 			request.setAttribute("registro", x);
-            validaciones = "El campo Color esta vacío";
+            validaciones = "El campo Color esta vacï¿½o";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
-		else if(!(nombre.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ 0-9]*"))) {
+		else if(!(nombre.matches("[A-Za-zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0-9]*"))) {
 			request.setAttribute("registro", x);
-            validaciones = "Ingrese un nombre válido";
+            validaciones = "Ingrese un nombre vï¿½lido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
 		else if(!(fono.matches("[0-9]*"))) {
 			request.setAttribute("registro", x);
-            validaciones = "Ingrese un teléfono válido";
+            validaciones = "Ingrese un telï¿½fono vï¿½lido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
 		else if(!(fono.length() == 7) && !(fono.length() == 9)) {
 			request.setAttribute("registro", x);
-            validaciones = "El teléfono solo debe tener 7 o 9 dígitos";
+            validaciones = "El telï¿½fono solo debe tener 7 o 9 dï¿½gitos";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
 				
 		else if(!(color.matches("[a-zA-Z]*"))) {
 			request.setAttribute("registro", x);
-            validaciones = "Ingrese un color válido";
+            validaciones = "Ingrese un color vï¿½lido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
 		else{	
 		obj.setNombre(nombre);
 		obj.setLogo(logo);
-		obj.setEmail(email);
-		obj.setFono(fono);
 		obj.setColor(color);
 		obj.setCodEvento(Integer.parseInt(evento));
 		obj.setCodModalidad(Integer.parseInt(modalidad));

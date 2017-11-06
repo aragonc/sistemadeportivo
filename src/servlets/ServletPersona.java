@@ -239,13 +239,13 @@ public class ServletPersona extends HttpServlet {
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
         }
-		else if(!(fono.length() == 7) && !(fono.length() == 9)) {
+		/*else if(!(fono.length() == 7) && !(fono.length() == 9)) {
 			request.setAttribute("registro", x);
             validaciones = "El teléfono solo debe tener 7 o 9 dígitos";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
         }
-		
+		*/
 		
 		else{
 		obj.setNombre(nombre);
@@ -432,11 +432,11 @@ public class ServletPersona extends HttpServlet {
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
         }
-		else if(!(fono.length() == 7) && !(fono.length() == 9)) {
+		/*else if(!(fono.length() == 7) && !(fono.length() == 9)) {
             validaciones = "El teléfono solo debe tener 7 o 9 dígitos";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
-        }
+        }*/
 		
 		else if(count==true) {
     		validaciones = "Ya hay una persona  registrada con el mismo número de documento"; 

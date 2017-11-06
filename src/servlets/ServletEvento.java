@@ -88,8 +88,19 @@ public class ServletEvento extends HttpServlet {
 
 	private void listaModalidad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String dato = request.getParameter("cod");
+		String action = request.getParameter("action");
+		
+		int codigo = Integer.parseInt(dato);
+		EventoDTO obj = eventoService.buscarEvento(codigo);
+		request.setAttribute("evento", obj);
 		List<ModalidadDTO> info = modalidadService.listarModalidad();
 		request.setAttribute("data", info);
+		if(action.equals("add")) {
+			request.setAttribute("action", "agregar");
+		} else {
+			request.setAttribute("accion", "actualizar");
+		}	
 		request.getRequestDispatcher("app/modalidad/suscribir_modalidad.jsp").forward(request,response);
 	}
 
@@ -425,9 +436,10 @@ public class ServletEvento extends HttpServlet {
 		
 		int resultado = eventoService.registrarEvento(obj);
 		if (resultado != -1){
-			request.setAttribute("nomevento", obj.getNombre());
-			request.setAttribute("codevento", resultado+"");
-			listaModalidad(request, response);
+			//request.setAttribute("nomevento", obj.getNombre());
+			//request.setAttribute("codevento", resultado+"");
+			response.sendRedirect("ServletEvento?tipo=listaModalidad&action=add&cod="+resultado);
+			//listaModalidad(request, response);
 		}else{
 			response.sendRedirect("error.html");
 		}

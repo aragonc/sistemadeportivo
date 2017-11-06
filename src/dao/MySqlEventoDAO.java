@@ -118,6 +118,7 @@ public class MySqlEventoDAO implements EventoDAO {
 		}
 		return a;
 	}
+	
 
 	@Override
 	public int registrarEvento(EventoDTO obj) {

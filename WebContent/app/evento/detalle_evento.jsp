@@ -27,7 +27,7 @@
 								<div class="pull-right btn-panel">
 									<a href="ServletEvento?tipo=buscar&cod=<%= obj.getCodigo() %>" class="btn btn-primary btn-sm">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
-										Modificar evento
+										Actualizar Evento
 									</a>
 								</div>
 								<h3 class="panel-title">Información del evento</h3>
@@ -118,9 +118,9 @@
 	                    <div class="panel panel-info">
 							<div class="panel-heading">
 								<div class="pull-right btn-panel">
-									<a href="#" class="btn btn-primary btn-sm">
+									<a href="ServletEvento?tipo=listaModalidad&action=update&cod=<%= obj.getCodigo() %>" class="btn btn-primary btn-sm">
 										<i class="fa fa-plus" aria-hidden="true"></i>
-										Agregar modalidad
+										Actualizar Modalidades
 									</a>
 								</div>
 								<h3 class="panel-title">Modalidades de Juego</h3>

@@ -99,6 +99,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 				mod.setNumVarones(rs.getInt(8));
 				mod.setNumMujeres(rs.getInt(9));
 				mod.setGenero(rs.getString(10));
+				mod.setChecked(true);
 				data.add(mod);
 			}
 		} catch (Exception e) {

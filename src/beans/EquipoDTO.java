@@ -7,18 +7,16 @@ public class EquipoDTO {
 	
 	private int codigo;
 	private String nombre;
+	private String descripcion;
 	private String logo;
-	private String email;
-	private String fono;
 	private String color;
-	private int estado;
-	private List<PersonaDTO> jugadores;
 	private int codEvento;
 	private EventoDTO evento;
 	private int codModalidad;
 	private ModalidadDTO modalidad;
-	private String descripcion;
+	private List<PersonaDTO> jugadores;
 	private Date fregistro;
+	private int estado;
 	
 	public EquipoDTO() {
 		super();
@@ -41,6 +39,14 @@ public class EquipoDTO {
 		this.nombre = nombre;
 	}
 
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	public String getLogo() {
 		return logo;
 	}
@@ -49,60 +55,12 @@ public class EquipoDTO {
 		this.logo = logo;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getFono() {
-		return fono;
-	}
-
-	public void setFono(String fono) {
-		this.fono = fono;
-	}
-
 	public String getColor() {
 		return color;
 	}
 
 	public void setColor(String color) {
 		this.color = color;
-	}
-
-	public int getEstado() {
-		return estado;
-	}
-
-	public void setEstado(int estado) {
-		this.estado = estado;
-	}
-
-	public List<PersonaDTO> getJugadores() {
-		return jugadores;
-	}
-
-	public void setJugadores(List<PersonaDTO> jugadores) {
-		this.jugadores = jugadores;
-	}
-
-	public ModalidadDTO getModalidad() {
-		return modalidad;
-	}
-
-	public void setModalidad(ModalidadDTO modalidad) {
-		this.modalidad = modalidad;
-	}
-
-	public int getCodModalidad() {
-		return codModalidad;
-	}
-
-	public void setCodModalidad(int codModalidad) {
-		this.codModalidad = codModalidad;
 	}
 
 	public int getCodEvento() {
@@ -121,12 +79,28 @@ public class EquipoDTO {
 		this.evento = evento;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public int getCodModalidad() {
+		return codModalidad;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setCodModalidad(int codModalidad) {
+		this.codModalidad = codModalidad;
+	}
+
+	public ModalidadDTO getModalidad() {
+		return modalidad;
+	}
+
+	public void setModalidad(ModalidadDTO modalidad) {
+		this.modalidad = modalidad;
+	}
+
+	public List<PersonaDTO> getJugadores() {
+		return jugadores;
+	}
+
+	public void setJugadores(List<PersonaDTO> jugadores) {
+		this.jugadores = jugadores;
 	}
 
 	public Date getFregistro() {
@@ -135,6 +109,14 @@ public class EquipoDTO {
 
 	public void setFregistro(Date fregistro) {
 		this.fregistro = fregistro;
+	}
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 	
 }

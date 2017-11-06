@@ -1,14 +1,32 @@
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.LinkedHashSet"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="beans.ModalidadDTO"%>
+<%@page import="beans.EventoDTO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 <%@taglib prefix="ct" uri="http://libreria.registro" %>	
 <%@page import="beans.CategoriaDTO"%>
 <%@page import="java.util.List"%>
 
-<% String nombreEvento = (String)request.getAttribute("nomevento"); %>
-<% String codigoEvento = (String)request.getAttribute("codevento"); %>
+<%
+String title = null;
+EventoDTO evento = (EventoDTO)request.getAttribute("evento");
 
- <%@ include file="../_header.jsp" %>
- <%@ include file="../_sidebar.jsp" %>
+List<ModalidadDTO> original = (List<ModalidadDTO>)request.getAttribute("data");
+List<ModalidadDTO> actual = evento.getModalidades();
+
+String action = (String)request.getAttribute("accion");
+	if(action.equals("agregar")){
+		title = "Agregar Modalidades ";
+	} else {
+		title = "Actualizar Modalidades ";
+	}
+%>
+<c:set var="modalidad" value="<%= evento.getModalidades() %>"/>
+<%@ include file="../_header.jsp" %>
+<%@ include file="../_sidebar.jsp" %>
  
   <div class="content-wrapper">
     <section class="content-header">
@@ -18,18 +36,11 @@
        <div class="box box-primary">
            <div class="box-body">
            	<div class="box-header with-border">
-	              <h3 class="box-title">Asignar modalidad a evento al <span class="valor"><%= nombreEvento %></span></h3>
+	              <h3 class="box-title"> <%= title %><span class="valor"><%= evento.getNombre() %></span></h3>
 	        </div>
 	        <div class="body">
 	        	<div class="col-md-12">
-	        		<!-- MENSAJE QUE APARECE CUANDO SE REGISTRA UN EVENTO -->
-			       	<% if(codigoEvento!=null) { %>
-		              	<div class="alert alert-success" role="alert">
-		              		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		              		Acabas de crear el evento a continuación procede a asignar las modalidesde de juego para el evento
-		              	</div>
-		              <% } %>
-			       	<!-- FIN DEL MENSAJE -->
+	        		
 			        <div class="toolbar-actions">
 			        	<div class="row">
 			        		<div class="col-md-6">
@@ -38,41 +49,66 @@
 					        	</a>
 			        		</div>
 			        		<div class="col-md-6">
-			        			<div class="pull-right">
-	            					<form class="form-inline">
-									  <div class="form-group">
-									    <div class="input-group">
-									      <input type="text" name="txtdni" class="form-control" id="txtdni" size="25" placeholder="Buscar modalidad">
-									    </div>
-									  </div>
-									  <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i>
-									   Buscar</button>
-									</form>
-	            				</div>
+			        			
 			        		</div>
 			        	</div>
 			       	</div>
 			       	
 			       	<form action="${pageContext.request.contextPath}/ServletEvento?tipo=suscribirModalidad" method="post" id="formlista">
-			        <div class="box-body table-responsive no-padding">
-			        	<input type="hidden" name="codevento" value="<%= codigoEvento %>">
-				        <display:table class="table table-bordered table-hover"  name="data" requestURI="../ServletModalidad?tipo=listar"	id="lista">
-			                <display:column title="Item" sortable="false" media="html" >
-							    	<input type="checkbox" name="modalidad[]" value="${lista.codigo}">
-             		 		</display:column>
-             		 		<display:column title="Modalidad" style="width:20%;">
-             		 			<p>
-             		 			${lista.disciplina.nombre} - ${lista.categoria.nombre}
-             		 			${lista.genero == 'V' ? '<span class="badge mod_varones"> Varones </span>' : lista.genero == 'M' ? '<span class="badge mod_mujeres"> Mujeres </span>' : '<span class="badge mod_mixto"> Mixto </span>'}
-             		 			</p>
-             		 		</display:column>
-			                <display:column title="Descripcion">
-			                	${lista.descripcion == null ? Ninguna : lista.descripcion }
-			                </display:column>
-			                <display:column property="numJugadores" title="Cantidad Jugadores"/>
-			                <display:column property="numVarones" title="N° Varones"/>
-			                <display:column property="numMujeres" title="N° Mujeres"/>
-				        </display:table>
+			       	<div class="box-body table-responsive no-padding">
+			       	<input type="hidden" name="codevento" value="<%= evento.getCodigo() %>">
+			       	<table class="table table-bordered table-hover">
+			       		<tr>
+			       			<th>Item</th>
+			       			<th>Modalidad</th>
+			       			<th>Descripcion</th>
+			       			<th>Cant. Jugadores</th>
+			       			<th>N° Varones</th>
+			       			<th>N° Mujeres</th>
+			       		</tr>
+			       	
+			       	<% for( ModalidadDTO item : original) { %>
+			       		<tr>
+			       			<td><input type="checkbox" name="modalidad[]" value="<%= item.getCodigo() %>" ></td>
+			       			<td>
+			       				<p>
+			       				
+			       				<% 
+			       				
+			       				out.println(item.getDisciplina().getNombre() + " - " + item.getCategoria().getNombre());
+									
+			       				if(item.getGenero().equals("V")) { 
+									
+			       					out.println("<span class=\"badge mod_varones\"> Varones </span>");
+									
+			       				} else if (item.getGenero().equals("M")) { 
+									
+									out.println("<span class=\"badge mod_mujeres\"> Mujeres </span>");
+									
+								} else { 
+									
+										out.println("<span class=\"badge mod_mixto\"> Mixto </span>");
+									
+								} %>		       				
+			       				</p>
+			       			</td>
+			       			<td>
+			       				<% if(item.getDescripcion().equals("")){
+			       					out.println("-");
+			       				}else{
+			       					out.println(item.getDescripcion());
+			       				}%>
+			       				
+			       			</td>
+			       			<td>
+			       				<%= item.getNumJugadores() %>
+			       			</td>
+			       			<td><%= item.getNumVarones() %></td>
+			       			<td><%= item.getNumMujeres() %></td>
+			       		</tr>
+			       	<% } %>
+			       	</table>
+			       	
 			         </div>
 			         <div class="btn-toolbar">
 			         	<div class="btn-group">
