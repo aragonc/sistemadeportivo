@@ -22,10 +22,10 @@
         	<div class="box-body">
             	<div class="col-md-12">
 						<section class="detalle">
-						<div class="panel panel-default">
+						<div class="panel panel-info">
 							<div class="panel-heading">
-								<div class="pull-right">
-									<a href="ServletEvento?tipo=buscar&cod=<%= obj.getCodigo() %>" class="btn btn-default">
+								<div class="pull-right btn-panel">
+									<a href="ServletEvento?tipo=buscar&cod=<%= obj.getCodigo() %>" class="btn btn-primary btn-sm">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
 										Modificar evento
 									</a>
@@ -69,7 +69,7 @@
 														<%= obj.getLugar().getDireccion() %>
 													</td>
 													<td><%= obj.getPrecio() %></td>
-													<td><%= obj.getGratuito() %></td>
+													<td><%= obj.getModo() %></td>
 													<td>
 														<% if(obj.getEstado() == 1 ){
 															out.println("Activo");
@@ -115,10 +115,10 @@
 							</div>
 						</div>
 	                    
-	                    <div class="panel panel-default">
+	                    <div class="panel panel-info">
 							<div class="panel-heading">
-								<div class="pull-right">
-									<a href="#" class="btn btn-default">
+								<div class="pull-right btn-panel">
+									<a href="#" class="btn btn-primary btn-sm">
 										<i class="fa fa-plus" aria-hidden="true"></i>
 										Agregar modalidad
 									</a>
@@ -130,19 +130,32 @@
 									<table class="table tabler-hover">
 										<tr>
 											<th class="th-detalle">Código</th>
-											<th class="th-detalle">Disciplina</th>
-											<th class="th-detalle">Cateogoria</th>
-											<th class="th-detalle">Acciones</th>
+											<th class="th-detalle">Modalidad</th>
+											<th class="th-detalle">Descripción</th>
+											<th class="th-detalle">Genero</th>
+											<th class="th-detalle">N° Jugadores</th>
 										</tr>
 
 											<% for (ModalidadDTO item : obj.getModalidades() ){  %>
 							                    <tr>
 							                    	<td> <%= item.getCodigo() %> </td>	
-							                    	<td> <%= item.getDisciplina().getNombre() %> </td>
-							                    	<td> <%= item.getCategoria().getNombre() %> </td>
-							                    	<td> 
-							                    		<a href="#" class="btn btn-default"><i class="fa fa-trash" aria-hidden="true"></i></a>
-							                    	</td>	
+							                    	<td> <%= item.getDisciplina().getNombre() %> <%= item.getCategoria().getNombre() %> </td>
+							                    	<td> <%= item.getDescripcion()  %></td>	
+							                    	<td>  
+							                    		<% if(item.getGenero().equals("V")){ %>
+							                    			<p>Varones</p>
+							                    		<% } else if(item.getGenero().equals("M")){ %>
+							                    			<p>Mujeres</p>
+							                    		<% } else { %>
+							                    			<p>Mixto</p>
+							                    		<% } %>
+							                    	</td>
+							                    	<td>
+							                    		
+							                    		<strong>V</strong> (<%= item.getNumVarones() %>)  <strong>M</strong> (<%= item.getNumMujeres() %>)
+							                    		= <%= item.getNumJugadores() %>
+							                    	</td>
+							                    	
 							                    </tr>
 							               <% } %>
 							               

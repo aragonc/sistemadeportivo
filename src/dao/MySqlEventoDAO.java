@@ -77,7 +77,7 @@ public class MySqlEventoDAO implements EventoDAO {
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "SELECT e.idevento, e.nombre, e.descripcion, e.fecha_inicio, e.fecha_fin, e.modo, e.costo, e.estado, l.idlugar, l.nombre, l.direccion, l.latitud, l.longitud "
-					+ "FROM evento e inner join lugar l on e.lugar_idlugar = l.idlugar where idevento = ?;";
+					+ "FROM evento e inner join lugar l on e.idlugar = l.idlugar where idevento = ?;";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
@@ -166,7 +166,7 @@ public class MySqlEventoDAO implements EventoDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "update evento set nombre=?,descripcion=?,fecha_inicio=?,fecha_fin=?,modo=?,costo_evento=?,estado=?,lugar_idlugar=? where idevento=?";
+			String sql = "update evento set nombre=?,descripcion=?,fecha_inicio=?,fecha_fin=?,modo=?,costo=?,estado=?,idlugar=? where idevento=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDescripcion());

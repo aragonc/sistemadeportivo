@@ -60,16 +60,18 @@
 			                <display:column title="Item" sortable="false" media="html" >
 							    	<input type="checkbox" name="modalidad[]" value="${lista.codigo}">
              		 		</display:column>
-             		 		<display:column property="disciplina.nombre" title="Disciplina" />
-			                <display:column property="categoria.nombre" title="Categoria" />
-			                <display:column property="descripcion" title="Descripcion" />
-			                <display:column  title="Acciones" sortable="false">
-				               	<div class="text-center">
-				               		<a class="btn btn-primary" href="ServletEvento?tipo=suscribirModalidad&codevento=<%= codigoEvento %>&modalidad[]=${lista.codigo}"><i class="fa fa-plus" aria-hidden="true"></i>
-				               			Agregar
-				               		</a>
-				               	</div>
-				            </display:column>
+             		 		<display:column title="Modalidad" style="width:20%;">
+             		 			<p>
+             		 			${lista.disciplina.nombre} - ${lista.categoria.nombre}
+             		 			${lista.genero == 'V' ? '<span class="badge mod_varones"> Varones </span>' : lista.genero == 'M' ? '<span class="badge mod_mujeres"> Mujeres </span>' : '<span class="badge mod_mixto"> Mixto </span>'}
+             		 			</p>
+             		 		</display:column>
+			                <display:column title="Descripcion">
+			                	${lista.descripcion == null ? Ninguna : lista.descripcion }
+			                </display:column>
+			                <display:column property="numJugadores" title="Cantidad Jugadores"/>
+			                <display:column property="numVarones" title="N° Varones"/>
+			                <display:column property="numMujeres" title="N° Mujeres"/>
 				        </display:table>
 			         </div>
 			         <div class="btn-toolbar">
@@ -77,19 +79,18 @@
 			         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(true, 'lista'); return false;">Seleccionar todos</a>
 			         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(false, 'lista'); return false;">Anular selección</a>
 			         	</div>
-			         	<div class="btn-group">
-						  <button type="button" id="seleccion" class="btn btn-sucess">
+			         	<div class="btn-actions">
+						  <button type="button" id="seleccion" class="btn btn-success">
+						  	<i class="fa fa-plus" aria-hidden="true"></i>
 						    Agregar modalidades 
 						  </button>
-						  <a href="${pageContext.request.contextPath}/ServletEvento?tipo=listar" class="btn btn-default">
-					        	Regresar a lista
-					      </a>
 						  <script type="text/javascript">
 						  	document.getElementById("seleccion").onclick = function() {
 							    document.getElementById("formlista").submit();
 							}
 						  </script>
 						</div>
+						
 			         </div>
 			         </form>
 	     	 	</div>
