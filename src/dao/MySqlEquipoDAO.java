@@ -72,8 +72,8 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "SELECT e.idequipo, e.nombre, e.descripcion, e.logo, e.email, e.telefono, e.color, e.modalidad_idmodalidad, " + 
-					"ep.evento_idevento, e.estado, e.fecha_registro FROM equipo e " + 
-					"inner join equipo_evento ep on e.idequipo = ep.equipo_idequipo " + 
+					"ep.idevento, e.estado, e.fecha_registro FROM equipo e " + 
+					"inner join equipo_evento ep on e.idequipo = ep.idequipo " + 
 					"WHERE e.idequipo = ? ";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
@@ -118,7 +118,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "INSERT INTO equipo VALUES(null,? ,? ,? ,?,? ,? ,?, ?, ?, now())";
+			String sql = "INSERT INTO equipo VALUES(null,? ,? ,? ,?,? ,? ,?, ?, now())";
 			pstm = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDescripcion());
@@ -126,9 +126,9 @@ public class MySqlEquipoDAO implements EquipoDAO{
 			pstm.setString(4, obj.getEmail());
 			pstm.setString(5, obj.getFono());
 			pstm.setString(6, obj.getColor());
-			pstm.setInt(7, obj.getCodEvento());
-			pstm.setInt(8, obj.getCodModalidad());
-			pstm.setInt(9, obj.getEstado());
+			//pstm.setInt(7, obj.getCodEvento());
+			pstm.setInt(7, obj.getCodModalidad());
+			pstm.setInt(8, obj.getEstado());
 			pstm.executeUpdate();
 			
 			ResultSet rs = pstm.getGeneratedKeys();

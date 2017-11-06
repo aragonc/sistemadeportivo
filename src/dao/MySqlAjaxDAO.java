@@ -26,8 +26,8 @@ public class MySqlAjaxDAO implements AjaxDAO {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "SELECT m.idmodalidad, m.descripcion, d.iddisciplina, d.nombre, c.idcategoria, c.nombre "
 					+ "FROM evento_modalidad em inner join modalidad m on m.idmodalidad = em.modalidad_idmodalidad "
-					+ "inner join categoria c on m.categoria_idcategoria = c.idcategoria "
-					+ "inner join disciplina d on  m.disciplina_iddisciplina = d.iddisciplina "
+					+ "inner join categoria c on m.idcategoria = c.idcategoria "
+					+ "inner join disciplina d on  m.iddisciplina = d.iddisciplina "
 					+ "where evento_idevento = ?;";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, codevento);
@@ -323,11 +323,11 @@ public class MySqlAjaxDAO implements AjaxDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "select COUNT(*) from equipo where nombre=? and evento_idevento=?";
-			
+			//String sql = "select COUNT(*) from equipo where nombre=? and evento_idevento=?";
+			String sql = "select COUNT(*) from equipo where nombre=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, nom);
-			pstm.setInt(2, codev);
+			//pstm.setInt(2, codev);
 			rs = pstm.executeQuery();
 			while(rs.next()){
 				valor = rs.getInt(1);
