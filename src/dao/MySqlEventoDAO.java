@@ -193,16 +193,20 @@ public class MySqlEventoDAO implements EventoDAO {
 		return estado;
 	}
 	
-	public int agregarModalidad(int codEvento, int codModalidad){
+	public int agregarEventoModalidad(int codEvento, ModalidadDTO mod){
 		int estado = -1;
 		Connection cn = null;
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "INSERT INTO evento_modalidad VALUES (? ,? )";
+			String sql = "INSERT INTO evento_modalidad VALUES (? , ?, ?, ?, ?, ? )";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, codEvento);
-			pstm.setInt(2, codModalidad);
+			pstm.setInt(2, mod.getCodigo());
+			pstm.setString(3, mod.getGenero());
+			pstm.setInt(4, mod.getNumJugadores());
+			pstm.setInt(5, mod.getNumVarones());
+			pstm.setInt(6, mod.getNumMujeres());
 			estado = pstm.executeUpdate();
 			
 		} catch (Exception e) {
@@ -219,6 +223,7 @@ public class MySqlEventoDAO implements EventoDAO {
 		}
 		return estado;
 	}
+	
 	public int eliminarEventoModalidad(int cod){
 		int estado = -1;
 		Connection cn = null;

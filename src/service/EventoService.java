@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 import beans.EventoDTO;
-
+import beans.ModalidadDTO;
 import dao.DAOFactory;
 import interfaces.EventoDAO;
 
@@ -35,7 +35,7 @@ public class EventoService {
 	public int eliminarEventoModalidad(int cod){
 		return eventoDAO.eliminarEventoModalidad(cod);
 	}
-	public int agregarModalidad(int codEvento, int codModalidad){
-		return eventoDAO.agregarModalidad(codEvento, codModalidad);
+	public int agregarEventoModalidad(int codEvento, ModalidadDTO mod){
+		return eventoDAO.agregarEventoModalidad(codEvento, mod);
 	}
 }

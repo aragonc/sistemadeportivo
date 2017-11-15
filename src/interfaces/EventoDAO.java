@@ -2,6 +2,7 @@ package interfaces;
 
 import java.util.List;
 import beans.EventoDTO;
+import beans.ModalidadDTO;
 
 public interface EventoDAO {
 	
@@ -17,5 +18,5 @@ public interface EventoDAO {
 	
 	public int eliminarEventoModalidad(int cod);
 	
-	public int agregarModalidad(int codEvento, int codModalidad);
+	public int agregarEventoModalidad(int codEvento, ModalidadDTO mod);
 }
