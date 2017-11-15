@@ -8,7 +8,7 @@ public class CategoriaDTO {
 
 	public CategoriaDTO() {
 		super();
-		// TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor stub asjaksjks
 	}
 
 	public int getCodigo() {

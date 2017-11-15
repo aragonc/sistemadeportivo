@@ -324,10 +324,10 @@ public class MySqlAjaxDAO implements AjaxDAO {
 		try {
 			cn = MysqlDBConexion.getConexion();
 			//String sql = "select COUNT(*) from equipo where nombre=? and evento_idevento=?";
-			String sql = "select COUNT(*) from equipo inner join evento_equipo ep where nombre=?  and ep.evento_idevento=?";
+			String sql = "select COUNT(*) from equipo where nombre=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, nom);
-			pstm.setInt(2, codev);
+			//pstm.setInt(2, codev);
 			rs = pstm.executeQuery();
 			while(rs.next()){
 				valor = rs.getInt(1);

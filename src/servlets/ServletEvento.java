@@ -70,7 +70,9 @@ public class ServletEvento extends HttpServlet {
 		 String[] codmodalidad = request.getParameterValues("modalidad[]");
 		 
 		 for(String item : codmodalidad){
-			 eventoService.agregarModalidad(Integer.parseInt(codevento), Integer.parseInt(item));
+			 ModalidadDTO mod = modalidadService.buscarModalidad(Integer.parseInt(item));
+			 System.out.println(mod.getGenero());
+			 eventoService.agregarEventoModalidad(Integer.parseInt(codevento), mod);
 		 }
 
 		 listar(request, response);
@@ -184,14 +186,14 @@ public class ServletEvento extends HttpServlet {
 		
 		if(nombre.replaceAll(" ", "").equals("")) {
 			request.setAttribute("registro", x);
-            validaciones = "El campo Titulo de Evento no puede estar vac�o";
+            validaciones = "El campo Titulo de Evento no puede estar vacio";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
         }
 		
 		else if(!(nombre.matches("[a-zA-Z 0-9]*"))) {
 			request.setAttribute("registro", x);
-            validaciones = "Ingrese un t�tulo de evento v�lido";
+            validaciones = "Ingrese un titulo de evento valido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
         }
@@ -226,21 +228,21 @@ public class ServletEvento extends HttpServlet {
 				
 		else if(fechafin.replaceAll(" ", "").equals("")) {
 			request.setAttribute("registro", x);
-            validaciones = "No ha seleccionado una fecha de finalizaci�n";
+            validaciones = "No ha seleccionado una fecha de finalización";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
         }
 		
 		else if(datefin.before(dateinicio)) {
 			request.setAttribute("registro", x);
-            validaciones = "La fecha de finalizaci�n no puede ser antes que la fecha de inicio";
+            validaciones = "La fecha de finalización no puede ser antes que la fecha de inicio";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
         }
 		
 		else if(datefin.compareTo(dateinicio) < 1) {
 			request.setAttribute("registro", x);
-            validaciones = "La hora de finalizaci�n no puede ser antes que la hora de inicio";
+            validaciones = "La hora de finalización no puede ser antes que la hora de inicio";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
         }
@@ -254,7 +256,7 @@ public class ServletEvento extends HttpServlet {
 			
 		else if(!(costo.matches("[0-9.]*"))) {
 			request.setAttribute("registro", x);
-            validaciones = "Ingrese un monto v�lido";
+            validaciones = "Ingrese un monto válido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
         }
@@ -347,8 +349,8 @@ public class ServletEvento extends HttpServlet {
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 		
-		else if(!(nombre.matches("[A-Za-z������������ 0-9]*"))) {
-            validaciones = "Ingrese un t�tulo de evento v�lido";
+		else if(!(nombre.matches("[A-Za-z 0-9]*"))) {
+            validaciones = "Ingrese un título de evento válido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
@@ -372,7 +374,7 @@ public class ServletEvento extends HttpServlet {
         }
 		
 		else if(fechafin.replaceAll(" ", "").equals("")) {
-            validaciones = "No ha seleccionado una fecha de finalizaci�n";
+            validaciones = "No ha seleccionado una fecha de finalización";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
@@ -390,34 +392,34 @@ public class ServletEvento extends HttpServlet {
         }
 		
 		else if(datefin.before(dateinicio)) {
-            validaciones = "La fecha de finalizaci�n no puede ser antes que la fecha de inicio";
+            validaciones = "La fecha de finalización no puede ser antes que la fecha de inicio";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 		
 		else if(count1==true) {
-    		validaciones = "Ya se est� llevando a cabo un evento en el mismo lugar y las fechas ingresadas estan dentro del rango de otras fechas de otro evento"; 
+    		validaciones = "Ya se está llevando a cabo un evento en el mismo lugar y las fechas ingresadas estan dentro del rango de otras fechas de otro evento"; 
     		request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 		else if(count2==true) {
-    		validaciones = "Ya se est� llevando a cabo un evento en el mismo lugar y en el rango de fechas ingresadas"; 
+    		validaciones = "Ya se está llevando a cabo un evento en el mismo lugar y en el rango de fechas ingresadas"; 
     		request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 		else if(count3==true) {
-    		validaciones = "Ya se est� llevando a cabo un evento en el mismo lugar y la fecha inicial de dicho evento est� dentro del intervalo de las fechas seleccionadas"; 
+    		validaciones = "Ya se está llevando a cabo un evento en el mismo lugar y la fecha inicial de dicho evento está dentro del intervalo de las fechas seleccionadas"; 
     		request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 		else if(count4==true) {
-    		validaciones = "Ya se est� llevando a cabo un evento en el mismo lugar y la fecha final de dicho evento est� dentro del intervalo de las fechas seleccionadas"; 
+    		validaciones = "Ya se está llevando a cabo un evento en el mismo lugar y la fecha final de dicho evento está dentro del intervalo de las fechas seleccionadas"; 
     		request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 				
 		else if(!(costo.matches("[0-9.]*"))) {
-            validaciones = "Ingrese un monto v�lido";
+            validaciones = "Ingrese un monto válido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }

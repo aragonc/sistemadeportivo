@@ -158,7 +158,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "SELECT p.idpersona, p.nombres, p.apaterno, p.amaterno, p.sexo, p.tipo_documento, p.num_documento, p.fecha_nacimiento, "
-					+ "p.email, p.telefono_contacto, p.estado FROM persona p inner join "
+					+ "p.email, p.telefono, p.estado FROM persona p inner join "
 					+ "persona_equipo pe on p.idpersona = pe.persona_idpersona where pe.equipo_idequipo = ?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, equipo);
