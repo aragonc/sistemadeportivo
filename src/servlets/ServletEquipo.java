@@ -170,8 +170,8 @@ public class ServletEquipo extends HttpServlet{
 		obj.setNombre(nombre);
 		obj.setLogo(logo);
 		obj.setColor(color);
-		obj.setCodEvento(Integer.parseInt(evento));
-		obj.setCodModalidad(Integer.parseInt(modalidad));
+		//obj.setCodEvento(Integer.parseInt(evento));
+		//obj.setCodModalidad(Integer.parseInt(modalidad));
 		obj.setEstado(Integer.parseInt(estado));
 		obj.setDescripcion(descripcion);
 				
@@ -179,7 +179,7 @@ public class ServletEquipo extends HttpServlet{
 		System.out.println("Equipo: " + codequipo);
 		if (codequipo != -1){
 			//Para agregar al equipo al evento a participar
-			equipoService.agregarEquipoEvento(codequipo, obj.getCodEvento());
+			//equipoService.agregarEquipoEvento(codequipo, obj.getCodEvento());
 			//Enviamos los datos para registrar jugadores.
 			request.setAttribute("nomequipo", obj.getNombre());
 			request.setAttribute("codequipo", codequipo+"");
@@ -295,8 +295,8 @@ public class ServletEquipo extends HttpServlet{
 		obj.setNombre(nombre);
 		obj.setLogo(logo);
 		obj.setColor(color);
-		obj.setCodEvento(Integer.parseInt(evento));
-		obj.setCodModalidad(Integer.parseInt(modalidad));
+		//obj.setCodEvento(Integer.parseInt(evento));
+		//obj.setCodModalidad(Integer.parseInt(modalidad));
 		obj.setEstado(Integer.parseInt(estado));
 		obj.setDescripcion(descripcion);
 		obj.setCodigo(Integer.parseInt(codigo));

@@ -119,7 +119,7 @@
 							<div class="panel-heading">
 								<div class="pull-right btn-panel">
 									<a href="ServletEvento?tipo=listaModalidad&action=update&cod=<%= obj.getCodigo() %>" class="btn btn-primary btn-sm">
-										<i class="fa fa-plus" aria-hidden="true"></i>
+										<i class="fa fa-pencil"></i>
 										Actualizar Modalidades
 									</a>
 								</div>

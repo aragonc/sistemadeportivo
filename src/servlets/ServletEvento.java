@@ -33,8 +33,6 @@ public class ServletEvento extends HttpServlet {
 
 		if (tipo.equals("registrar"))
 			registrar(request, response);
-		else if (tipo.equals("buscarEventos"))
-			buscarEventos(request, response);
 		else if (tipo.equals("actualizar"))
 			actualizar(request, response);
 		else if (tipo.equals("buscar"))
@@ -66,16 +64,30 @@ public class ServletEvento extends HttpServlet {
 	}
 
 	private void suscribirModalidad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 String accion = request.getParameter("accion");
 		 String codevento = request.getParameter("codevento");
 		 String[] codmodalidad = request.getParameterValues("modalidad[]");
-		 
-		 for(String item : codmodalidad){
-			 ModalidadDTO mod = modalidadService.buscarModalidad(Integer.parseInt(item));
-			 System.out.println(mod.getGenero());
-			 eventoService.agregarEventoModalidad(Integer.parseInt(codevento), mod);
-		 }
-
-		 listar(request, response);
+		 //Determinamos el tipo de acción que vamos a recibir 
+		 if(accion.equals("agregar")) {
+			 //Cuando vamos  a agregar un registro nuevo de un evento nuevo
+			 for(String item : codmodalidad){
+				 ModalidadDTO mod = modalidadService.buscarModalidad(Integer.parseInt(item));
+				 eventoService.agregarEventoModalidad(Integer.parseInt(codevento), mod);
+			 }
+			 listar(request, response);
+			 //System.out.println("Agrego");
+		 } else {
+			 //Cuando vamos a modificar las modalidades de un evento existente.
+			 eventoService.eliminarEventoModalidad(Integer.parseInt(codevento));
+			 if(codmodalidad!=null) {
+				 for(String item : codmodalidad){
+					 ModalidadDTO mod = modalidadService.buscarModalidad(Integer.parseInt(item));
+					 eventoService.agregarEventoModalidad(Integer.parseInt(codevento), mod);
+				 }
+			 }
+			 response.sendRedirect("ServletEvento?tipo=detalle&cod="+codevento);
+			 //System.out.println("Actualizo"); 
+		 } 
 	}
 
 	private void buscar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -94,12 +106,15 @@ public class ServletEvento extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		int codigo = Integer.parseInt(dato);
+		
 		EventoDTO obj = eventoService.buscarEvento(codigo);
 		request.setAttribute("evento", obj);
+		
 		List<ModalidadDTO> info = modalidadService.listarModalidad();
 		request.setAttribute("data", info);
+		
 		if(action.equals("add")) {
-			request.setAttribute("action", "agregar");
+			request.setAttribute("accion", "agregar");
 		} else {
 			request.setAttribute("accion", "actualizar");
 		}	
@@ -282,11 +297,6 @@ public class ServletEvento extends HttpServlet {
 		
 	}
 
-	private void buscarEventos(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	private void registrar(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		EventoDTO obj = new EventoDTO();
@@ -299,11 +309,11 @@ public class ServletEvento extends HttpServlet {
 		String lugar = request.getParameter("cbougar");
 		String gratuito = request.getParameter("gratuito");
 		String estado = request.getParameter("estado");
-		String validaciones = "";
+		//String validaciones = "";
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
-		Date hoy = new Date();
+		//Date hoy = new Date();
 		Date dateinicio = null;
 		Date datefin = null;
 		
@@ -334,10 +344,9 @@ public class ServletEvento extends HttpServlet {
 			obj.setFechaFin(datefin);
 		}
 		
-		
-		boolean count = ajaxService.mismoNombre("evento",nombre);
 		int codlugar = Integer.parseInt(lugar);
 		
+		/* boolean count = ajaxService.mismoNombre("evento",nombre);
 		boolean count1 = ajaxService.mismoEvento("evento", dateinicio,datefin,codlugar);
 		boolean count2 = ajaxService.mismoEvento1("evento", dateinicio, datefin, codlugar);
 		boolean count3 = ajaxService.mismoEventoInicio("evento", dateinicio, datefin, codlugar);
@@ -423,9 +432,10 @@ public class ServletEvento extends HttpServlet {
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
+       
 		
 		
-		else{
+		else{  */
 			
 					
 			
@@ -438,15 +448,12 @@ public class ServletEvento extends HttpServlet {
 		
 		int resultado = eventoService.registrarEvento(obj);
 		if (resultado != -1){
-			//request.setAttribute("nomevento", obj.getNombre());
-			//request.setAttribute("codevento", resultado+"");
 			response.sendRedirect("ServletEvento?tipo=listaModalidad&action=add&cod="+resultado);
-			//listaModalidad(request, response);
 		}else{
 			response.sendRedirect("error.html");
 		}
 	}
-	}
+	//}
 		
 	public ServletEvento() {
         super();
@@ -468,5 +475,13 @@ public class ServletEvento extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+	
+	public boolean isEmptyStringArray(String [] array){
+	 for(int i=0; i<array.length; i++){ 
+		 if(array[i]!=null){
+			 return false;
+		 }
+	  }
+	 return true;
+	}
 }

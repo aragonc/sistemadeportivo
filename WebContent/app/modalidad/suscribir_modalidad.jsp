@@ -11,20 +11,27 @@
 <%@page import="java.util.List"%>
 
 <%
-String title = null;
-EventoDTO evento = (EventoDTO)request.getAttribute("evento");
+	String title = null;
 
-List<ModalidadDTO> original = (List<ModalidadDTO>)request.getAttribute("data");
-List<ModalidadDTO> actual = evento.getModalidades();
-
-String action = (String)request.getAttribute("accion");
+	EventoDTO evento = (EventoDTO)request.getAttribute("evento");
+	
+	List<ModalidadDTO> original = (List<ModalidadDTO>)request.getAttribute("data");
+	List<ModalidadDTO> actual = evento.getModalidades();
+	
+	String action = (String)request.getAttribute("accion");
 	if(action.equals("agregar")){
 		title = "Agregar Modalidades ";
 	} else {
 		title = "Actualizar Modalidades ";
 	}
+	ArrayList<String> xactual = new ArrayList<String>();
+	for(ModalidadDTO item : actual){
+		xactual.add(item.getCodigo()+"");
+	}
+	//System.out.println(xactual);
+
 %>
-<c:set var="modalidad" value="<%= evento.getModalidades() %>"/>
+<c:set var="listamodalidad" value="<%= evento.getModalidades() %>"/>
 <%@ include file="../_header.jsp" %>
 <%@ include file="../_sidebar.jsp" %>
  
@@ -56,6 +63,7 @@ String action = (String)request.getAttribute("accion");
 			       	
 			       	<form action="${pageContext.request.contextPath}/ServletEvento?tipo=suscribirModalidad" method="post" id="formlista">
 			       	<div class="box-body table-responsive no-padding">
+			       	<input type="hidden" name="accion" value="<%= action %>">
 			       	<input type="hidden" name="codevento" value="<%= evento.getCodigo() %>">
 			       	<table class="table table-bordered table-hover">
 			       		<tr>
@@ -69,7 +77,7 @@ String action = (String)request.getAttribute("accion");
 			       	
 			       	<% for( ModalidadDTO item : original) { %>
 			       		<tr>
-			       			<td><input type="checkbox" name="modalidad[]" value="<%= item.getCodigo() %>" ></td>
+			       			<td><input type="checkbox" name="modalidad[]" id="modalidad_<%=item.getCodigo() %>" value="<%= item.getCodigo() %>" ></td>
 			       			<td>
 			       				<p>
 			       				
@@ -108,7 +116,18 @@ String action = (String)request.getAttribute("accion");
 			       		</tr>
 			       	<% } %>
 			       	</table>
-			       	
+			       	<script type="text/javascript">
+			       	$(document).ready(function(){
+			       		var actual = <%= xactual %>;
+			       		if(actual.length >= 0 ){
+				       		console.log(actual);
+				       		for ( var i = 0, l = actual.length; i < l; i++ ) {
+				    			$("#modalidad_"+actual[i]).prop('checked',true);
+				        		//console.log(actual[ i ]);
+				    		}
+			       		}
+			       	});
+			       	</script>
 			         </div>
 			         <div class="btn-toolbar">
 			         	<div class="btn-group">
@@ -118,7 +137,7 @@ String action = (String)request.getAttribute("accion");
 			         	<div class="btn-actions">
 						  <button type="button" id="seleccion" class="btn btn-success">
 						  	<i class="fa fa-plus" aria-hidden="true"></i>
-						    Agregar modalidades 
+						    <%= title %>
 						  </button>
 						  <script type="text/javascript">
 						  	document.getElementById("seleccion").onclick = function() {

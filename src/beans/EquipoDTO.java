@@ -1,6 +1,5 @@
 package beans;
 
-import java.util.Date;
 import java.util.List;
 
 public class EquipoDTO {
@@ -10,12 +9,10 @@ public class EquipoDTO {
 	private String descripcion;
 	private String logo;
 	private String color;
-	private int codEvento;
 	private EventoDTO evento;
-	private int codModalidad;
 	private ModalidadDTO modalidad;
+	private PersonaDTO delegado;
 	private List<PersonaDTO> jugadores;
-	private Date fregistro;
 	private int estado;
 	
 	public EquipoDTO() {
@@ -63,28 +60,12 @@ public class EquipoDTO {
 		this.color = color;
 	}
 
-	public int getCodEvento() {
-		return codEvento;
-	}
-
-	public void setCodEvento(int codEvento) {
-		this.codEvento = codEvento;
-	}
-
 	public EventoDTO getEvento() {
 		return evento;
 	}
 
 	public void setEvento(EventoDTO evento) {
 		this.evento = evento;
-	}
-
-	public int getCodModalidad() {
-		return codModalidad;
-	}
-
-	public void setCodModalidad(int codModalidad) {
-		this.codModalidad = codModalidad;
 	}
 
 	public ModalidadDTO getModalidad() {
@@ -95,6 +76,14 @@ public class EquipoDTO {
 		this.modalidad = modalidad;
 	}
 
+	public PersonaDTO getDelegado() {
+		return delegado;
+	}
+
+	public void setDelegado(PersonaDTO delegado) {
+		this.delegado = delegado;
+	}
+
 	public List<PersonaDTO> getJugadores() {
 		return jugadores;
 	}
@@ -103,19 +92,26 @@ public class EquipoDTO {
 		this.jugadores = jugadores;
 	}
 
-	public Date getFregistro() {
-		return fregistro;
-	}
-
-	public void setFregistro(Date fregistro) {
-		this.fregistro = fregistro;
-	}
-
 	public int getEstado() {
 		return estado;
 	}
 
 	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
+	public EquipoDTO(int codigo, String nombre, String descripcion, String logo, String color, EventoDTO evento,
+			ModalidadDTO modalidad, PersonaDTO delegado, List<PersonaDTO> jugadores, int estado) {
+		super();
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.logo = logo;
+		this.color = color;
+		this.evento = evento;
+		this.modalidad = modalidad;
+		this.delegado = delegado;
+		this.jugadores = jugadores;
 		this.estado = estado;
 	}
 	

@@ -39,10 +39,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 				a.setNombre(rs.getString(2));
 				a.setDescripcion(rs.getString(3));
 				a.setLogo(rs.getString(4));
-				a.setEmail(rs.getString(5));
-				a.setFono(rs.getString(6));
 				a.setColor(rs.getString(7));
-				a.setCodModalidad(rs.getInt(8));
 				a.setEstado(rs.getInt(9));	
 				data.add(a);
 			}
@@ -84,13 +81,6 @@ public class MySqlEquipoDAO implements EquipoDAO{
 				a.setNombre(rs.getString(2));
 				a.setDescripcion(rs.getString(3));
 				a.setLogo(rs.getString(4));
-				a.setEmail(rs.getString(5));
-				a.setFono(rs.getString(6));
-				a.setColor(rs.getString(7));
-				a.setCodModalidad(rs.getInt(8));
-				a.setCodEvento(rs.getInt(9));
-				a.setEstado(rs.getInt(10));	
-				a.setFregistro(rs.getDate(11));
 				List<PersonaDTO> people = persona.buscarPersonaEquipo(a.getCodigo());
 				a.setJugadores(people);
 			}
@@ -123,11 +113,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDescripcion());
 			pstm.setString(3, obj.getLogo());
-			pstm.setString(4, obj.getEmail());
-			pstm.setString(5, obj.getFono());
 			pstm.setString(6, obj.getColor());
-			//pstm.setInt(7, obj.getCodEvento());
-			pstm.setInt(7, obj.getCodModalidad());
 			pstm.setInt(8, obj.getEstado());
 			pstm.executeUpdate();
 			
@@ -164,11 +150,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDescripcion());
 			pstm.setString(3, obj.getLogo());
-			pstm.setString(4, obj.getEmail());
-			pstm.setString(5, obj.getFono());
 			pstm.setString(6, obj.getColor());
-			pstm.setInt(7, obj.getCodEvento());
-			pstm.setInt(8, obj.getCodModalidad());
 			pstm.setInt(9, obj.getEstado());
 			pstm.setInt(10, obj.getCodigo());
 			estado = pstm.executeUpdate();
