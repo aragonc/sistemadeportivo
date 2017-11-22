@@ -11,7 +11,7 @@
 	
 	//CONTROLA SESSION
 	if ( ( validarSession == null || validarSession.equalsIgnoreCase("") ) ) {
-		System.out.println("ValidaSesion.jsp -> usuario mal");
+		System.out.println("Sesión caducada");
 		//procesar = false;
 		response.sendRedirect(request.getContextPath());
     } else {

@@ -74,7 +74,7 @@ $( document ).ready(function() {
 				data: { "ndni" : $("#txtnumdocumento").val() },
 				type: "POST",
 				dataType: "json",
-				url: "https://demos.geekdev.ml/reniec/consulta.php",
+				url: "http://localhost/reniec/example/consulta.php",
 			}).done(function( data, textStatus, jqXHR ){
 				
 				if(data['success']!="false" && data['success']!=false)

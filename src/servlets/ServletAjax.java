@@ -63,11 +63,20 @@ public class ServletAjax extends HttpServlet {
     	ComboDTO modalidad = null;
     	String dataJson = null;
     	Gson gson = new Gson();
+    	String genero = null;
     	for(ModalidadDTO item : lista){
     		//System.out.println(item.getDisciplina().getNombre());
+    		System.out.println(item.getGenero());
+    		if(item.getGenero().equals("M")) {
+    			genero = "Mujeres";
+    		} else if(item.getGenero().equals("V")) {
+    			genero = "Varones";
+    		} else {
+    			genero = "Mixto";
+    		}
     		modalidad = new ComboDTO();
     		modalidad.setCodigo(item.getCodigo());
-    		modalidad.setValor(item.getDisciplina().getNombre() + " - " + item.getCategoria().getNombre());
+    		modalidad.setValor(item.getDisciplina().getNombre() + " " + item.getCategoria().getNombre() + " - " + genero + " (" + item.getNumJugadores() + ")" );
     		combo.add(modalidad);
     	}
     	try (PrintWriter out = response.getWriter()) {

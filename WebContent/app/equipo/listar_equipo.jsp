@@ -62,16 +62,22 @@
 											<input type="checkbox" name="cod[]" value="${lista.codigo}">
 	               		 				</display:column>
 										<display:column property="nombre" title="Nombre Equipo" sortable="false"/>
-										<display:column property="descripcion" title="Descripción" sortable="false" style="width:30%"/>
-										<display:column property="email" title="Email" sortable="false"/>
-										<display:column title="Telefono" sortable="false">
-											${lista.fono == '' ? 'No registrado' : lista.fono }
-										</display:column>
+										<display:column property="descripcion" title="Descripción" sortable="false" style="width:20%"/>
 										<display:column property="color" title="Color" sortable="false"/>	
-										
+										<display:column title="Delegado">
+											${lista.delegado.nombre} ${ lista.delegado.apaterno } ${ lista.delegado.amaterno }
+										</display:column>
+										<display:column title="Modalidad">
+											${lista.modalidad.disciplina.nombre} ${lista.modalidad.categoria.nombre} 
+											${lista.modalidad.genero == 'V' ? '<span> Varones </span>' : lista.modalidad.genero == 'M' ? '<span> Mujeres </span>' : '<span> Mixto </span>'}
+										</display:column>
+										<display:column title="N° Jugadores">
+											${lista.modalidad.numJugadores} 
+										</display:column>
 										<display:column  title="Estado" sortable="false">
 											${lista.estado == 1 ? '<span class="label label-success"> Activo </span>' : '<span class="label label-danger"> Inactivo </span>'}
 										</display:column>
+										
 										<display:column title="Acciones" sortable="false" media="html" >
 										
 											<div class="btn-group btn-group-sm" role="group">

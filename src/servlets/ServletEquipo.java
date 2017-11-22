@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import beans.EquipoDTO;
-
+import beans.EventoDTO;
+import beans.ModalidadDTO;
 import beans.PersonaDTO;
 import service.AjaxService;
 import service.EquipoService;
@@ -97,35 +98,48 @@ public class ServletEquipo extends HttpServlet{
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		EquipoDTO obj = new EquipoDTO();
+		
 		String nombre = request.getParameter("nombre");
-		String logo = request.getParameter("logotipo");
-		String email = request.getParameter("email");
-		String fono = request.getParameter("fono");
-		String evento = request.getParameter("evento");
-		String modalidad = request.getParameter("modalidad");
+		//String logo = request.getParameter("logotipo");
+		String idevento = request.getParameter("evento");
+		String idmodalidad = request.getParameter("modalidad");
 		String color = request.getParameter("color");
 		String descripcion = request.getParameter("descripcion");
 		String estado = request.getParameter("estado");
+		String iddelegado = request.getParameter("delegado");
+		
+		
 		String validaciones = "";
 		
-		int ev = Integer.parseInt(evento);
-		boolean count = ajaxService.mismoEquipoEvento("equipo",nombre,ev);
+		obj.setNombre(nombre);
+		obj.setDescripcion(descripcion);
+		obj.setColor(color);
+		obj.setLogo(null);
+		EventoDTO evento = new EventoDTO();
+			evento.setCodigo(Integer.parseInt(idevento));
+			obj.setEvento(evento);
+		ModalidadDTO modalidad = new ModalidadDTO();
+			modalidad.setCodigo(Integer.parseInt(idmodalidad));
+			obj.setModalidad(modalidad);
+		PersonaDTO delegado = new PersonaDTO();
+			delegado.setCodigo(Integer.parseInt(iddelegado));
+		obj.setDelegado(delegado);
+		obj.setEstado(Integer.parseInt(estado));
 		
-		int mod = Integer.parseInt(modalidad);
-		
-		boolean count1 = ajaxService.mismoEquipoModalidad("equipo",nombre,mod);
+		boolean count = ajaxService.mismoEquipoEvento("equipo",nombre,obj.getEvento().getCodigo());
+		boolean count1 = ajaxService.mismoEquipoModalidad("equipo",nombre,obj.getModalidad().getCodigo());
 		
 		if(nombre.replaceAll(" ", "").equals("")) {
             validaciones = "Es necesario ingresar un nombre al equipo";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
-		else if(ev == 0) {
+		else if(obj.getEvento().getCodigo() == 0) {
             validaciones = "Debe seleccionar un evento";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
-		else if(mod == 0) {
+		else if(obj.getModalidad().getCodigo() == 0) {
             validaciones = "Debe seleccionar una modalidad";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
@@ -138,12 +152,6 @@ public class ServletEquipo extends HttpServlet{
         }
 		else if(!(nombre.matches("[A-Za-z 0-9]*"))) {
             validaciones = "Ingrese un nombre valido";
-            request.setAttribute("validaciones", validaciones);
-            request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
-        }
-
-		else if(!(fono.length() == 7) && !(fono.length() == 9)) {
-            validaciones = "El telefono solo debe tener 7 o 9 digitos";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
@@ -167,26 +175,17 @@ public class ServletEquipo extends HttpServlet{
 	    }
 		else{	
 			
-		obj.setNombre(nombre);
-		obj.setLogo(logo);
-		obj.setColor(color);
-		//obj.setCodEvento(Integer.parseInt(evento));
-		//obj.setCodModalidad(Integer.parseInt(modalidad));
-		obj.setEstado(Integer.parseInt(estado));
-		obj.setDescripcion(descripcion);
-				
-		int codequipo = equipoService.registrarEquipo(obj);
-		System.out.println("Equipo: " + codequipo);
-		if (codequipo != -1){
-			//Para agregar al equipo al evento a participar
-			//equipoService.agregarEquipoEvento(codequipo, obj.getCodEvento());
-			//Enviamos los datos para registrar jugadores.
-			request.setAttribute("nomequipo", obj.getNombre());
-			request.setAttribute("codequipo", codequipo+"");
-			listaPersona(request, response);
-		} else {
-			response.sendRedirect("error.html");
-		}
+			int codequipo = equipoService.registrarEquipo(obj);
+			System.out.println("Equipo: " + codequipo);
+			
+			if (codequipo != -1){
+				request.setAttribute("nomequipo", obj.getNombre());
+				request.setAttribute("codequipo", codequipo+"");
+				//listaPersona(request, response);
+				listar(request, response);
+			} else {
+				response.sendRedirect("error.html");
+			}
 		}
 	}
 

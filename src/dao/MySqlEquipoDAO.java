@@ -9,6 +9,7 @@ import com.mysql.jdbc.Statement;
 
 import java.sql.Connection;
 import beans.EquipoDTO;
+import beans.ModalidadDTO;
 import beans.PersonaDTO;
 import interfaces.EquipoDAO;
 import service.ModalidadService;
@@ -39,8 +40,12 @@ public class MySqlEquipoDAO implements EquipoDAO{
 				a.setNombre(rs.getString(2));
 				a.setDescripcion(rs.getString(3));
 				a.setLogo(rs.getString(4));
-				a.setColor(rs.getString(7));
-				a.setEstado(rs.getInt(9));	
+				a.setColor(rs.getString(5));
+				ModalidadDTO mod = modalidad.buscarModalidad(rs.getInt(6));
+				a.setModalidad(mod);
+				PersonaDTO del = persona.buscarPersona(rs.getInt(7));
+				a.setDelegado(del);
+				a.setEstado(rs.getInt(8));	
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -108,13 +113,15 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "INSERT INTO equipo VALUES(null,? ,? ,? ,?,? ,? ,?, ?, now())";
+			String sql = "INSERT INTO equipo VALUES(null,? ,? ,? ,? ,? ,? ,?, now())";
 			pstm = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDescripcion());
 			pstm.setString(3, obj.getLogo());
-			pstm.setString(6, obj.getColor());
-			pstm.setInt(8, obj.getEstado());
+			pstm.setString(4, obj.getColor());
+			pstm.setInt(5, obj.getModalidad().getCodigo());
+			pstm.setInt(6, obj.getDelegado().getCodigo());
+			pstm.setInt(7, obj.getEstado());
 			pstm.executeUpdate();
 			
 			ResultSet rs = pstm.getGeneratedKeys();

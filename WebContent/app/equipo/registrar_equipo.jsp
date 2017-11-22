@@ -10,7 +10,9 @@
 	List<ComboDTO> listaEventos = listaDocumento.listarComboSql("SELECT idevento, nombre FROM evento where estado = 1;");
 	List<ComboDTO> listaPersona = listaDocumento.listarComboSql("SELECT p.idpersona, concat(p.nombres,space(1),p.apaterno,space(1), p.amaterno) as nombre FROM persona p inner join usuario u on p.idpersona = u.idpersona where u.idperfil = 2");
 	String validar = (String) request.getAttribute("validaciones"); 
+	System.out.println(usuario.getCodigo() + usuario.getPersona().getNombre());
  %>
+ <c:set var="user" value="<%= usuario.getCodigo() %>"/>
   <div class="content-wrapper">
     <section class="content-header">
       <h1>Equipo</h1> 
@@ -32,7 +34,7 @@
                                  
 							<div class="col-md-6">
 								<div class="form-group">
-								
+									 <input type="hidden" name="delegado" value="${ user }">
 			                         <label for="nombre" class="col-sm-4 control-label">Nombre del Equipo</label>
 			                         <div class="col-sm-8">
 			                           <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Escribe nombre del equipo">
@@ -40,21 +42,12 @@
 			                    </div>
 							</div>
 							<div class="col-md-6">
-		                    		<div class="form-group">
-		                    			<label for="delegado" class="col-sm-4 control-label">Delegado</label>
-		                    			<div class="col-sm-8">
-		                    				<select id="listadelegado" name="delegado" id="delegado" class="form-control">
-		                    					<option value="0">-- Seleccione --</option>
-							                    <%
-							                    	for (ComboDTO item : listaPersona ){
-							                    %>
-							                    	<option value="<%= item.getField() %>"> <%= item.getValor() %> </option>		
-							                   	<%
-							                   		}  
-							                   	%>
-							                   	</select>
-		                    			</div>
-		                    		</div>
+		                    	<div class="form-group">
+	                    			<label for="color" class="col-sm-4 control-label">Color</label>
+	                    			<div class="col-sm-8">
+	                    				<input type="text" id="color" name="color" class="form-control" placeholder="Escriba el color uniforme del equipo">
+	                    			</div>
+	                    		</div>
 							</div>
 						</div>
 						
@@ -96,14 +89,6 @@
 	                    <div class="row">
 	                 		<div class="col-md-6">
 	                 			<div class="form-group">
-	                    			<label for="color" class="col-sm-4 control-label">Color</label>
-	                    			<div class="col-sm-8">
-	                    				<input type="text" id="color" name="color" class="form-control" placeholder="Escriba el color uniforme del equipo">
-	                    			</div>
-	                    		</div>
-	                 		</div>   
-	                 		<div class="col-md-6">
-	                 			<div class="form-group">
 								    <label for="estado" class="col-sm-4 control-label">Estado:</label>
 								    <div class="col-sm-8">
 								      <select class="form-control" name="estado">
@@ -112,6 +97,9 @@
 					                  </select>
 								    </div>
 								</div>
+	                 		</div>   
+	                 		<div class="col-md-6">
+	                 			
 	                 		</div>
 	                    </div>	                    
                         

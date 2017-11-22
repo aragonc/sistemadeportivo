@@ -9,11 +9,11 @@ public class EquipoDTO {
 	private String descripcion;
 	private String logo;
 	private String color;
-	private EventoDTO evento;
 	private ModalidadDTO modalidad;
 	private PersonaDTO delegado;
 	private List<PersonaDTO> jugadores;
 	private int estado;
+	private EventoDTO evento;
 	
 	public EquipoDTO() {
 		super();
