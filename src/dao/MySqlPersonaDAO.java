@@ -106,7 +106,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		return data;
 	}
 
-	public List<PersonaDTO> listarPersonaBuscar(String criterio) {
+	public List<PersonaDTO> listarPersonaSexo(int tipo) {
 		PersonaDTO a = null;
 		List<PersonaDTO> data = new ArrayList<PersonaDTO>();
 		Connection cn = null;
@@ -114,8 +114,9 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT * FROM persona where ;";
+			String sql = "SELECT * FROM persona where sexo = ? ;";
 			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, tipo);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
 				a = new PersonaDTO();
@@ -129,7 +130,9 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setFnacimiento(rs.getDate(8));
 				a.setEmail(rs.getString(9));
 				a.setFono(rs.getString(10));
-				a.setEstado(rs.getInt(11));				
+				a.setAvatar(rs.getString(11));
+				a.setPlataforma(rs.getBoolean(12));
+				a.setEstado(rs.getInt(13));				
 				data.add(a);
 			}
 		} catch (Exception e) {

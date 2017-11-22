@@ -121,8 +121,8 @@ public class ServletEvento extends HttpServlet {
 		request.getRequestDispatcher("app/modalidad/suscribir_modalidad.jsp").forward(request,response);
 	}
 
-	private void eliminar(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	private void eliminar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
 			String[] dato = request.getParameterValues("cod[]");
 			
 			for(String item : dato){

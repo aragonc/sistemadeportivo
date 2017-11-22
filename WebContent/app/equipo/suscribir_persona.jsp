@@ -55,17 +55,7 @@
             				</div>
             				
             				<div class="col-md-9">
-	            				<div class="pull-right">
-	            					<form class="form-inline">
-									  <div class="form-group">
-									    <div class="input-group">
-									      <input type="text" name="txtdni" class="form-control" id="txtdni" size="25" placeholder="Buscar persona">
-									    </div>
-									  </div>
-									  <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i>
-									   Buscar</button>
-									</form>
-	            				</div>
+	            				
             				</div>
             			</div>
 			       	</div>
@@ -80,24 +70,33 @@
 	               		 			<display:column title="Item" sortable="false"  >
 										<input type="checkbox" name="jugador[]" value="${lista.codigo}">
 	               		 			</display:column>
+	               		 			
+	               		 			<display:column title="Foto" sortable="false">
+	               		 				<c:choose>
+										    <c:when test="${lista.avatar != null }">
+										        <img width="40px" src="${pageContext.request.contextPath}/uploads/${lista.avatar}" class="img-thumbnail">
+										    </c:when>    
+										    <c:otherwise>
+										        <img width="40px" src="${pageContext.request.contextPath}/images/avatar.jpg" class="img-thumbnail">
+										    </c:otherwise>
+										</c:choose>
+	               		 				
+	               		 			</display:column>
+	               		 			
 	               		 			<display:column title="Apellidos y nombres" sortable="false">
 	               		 				${lista.apaterno} ${lista.amaterno} , ${lista.nombre}
 	               		 			</display:column>
-									
+									<display:column title="N° DNI">
+										${lista.numdocumento}
+									</display:column>
 									<display:column property="email" title="Email" sortable="false"/>	
 									<display:column title="Sexo" sortable="false">
-										${lista.sexo == 'M' ? '<span> Masculino </span>' : '<span> Femenino </span>'}
+										${lista.sexo == '1' ? '<span> Masculino </span>' : '<span> Femenino </span>'}
 									</display:column>
 									<display:column  title="Estado" sortable="false">
 										${lista.estado == 1 ? '<span class="label label-success"> Activo </span>' : '<span class="label label-danger"> Inactivo </span>'}
 									</display:column>
-									<display:column title="Acciones" sortable="false" media="html" >
-											<div class="text-center">
-							               		<a class="btn btn-primary" href="ServletEquipo?tipo=suscribirPersona&equipo=<%= codigoEquipo %>&jugador[]=${lista.codigo}"><i class="fa fa-plus" aria-hidden="true"></i>
-							               			Agregar
-							               		</a>
-							               	</div>
-									</display:column>
+									
 								</display:table>
 		              		 </div>
 		              		 <div class="btn-toolbar">

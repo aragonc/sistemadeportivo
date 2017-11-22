@@ -32,12 +32,20 @@ public class EquipoService {
 		return equipoDAO.eliminarEquipo(cod);
 	}
 	
+	public int eliminarEquipoEvento(int cod) {
+		return equipoDAO.eliminarEquipoEvento(cod);
+	}
+	
 	public int agregarPersona(int equipo, int jugador){
 		return equipoDAO.agregarPersona(equipo, jugador);
 	}
 	
 	public int agregarEquipoEvento(int equipo, int evento) {
 		return equipoDAO.agregarEquipoEvento(equipo, evento);
+	}
+	
+	public String buscarGenero(int codequipo) {
+		return equipoDAO.buscarGenero(codequipo);
 	}
 }
 

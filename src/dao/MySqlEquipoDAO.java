@@ -204,6 +204,40 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		return estado;
 	}
 	
+	public String buscarGenero(int codequipo) {
+		String genero = null;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "SELECT em.tipo_genero FROM equipo e inner join equipo_evento ee on e.idequipo = ee.idequipo " + 
+					"inner join evento_modalidad em on em.modalidad_idmodalidad = e.idmodalidad where e.idequipo = ?";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, codequipo);
+			rs = pstm.executeQuery();
+			
+			if (rs.next()) {
+				genero = rs.getString(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return genero;
+	}
+	
 	public int agregarEquipoEvento(int equipo, int evento){
 		int estado = -1;
 		Connection cn = null;
@@ -243,6 +277,31 @@ public class MySqlEquipoDAO implements EquipoDAO{
 			pstm.setInt(2, equipo);
 			estado = pstm.executeUpdate();
 			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return estado;
+	}
+	
+	public int eliminarEquipoEvento(int cod) {
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "DELETE FROM equipo_evento WHERE idequipo=?";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, cod);
+			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
