@@ -33,7 +33,7 @@ public class ServletModalidad extends HttpServlet {
     }
     
 	protected void service(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-			
+		request.setCharacterEncoding("utf-8");
 	    	String tipo = request.getParameter("tipo");
 	    	
 			if (tipo.equals("registrar"))
@@ -93,14 +93,14 @@ public class ServletModalidad extends HttpServlet {
 		
 		if(idcategoria.equals("") && iddisciplina.equals("")) {
 			request.setAttribute("registro", x);
-            validaciones = "Debe seleccionar obligatoriamente una categor√≠a y una disciplina";
+            validaciones = "Debe seleccionar obligatoriamente una categorÌa y una disciplina";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/modalidad/actualizar_modalidad.jsp").forward(request, response);
         }
 		
 		else if(idcategoria.equals("")) {
 			request.setAttribute("registro", x);
-            validaciones = "Debe seleccionar una categor√≠a";
+            validaciones = "Debe seleccionar una categorÌa";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/modalidad/actualizar_modalidad.jsp").forward(request, response);
         }
@@ -114,14 +114,14 @@ public class ServletModalidad extends HttpServlet {
 		
 		else if(cantidad.replaceAll(" ", "").equals("")) {
 			request.setAttribute("registro", x);
-            validaciones = "El campo numero de jugadores no puede estar vac√≠o";
+            validaciones = "El campo numero de jugadores no puede estar vacÌo";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/modalidad/actualizar_modalidad.jsp").forward(request, response);
         }
 		
 		else if(!(cantidad.matches("[0-9]*"))) {
 			request.setAttribute("registro", x);
-            validaciones = "Solo debe ingresar car√°cteres num√©ricos en el campo n√∫mero de jugadores";
+            validaciones = "Solo debe ingresar car√°cteres numÈricos en el campo n√∫mero de jugadores";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/modalidad/actualizar_modalidad.jsp").forward(request, response);
         }
@@ -217,13 +217,13 @@ public class ServletModalidad extends HttpServlet {
 		String validaciones = "";
 		
 		if(idcategoria.equals("") && iddisciplina.equals("")) {
-            validaciones = "Debe seleccionar obligatoriamente una categor√≠a y una disciplina";
+            validaciones = "Debe seleccionar obligatoriamente una categorÌa y una disciplina";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/modalidad/registrar_modalidad.jsp").forward(request, response);
         }
 		
 		else if(idcategoria.equals("")) {
-            validaciones = "Debe seleccionar una categor√≠a";
+            validaciones = "Debe seleccionar una categorÌa";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/modalidad/registrar_modalidad.jsp").forward(request, response);
         }
@@ -235,7 +235,7 @@ public class ServletModalidad extends HttpServlet {
         }
 		
 		else if(cantidad.replaceAll(" ", "").equals("")) {
-            validaciones = "El campo n√∫mero de jugadores no puede estar vac√≠o";
+            validaciones = "El campo n˙mero de jugadores no puede estar vacÌo";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/modalidad/registrar_modalidad.jsp").forward(request, response);
         }
@@ -255,19 +255,19 @@ public class ServletModalidad extends HttpServlet {
 		
 		
 		else if(!(cantidad.matches("[0-9]*"))) {
-            validaciones = "Solo debe ingresar car√°cteres num√©ricos en el campo n√∫mero de jugadores";
+            validaciones = "Solo debe ingresar caracteres numÈricos en el campo n˙mero de jugadores";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/modalidad/registrar_modalidad.jsp").forward(request, response);
         }
 		
 		else if(!(nvarones.matches("[0-9]*"))) {
-            validaciones = "Solo debe ingresar car√°cteres num√©ricos en el campo n√∫mero de varones";
+            validaciones = "Solo debe ingresar caracteres numÈricos en el campo n˙mero de varones";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/modalidad/registrar_modalidad.jsp").forward(request, response);
         }
 		
 		else if(!(nmujeres.matches("[0-9]*"))) {
-            validaciones = "Solo debe ingresar car√°cteres num√©ricos en el campo n√∫mero de mujeres";
+            validaciones = "Solo debe ingresar caracteres numÈricos en el campo n˙mero de mujeres";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/modalidad/registrar_modalidad.jsp").forward(request, response);
         }

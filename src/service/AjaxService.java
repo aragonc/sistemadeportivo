@@ -42,9 +42,6 @@ public class AjaxService {
 		return ajaxDAO.mismoEquipoEvento(tabla, nom,codev);
 	}
 	
-	public boolean mismoEquipoModalidad(String tabla, String nom, int codmod){
-		return ajaxDAO.mismoEquipoModalidad(tabla, nom,codmod);
-	}
 	public boolean mismoDoc(String tabla, String doc){
 		return ajaxDAO.mismoDoc(tabla, doc);
 	}

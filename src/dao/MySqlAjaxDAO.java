@@ -325,11 +325,11 @@ public class MySqlAjaxDAO implements AjaxDAO {
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			//String sql = "select COUNT(*) from equipo where nombre=? and evento_idevento=?";
-			String sql = "select COUNT(*) from equipo where nombre=?";
+			String sql = "select COUNT(*) from equipo e inner join equipo_evento ee where e.nombre=? and ee.idevento=?";
+			//String sql = "select COUNT(*) from equipo where nombre=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, nom);
-			//pstm.setInt(2, codev);
+			pstm.setInt(2, codev);
 			rs = pstm.executeQuery();
 			while(rs.next()){
 				valor = rs.getInt(1);
@@ -357,46 +357,7 @@ public class MySqlAjaxDAO implements AjaxDAO {
 		return unico;
 	}
 	
-	@Override
-	public boolean mismoEquipoModalidad(String tabla, String nom, int codmod) {
-		boolean unico = false;
-		int valor = 0;
-		Connection cn = null;
-		ResultSet rs = null;
-		PreparedStatement pstm = null;
-		try {
-			cn = MysqlDBConexion.getConexion();
-			String sql = "select COUNT(*) from equipo where nombre=? and idmodalidad=?";
-			
-			pstm = cn.prepareStatement(sql);
-			pstm.setString(1, nom);
-			pstm.setInt(2, codmod);
-			rs = pstm.executeQuery();
-			while(rs.next()){
-				valor = rs.getInt(1);
-				if(valor != 0){
-					unico = true;
-				}
-				
-			}
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstm != null)
-					pstm.close();
-				if (cn != null)
-					cn.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		return unico;
-	}
+	
 	
 	@Override
 	public boolean mismoDoc(String tabla, String doc ) {

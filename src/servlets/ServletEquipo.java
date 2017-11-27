@@ -34,6 +34,7 @@ public class ServletEquipo extends HttpServlet{
 
 	protected void service(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		String tipo = request.getParameter("tipo");
 		if (tipo.equals("listar"))
 			listar(request, response);
@@ -143,7 +144,7 @@ public class ServletEquipo extends HttpServlet{
 		obj.setEstado(Integer.parseInt(estado));
 		
 		boolean count = ajaxService.mismoEquipoEvento("equipo",nombre,obj.getEvento().getCodigo());
-		boolean count1 = ajaxService.mismoEquipoModalidad("equipo",nombre,obj.getModalidad().getCodigo());
+		
 		
 		if(nombre.replaceAll(" ", "").equals("")) {
             validaciones = "Es necesario ingresar un nombre al equipo";
@@ -166,13 +167,13 @@ public class ServletEquipo extends HttpServlet{
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
-		else if(!(nombre.matches("[A-Za-z 0-9]*"))) {
+		else if(!(nombre.matches("[A-Za-z—Ò·ÈÌÛ˙¡…Õ”⁄ 0-9]*"))) {
             validaciones = "Ingrese un nombre valido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
 				
-		else if(!(color.matches("[a-zA-Z]*"))) {
+		else if(!(color.matches("[A-Za-z—Ò·ÈÌÛ˙¡…Õ”⁄ ]*"))) {
             validaciones = "Ingrese un color valido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
@@ -183,12 +184,6 @@ public class ServletEquipo extends HttpServlet{
     		request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
-		
-		else if(count1==true) {
-	    		validaciones = "Ya existe un equipo con el mismo nombre en la modalidad seleccionada"; 
-	    		request.setAttribute("validaciones", validaciones);
-	            request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
-	    }
 		else{	
 			
 			int codequipo = equipoService.registrarEquipo(obj);
@@ -295,14 +290,14 @@ public class ServletEquipo extends HttpServlet{
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
-		/* else if(!(nombre.matches("[a-zA-Z]*"))) {
+		else if(!(nombre.matches("[A-Za-z—Ò·ÈÌÛ˙¡…Õ”⁄ 0-9]*"))) {
 			request.setAttribute("registro", x);
             validaciones = "Ingrese un nombre valido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
-        }*/
+        }
 				
-		else if(!(color.matches("[a-zA-Z]*"))) {
+		else if(!(color.matches("[ A-Za-z—Ò·ÈÌÛ˙¡…Õ”⁄]*"))) {
 			request.setAttribute("registro", x);
             validaciones = "Ingrese un color v·lido";
             request.setAttribute("validaciones", validaciones);

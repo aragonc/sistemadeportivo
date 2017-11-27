@@ -31,7 +31,7 @@ public class ServletPersona extends HttpServlet {
 	}
 	
 	 protected void service(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-			
+		 request.setCharacterEncoding("utf-8");
 	    	String tipo = request.getParameter("tipo");
 	    	//String tipopersona = request.getParameter("tipo");
 			if (tipo.equals("registrar"))
@@ -49,7 +49,7 @@ public class ServletPersona extends HttpServlet {
 			else if (tipo.equals("buscarPersonaXNombre"))
 				buscarPersonaXNombre(request, response);
 		}
-	//metodos para registar una persona pero seg�n su tipo;
+	//metodos para registar una persona pero segï¿½n su tipo;
 	 
 	 private void eliminar(HttpServletRequest request,
 				HttpServletResponse response) throws ServletException, IOException {
@@ -113,7 +113,7 @@ public class ServletPersona extends HttpServlet {
 		
 		if(nombre.replaceAll(" ", "").equals("")) {
 			request.setAttribute("registro", x);
-            validaciones = "El campo Nombres está no puede vacío";
+            validaciones = "El campo Nombres estÃ¡ no puede vacío";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
         }
@@ -143,7 +143,7 @@ public class ServletPersona extends HttpServlet {
         }
 		else if(numdocumento.replaceAll(" ", "").equals("")) {
 			request.setAttribute("registro", x);
-            validaciones = "No ha ingresado un número de documento";
+            validaciones = "No ha ingresado un nÃºmero de documento";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
         }
@@ -239,13 +239,13 @@ public class ServletPersona extends HttpServlet {
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
         }
-		/*else if(!(fono.length() == 7) && !(fono.length() == 9)) {
+		else if(!(fono.length() == 7) && !(fono.length() == 9)) {
 			request.setAttribute("registro", x);
             validaciones = "El teléfono solo debe tener 7 o 9 dígitos";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/persona/actualizar_persona.jsp").forward(request, response);
         }
-		*/
+		
 		
 		else{
 		obj.setNombre(nombre);
@@ -324,7 +324,7 @@ public class ServletPersona extends HttpServlet {
 		
 		
 		if(nombre.replaceAll(" ", "").equals("")) {
-            validaciones = "El campo Nombres está no puede vacío";
+            validaciones = "El campo Nombres está vacío";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
         }
@@ -428,15 +428,15 @@ public class ServletPersona extends HttpServlet {
             request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
         }
 		else if(!(fono.matches("[0-9]*"))) {
-            validaciones = "Solo debe ingresar caracteres numéricos en su teléfono";
+            validaciones = "Solo debe ingresar caracteres numÃ©ricos en su telÃ©fono";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
         }
-		/*else if(!(fono.length() == 7) && !(fono.length() == 9)) {
+		else if(!(fono.length() == 7) && !(fono.length() == 9)) {
             validaciones = "El teléfono solo debe tener 7 o 9 dígitos";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/persona/registrar_persona.jsp").forward(request, response);
-        }*/
+        }
 		
 		else if(count==true) {
     		validaciones = "Ya hay una persona  registrada con el mismo número de documento"; 

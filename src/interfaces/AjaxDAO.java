@@ -14,6 +14,6 @@ public interface AjaxDAO {
 	public boolean mismoEventoInicio(String tabla, Date fechini, Date fechfin, int codlug);
 	public boolean mismoEventoFin(String tabla, Date fechini, Date fechfin, int codlug);
 	public boolean mismoEquipoEvento(String tabla, String nom, int codev);
-	public boolean mismoEquipoModalidad(String tabla, String nom, int codmod);
+	
 	public boolean mismoDoc(String tabla, String doc);
 }
