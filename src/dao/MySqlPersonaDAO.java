@@ -32,7 +32,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setNombre(rs.getString(2));
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
-				a.setSexo(rs.getString(5));
+				a.setSexo(rs.getInt(5));
 				a.setTipodocumento(rs.getInt(6));
 				a.setNumdocumento(rs.getString(7));
 				a.setFnacimiento(rs.getDate(8));
@@ -78,7 +78,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setNombre(rs.getString(2));
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
-				a.setSexo(rs.getString(5));
+				a.setSexo(rs.getInt(5));
 				a.setTipodocumento(rs.getInt(6));
 				a.setNumdocumento(rs.getString(7));
 				a.setFnacimiento(rs.getDate(8));
@@ -124,7 +124,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setNombre(rs.getString(2));
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
-				a.setSexo(rs.getString(5));
+				a.setSexo(rs.getInt(5));
 				a.setTipodocumento(rs.getInt(6));
 				a.setNumdocumento(rs.getString(7));
 				a.setFnacimiento(rs.getDate(8));
@@ -162,7 +162,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 			cn = MysqlDBConexion.getConexion();
 			String sql = "SELECT p.idpersona, p.nombres, p.apaterno, p.amaterno, p.sexo, p.tipo_documento, p.num_documento, p.fecha_nacimiento, "
 					+ "p.email, p.telefono, p.estado FROM persona p inner join "
-					+ "persona_equipo pe on p.idpersona = pe.persona_idpersona where pe.equipo_idequipo = ?";
+					+ "persona_equipo pe on p.idpersona = pe.idpersona where pe.idequipo = ?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, equipo);
 			rs = pstm.executeQuery();
@@ -172,7 +172,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setNombre(rs.getString(2));
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
-				a.setSexo(rs.getString(5));
+				a.setSexo(rs.getInt(5));
 				a.setTipodocumento(rs.getInt(6));
 				a.setNumdocumento(rs.getString(7));
 				a.setFnacimiento(rs.getDate(8));
@@ -216,7 +216,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setNombre(rs.getString(2));
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
-				a.setSexo(rs.getString(5));
+				a.setSexo(rs.getInt(5));
 				a.setTipodocumento(rs.getInt(6));
 				a.setNumdocumento(rs.getString(7));
 				a.setFnacimiento(rs.getDate(8));
@@ -261,7 +261,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getApaterno());
 			pstm.setString(3, obj.getAmaterno());
-			pstm.setString(4, obj.getSexo());
+			pstm.setInt(4, obj.getSexo());
 			pstm.setInt(5, obj.getTipodocumento());
 			pstm.setString(6, obj.getNumdocumento());
 			pstm.setDate(7, new java.sql.Date(obj.getFnacimiento().getTime()));
@@ -308,7 +308,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getApaterno());
 			pstm.setString(3, obj.getAmaterno());
-			pstm.setString(4, obj.getSexo());
+			pstm.setInt(4, obj.getSexo());
 			pstm.setInt(5, obj.getTipodocumento());
 			pstm.setString(6, obj.getNumdocumento());
 			pstm.setDate(7, new java.sql.Date(obj.getFnacimiento().getTime()));
@@ -404,7 +404,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setNombre(rs.getString(2));
 				a.setApaterno(rs.getString(3));
 				a.setAmaterno(rs.getString(4));
-				a.setSexo(rs.getString(5));
+				a.setSexo(rs.getInt(5));
 				a.setTipodocumento(rs.getInt(6));
 				a.setNumdocumento(rs.getString(7));
 				a.setFnacimiento(rs.getDate(8));

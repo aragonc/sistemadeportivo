@@ -8,7 +8,7 @@
  <%
  	ComboService listaDocumento = new ComboService();
 	List<ComboDTO> listaEventos = listaDocumento.listarComboSql("SELECT idevento, nombre FROM evento where estado = 1;");
-	List<ComboDTO> listaPersona = listaDocumento.listarComboSql("SELECT p.idpersona, concat(p.nombres,space(1),p.apaterno,space(1), p.amaterno) as nombre FROM persona p inner join usuario u on p.idpersona = u.idpersona where u.idperfil = 2");
+	//List<ComboDTO> listaPersona = listaDocumento.listarComboSql("SELECT p.idpersona, concat(p.nombres,space(1),p.apaterno,space(1), p.amaterno) as nombre FROM persona p inner join usuario u on p.idpersona = u.idpersona where u.idperfil = 2");
 	String validar = (String) request.getAttribute("validaciones"); 
 	
  %>

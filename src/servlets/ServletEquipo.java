@@ -1,12 +1,15 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import beans.ComboDTO;
 import beans.EquipoDTO;
 import beans.EventoDTO;
 import beans.ModalidadDTO;
@@ -208,7 +211,25 @@ public class ServletEquipo extends HttpServlet{
 		String dato = request.getParameter("cod");
 		int codigo = Integer.parseInt(dato);
 		EquipoDTO obj = equipoService.buscarEquipo(codigo);
+		List<ModalidadDTO> lista = ajaxService.listarModalidadEvento(obj.getEvento().getCodigo());
+		List<ComboDTO> data = new ArrayList<ComboDTO>();
+		String genero = null;
+		ComboDTO a = null;
+		for(ModalidadDTO item : lista) {
+			a = new ComboDTO();
+			if(item.getGenero() == 1) {
+				genero = "Varones";
+			} else if (item.getGenero() == 2) {
+				genero = "Mujeres";
+			} else {
+				genero = "Mixto";
+			}
+			a.setValor(item.getDisciplina().getNombre() + " " + item.getCategoria().getNombre() + " - " + genero + " (" + item.getNumJugadores() + ")" );
+			a.setField(item.getCodigo()+"");
+			data.add(a);
+		}
 		request.setAttribute("registro", obj);
+		request.setAttribute("modalidad", data);
 		request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request,
 				response);
 	}

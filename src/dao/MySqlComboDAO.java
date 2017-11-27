@@ -8,6 +8,7 @@ import java.util.List;
 
 
 import beans.ComboDTO;
+import beans.ModalidadDTO;
 import interfaces.ComboDAO;
 import utils.MysqlDBConexion;
 
@@ -52,40 +53,20 @@ public class MySqlComboDAO implements ComboDAO{
 	
 	@Override
 	public List<ComboDTO> listarComboModalidad(int evento) {
+		MySqlAjaxDAO ajax = new MySqlAjaxDAO();
 		ComboDTO a = null;
+		List<ModalidadDTO> lista = ajax.listarModalidadEvento(evento);
+		System.out.println(lista);
 		List<ComboDTO> data = new ArrayList<ComboDTO>();
-		Connection cn = null;
-		ResultSet rs = null;
-		PreparedStatement pstm = null;
-		try {
-			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT m.idmodalidad, CONCAT(d.nombre,' - ', c.nombre) as nombremodalidad FROM evento_modalidad em " + 
-					"INNER JOIN modalidad m ON em.modalidad_idmodalidad = m.idmodalidad " + 
-					"INNER JOIN disciplina d ON m.disciplina_iddisciplina = d.iddisciplina " + 
-					"INNER JOIN categoria c ON m.categoria_idcategoria = c.idcategoria " + 
-					"WHERE em.evento_idevento = "+evento+" ;";
-			pstm = cn.prepareStatement(sql);
-			rs = pstm.executeQuery();
-			while (rs.next()) {
-				a = new ComboDTO();			
-				a.setField(rs.getString(1));
-				a.setValor(rs.getString(2));
-				data.add(a);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstm != null)
-					pstm.close();
-				if (cn != null)
-					cn.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+		
+		for(ModalidadDTO item : lista){
+			a = new ComboDTO();
+			System.out.println(item.getDisciplina().getNombre());
+			a.setField(item.getDisciplina().getNombre());
+			a.setField(item.getCodigo()+"");
+			data.add(a);
 		}
+		
 		return data;
 	}
 

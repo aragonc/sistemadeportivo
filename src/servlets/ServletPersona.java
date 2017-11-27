@@ -251,7 +251,7 @@ public class ServletPersona extends HttpServlet {
 		obj.setNombre(nombre);
 		obj.setApaterno(apaterno);
 		obj.setAmaterno(amaterno);
-		obj.setSexo(sexo);
+		obj.setSexo(Integer.parseInt(sexo));
 		obj.setTipodocumento(Integer.parseInt(tipodocumento));
 		obj.setNumdocumento(numdocumento);
 		obj.setEmail(email);
@@ -447,7 +447,7 @@ public class ServletPersona extends HttpServlet {
 			obj.setNombre(nombre);
 			obj.setApaterno(apaterno);
 			obj.setAmaterno(amaterno);
-			obj.setSexo(sexo);
+			obj.setSexo(Integer.parseInt(sexo));
 			obj.setTipodocumento(Integer.parseInt(tipodocumento));
 			obj.setNumdocumento(numdocumento);
 			obj.setEmail(email);

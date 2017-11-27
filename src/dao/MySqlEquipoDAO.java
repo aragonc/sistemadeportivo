@@ -9,9 +9,11 @@ import com.mysql.jdbc.Statement;
 
 import java.sql.Connection;
 import beans.EquipoDTO;
+import beans.EventoDTO;
 import beans.ModalidadDTO;
 import beans.PersonaDTO;
 import interfaces.EquipoDAO;
+import service.EventoService;
 import service.ModalidadService;
 import service.PersonaService;
 import utils.MysqlDBConexion;
@@ -20,6 +22,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 	
 	ModalidadService modalidad = new ModalidadService();
 	PersonaService persona = new PersonaService();
+	EventoService eventoservice = new EventoService();
 
 	@Override
 	public List<EquipoDTO> listarEquipo() {
@@ -64,7 +67,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		}
 		return data;
 	}
-
+	
 	@Override
 	public EquipoDTO buscarEquipo(int cod) {
 		EquipoDTO a = null;
@@ -73,7 +76,8 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		ResultSet rs = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT * from equipo WHERE idequipo = ? ";
+			String sql = "SELECT e.idequipo, e.nombre, e.descripcion, e.logo, e.color, e.idmodalidad, e.iddelegado, ee.idevento, e.estado " + 
+					" FROM equipo e inner join equipo_evento ee on ee.idequipo = e.idequipo where e.idequipo = ? ";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
@@ -88,7 +92,11 @@ public class MySqlEquipoDAO implements EquipoDAO{
 				a.setModalidad(mod);
 				PersonaDTO del = persona.buscarPersona(rs.getInt(7));
 				a.setDelegado(del);
-				a.setEstado(rs.getInt(8));	
+				List<PersonaDTO> jugadores = persona.buscarPersonaEquipo(cod);
+				a.setJugadores(jugadores);
+				EventoDTO evento = eventoservice.buscarEvento(rs.getInt(8));
+				a.setEvento(evento);
+				a.setEstado(rs.getInt(9));	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

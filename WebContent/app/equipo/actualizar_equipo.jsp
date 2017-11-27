@@ -1,3 +1,4 @@
+<%@page import="beans.ModalidadDTO"%>
 <%@page import="beans.EquipoDTO"%>
 <%@page import="beans.ComboDTO"%>
 <%@page import="java.util.List"%>
@@ -7,9 +8,9 @@
  <%@ include file="../_sidebar.jsp" %>
  <%
 	EquipoDTO obj = (EquipoDTO)request.getAttribute("registro");
- 	ComboService listaDocumento = new ComboService();  
+ 	List<ComboDTO> listaModalidad = (List<ComboDTO>) request.getAttribute("modalidad");
+ 	ComboService listaDocumento = new ComboService();
 	List<ComboDTO> listaEventos = listaDocumento.listarComboSql("SELECT idevento, nombre FROM evento where estado = 1;");
-	List<ComboDTO> listaModalidad = listaDocumento.listarComboModalidad(obj.getCodEvento());
  %>
  <c:set var="estado" value="<%= obj.getEstado() %>"/>
   <div class="content-wrapper">
@@ -35,18 +36,14 @@
 			                    </div>
 							</div>
 							<div class="col-md-6">
-		                    		<div class="form-group">
-		                    			<label for="email" class="col-sm-4 control-label">Email</label>
-		                    			<div class="col-sm-8">
-		                    				<div class="input-group">
-		                    					<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-		                    					<input type="text" name="email" id="email" class="form-control" value="<%= obj.getEmail() %>" placeholder="Escriba el email de contacto del equipo">
-		                    				</div>
-		                    			</div>
-		                    		</div>
+		                    	<div class="form-group">
+	                    			<label for="color" class="col-sm-4 control-label">Color</label>
+	                    			<div class="col-sm-8">
+	                    				<input type="text" id="color" name="color" value="<%= obj.getColor() %>" class="form-control" placeholder="Escriba el color uniforme del equipo">
+	                    			</div>
+	                    		</div>
 							</div>
 						</div>
-						
 	                    <div class="row">
 	                    	<div class="col-md-6">
 	                    		<div class="form-group">
@@ -57,7 +54,7 @@
 							                    <%
 							                    	
 							                    	for (ComboDTO item : listaEventos ){
-							                    		if(item.getField().equals(obj.getCodEvento()+"")){
+							                    		if(item.getField().equals(obj.getEvento().getCodigo()+"")){
 							                    			out.println("<option value="+ item.getField() +" selected>" + item.getValor()+"</option>");
 							                    		} else {
 							                    			out.println("<option value="+ item.getField() +" >" + item.getValor()+"</option>");
@@ -76,9 +73,8 @@
 			                           	<select id="listamodalidad" name="modalidad" class="form-control">
 			                           		<option selected="selected">-- Seleccionar molalidad --</option>
 			                           		<%
-							                    	System.out.println(obj.getCodModalidad());
 							                    	for (ComboDTO item : listaModalidad ){
-							                    		if(item.getField().equals(obj.getCodModalidad()+"")){
+							                    		if(item.getField().equals(obj.getModalidad().getCodigo()+"")){
 							                    			out.println("<option value="+ item.getField() +" selected>" + item.getValor()+"</option>");
 							                    		} else {
 							                    			out.println("<option value="+ item.getField() +" >" + item.getValor()+"</option>");
@@ -100,27 +96,6 @@
 	                         </div>
 	                    </div>
 	                    <div class="row">
-	                 		<div class="col-md-6">
-	                 			<div class="form-group">
-	                    			<label for="fono" class="col-sm-4 control-label">Télefono</label>
-	                    			<div class="col-sm-8">
-	                    				<div class="input-group">
-	                    					<span class="input-group-addon"><i class="fa fa-mobile" aria-hidden="true"></i></span>
-	                    					<input type="text" id="fono" name="fono" value="<%= obj.getFono() %>" class="form-control" placeholder="Escriba el télefono de contacto del equipo">
-	                    				</div>
-	                    			</div>
-	                    		</div>
-	                 		</div>   
-	                 		<div class="col-md-6">
-	                 			<div class="form-group">
-	                    			<label for="color" class="col-sm-4 control-label">Color</label>
-	                    			<div class="col-sm-8">
-	                    				<input type="text" id="color" name="color" value="<%= obj.getColor() %>" class="form-control" placeholder="Escriba el color uniforme del equipo">
-	                    			</div>
-	                    		</div>
-	                 		</div>
-	                    </div>
-	                    <div class="row">
 	                    	<div class="col-md-6">
 	                    		
 	                    		<div class="form-group">
@@ -133,14 +108,7 @@
 								    </div>
 								</div>
 	                    	</div>
-	                    	<div class="col-md-6">
-	                    		<div class="form-group">
-		                           <label class="col-sm-4 control-label">Logotipo</label>
-		                           <div class="col-sm-8">
-		                             <input type="file" id="logotipo" name="logotipo" accept=".jpg, .jpeg, .png">
-		                           </div>
-		                        </div>
-	                    	</div>
+	                    	
 	                    </div>
 	                    
                         
