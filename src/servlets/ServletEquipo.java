@@ -88,9 +88,7 @@ public class ServletEquipo extends HttpServlet{
 		String genero = request.getParameter("genero");
 			
 		List<PersonaDTO> info = null;
-		if(Integer.parseInt(genero)==1) {
-			info = personaService.listarPersonaSexo(Integer.parseInt(genero));
-		}else if(Integer.parseInt(genero)==2) {
+		if(Integer.parseInt(genero)!=3) {
 			info = personaService.listarPersonaSexo(Integer.parseInt(genero));
 		}else {
 			info = personaService.listarPersona();

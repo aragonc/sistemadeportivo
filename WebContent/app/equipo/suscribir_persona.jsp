@@ -26,7 +26,9 @@
 
  <%@ include file="../_header.jsp" %>
  <%@ include file="../_sidebar.jsp" %>
- 
+ <c:set var="total" value="<%= obj.getModalidad().getNumJugadores() %>"/>
+ <c:set var="man" value="<%= obj.getModalidad().getNumVarones() %>"/>
+ <c:set var="woman" value="<%= obj.getModalidad().getNumMujeres() %>"/>
    <div class="content-wrapper">
     <section class="content-header">
       <h1>
@@ -147,6 +149,50 @@
 								    <li><a href="#" id="seleccion">Agregar seleccionados</a></li>
 								  </ul>
 								  <script type="text/javascript">
+								  
+								  $(document).ready(function(){
+									  var total = ${total};
+									  var varones = ${man};
+									  var mujeres = ${woman};
+									  var count = 0;
+									  console.log("Total Jugadores: " + total);
+									  console.log("Total Varones: " + varones);
+									  console.log("Total Mujeres: " + mujeres);
+									  
+									  
+									  $("table#lista input.man[type=checkbox]").click(function(){
+										    var countchecked = $("table#lista input.man[type=checkbox]:checked").length;
+
+										    if(countchecked >= varones) 
+										    {
+										        $('table#lista input.man[type=checkbox]').not(':checked').attr("disabled",true);
+										    }
+										    else
+										    {
+										        $('table#lista input.man[type=checkbox]').not(':checked').attr("disabled",false);
+										    }
+										});
+									  
+									  $("table#lista input.woman[type=checkbox]").click(function(){
+										    var countchecked = $("table#lista input.woman[type=checkbox]:checked").length;
+
+										    if(countchecked >= mujeres) 
+										    {
+										        $('table#lista input.woman[type=checkbox]').not(':checked').attr("disabled",true);
+										    }
+										    else
+										    {
+										        $('table#lista input.woman[type=checkbox]').not(':checked').attr("disabled",false);
+										    }
+										});
+									  
+									 
+									  
+									  
+								  });
+								  
+								  
+								  
 								  	document.getElementById("seleccion").onclick = function() {
 								  		if(confirm('Por favor, confirme su elección')){
 								  			document.getElementById("formlista").submit();
