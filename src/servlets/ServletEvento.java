@@ -28,7 +28,7 @@ public class ServletEvento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void service(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("utf-8");
     	String tipo = request.getParameter("tipo");
 
 		if (tipo.equals("registrar"))
@@ -206,7 +206,7 @@ public class ServletEvento extends HttpServlet {
             request.getRequestDispatcher("app/evento/actualizar_evento.jsp").forward(request, response);
         }
 		
-		else if(!(nombre.matches("[a-zA-Z 0-9]*"))) {
+		else if(!(nombre.matches("[A-Za-z—Ò·ÈÌÛ˙¡…Õ”⁄ 0-9]*"))) {
 			request.setAttribute("registro", x);
             validaciones = "Ingrese un titulo de evento valido";
             request.setAttribute("validaciones", validaciones);
@@ -309,11 +309,11 @@ public class ServletEvento extends HttpServlet {
 		String lugar = request.getParameter("cbougar");
 		String gratuito = request.getParameter("gratuito");
 		String estado = request.getParameter("estado");
-		//String validaciones = "";
+		String validaciones = "";
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
-		//Date hoy = new Date();
+		Date hoy = new Date();
 		Date dateinicio = null;
 		Date datefin = null;
 		
@@ -346,20 +346,20 @@ public class ServletEvento extends HttpServlet {
 		
 		int codlugar = Integer.parseInt(lugar);
 		
-		/* boolean count = ajaxService.mismoNombre("evento",nombre);
+		boolean count = ajaxService.mismoNombre("evento",nombre);
 		boolean count1 = ajaxService.mismoEvento("evento", dateinicio,datefin,codlugar);
 		boolean count2 = ajaxService.mismoEvento1("evento", dateinicio, datefin, codlugar);
 		boolean count3 = ajaxService.mismoEventoInicio("evento", dateinicio, datefin, codlugar);
 		boolean count4 = ajaxService.mismoEventoFin("evento", dateinicio, datefin, codlugar);
 		
 		if(nombre.replaceAll(" ", "").equals("")) {
-            validaciones = "El campo Titulo de Evento no puede estar vacÔøΩo";
+            validaciones = "El campo Titulo de Evento no puede estar vacÌo";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 		
-		else if(!(nombre.matches("[A-Za-z 0-9]*"))) {
-            validaciones = "Ingrese un t√≠tulo de evento v√°lido";
+		else if(!(nombre.matches("[A-Za-z—Ò·ÈÌÛ˙¡…Õ”⁄ 0-9]*"))) {
+            validaciones = "Ingrese un t√≠tulo de evento v·lido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
@@ -383,7 +383,7 @@ public class ServletEvento extends HttpServlet {
         }
 		
 		else if(fechafin.replaceAll(" ", "").equals("")) {
-            validaciones = "No ha seleccionado una fecha de finalizaci√≥n";
+            validaciones = "No ha seleccionado una fecha de finalizaciÛn";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
@@ -401,41 +401,41 @@ public class ServletEvento extends HttpServlet {
         }
 		
 		else if(datefin.before(dateinicio)) {
-            validaciones = "La fecha de finalizaci√≥n no puede ser antes que la fecha de inicio";
+            validaciones = "La fecha de finalizaciÛn no puede ser antes que la fecha de inicio";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 		
 		else if(count1==true) {
-    		validaciones = "Ya se est√° llevando a cabo un evento en el mismo lugar y las fechas ingresadas estan dentro del rango de otras fechas de otro evento"; 
+    		validaciones = "Ya se est· llevando a cabo un evento en el mismo lugar y las fechas ingresadas estan dentro del rango de otras fechas de otro evento"; 
     		request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 		else if(count2==true) {
-    		validaciones = "Ya se est√° llevando a cabo un evento en el mismo lugar y en el rango de fechas ingresadas"; 
+    		validaciones = "Ya se est· llevando a cabo un evento en el mismo lugar y en el rango de fechas ingresadas"; 
     		request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 		else if(count3==true) {
-    		validaciones = "Ya se est√° llevando a cabo un evento en el mismo lugar y la fecha inicial de dicho evento est√° dentro del intervalo de las fechas seleccionadas"; 
+    		validaciones = "Ya se est· llevando a cabo un evento en el mismo lugar y la fecha inicial de dicho evento est· dentro del intervalo de las fechas seleccionadas"; 
     		request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 		else if(count4==true) {
-    		validaciones = "Ya se est√° llevando a cabo un evento en el mismo lugar y la fecha final de dicho evento est√° dentro del intervalo de las fechas seleccionadas"; 
+    		validaciones = "Ya se est· llevando a cabo un evento en el mismo lugar y la fecha final de dicho evento est· dentro del intervalo de las fechas seleccionadas"; 
     		request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
 				
 		else if(!(costo.matches("[0-9.]*"))) {
-            validaciones = "Ingrese un monto v√°lido";
+            validaciones = "Ingrese un monto v·lido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/evento/registrar_evento.jsp").forward(request, response);
         }
        
 		
 		
-		else{  */
+		else{  
 			
 					
 			
@@ -452,6 +452,7 @@ public class ServletEvento extends HttpServlet {
 		}else{
 			response.sendRedirect("error.html");
 		}
+	}
 	}
 	//}
 		
