@@ -161,14 +161,16 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "UPDATE equipo SET nombre=?,descripcion=?, "
-					+ " logo=?,email=?, telefono=?, color=?, evento_idevento=?, modalidad_idmodalidad=?, estado=? where idequipo=?";
+					+ " logo=?, color=?, idmodalidad=?, iddelegado=?, estado=? where idequipo=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDescripcion());
 			pstm.setString(3, obj.getLogo());
-			pstm.setString(6, obj.getColor());
-			pstm.setInt(9, obj.getEstado());
-			pstm.setInt(10, obj.getCodigo());
+			pstm.setString(4, obj.getColor());
+			pstm.setInt(5, obj.getModalidad().getCodigo());
+			pstm.setInt(6, obj.getDelegado().getCodigo());
+			pstm.setInt(7, obj.getEstado());
+			pstm.setInt(8, obj.getCodigo());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

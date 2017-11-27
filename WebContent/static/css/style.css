@@ -202,6 +202,27 @@
 	top: -6px;
     position: relative;
 }
+.lista{
+	padding: 0;
+	margin: 0;
+	line-height: 37px;
+}
+.lista-jugadores{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.lista-jugadores li{
+	display: inline-block;
+	padding: 5px 10px;
+	
+}
+.lista-jugadores li.criterio{
+	font-weight: bold;
+}
+.lista-jugadores li.cantidad{
+	background-color: #FFFFFF;
+}
 /* PROGRESO */
 .sk-circle {
   margin: 5px auto;

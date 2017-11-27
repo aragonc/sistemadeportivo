@@ -21,6 +21,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		Connection cn = null;
 		ResultSet rs = null;
 		PreparedStatement pstm = null;
+		String avatar = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "SELECT * FROM persona;";
@@ -38,7 +39,12 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setFnacimiento(rs.getDate(8));
 				a.setEmail(rs.getString(9));
 				a.setFono(rs.getString(10));
-				a.setAvatar(rs.getString(11));
+				avatar = rs.getString(11);
+				if(avatar != null && !avatar.equals("")) {
+					a.setAvatar(avatar);
+				} else {
+					a.setAvatar(null);
+				}	
 				a.setPlataforma(rs.getBoolean(12));
 				a.setEstado(rs.getInt(13));				
 				data.add(a);
@@ -112,6 +118,7 @@ public class MySqlPersonaDAO implements PersonaDAO{
 		Connection cn = null;
 		ResultSet rs = null;
 		PreparedStatement pstm = null;
+		String avatar = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "SELECT * FROM persona where sexo = ? ;";
@@ -130,7 +137,12 @@ public class MySqlPersonaDAO implements PersonaDAO{
 				a.setFnacimiento(rs.getDate(8));
 				a.setEmail(rs.getString(9));
 				a.setFono(rs.getString(10));
-				a.setAvatar(rs.getString(11));
+				avatar = rs.getString(11);
+				if(avatar != null && !avatar.equals("")) {
+					a.setAvatar(avatar);
+				} else {
+					a.setAvatar(null);
+				}			
 				a.setPlataforma(rs.getBoolean(12));
 				a.setEstado(rs.getInt(13));				
 				data.add(a);

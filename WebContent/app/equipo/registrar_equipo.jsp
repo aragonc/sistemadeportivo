@@ -30,7 +30,7 @@
 						
 						<% if (validar != null) { %>
                                  <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
-                                 <% } %>
+                        <% } %>
                                  
 							<div class="col-md-6">
 								<div class="form-group">

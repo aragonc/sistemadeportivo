@@ -11,8 +11,10 @@
  	List<ComboDTO> listaModalidad = (List<ComboDTO>) request.getAttribute("modalidad");
  	ComboService listaDocumento = new ComboService();
 	List<ComboDTO> listaEventos = listaDocumento.listarComboSql("SELECT idevento, nombre FROM evento where estado = 1;");
+	String validar = (String) request.getAttribute("validaciones"); 
  %>
- <c:set var="estado" value="<%= obj.getEstado() %>"/>
+<c:set var="estado" value="<%= obj.getEstado() %>"/>
+<c:set var="user" value="<%= usuario.getCodigo() %>"/>
   <div class="content-wrapper">
     <section class="content-header">
       <h1>Equipo</h1> 
@@ -25,10 +27,16 @@
         	<div class="box-body">
             	<div class="col-md-9">
 					<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletEquipo?tipo=actualizar" method="post" id="frmequipo">
+						
+						<% if (validar != null) { %>
+                                 <div class="alert alert-warning" role="alert">${requestScope.validaciones}</div>
+                        <% } %>
+						
 						<input type="hidden" name="codigo" value="<%= obj.getCodigo() %>">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
+									 <input type="hidden" name="delegado" value="${ user }">
 			                         <label for="nombre" class="col-sm-4 control-label">Nombre del Equipo</label>
 			                         <div class="col-sm-8">
 			                           <input type="text" id="nombre" name="nombre" value="<%= obj.getNombre() %>" class="form-control" placeholder="Escribe nombre del equipo">

@@ -12,6 +12,16 @@
 <%  
 	String data = request.getParameter("data");
 	EquipoDTO obj = (EquipoDTO)request.getAttribute("equipo");
+	
+	String genero = null;
+	if(obj.getModalidad().getGenero()==1){
+		genero = "Varones";
+	} else if(obj.getModalidad().getGenero()==2){
+		genero = "Mujeres";
+	} else {
+		genero = "Mixto";
+	}
+	String modalidad = obj.getModalidad().getDisciplina().getNombre() + " " + obj.getModalidad().getCategoria().getNombre() +  " - " + genero;
 %>
 
  <%@ include file="../_header.jsp" %>
@@ -26,15 +36,33 @@
     <section class="content">
     	<div class="box box-primary">
     		<div class="box-header with-border">
-	              <h3 class="box-title">Asignar jugadores a equipo <span class="valor"><%= obj.getNombre() %></span></h3>
+	              <h3 class="box-title">Asignar jugadores a equipo <span class="valor"><%= obj.getNombre() %></span> en la modalidad <span class="valor"><%= modalidad %></span></h3>
 	        </div>
         	<div class="box-body">
             	<div class="col-md-12">
             		<!-- MENSAJE QUE APARECE CUANDO SE REGISTRA UN EVENTO -->
 			       	<% if(obj.getCodigo()!=0) { %>
-		              	<div class="alert alert-info" role="alert">
-		              		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		              		Acabas de crear un equipo a continuación procede a asignar a sus <strong>JUGADORES </strong>
+		              	<div class="alert alert-success lista" role="alert">
+		              		
+		        			<ul class="lista-jugadores">
+		        				<li class="criterio">Cantidad de jugadores a registrar: </li>
+		        				<li id="numtotal" class="cantidad">
+		        					<%= obj.getModalidad().getNumJugadores() %>
+		        				</li>
+		        				<li class="criterio">
+		        					<img alt="Varones" title ="Varones" src="${pageContext.request.contextPath}/images/icons/32/boy.png">
+		        				</li>
+		        				<li id="numvarones" class="cantidad">
+		        					<%= obj.getModalidad().getNumVarones() %>
+		        				</li>
+		        				<li class="criterio">
+		        					<img alt="Mujeres" title ="Mujeres" src="${pageContext.request.contextPath}/images/icons/32/girl.png">
+		        				</li>
+		        				<li id="nummujeres" class="cantidad">
+		        					<%= obj.getModalidad().getNumMujeres() %>
+		        				</li>
+		        			</ul>
+		              		
 		              	</div>
 		              <% } %>
 			       	<!-- FIN DEL MENSAJE -->
@@ -66,7 +94,16 @@
 	               		 				<div class="alert alert-warning" role="alert">No se existe personas registradas</div>
 	               		 			</display:setProperty>                  		 				               		 			
 	               		 			<display:column title="Item" sortable="false"  >
-										<input type="checkbox" name="jugador[]" value="${lista.codigo}">
+	               		 				
+	               		 				<c:choose>
+										    <c:when test="${lista.sexo == 1 }">
+										        <input type="checkbox" id="man_${lista.codigo}" class="man" name="jugador[]" value="${lista.codigo}">
+										    </c:when>    
+										    <c:otherwise>
+										        <input type="checkbox" id="wonman_${lista.codigo}" class="woman" name="jugador[]" value="${lista.codigo}">
+										    </c:otherwise>
+										</c:choose>
+										
 	               		 			</display:column>
 	               		 			
 	               		 			<display:column title="Foto" sortable="false">

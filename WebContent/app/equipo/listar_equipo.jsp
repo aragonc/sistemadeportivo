@@ -36,7 +36,7 @@
 						        </a>
             				</div>
             				<div class="col-md-6">
-	            				<div class="pull-right">
+	            				<!-- <div class="pull-right">
 	            					<form class="form-inline">
 									  <div class="form-group">
 									    <div class="input-group">
@@ -45,7 +45,7 @@
 									  </div>
 									  <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i>
 									   Buscar</button>
-									</form>
+									</form>  -->
 	            				</div>
             				</div>
             			</div>

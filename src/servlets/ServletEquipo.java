@@ -243,20 +243,33 @@ public class ServletEquipo extends HttpServlet{
 		EquipoDTO obj = new EquipoDTO();
 		String codigo = request.getParameter("codigo");
 		String nombre = request.getParameter("nombre");
-		String logo = request.getParameter("logotipo");
-		String email = request.getParameter("email");
-		String fono = request.getParameter("fono");
-		String evento = request.getParameter("evento");
-		String modalidad = request.getParameter("modalidad");
+		//String logo = request.getParameter("logotipo");
+		String idevento = request.getParameter("evento");
+		String idmodalidad = request.getParameter("modalidad");
 		String color = request.getParameter("color");
 		String descripcion = request.getParameter("descripcion");
 		String estado = request.getParameter("estado");
+		String iddelegado = request.getParameter("delegado");
+		
 		String validaciones = "";
 		
-		int ev = Integer.parseInt(evento);
-		int mod = Integer.parseInt(modalidad);
-		
-		EquipoDTO x = equipoService.buscarEquipo(Integer.parseInt(codigo));
+		obj.setCodigo(Integer.parseInt(codigo));
+		obj.setNombre(nombre);
+		obj.setDescripcion(descripcion);
+		obj.setColor(color);
+		obj.setLogo(null);
+		EventoDTO evento = new EventoDTO();
+			evento.setCodigo(Integer.parseInt(idevento));
+			obj.setEvento(evento);
+		ModalidadDTO modalidad = new ModalidadDTO();
+			modalidad.setCodigo(Integer.parseInt(idmodalidad));
+			obj.setModalidad(modalidad);
+		PersonaDTO delegado = new PersonaDTO();
+			delegado.setCodigo(Integer.parseInt(iddelegado));
+		obj.setDelegado(delegado);
+		obj.setEstado(Integer.parseInt(estado));
+			
+		EquipoDTO x = equipoService.buscarEquipo(obj.getCodigo());
 	
 		if(nombre.replaceAll(" ", "").equals("")) {
 			request.setAttribute("registro", x);
@@ -264,84 +277,45 @@ public class ServletEquipo extends HttpServlet{
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
-		else if(email.replaceAll(" ", "").equals("")) {
-			request.setAttribute("registro", x);
-            validaciones = "El campo Email está vacío";
-            request.setAttribute("validaciones", validaciones);
-            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
-        }		
-		else if(!(email.matches("[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})"))) {
-			request.setAttribute("registro", x);
-            validaciones = "Ingrese un email válido";
-            request.setAttribute("validaciones", validaciones);
-            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
-        }
-		else if(ev == 0) {
+		else if(obj.getEvento().getCodigo() == 0) {
 			request.setAttribute("registro", x);
             validaciones = "Debe seleccionar un evento";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
-		else if(mod == 0) {
+		else if(obj.getModalidad().getCodigo() == 0) {
 			request.setAttribute("registro", x);
             validaciones = "Debe seleccionar una modalidad";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
-		else if(fono.replaceAll(" ", "").equals("")) {
-			request.setAttribute("registro", x);
-            validaciones = "El campo Teléfono esta vac�o";
-            request.setAttribute("validaciones", validaciones);
-            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
-        }
 		else if(color.replaceAll(" ", "").equals("")) {
 			request.setAttribute("registro", x);
-            validaciones = "El campo Color esta vac�o";
+            validaciones = "El campo no debe estar vacio";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
-		else if(!(nombre.matches("[A-Za-z������������ 0-9]*"))) {
+		/* else if(!(nombre.matches("[a-zA-Z]*"))) {
 			request.setAttribute("registro", x);
-            validaciones = "Ingrese un nombre v�lido";
+            validaciones = "Ingrese un nombre valido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
-        }
-		else if(!(fono.matches("[0-9]*"))) {
-			request.setAttribute("registro", x);
-            validaciones = "Ingrese un tel�fono v�lido";
-            request.setAttribute("validaciones", validaciones);
-            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
-        }
-		else if(!(fono.length() == 7) && !(fono.length() == 9)) {
-			request.setAttribute("registro", x);
-            validaciones = "El tel�fono solo debe tener 7 o 9 d�gitos";
-            request.setAttribute("validaciones", validaciones);
-            request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
-        }
+        }*/
 				
 		else if(!(color.matches("[a-zA-Z]*"))) {
 			request.setAttribute("registro", x);
-            validaciones = "Ingrese un color v�lido";
+            validaciones = "Ingrese un color v�lido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
 		else{	
-		obj.setNombre(nombre);
-		obj.setLogo(logo);
-		obj.setColor(color);
-		//obj.setCodEvento(Integer.parseInt(evento));
-		//obj.setCodModalidad(Integer.parseInt(modalidad));
-		obj.setEstado(Integer.parseInt(estado));
-		obj.setDescripcion(descripcion);
-		obj.setCodigo(Integer.parseInt(codigo));
-				
-		int codequipo = equipoService.actualizarEquipo(obj);
-		
-		if (codequipo != -1){
-			listar(request, response);
-		} else {
-			response.sendRedirect("error.html");
-		}
+
+			int codequipo = equipoService.actualizarEquipo(obj);
+			if (codequipo != -1){
+				listar(request, response);
+			} else {
+				response.sendRedirect("error.html");
+			}
 		}
 	}
 
