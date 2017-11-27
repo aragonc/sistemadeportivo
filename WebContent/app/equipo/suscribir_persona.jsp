@@ -162,15 +162,20 @@
 									  
 									  $("table#lista input.man[type=checkbox]").click(function(){
 										    var countchecked = $("table#lista input.man[type=checkbox]:checked").length;
-
+										    console.log(countchecked)
+										    
 										    if(countchecked >= varones) 
 										    {
+										    	
 										        $('table#lista input.man[type=checkbox]').not(':checked').attr("disabled",true);
 										    }
 										    else
 										    {
-										        $('table#lista input.man[type=checkbox]').not(':checked').attr("disabled",false);
+										    	
+										    	$('table#lista input.man[type=checkbox]').not(':checked').attr("disabled",false);
+										        
 										    }
+										    $("#numvarones").html(varones-countchecked);
 										});
 									  
 									  $("table#lista input.woman[type=checkbox]").click(function(){
@@ -184,14 +189,9 @@
 										    {
 										        $('table#lista input.woman[type=checkbox]').not(':checked').attr("disabled",false);
 										    }
+										    $("#nummujeres").html(mujeres-countchecked);
 										});
-									  
-									 
-									  
-									  
 								  });
-								  
-								  
 								  
 								  	document.getElementById("seleccion").onclick = function() {
 								  		if(confirm('Por favor, confirme su elección')){
