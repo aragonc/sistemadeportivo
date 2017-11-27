@@ -15,6 +15,17 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- -----------------------------------------------------
+-- Schema campeonato
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `campeonato` ;
+
+-- -----------------------------------------------------
+-- Schema campeonato
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `campeonato` DEFAULT CHARACTER SET utf8 ;
+USE `campeonato` ;
+
 --
 -- Table structure for table `categoria`
 --
