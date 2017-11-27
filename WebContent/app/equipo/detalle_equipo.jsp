@@ -88,7 +88,7 @@
 	                    <div class="panel panel-info">
 							<div class="panel-heading">
 								<div class="pull-right btn-panel">
-									<a href="#" class="btn btn-primary btn-sm">
+									<a href="ServletEquipo?tipo=listaPersona&genero=<%= obj.getModalidad().getGenero() %>&codequipo=<%= obj.getCodigo() %>" class="btn btn-primary btn-sm">
 										<i class="fa fa-plus" aria-hidden="true"></i>
 										Agregar jugadores
 									</a>
