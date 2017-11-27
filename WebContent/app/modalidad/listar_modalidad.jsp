@@ -60,7 +60,7 @@
 			                <display:column property="descripcion" title="Descripcion" style="width:30%" />
 			                <display:column property="numJugadores" title="N° Jugadores" />
 			                <display:column title="Género">
-			                	${lista.genero == 'V' ? '<span> Varones </span>' : lista.genero == 'M' ? '<span> Mujeres </span>' : '<span> Mixto </span>'}
+			                	${lista.genero == 1 ? '<span> Varones </span>' : lista.genero == 2 ? '<span> Mujeres </span>' : '<span> Mixto </span>'}
 			                
 			                </display:column>
 			                <display:column property="numVarones" title="N° Varones" />

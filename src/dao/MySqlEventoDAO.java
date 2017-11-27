@@ -204,7 +204,7 @@ public class MySqlEventoDAO implements EventoDAO {
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, codEvento);
 			pstm.setInt(2, mod.getCodigo());
-			pstm.setString(3, mod.getGenero());
+			pstm.setInt(3, mod.getGenero());
 			pstm.setInt(4, mod.getNumJugadores());
 			pstm.setInt(5, mod.getNumVarones());
 			pstm.setInt(6, mod.getNumMujeres());

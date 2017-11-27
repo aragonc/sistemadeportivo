@@ -46,7 +46,7 @@ public class MySqlAjaxDAO implements AjaxDAO {
 					b.setCodigo(rs.getInt(5));
 					b.setNombre(rs.getString(6));
 				mod.setCategoria(b);
-				mod.setGenero(rs.getString(7));
+				mod.setGenero(rs.getInt(7));
 				mod.setNumJugadores(rs.getInt(8));
 				data.add(mod);
 			}

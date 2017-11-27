@@ -142,9 +142,9 @@
 							                    	<td> <%= item.getDisciplina().getNombre() %> <%= item.getCategoria().getNombre() %> </td>
 							                    	<td> <%= item.getDescripcion()  %></td>	
 							                    	<td>  
-							                    		<% if(item.getGenero().equals("V")){ %>
+							                    		<% if(item.getGenero()==1){ %>
 							                    			<p>Varones</p>
-							                    		<% } else if(item.getGenero().equals("M")){ %>
+							                    		<% } else if(item.getGenero()==2){ %>
 							                    			<p>Mujeres</p>
 							                    		<% } else { %>
 							                    			<p>Mixto</p>

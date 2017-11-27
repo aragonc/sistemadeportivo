@@ -97,7 +97,7 @@
 		                            	<%
 		                            		String check = null;
 							              for (ComboDTO item : listaGenero ){
-							            	 if(item.getField().equals("V")){
+							            	 if(item.getField().equals("1")){
 							            		 check = "checked='checked'";
 							            	 }else{
 							            		 check = "";

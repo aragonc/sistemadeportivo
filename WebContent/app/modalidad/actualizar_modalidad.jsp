@@ -106,7 +106,8 @@
 		                            	
 		                            	String check = null;
 							              for (ComboDTO item : listaGenero ){
-							            	 if(item.getField().equals(obj.getGenero())){
+							            	 
+							            	 if(item.getField().equals(obj.getGenero()+"")){
 							            		 check = "checked='checked'";
 							            	 }else{
 							            		 check = "";
@@ -122,7 +123,7 @@
 		                            <div class="col-sm-4">
 		                            	<% 
 		                            	
-		                            		if(obj.getGenero().trim().equals("MX")){
+		                            		if(obj.getGenero()==3){
 
 		                            	%>
 		                            		<div id="mixto" class="mixto" style="display:block;">

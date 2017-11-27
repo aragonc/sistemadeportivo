@@ -1,3 +1,4 @@
+<%@page import="beans.EquipoDTO"%>
 <%@page import="sun.invoke.empty.Empty"%>
 <%@page import="beans.ComboDTO"%>
 <%@page import="service.ComboService"%>
@@ -9,12 +10,9 @@
 <%@page import="beans.PersonaDTO"%>
 <%@page import="java.util.List"%>
 <%  
-	ComboService listaDocumento = new ComboService();
-	List<ComboDTO> listaSexo = listaDocumento.listarCombo("sexo");
 	String data = request.getParameter("data");
+	EquipoDTO obj = (EquipoDTO)request.getAttribute("equipo");
 %>
-<% String nombreEquipo = (String)request.getAttribute("nomequipo"); %>
-<% String codigoEquipo = (String)request.getAttribute("codequipo"); %>
 
  <%@ include file="../_header.jsp" %>
  <%@ include file="../_sidebar.jsp" %>
@@ -28,12 +26,12 @@
     <section class="content">
     	<div class="box box-primary">
     		<div class="box-header with-border">
-	              <h3 class="box-title">Asignar jugadores a equipo <span class="valor"><%= nombreEquipo %></span></h3>
+	              <h3 class="box-title">Asignar jugadores a equipo <span class="valor"><%= obj.getNombre() %></span></h3>
 	        </div>
         	<div class="box-body">
             	<div class="col-md-12">
             		<!-- MENSAJE QUE APARECE CUANDO SE REGISTRA UN EVENTO -->
-			       	<% if(codigoEquipo!=null) { %>
+			       	<% if(obj.getCodigo()!=0) { %>
 		              	<div class="alert alert-info" role="alert">
 		              		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		              		Acabas de crear un equipo a continuación procede a asignar a sus <strong>JUGADORES </strong>
@@ -61,7 +59,7 @@
 			       	</div>
 		              <div class="box-body">
 		              	<form class="form-horizontal" action="ServletEquipo?tipo=suscribirPersona" method="post" id="formlista">
-		              		<input type="hidden" name="evento" value="<%= codigoEquipo %>">
+		              		<input type="hidden" name="evento" value="<%= obj.getCodigo() %>">
 		               		<div class="table-responsive">
 		               			<display:table name="data" class="table table-bordered" requestURI="ServletPersona?tipo=listar" excludedParams="tipo" id="lista">
 	               		 			<display:setProperty name="basic.msg.empty_list">

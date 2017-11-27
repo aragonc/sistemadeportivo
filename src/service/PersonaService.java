@@ -42,5 +42,8 @@ public class PersonaService {
 	public List<PersonaDTO> listarDelegados() {
 		return personaDAO.listarDelegados();
 	}
+	public List<PersonaDTO> listarPersonaSexo(int tipo) {
+		return personaDAO.listarPersonaSexo(tipo);
+	}
 }
 

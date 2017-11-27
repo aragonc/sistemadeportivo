@@ -20,5 +20,6 @@ public interface PersonaDAO {
 	
 	public List<PersonaDTO> buscarPersonaEquipo(int equipo);
 	public List<PersonaDTO> listarDelegados();
+	public List<PersonaDTO> listarPersonaSexo(int tipo);
 
 }

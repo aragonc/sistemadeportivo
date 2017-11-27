@@ -44,8 +44,11 @@ public class EquipoService {
 		return equipoDAO.agregarEquipoEvento(equipo, evento);
 	}
 	
-	public String buscarGenero(int codequipo) {
+	public int buscarGenero(int codequipo) {
 		return equipoDAO.buscarGenero(codequipo);
+	}
+	public int eliminarEquipoPersona(int codequipo) {
+		return equipoDAO.eliminarEquipoPersona(codequipo);
 	}
 }
 

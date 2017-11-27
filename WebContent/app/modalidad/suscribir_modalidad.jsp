@@ -85,11 +85,11 @@
 			       				
 			       				out.println(item.getDisciplina().getNombre() + " - " + item.getCategoria().getNombre());
 									
-			       				if(item.getGenero().equals("V")) { 
+			       				if(item.getGenero()==1) { 
 									
 			       					out.println("<span class=\"badge mod_varones\"> Varones </span>");
 									
-			       				} else if (item.getGenero().equals("M")) { 
+			       				} else if (item.getGenero()==2) { 
 									
 									out.println("<span class=\"badge mod_mujeres\"> Mujeres </span>");
 									

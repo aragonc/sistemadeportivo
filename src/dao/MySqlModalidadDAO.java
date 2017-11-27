@@ -33,7 +33,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 				cat = new ModalidadDTO();
 				cat.setCodigo(rs.getInt(1));
 				cat.setDescripcion(rs.getString(2));
-				cat.setGenero(rs.getString(3));
+				cat.setGenero(rs.getInt(3));
 				cat.setNumJugadores(rs.getInt(4));
 				cat.setNumMujeres(rs.getInt(5));
 				cat.setNumVarones(rs.getInt(6));
@@ -98,7 +98,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 				mod.setNumJugadores(rs.getInt(7));
 				mod.setNumVarones(rs.getInt(8));
 				mod.setNumMujeres(rs.getInt(9));
-				mod.setGenero(rs.getString(10));
+				mod.setGenero(rs.getInt(10));
 				mod.setChecked(true);
 				data.add(mod);
 			}
@@ -137,7 +137,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 				cat = new ModalidadDTO();
 				cat.setCodigo(rs.getInt(1));
 				cat.setDescripcion(rs.getString(2));
-				cat.setGenero(rs.getString(3));
+				cat.setGenero(rs.getInt(3));
 				cat.setNumJugadores(rs.getInt(4));
 				cat.setNumMujeres(rs.getInt(5));
 				cat.setNumVarones(rs.getInt(6));
@@ -179,7 +179,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 			pstm.setString(1, obj.getDescripcion());
 			pstm.setInt(2, obj.getCodCategoria());
 			pstm.setInt(3, obj.getCodDisciplina());
-			pstm.setString(4, obj.getGenero());
+			pstm.setInt(4, obj.getGenero());
 			pstm.setInt(5,obj.getNumJugadores());
 			pstm.setInt(6, obj.getNumVarones());
 			pstm.setInt(7, obj.getNumMujeres());
@@ -212,7 +212,7 @@ public class MySqlModalidadDAO implements ModalidadDAO {
 			pstm.setString(1, obj.getDescripcion());
 			pstm.setInt(2, obj.getCodCategoria());
 			pstm.setInt(3, obj.getCodDisciplina());
-			pstm.setString(4, obj.getGenero());
+			pstm.setInt(4, obj.getGenero());
 			pstm.setInt(5, obj.getNumJugadores());
 			pstm.setInt(6, obj.getNumVarones());
 			pstm.setInt(7, obj.getNumMujeres());

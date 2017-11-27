@@ -5,7 +5,7 @@ public class ModalidadDTO {
 	private int codDisciplina;
 	private int codCategoria;
 	private String descripcion;
-	private String genero;
+	private int genero;
 	private int numJugadores;
 	private int numVarones;
 	private int numMujeres;
@@ -37,10 +37,10 @@ public class ModalidadDTO {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public String getGenero() {
+	public int getGenero() {
 		return genero;
 	}
-	public void setGenero(String genero) {
+	public void setGenero(int genero) {
 		this.genero = genero;
 	}
 	public int getNumJugadores() {
@@ -81,7 +81,7 @@ public class ModalidadDTO {
 		this.checked = checked;
 	}
 	
-	public ModalidadDTO(int codigo, int codDisciplina, int codCategoria, String descripcion, String genero,
+	public ModalidadDTO(int codigo, int codDisciplina, int codCategoria, String descripcion, int genero,
 			int numJugadores, int numVarones, int numMujeres, CategoriaDTO categoria, DisciplinaDTO disciplina) {
 		super();
 		this.codigo = codigo;

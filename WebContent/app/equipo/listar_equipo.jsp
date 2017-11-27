@@ -69,7 +69,7 @@
 										</display:column>
 										<display:column title="Modalidad">
 											${lista.modalidad.disciplina.nombre} ${lista.modalidad.categoria.nombre} 
-											${lista.modalidad.genero == 'V' ? '<span> Varones </span>' : lista.modalidad.genero == 'M' ? '<span> Mujeres </span>' : '<span> Mixto </span>'}
+											${lista.modalidad.genero == 1 ? '<span> Varones </span>' : lista.modalidad.genero == 2 ? '<span> Mujeres </span>' : '<span> Mixto </span>'}
 										</display:column>
 										<display:column title="N° Jugadores">
 											${lista.modalidad.numJugadores} 

@@ -65,12 +65,11 @@ public class ServletAjax extends HttpServlet {
     	Gson gson = new Gson();
     	String genero = null;
     	for(ModalidadDTO item : lista){
-    		//System.out.println(item.getDisciplina().getNombre());
-    		System.out.println(item.getGenero());
-    		if(item.getGenero().equals("M")) {
-    			genero = "Mujeres";
-    		} else if(item.getGenero().equals("V")) {
+
+    		if(item.getGenero() == 1) {
     			genero = "Varones";
+    		} else if(item.getGenero()==2) {
+    			genero = "Mujeres";
     		} else {
     			genero = "Mixto";
     		}

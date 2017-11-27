@@ -73,10 +73,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		ResultSet rs = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT e.idequipo, e.nombre, e.descripcion, e.logo, e.email, e.telefono, e.color, e.modalidad_idmodalidad, " + 
-					"ep.idevento, e.estado, e.fecha_registro FROM equipo e " + 
-					"inner join equipo_evento ep on e.idequipo = ep.idequipo " + 
-					"WHERE e.idequipo = ? ";
+			String sql = "SELECT * from equipo WHERE idequipo = ? ";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
 			rs = pstm.executeQuery();
@@ -86,8 +83,12 @@ public class MySqlEquipoDAO implements EquipoDAO{
 				a.setNombre(rs.getString(2));
 				a.setDescripcion(rs.getString(3));
 				a.setLogo(rs.getString(4));
-				List<PersonaDTO> people = persona.buscarPersonaEquipo(a.getCodigo());
-				a.setJugadores(people);
+				a.setColor(rs.getString(5));
+				ModalidadDTO mod = modalidad.buscarModalidad(rs.getInt(6));
+				a.setModalidad(mod);
+				PersonaDTO del = persona.buscarPersona(rs.getInt(7));
+				a.setDelegado(del);
+				a.setEstado(rs.getInt(8));	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -204,8 +205,8 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		return estado;
 	}
 	
-	public String buscarGenero(int codequipo) {
-		String genero = null;
+	public int buscarGenero(int codequipo) {
+		int genero = 0;
 		Connection cn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -219,7 +220,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 			rs = pstm.executeQuery();
 			
 			if (rs.next()) {
-				genero = rs.getString(1);
+				genero = rs.getInt(1);
 			}
 			
 		} catch (Exception e) {
@@ -327,6 +328,32 @@ public class MySqlEquipoDAO implements EquipoDAO{
 			String sql = "DELETE FROM equipo WHERE idequipo=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
+			estado = pstm.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null)
+					pstm.close();
+				if (cn != null)
+					cn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return estado;
+	}
+	
+	@Override
+	public int eliminarEquipoPersona(int codequipo) {
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		try {
+			cn = MysqlDBConexion.getConexion();
+			String sql = "DELETE FROM persona_equipo WHERE idequipo=?";
+			pstm = cn.prepareStatement(sql);
+			pstm.setInt(1, codequipo);
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -60,9 +60,9 @@ public class ServletEquipo extends HttpServlet{
 
 	private void detalle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dato = request.getParameter("cod");
-		int codigo = Integer.parseInt(dato);
-		EquipoDTO obj = equipoService.buscarEquipo(codigo);
-		request.setAttribute("registro", obj);
+		System.out.println(dato);
+		EquipoDTO obj = equipoService.buscarEquipo(Integer.parseInt(dato));
+		request.setAttribute("equipo", obj);
 		request.getRequestDispatcher("app/equipo/detalle_equipo.jsp").forward(request,
 				response);
 		
@@ -73,16 +73,28 @@ public class ServletEquipo extends HttpServlet{
 		 String[] codjugador = request.getParameterValues("jugador[]");
 		 
 		 for(String item : codjugador){
-			 System.out.println(item);
+			 //System.out.println(item);
 			 equipoService.agregarPersona(Integer.parseInt(codequipo), Integer.parseInt(item));
 		 }
 		 listar(request, response);
 	}
 
 	private void listaPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		List<PersonaDTO> info = personaService.listarPersona();
+		
+		String idequipo = request.getParameter("codequipo");
+		String genero = request.getParameter("genero");
+			
+		List<PersonaDTO> info = null;
+		if(Integer.parseInt(genero)==1) {
+			info = personaService.listarPersonaSexo(Integer.parseInt(genero));
+		}else if(Integer.parseInt(genero)==2) {
+			info = personaService.listarPersonaSexo(Integer.parseInt(genero));
+		}else {
+			info = personaService.listarPersona();
+		}
+		EquipoDTO equipo = equipoService.buscarEquipo(Integer.parseInt(idequipo));
 		request.setAttribute("data", info);
+		request.setAttribute("equipo", equipo);
 		request.getRequestDispatcher("app/equipo/suscribir_persona.jsp").forward(request,response);
 		
 	}
@@ -181,7 +193,7 @@ public class ServletEquipo extends HttpServlet{
 			if (codequipo != -1){
 				
 				equipoService.agregarEquipoEvento(codequipo, obj.getEvento().getCodigo());
-				String genero = equipoService.buscarGenero(codequipo);
+				int genero = equipoService.buscarGenero(codequipo);
 				
 				response.sendRedirect("ServletEquipo?tipo=listaPersona&genero="+genero+"&codequipo="+codequipo);
 
@@ -233,13 +245,13 @@ public class ServletEquipo extends HttpServlet{
         }
 		else if(email.replaceAll(" ", "").equals("")) {
 			request.setAttribute("registro", x);
-            validaciones = "El campo Email est� vac�o";
+            validaciones = "El campo Email está vacío";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }		
 		else if(!(email.matches("[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})"))) {
 			request.setAttribute("registro", x);
-            validaciones = "Ingrese un email v�lido";
+            validaciones = "Ingrese un email válido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
@@ -257,7 +269,7 @@ public class ServletEquipo extends HttpServlet{
         }
 		else if(fono.replaceAll(" ", "").equals("")) {
 			request.setAttribute("registro", x);
-            validaciones = "El campo Tel�fono esta vac�o";
+            validaciones = "El campo Teléfono esta vac�o";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
@@ -314,9 +326,12 @@ public class ServletEquipo extends HttpServlet{
 
 	private void eliminar(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		String[] dato = request.getParameterValues("cod[]");
+		
 		for(String item : dato){
 			equipoService.eliminarEquipoEvento(Integer.parseInt(item));
+			equipoService.eliminarEquipoPersona(Integer.parseInt(item));
 			equipoService.eliminarEquipo(Integer.parseInt(item));
 		}
 		
