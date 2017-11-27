@@ -1,6 +1,6 @@
 <%@page import="java.net.URL"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -47,7 +47,7 @@
       <span class="logo-mini"><b>S</b>D</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg">
-      	<img alt="Sistema de gestión de campeonato" src="${pageContext.request.contextPath}/images/logoapp.svg">
+      	<img alt="Sistema de gestiÃ³n de campeonato" src="${pageContext.request.contextPath}/images/logoapp.svg">
       </span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->

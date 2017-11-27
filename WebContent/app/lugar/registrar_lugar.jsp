@@ -1,8 +1,7 @@
 <%@page import="beans.ComboDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="service.ComboService"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
  <%@ include file="../_header.jsp" %>
  <%@ include file="../_sidebar.jsp" %>
  <%  

@@ -28,6 +28,7 @@ public class ServletCategoria extends HttpServlet{
 
 	protected void service(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		String tipo = request.getParameter("tipo");
 		if (tipo.equals("listar"))
 			listar(request, response);
@@ -65,7 +66,7 @@ public class ServletCategoria extends HttpServlet{
 		boolean count = ajaxService.mismoNombre("categoria",nombre);
 		
 		if (nombre.replaceAll(" ", "").equals("")) {
-            validaciones += "El campo Nombre de Categoria esta vacio";
+            validaciones += "El campo Nombre de Categoria esta vacío";
             request.setAttribute("validaciones", validaciones);
 	        request.getRequestDispatcher("app/categoria/registrar_categoria.jsp").forward(request, response);
         }		
