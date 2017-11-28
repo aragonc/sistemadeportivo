@@ -90,7 +90,7 @@
 								<div class="pull-right btn-panel">
 									<a href="ServletEquipo?tipo=listaPersona&action=update&genero=<%= obj.getModalidad().getGenero() %>&codequipo=<%= obj.getCodigo() %>" class="btn btn-primary btn-sm">
 										<i class="fa fa-plus" aria-hidden="true"></i>
-										Agregar jugadores
+										Modificar jugadores
 									</a>
 								</div>
 								<h3 class="panel-title">Lista de Jugadores</h3>

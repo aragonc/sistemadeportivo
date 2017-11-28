@@ -158,13 +158,13 @@
 					         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(true, 'lista'); return false;">Seleccionar todos</a>
 					         		<a href="#" class="btn btn-default" onclick="javascript: setCheckbox(false, 'lista'); return false;">Anular selección</a>
 					         	</div>
-					         	<div class="btn-group">
-								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								    Acciones <span class="caret"></span>
-								  </button>
-								  <ul class="dropdown-menu">
-								    <li><a href="#" id="seleccion">Agregar seleccionados</a></li>
-								  </ul>
+					         	<div class="btn-actions">
+								  
+								<button type="button" id="seleccion" class="btn btn-success">
+						  			<i class="fa fa-plus" aria-hidden="true"></i>
+						    		<%= title %>
+						  		</button>
+								  
 								  <script type="text/javascript">
 								  
 								  $(document).ready(function(){
@@ -172,17 +172,12 @@
 									  var varones = ${man};
 									  var mujeres = ${woman};
 									  var count = 0;
-									  console.log("Total Jugadores: " + total);
-									  console.log("Total Varones: " + varones);
-									  console.log("Total Mujeres: " + mujeres);
-									  
 									  
 									  var actual = <%= xactual %>;
 							       		if(actual.length >= 0 ){
 								       		console.log(actual);
 								       		for ( var i = 0, l = actual.length; i < l; i++ ) {
 								    			$("#people_"+actual[i]).prop('checked',true);
-								        		//console.log(actual[ i ]);
 								    		}
 							       		}
 									  
