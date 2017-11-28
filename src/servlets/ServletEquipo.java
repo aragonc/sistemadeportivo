@@ -64,7 +64,7 @@ public class ServletEquipo extends HttpServlet{
 
 	private void detalle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dato = request.getParameter("cod");
-		System.out.println(dato);
+		
 		EquipoDTO obj = equipoService.buscarEquipo(Integer.parseInt(dato));
 		request.setAttribute("equipo", obj);
 		request.getRequestDispatcher("app/equipo/detalle_equipo.jsp").forward(request,
@@ -73,20 +73,34 @@ public class ServletEquipo extends HttpServlet{
 	}
 
 	private void suscribirPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 String accion = request.getParameter("accion");
 		 String codequipo = request.getParameter("evento");
 		 String[] codjugador = request.getParameterValues("jugador[]");
 		 
-		 for(String item : codjugador){
-			 //System.out.println(item);
-			 equipoService.agregarPersona(Integer.parseInt(codequipo), Integer.parseInt(item));
+		 if(accion.equals("agregar")) {
+			 for(String item : codjugador){
+				 //System.out.println(item);
+				 equipoService.agregarPersona(Integer.parseInt(codequipo), Integer.parseInt(item));
+			 }
+			 listar(request, response);
+		 } else {
+			 equipoService.eliminarEquipoPersona(Integer.parseInt(codequipo));
+			 
+			 if(codjugador!=null) {
+				 for(String item : codjugador){
+					 equipoService.agregarPersona(Integer.parseInt(codequipo), Integer.parseInt(item));
+				 }
+			 }
+			 response.sendRedirect("ServletEquipo?tipo=detalle&cod="+codequipo);
 		 }
-		 listar(request, response);
+		 
 	}
 
 	private void listaPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String idequipo = request.getParameter("codequipo");
 		String genero = request.getParameter("genero");
+		String action = request.getParameter("action");
 			
 		List<PersonaDTO> info = null;
 		if(Integer.parseInt(genero)!=3) {
@@ -94,8 +108,15 @@ public class ServletEquipo extends HttpServlet{
 		}else {
 			info = personaService.listarPersona();
 		}
+		
+		if(action.equals("add")) {
+			request.setAttribute("accion", "agregar");
+		} else {
+			request.setAttribute("accion", "actualizar");
+		}
+		
 		EquipoDTO equipo = equipoService.buscarEquipo(Integer.parseInt(idequipo));
-		request.setAttribute("data", info);
+		request.setAttribute("personas", info);
 		request.setAttribute("equipo", equipo);
 		request.getRequestDispatcher("app/equipo/suscribir_persona.jsp").forward(request,response);
 		
@@ -191,7 +212,7 @@ public class ServletEquipo extends HttpServlet{
 				equipoService.agregarEquipoEvento(codequipo, obj.getEvento().getCodigo());
 				int genero = equipoService.buscarGenero(codequipo);
 				
-				response.sendRedirect("ServletEquipo?tipo=listaPersona&genero="+genero+"&codequipo="+codequipo);
+				response.sendRedirect("ServletEquipo?tipo=listaPersona&action=add&genero="+genero+"&codequipo="+codequipo);
 
 			} else {
 				response.sendRedirect("error.html");

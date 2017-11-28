@@ -128,14 +128,14 @@ public class ServletModalidad extends HttpServlet {
 		
 		else if(!(nvarones.matches("[0-9]*"))) {
 			request.setAttribute("registro", x);
-            validaciones = "Solo debe ingresar carÃ¡cteres numÃ©ricos en el campo nÃºmero de varones";
+            validaciones = "Solo debe ingresar carácteres numéricos en el campo número de varones";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/modalidad/actualizar_modalidad.jsp").forward(request, response);
         }
 		
 		else if(!(nmujeres.matches("[0-9]*"))) {
 			request.setAttribute("registro", x);
-            validaciones = "Solo debe ingresar carÃ¡cteres numÃ©ricos en el campo nÃºmero de mujeres";
+            validaciones = "Solo debe ingresar carácteres numéricos en el campo número de mujeres";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/modalidad/actualizar_modalidad.jsp").forward(request, response);
         }

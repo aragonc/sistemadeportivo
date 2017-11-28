@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="beans.EquipoDTO"%>
 <%@page import="sun.invoke.empty.Empty"%>
 <%@page import="beans.ComboDTO"%>
@@ -10,8 +11,11 @@
 <%@page import="beans.PersonaDTO"%>
 <%@page import="java.util.List"%>
 <%  
-	String data = request.getParameter("data");
+	String title = null;
+	String data = request.getParameter("personas");
 	EquipoDTO obj = (EquipoDTO)request.getAttribute("equipo");
+	
+	List<PersonaDTO> actual = obj.getJugadores();
 	
 	String genero = null;
 	if(obj.getModalidad().getGenero()==1){
@@ -21,6 +25,20 @@
 	} else {
 		genero = "Mixto";
 	}
+	
+	String action = (String)request.getAttribute("accion");
+	if(action.equals("agregar")){
+		title = "Agregar jugadores ";
+	} else {
+		title = "Actualizar jugadores ";
+	}
+	
+	ArrayList<String> xactual = new ArrayList<String>();
+	for(PersonaDTO item : actual){
+		xactual.add(item.getCodigo()+"");
+		System.out.println("jugador: " + item.getCodigo());
+	}
+	
 	String modalidad = obj.getModalidad().getDisciplina().getNombre() + " " + obj.getModalidad().getCategoria().getNombre() +  " - " + genero;
 %>
 
@@ -38,7 +56,7 @@
     <section class="content">
     	<div class="box box-primary">
     		<div class="box-header with-border">
-	              <h3 class="box-title">Asignar jugadores a equipo <span class="valor"><%= obj.getNombre() %></span> en la modalidad <span class="valor"><%= modalidad %></span></h3>
+	              <h3 class="box-title"><%= title %> <span class="valor"><%= obj.getNombre() %></span> en la modalidad <span class="valor"><%= modalidad %></span></h3>
 	        </div>
         	<div class="box-body">
             	<div class="col-md-12">
@@ -77,9 +95,7 @@
             					<a href="${pageContext.request.contextPath}">
 					        		<img alt="Regresar al escritorio" title ="Regresar al escritorio" src="${pageContext.request.contextPath}/images/icons/32/home.png">
 					        	</a>
-						        <a href="${pageContext.request.contextPath}/app/registrar_persona.jsp">
-						        	<img alt="Registrar persona" title="Crear nueva categoria" src="${pageContext.request.contextPath}/images/icons/32/nuevo_usuario.png">
-						        </a>
+						        
             				</div>
             				
             				<div class="col-md-9">
@@ -89,9 +105,10 @@
 			       	</div>
 		              <div class="box-body">
 		              	<form class="form-horizontal" action="ServletEquipo?tipo=suscribirPersona" method="post" id="formlista">
+		              		<input type="hidden" name="accion" value="<%= action %>">
 		              		<input type="hidden" name="evento" value="<%= obj.getCodigo() %>">
 		               		<div class="table-responsive">
-		               			<display:table name="data" class="table table-bordered" requestURI="ServletPersona?tipo=listar" excludedParams="tipo" id="lista">
+		               			<display:table name="personas" class="table table-bordered" requestURI="ServletPersona?tipo=listar" excludedParams="tipo" id="lista">
 	               		 			<display:setProperty name="basic.msg.empty_list">
 	               		 				<div class="alert alert-warning" role="alert">No se existe personas registradas</div>
 	               		 			</display:setProperty>                  		 				               		 			
@@ -99,10 +116,10 @@
 	               		 				
 	               		 				<c:choose>
 										    <c:when test="${lista.sexo == 1 }">
-										        <input type="checkbox" id="man_${lista.codigo}" class="man" name="jugador[]" value="${lista.codigo}">
+										        <input type="checkbox" id="people_${lista.codigo}" class="man" name="jugador[]" value="${lista.codigo}">
 										    </c:when>    
 										    <c:otherwise>
-										        <input type="checkbox" id="wonman_${lista.codigo}" class="woman" name="jugador[]" value="${lista.codigo}">
+										        <input type="checkbox" id="people_${lista.codigo}" class="woman" name="jugador[]" value="${lista.codigo}">
 										    </c:otherwise>
 										</c:choose>
 										
@@ -160,9 +177,17 @@
 									  console.log("Total Mujeres: " + mujeres);
 									  
 									  
+									  var actual = <%= xactual %>;
+							       		if(actual.length >= 0 ){
+								       		console.log(actual);
+								       		for ( var i = 0, l = actual.length; i < l; i++ ) {
+								    			$("#people_"+actual[i]).prop('checked',true);
+								        		//console.log(actual[ i ]);
+								    		}
+							       		}
+									  
 									  $("table#lista input.man[type=checkbox]").click(function(){
 										    var countchecked = $("table#lista input.man[type=checkbox]:checked").length;
-										    console.log(countchecked)
 										    
 										    if(countchecked >= varones) 
 										    {
