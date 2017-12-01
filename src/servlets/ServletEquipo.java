@@ -129,7 +129,6 @@ public class ServletEquipo extends HttpServlet{
 		obj.setNombre(nombre);
 		obj.setDescripcion(descripcion);
 		obj.setColor(color);
-		obj.setLogo(null);
 		EventoDTO evento = new EventoDTO();
 			evento.setCodigo(Integer.parseInt(idevento));
 			obj.setEvento(evento);
@@ -165,13 +164,13 @@ public class ServletEquipo extends HttpServlet{
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
-		else if(!(nombre.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ 0-9]*"))) {
+		else if(!(nombre.matches("[A-Za-zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0-9]*"))) {
             validaciones = "Ingrese un nombre valido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
         }
 				
-		else if(!(color.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ ]*"))) {
+		else if(!(color.matches("[A-Za-zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ]*"))) {
             validaciones = "Ingrese un color valido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/registrar_equipo.jsp").forward(request, response);
@@ -250,7 +249,6 @@ public class ServletEquipo extends HttpServlet{
 		obj.setNombre(nombre);
 		obj.setDescripcion(descripcion);
 		obj.setColor(color);
-		obj.setLogo(null);
 		EventoDTO evento = new EventoDTO();
 			evento.setCodigo(Integer.parseInt(idevento));
 			obj.setEvento(evento);
@@ -288,16 +286,16 @@ public class ServletEquipo extends HttpServlet{
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
-		else if(!(nombre.matches("[A-Za-zÑñáéíóúÁÉÍÓÚ 0-9]*"))) {
+		else if(!(nombre.matches("[A-Za-zÃ‘Ã±Ã¡Ã©Ã­Ã³ÃºÃÃ‰ÃÃ“Ãš 0-9]*"))) {
 			request.setAttribute("registro", x);
             validaciones = "Ingrese un nombre valido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }
 				
-		else if(!(color.matches("[ A-Za-zÑñáéíóúÁÉÍÓÚ]*"))) {
+		else if(!(color.matches("[ A-Za-zÃ‘Ã±Ã¡Ã©Ã­Ã³ÃºÃÃ‰ÃÃ“Ãš 0-9]*"))) {
 			request.setAttribute("registro", x);
-            validaciones = "Ingrese un color válido";
+            validaciones = "Ingrese un color vÃ¡lido";
             request.setAttribute("validaciones", validaciones);
             request.getRequestDispatcher("app/equipo/actualizar_equipo.jsp").forward(request, response);
         }

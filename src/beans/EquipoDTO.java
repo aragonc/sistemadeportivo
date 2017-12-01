@@ -7,7 +7,6 @@ public class EquipoDTO {
 	private int codigo;
 	private String nombre;
 	private String descripcion;
-	private String logo;
 	private String color;
 	private ModalidadDTO modalidad;
 	private PersonaDTO delegado;
@@ -42,14 +41,6 @@ public class EquipoDTO {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	public String getLogo() {
-		return logo;
-	}
-
-	public void setLogo(String logo) {
-		this.logo = logo;
 	}
 
 	public String getColor() {
@@ -100,13 +91,12 @@ public class EquipoDTO {
 		this.estado = estado;
 	}
 
-	public EquipoDTO(int codigo, String nombre, String descripcion, String logo, String color, EventoDTO evento,
+	public EquipoDTO(int codigo, String nombre, String descripcion, String color, EventoDTO evento,
 			ModalidadDTO modalidad, PersonaDTO delegado, List<PersonaDTO> jugadores, int estado) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.logo = logo;
 		this.color = color;
 		this.evento = evento;
 		this.modalidad = modalidad;

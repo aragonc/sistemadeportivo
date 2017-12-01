@@ -42,13 +42,12 @@ public class MySqlEquipoDAO implements EquipoDAO{
 				a.setCodigo(rs.getInt(1));
 				a.setNombre(rs.getString(2));
 				a.setDescripcion(rs.getString(3));
-				a.setLogo(rs.getString(4));
-				a.setColor(rs.getString(5));
-				ModalidadDTO mod = modalidad.buscarModalidad(rs.getInt(6));
+				a.setColor(rs.getString(4));
+				ModalidadDTO mod = modalidad.buscarModalidad(rs.getInt(5));
 				a.setModalidad(mod);
-				PersonaDTO del = persona.buscarPersona(rs.getInt(7));
+				PersonaDTO del = persona.buscarPersona(rs.getInt(6));
 				a.setDelegado(del);
-				a.setEstado(rs.getInt(8));	
+				a.setEstado(rs.getInt(7));	
 				data.add(a);
 			}
 		} catch (Exception e) {
@@ -76,7 +75,7 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		ResultSet rs = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "SELECT e.idequipo, e.nombre, e.descripcion, e.logo, e.color, e.idmodalidad, e.iddelegado, ee.idevento, e.estado " + 
+			String sql = "SELECT e.idequipo, e.nombre, e.descripcion, e.color, e.idmodalidad, e.iddelegado, ee.idevento, e.estado " + 
 					" FROM equipo e inner join equipo_evento ee on ee.idequipo = e.idequipo where e.idequipo = ? ";
 			pstm = cn.prepareStatement(sql);
 			pstm.setInt(1, cod);
@@ -86,17 +85,16 @@ public class MySqlEquipoDAO implements EquipoDAO{
 				a.setCodigo(rs.getInt(1));
 				a.setNombre(rs.getString(2));
 				a.setDescripcion(rs.getString(3));
-				a.setLogo(rs.getString(4));
-				a.setColor(rs.getString(5));
-				ModalidadDTO mod = modalidad.buscarModalidad(rs.getInt(6));
+				a.setColor(rs.getString(4));
+				ModalidadDTO mod = modalidad.buscarModalidad(rs.getInt(5));
 				a.setModalidad(mod);
-				PersonaDTO del = persona.buscarPersona(rs.getInt(7));
+				PersonaDTO del = persona.buscarPersona(rs.getInt(6));
 				a.setDelegado(del);
 				List<PersonaDTO> jugadores = persona.buscarPersonaEquipo(cod);
 				a.setJugadores(jugadores);
-				EventoDTO evento = eventoservice.buscarEvento(rs.getInt(8));
+				EventoDTO evento = eventoservice.buscarEvento(rs.getInt(7));
 				a.setEvento(evento);
-				a.setEstado(rs.getInt(9));	
+				a.setEstado(rs.getInt(8));	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -122,15 +120,14 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		PreparedStatement pstm = null;
 		try {
 			cn = MysqlDBConexion.getConexion();
-			String sql = "INSERT INTO equipo VALUES(null,? ,? ,? ,? ,? ,? ,?, now())";
+			String sql = "INSERT INTO equipo VALUES(null,? ,? ,? ,? ,? ,?, now())";
 			pstm = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDescripcion());
-			pstm.setString(3, obj.getLogo());
-			pstm.setString(4, obj.getColor());
-			pstm.setInt(5, obj.getModalidad().getCodigo());
-			pstm.setInt(6, obj.getDelegado().getCodigo());
-			pstm.setInt(7, obj.getEstado());
+			pstm.setString(3, obj.getColor());
+			pstm.setInt(4, obj.getModalidad().getCodigo());
+			pstm.setInt(5, obj.getDelegado().getCodigo());
+			pstm.setInt(6, obj.getEstado());
 			pstm.executeUpdate();
 			
 			ResultSet rs = pstm.getGeneratedKeys();
@@ -161,16 +158,15 @@ public class MySqlEquipoDAO implements EquipoDAO{
 		try {
 			cn = MysqlDBConexion.getConexion();
 			String sql = "UPDATE equipo SET nombre=?,descripcion=?, "
-					+ " logo=?, color=?, idmodalidad=?, iddelegado=?, estado=? where idequipo=?";
+					+ " color=?, idmodalidad=?, iddelegado=?, estado=? where idequipo=?";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDescripcion());
-			pstm.setString(3, obj.getLogo());
-			pstm.setString(4, obj.getColor());
-			pstm.setInt(5, obj.getModalidad().getCodigo());
-			pstm.setInt(6, obj.getDelegado().getCodigo());
-			pstm.setInt(7, obj.getEstado());
-			pstm.setInt(8, obj.getCodigo());
+			pstm.setString(3, obj.getColor());
+			pstm.setInt(4, obj.getModalidad().getCodigo());
+			pstm.setInt(5, obj.getDelegado().getCodigo());
+			pstm.setInt(6, obj.getEstado());
+			pstm.setInt(7, obj.getCodigo());
 			estado = pstm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
