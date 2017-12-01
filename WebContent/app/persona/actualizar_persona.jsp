@@ -39,7 +39,7 @@
     		<div class="box-header with-border">
   				<h3 class="box-title">Datos personales</h3>
   			</div>
-	  		<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletPersona?tipo=registrar" method="post" enctype="multipart/form-data">
+	  		<form class="form-horizontal" action="${pageContext.request.contextPath}/ServletPersona?tipo=actualizar" method="post" enctype="multipart/form-data">
 	  			<div class="box-body">
 	  				<input type="hidden" name="codigo" value="<%= pe.getCodigo() %>">
 	  				<div class="col-md-9">
@@ -364,7 +364,7 @@
 				</div>
 				<div class="box-footer">
 					<a href="${pageContext.request.contextPath}/ServletPersona?tipo=listar" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver a lista </a>
-                	<button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Registrar persona</button>
+                	<button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Actualizar persona</button>
               	</div>
 	  		</form>
     	</div>
