@@ -15,17 +15,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- -----------------------------------------------------
--- Schema campeonato
--- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `campeonato` ;
-
--- -----------------------------------------------------
--- Schema campeonato
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `campeonato` DEFAULT CHARACTER SET utf8 ;
-USE `campeonato` ;
-
 --
 -- Table structure for table `categoria`
 --
@@ -121,7 +110,6 @@ CREATE TABLE `equipo` (
   `idequipo` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) DEFAULT NULL,
   `descripcion` text,
-  `logo` varchar(200) DEFAULT NULL,
   `color` varchar(50) DEFAULT NULL,
   `idmodalidad` int(11) NOT NULL,
   `iddelegado` int(11) NOT NULL,
@@ -132,7 +120,7 @@ CREATE TABLE `equipo` (
   KEY `fk_equipo_persona_idx` (`iddelegado`),
   CONSTRAINT `fk_equipo_modalidad` FOREIGN KEY (`idmodalidad`) REFERENCES `modalidad` (`idmodalidad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_equipo_persona1` FOREIGN KEY (`iddelegado`) REFERENCES `persona` (`idpersona`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,7 +129,7 @@ CREATE TABLE `equipo` (
 
 LOCK TABLES `equipo` WRITE;
 /*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
-INSERT INTO `equipo` VALUES (3,'Los Galacticos','<p>ddfddf</p>\r\n',NULL,'Azul',1,1,1,'2017-11-26 21:06:39');
+INSERT INTO `equipo` VALUES (5,'Los Galacticos','','Azul',1,1,1,'2017-12-01 00:19:58'),(7,'Las mayores','','Rojo',2,1,1,'2017-12-01 00:49:16'),(8,'Cibertec Independencia','','azul',3,1,1,'2017-12-01 00:53:07');
 /*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +157,7 @@ CREATE TABLE `equipo_evento` (
 
 LOCK TABLES `equipo_evento` WRITE;
 /*!40000 ALTER TABLE `equipo_evento` DISABLE KEYS */;
-INSERT INTO `equipo_evento` VALUES (3,1);
+INSERT INTO `equipo_evento` VALUES (5,1),(7,1),(8,1);
 /*!40000 ALTER TABLE `equipo_evento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -194,7 +182,7 @@ CREATE TABLE `evento` (
   PRIMARY KEY (`idevento`),
   KEY `fk_evento_lugar1_idx` (`idlugar`),
   CONSTRAINT `fk_evento_lugar1` FOREIGN KEY (`idlugar`) REFERENCES `lugar` (`idlugar`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,7 +191,7 @@ CREATE TABLE `evento` (
 
 LOCK TABLES `evento` WRITE;
 /*!40000 ALTER TABLE `evento` DISABLE KEYS */;
-INSERT INTO `evento` VALUES (1,'Encuentro deportivo juvenil 2017','<p>Nunca hab&iacute;a visto algo as&iacute; en m&aacute;s de 20 a&ntilde;os como m&eacute;dico&quot;: el soldado que desert&oacute; de Corea del Norte ten&iacute;a &quot;enormes par&aacute;sitos&quot; en su cuerpo</p>\r\n','2017-11-22 11:47:00','2017-11-25 11:48:00',1,20.00,1,1,'2017-11-21 11:47:34'),(2,'Cibertec Independencia','<p>sdsdsd</p>\r\n','2017-11-30 10:14:00','2017-12-02 10:15:00',1,20.00,1,4,'2017-11-25 10:14:39');
+INSERT INTO `evento` VALUES (1,'Encuentro deportivo juvenil 2017','<p>El Campeonato Nacional o Torneo Descentralizado organizado desde 1966? es la liga nacional de la Primera Divisi&oacute;n del Per&uacute; de los clubes.</p>\r\n','2017-11-28 16:52:00','2017-11-30 16:53:00',1,20.00,1,1,'2017-11-27 16:52:05');
 /*!40000 ALTER TABLE `evento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +223,7 @@ CREATE TABLE `evento_modalidad` (
 
 LOCK TABLES `evento_modalidad` WRITE;
 /*!40000 ALTER TABLE `evento_modalidad` DISABLE KEYS */;
-INSERT INTO `evento_modalidad` VALUES (1,1,1,3,3,0),(1,2,2,3,0,3),(2,1,1,3,3,0),(2,3,3,4,2,2);
+INSERT INTO `evento_modalidad` VALUES (1,1,1,3,3,0),(1,2,2,3,0,3),(1,3,3,4,2,2);
 /*!40000 ALTER TABLE `evento_modalidad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -324,7 +312,7 @@ CREATE TABLE `modalidad` (
 
 LOCK TABLES `modalidad` WRITE;
 /*!40000 ALTER TABLE `modalidad` DISABLE KEYS */;
-INSERT INTO `modalidad` VALUES (1,'<p>Solo para competici&oacute;n de 3 entre 3 Varones</p>\r\n',1,5,1,3,3,0),(2,'<p>Solo para competici&oacute;n entre 3 y 3 Mujeres</p>\r\n',2,6,2,3,0,3),(3,'<p>dsdds</p>\r\n',2,7,3,4,2,2);
+INSERT INTO `modalidad` VALUES (1,'<p>Solo para competici&oacute;n de 3 entre 3 Varones</p>\r\n',1,5,1,3,3,0),(2,'<p>Solo para competici&oacute;n entre 3 y 3 Mujeres</p>\r\n',2,6,2,3,0,3),(3,'<p>Juego mixto de mayores de 4 participantes 2 varones y 2 mujeres</p>\r\n',2,7,3,4,2,2);
 /*!40000 ALTER TABLE `modalidad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,7 +368,7 @@ CREATE TABLE `modulo_perfil` (
 
 LOCK TABLES `modulo_perfil` WRITE;
 /*!40000 ALTER TABLE `modulo_perfil` DISABLE KEYS */;
-INSERT INTO `modulo_perfil` VALUES (1,1),(2,1),(3,1),(4,1),(5,1),(6,1),(7,1),(6,2),(7,2);
+INSERT INTO `modulo_perfil` VALUES (1,1),(2,1),(3,1),(4,1),(5,1),(6,1),(7,1),(5,2),(6,2),(7,2);
 /*!40000 ALTER TABLE `modulo_perfil` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -440,7 +428,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'ALEX RUBEN','ARAGON','CALIXTO','1',1,'44197172','2017-10-08','aragcar@gmail.com','954189939',NULL,1,1,'2017-11-13 20:12:18'),(2,'ERICK RONALD','ARCE','YUPANQUI','1',1,'44197173','1987-10-04','ercik@gmail.com','950418993','',0,1,'2017-11-21 10:31:57'),(3,'DELIA XIMENA','PORTOCARRERO','FARFAN','2',1,'44197179','1987-10-04','delia@gmail.com','954189939','',0,1,'2017-11-21 10:33:00'),(4,'MIRLEY LINMEY','GONZALES','SANTOS','2',1,'44778855','1900-02-25','mirley@gmail.com','954189939','',0,1,'2017-11-21 10:34:07'),(5,'ALDO SANTIAGO','MALLQUI','CHINCHAY','1',1,'44197175','1987-10-04','aldo@gmail.com','954189939','',0,1,'2017-11-21 10:36:10'),(6,'NELIDA','CORTEZ','ZURITA','2',1,'44331562','1987-10-04','nelida@gmail.com','954189939','',0,1,'2017-11-21 10:42:06'),(7,'REMY','VARGAS','MARAZA','1',1,'42153366','1987-10-04','remy@gmail.com','954189939','',0,1,'2017-11-21 10:42:54'),(8,'DEVORA MIRTHA','DE ACOSTA','GALLARDO','2',1,'44197270','1987-10-04','devora@gmail.com','954189939','',0,1,'2017-11-21 11:37:23'),(9,'RODOLFO','PARI','CHOQUIHUILLCA','1',1,'44157188','1987-10-04','rodolfo@gmail.com','954189939','',0,1,'2017-11-21 11:37:49');
+INSERT INTO `persona` VALUES (1,'ALEX RUBEN','ARAGON','CALIXTO','1',1,'44197172','2017-10-08','aragcar@gmail.com','954189939',NULL,1,1,'2017-11-13 20:12:18'),(2,'ERICK RONALD','ARCE','YUPANQUI','1',1,'44197173','1987-10-04','ercik@gmail.com','950418993','',1,1,'2017-11-21 10:31:57'),(3,'DELIA XIMENA','PORTOCARRERO','FARFAN','2',1,'44197179','1987-10-04','delia@gmail.com','954189939','',0,1,'2017-11-21 10:33:00'),(4,'MIRLEY LINMEY','GONZALES','SANTOS','2',1,'44778855','1900-02-25','mirley@gmail.com','954189939','',0,1,'2017-11-21 10:34:07'),(5,'ALDO SANTIAGO','MALLQUI','CHINCHAY','1',1,'44197175','1987-10-04','aldo@gmail.com','954189939','',0,1,'2017-11-21 10:36:10'),(6,'NELIDA','CORTEZ','ZURITA','2',1,'44331562','1987-10-04','nelida@gmail.com','954189939','',0,1,'2017-11-21 10:42:06'),(7,'REMY','VARGAS','MARAZA','1',1,'42153366','1987-10-04','remy@gmail.com','954189939','',0,1,'2017-11-21 10:42:54'),(8,'DEVORA MIRTHA','DE ACOSTA','GALLARDO','2',1,'44197270','1987-10-04','devora@gmail.com','954189939','',0,1,'2017-11-21 11:37:23'),(9,'RODOLFO','PARI','CHOQUIHUILLCA','1',1,'44157188','1987-10-04','rodolfo@gmail.com','954189939','',0,1,'2017-11-21 11:37:49');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -464,7 +452,7 @@ CREATE TABLE `persona_equipo` (
 
 LOCK TABLES `persona_equipo` WRITE;
 /*!40000 ALTER TABLE `persona_equipo` DISABLE KEYS */;
-INSERT INTO `persona_equipo` VALUES (2,3),(5,3),(7,3);
+INSERT INTO `persona_equipo` VALUES (1,8),(3,8),(4,8),(5,5),(7,5),(7,8),(9,5);
 /*!40000 ALTER TABLE `persona_equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -486,7 +474,7 @@ CREATE TABLE `usuario` (
   KEY `fk_usuario_perfil_idx` (`idperfil`),
   CONSTRAINT `fk_usuario_perfil` FOREIGN KEY (`idperfil`) REFERENCES `perfil` (`idperfil`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario_persona` FOREIGN KEY (`idpersona`) REFERENCES `persona` (`idpersona`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -495,7 +483,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'admin','1234',1,1);
+INSERT INTO `usuario` VALUES (1,'admin','1234',1,1),(2,'delegado','1234',2,2);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -508,4 +496,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-27  2:14:20
+-- Dump completed on 2017-12-01  0:56:09

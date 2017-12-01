@@ -172,6 +172,8 @@
 									  var varones = ${man};
 									  var mujeres = ${woman};
 									  var count = 0;
+									  var countchecked_v = 0;
+									  var countchecked_m = 0;
 									  
 									  var actual = <%= xactual %>;
 							       		if(actual.length >= 0 ){
@@ -182,9 +184,9 @@
 							       		}
 									  
 									  $("table#lista input.man[type=checkbox]").click(function(){
-										    var countchecked = $("table#lista input.man[type=checkbox]:checked").length;
+										    countchecked_v = $("table#lista input.man[type=checkbox]:checked").length;
 										    
-										    if(countchecked >= varones) 
+										    if(countchecked_v >= varones) 
 										    {
 										    	
 										        $('table#lista input.man[type=checkbox]').not(':checked').attr("disabled",true);
@@ -195,13 +197,13 @@
 										    	$('table#lista input.man[type=checkbox]').not(':checked').attr("disabled",false);
 										        
 										    }
-										    $("#numvarones").html(varones-countchecked);
+										    $("#numvarones").html(varones-countchecked_v);
 										});
 									  
 									  $("table#lista input.woman[type=checkbox]").click(function(){
-										    var countchecked = $("table#lista input.woman[type=checkbox]:checked").length;
+										    countchecked_m = $("table#lista input.woman[type=checkbox]:checked").length;
 
-										    if(countchecked >= mujeres) 
+										    if(countchecked_m >= mujeres) 
 										    {
 										        $('table#lista input.woman[type=checkbox]').not(':checked').attr("disabled",true);
 										    }
@@ -209,17 +211,24 @@
 										    {
 										        $('table#lista input.woman[type=checkbox]').not(':checked').attr("disabled",false);
 										    }
-										    $("#nummujeres").html(mujeres-countchecked);
+										    $("#nummujeres").html(mujeres-countchecked_m);
 										});
+									  
+									  document.getElementById("seleccion").onclick = function() {
+
+										  	if((countchecked_v + countchecked_m) == 0 ){
+										  		
+										  		alert("Seleccionar la cantidad indicada");
+										  		
+										  	} else if(confirm('Por favor, confirme su elección')){
+									  			document.getElementById("formlista").submit();
+									  		} else {
+									  			false;
+									  		}  
+										}
 								  });
 								  
-								  	document.getElementById("seleccion").onclick = function() {
-								  		if(confirm('Por favor, confirme su elección')){
-								  			document.getElementById("formlista").submit();
-								  		} else {
-								  			false;
-								  		}  
-									}
+								  	
 								  </script>
 								</div>
 			         		</div>
